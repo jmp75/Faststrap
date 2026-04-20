@@ -16,6 +16,7 @@ Before making UI changes, inspect:
 3. the main layout shell
 4. the app CSS file
 5. the closest route/page module for the task
+6. the relevant Faststrap component docs/examples for the page features you need
 
 ## Framework reference
 
@@ -26,8 +27,8 @@ The Faststrap framework repo lives at:
 Before building, inspect these framework references:
 
 - `C:/path/to/Faststrap/AGENTS.md`
-- `C:/path/to/Faststrap/examples/showcase/saas_landing.py`
-- `C:/path/to/Faststrap/examples/showcase/admin_dashboard.py`
+- `C:/path/to/Faststrap/showcase/novaflow_ai_saas.py`
+- `C:/path/to/Faststrap/showcase/northstar_ops_dashboard.py`
 - `C:/path/to/Faststrap/showcase/hotel_booking_showcase.py`
 
 ## Local gold-standard reference apps
@@ -46,14 +47,27 @@ Inspect the closest matching files before writing code.
 - Use Faststrap components plus custom CSS for polish.
 - Respect responsive layout, spacing rhythm, typography hierarchy, and section contrast.
 - Do not ship a plain hero-card-grid-footer layout unless the brief explicitly calls for it.
+- Build mobile-first: if two cards or columns sit side by side on desktop, explicitly define the stacked mobile state first with Bootstrap/Faststrap row controls like `cols=1, cols_md=2` or `cols=1, cols_lg=2`.
+- If a secondary/highlight card is too dense for mobile or tablet, hide it with Bootstrap display utilities like `d-none d-lg-block` rather than forcing it into a cramped small-screen layout.
+- Before finishing, do a dedicated "Bootstrap smell" pass: remove pill-heavy defaults, weak shadows, over-rounded controls, and generic untouched sections.
+
+## Accessibility and state rules
+
+- Keep headings semantic and ordered.
+- Preserve visible focus states.
+- Ensure icon-only controls have accessible labels.
+- Check empty, loading, success, and error states for key interactions before calling the page done.
+- Do not rely on color alone to carry important meaning.
 
 ## Implementation priority
 
 - Use Faststrap and Bootstrap capabilities first for layout, spacing, responsiveness, visibility control, and component behavior.
+- Before inventing a new section or widget, inspect whether Faststrap already has a component or pattern that can cover most of the need.
 - Use HTMX first for interaction and partial updates.
 - Use custom CSS mainly for brand feel, modern visuals, and refinements Bootstrap does not already solve well.
 - Use JavaScript only when HTMX/Bootstrap cannot do the job cleanly or when browser/PWA APIs are required.
 - Do not add external CSS CDNs for styling.
+- In single-file showcases, inline `Style(...)` is acceptable. In multi-route apps, move custom CSS into local assets rather than scattering large inline style blocks across route files.
 
 ## Architecture rules
 
@@ -68,5 +82,7 @@ Inspect the closest matching files before writing code.
 - Shared theme/defaults applied consistently
 - Custom CSS added where needed for polish
 - Empty/loading/error states considered
+- Accessibility labels and focus states checked
+- Typography scale and spacing rhythm reviewed
 - Relevant tests run
 ```

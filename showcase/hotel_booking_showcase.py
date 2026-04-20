@@ -1,7 +1,17 @@
-"""
-Showcase - Hotel Booking Landing
-Inspired by the uploaded booking design.
-Built with Faststrap components, presets, and zero custom JavaScript.
+"""Flagship showcase — Aurelia Hotels Booking.
+
+Production-grade luxury hotel landing for Faststrap:
+
+- Cormorant Garamond display font + Inter body
+- Gold accent (#C9A84C) on dark navy (#0A0F1E) palette
+- Animated hero with floating "Award Winner" badge and live demand counter
+- Amenities glassmorphism strip: WiFi, Breakfast, Parking, Pool, Spa
+- Room cards with star ratings, amenity mini-badges, gold price highlight
+- AutoRefresh live traveler count
+- ActiveSearch room filtering
+- LazyLoad testimonials and special offers
+- LoadingButton availability check with toast alert
+- FooterModern, PageMeta, Fx effects throughout
 """
 
 from __future__ import annotations
@@ -14,11 +24,14 @@ from fasthtml.common import (
     H1,
     H2,
     H4,
+    H5,
     A,
     Br,
+    Button,
     Div,
     FastHTML,
     Img,
+    Nav,
     P,
     Span,
     Strong,
@@ -29,7 +42,6 @@ from fasthtml.common import (
 from faststrap import (
     Alert,
     Badge,
-    Button,
     Card,
     Col,
     Container,
@@ -38,41 +50,66 @@ from faststrap import (
     Fx,
     Icon,
     Input,
-    Navbar,
+    PageMeta,
     Row,
     Select,
     Testimonial,
     add_bootstrap,
+    create_theme,
 )
 from faststrap.presets import ActiveSearch, AutoRefresh, LazyLoad, LoadingButton, toast_response
 
-app = FastHTML()
-add_bootstrap(app, font_family="Montserrat")
+# ── Theme ──────────────────────────────────────────────────────────────────────
+AURELIA_THEME = create_theme(
+    primary="#C9A84C",  # antique gold
+    secondary="#8B7355",  # warm stone
+    success="#4CAF50",
+    danger="#E53935",
+    warning="#F59E0B",
+    dark="#0A0F1E",
+    light="#F8F5EF",
+)
 
+app = FastHTML()
+add_bootstrap(app, theme=AURELIA_THEME, font_family="Inter")
+
+# ── Data ───────────────────────────────────────────────────────────────────────
 ROOMS = [
     {
-        "name": "Twin Room",
-        "price": "$92 / night",
+        "name": "Classic Twin",
+        "price": "$92",
         "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1200",
-        "desc": "Comfortable room for quick city stays with modern interior.",
+        "desc": "Comfortable room with twin beds, ideal for quick city escapes.",
+        "size": "26 m²",
+        "beds": "2 Twin",
+        "amenities": ["wifi", "cup-hot", "snow"],
     },
     {
-        "name": "Deluxe Room",
-        "price": "$129 / night",
+        "name": "Deluxe King",
+        "price": "$129",
         "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=1200",
-        "desc": "Elegant furnishing and premium amenities for relaxed travel.",
+        "desc": "Elegant king suite with premium linens and city views.",
+        "size": "38 m²",
+        "beds": "1 King",
+        "amenities": ["wifi", "cup-hot", "snow", "tv"],
     },
     {
         "name": "Family Suite",
-        "price": "$189 / night",
+        "price": "$189",
         "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200",
-        "desc": "Spacious multi-bed suite for family vacations and group trips.",
+        "desc": "Spacious multi-room suite for families and extended stays.",
+        "size": "60 m²",
+        "beds": "1 King + 2 Twin",
+        "amenities": ["wifi", "cup-hot", "snow", "tv", "water"],
     },
     {
-        "name": "Presidential Suite",
-        "price": "$420 / night",
+        "name": "Presidential",
+        "price": "$420",
         "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200",
-        "desc": "Top-tier suite with skyline view and private lounge area.",
+        "desc": "Top-floor suite with panoramic skyline views and a private lounge.",
+        "size": "120 m²",
+        "beds": "1 Super King",
+        "amenities": ["wifi", "cup-hot", "snow", "tv", "water", "gem"],
     },
 ]
 
@@ -95,127 +132,422 @@ OFFERS = [
 ]
 
 TEAM = [
-    ("Michael Drew", "Manager", "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400"),
-    ("Frank Jones", "Host", "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400"),
+    (
+        "Michael Drew",
+        "General Manager",
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
+    ),
+    (
+        "Frank Jones",
+        "Guest Relations",
+        "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400",
+    ),
     (
         "Mya Mullins",
-        "Reception",
+        "Head of Reception",
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
     ),
-    ("Ruby Nguyen", "Care", "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400"),
+    (
+        "Ruby Nguyen",
+        "Wellness Director",
+        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400",
+    ),
 ]
 
 TESTIMONIALS = [
     (
-        "The booking flow was effortless and the room exceeded expectations.",
+        "The booking flow was effortless and the room exceeded every expectation. Truly five-star.",
         "Melissa Adam",
-        "VIA",
+        "Via, London",
     ),
     (
-        "Great hospitality and smooth check-in. Perfect business stay.",
+        "Outstanding hospitality and the smoothest check-in I've ever experienced.",
         "Ricky Smith",
-        "NYC",
+        "NYC, USA",
     ),
     (
-        "Family-friendly service with clean rooms and excellent breakfast.",
+        "Family-friendly service, clean rooms, and the breakfast was absolutely delightful.",
         "Leslie May",
-        "LA",
+        "LA, USA",
     ),
 ]
 
-SHOWCASE_CSS = """
-body { background: #f1f2f6; }
-.hs-nav { background: #fff; border-radius: .75rem; }
-.hs-hero { background: linear-gradient(120deg, rgba(12,17,28,.8), rgba(12,17,28,.55)), url('https://images.unsplash.com/photo-1455587734955-081b22074882?w=1400') center/cover no-repeat; }
-.hs-white-card { background: #fff; border-radius: 1rem; }
-.hs-soft { background: #f8f9ff; border-radius: 1rem; }
-.hs-dark-cta { background: linear-gradient(140deg, #0f1a2c, #1f2d49); border-radius: 1rem; }
-.hs-sticky-booking { margin-top: -2.2rem; position: relative; z-index: 2; }
+AMENITIES = [
+    ("wifi", "Free WiFi", "High-speed throughout"),
+    ("cup-hot-fill", "Breakfast", "Included daily"),
+    ("car-front-fill", "Parking", "Secure valet"),
+    ("water", "Infinity Pool", "Rooftop access"),
+    ("heart-pulse-fill", "Spa & Wellness", "World-class"),
+]
+
+AMENITY_ICON_LABELS = {
+    "wifi": "WiFi",
+    "cup-hot": "Breakfast",
+    "snow": "A/C",
+    "tv": "Smart TV",
+    "water": "Pool",
+    "gem": "Butler",
+}
+
+# ── CSS ────────────────────────────────────────────────────────────────────────
+CSS = """
+/* ════════════════════════════════════════════════════════════
+   Aurelia Hotels · Luxury Landing CSS
+   Cormorant Garamond display, Inter body, gold on dark navy.
+   Atmospheric only — Bootstrap/Faststrap own layout.
+   ════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #F8F5EF;
+  color: #1A1410;
+}
+
+/* ── Display font ───────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.au-nav {
+  background: rgba(10,15,30,0.92) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,168,76,0.15) !important;
+}
+
+.au-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #C9A84C !important;
+  letter-spacing: 0.05em;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.au-hero {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(10,15,30,0.65) 0%, rgba(10,15,30,0.45) 50%, rgba(10,15,30,0.85) 100%),
+    url('https://images.unsplash.com/photo-1455587734955-081b22074882?w=1400') center/cover no-repeat;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+}
+
+/* Floating award badge animation */
+@keyframes au-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.au-float-badge {
+  animation: au-float 3s ease-in-out infinite;
+}
+
+/* Gold divider line */
+.au-gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #C9A84C, #E8C97A);
+  border-radius: 2px;
+  margin: 1rem 0 1.25rem;
+}
+
+/* ── Amenities strip ────────────────────────────────────────── */
+.au-amenities-strip {
+  background: rgba(10,15,30,0.85);
+  backdrop-filter: blur(20px);
+  border-radius: 0 0 16px 16px;
+  padding: 1.5rem;
+  margin-top: -1px;
+}
+
+.au-amenity-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 1rem;
+  border-right: 1px solid rgba(201,168,76,0.15);
+  text-align: center;
+}
+
+.au-amenity-item:last-child { border-right: none; }
+
+.au-amenity-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  color: #C9A84C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.au-amenity-label   { font-size: 0.78rem; color: #fff; font-weight: 600; }
+.au-amenity-sublabel { font-size: 0.65rem; color: rgba(255,255,255,0.45); }
+
+/* ── Booking card ───────────────────────────────────────────── */
+.au-booking-card {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+/* ── Room cards ─────────────────────────────────────────────── */
+.au-room-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.au-room-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+.au-room-image-wrap { position: relative; overflow: hidden; }
+
+.au-room-image-wrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.au-room-card:hover .au-room-image-wrap img { transform: scale(1.06); }
+
+.au-price-tag {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(10,15,30,0.85);
+  backdrop-filter: blur(8px);
+  color: #C9A84C;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.au-room-body { padding: 1.25rem 1.5rem 1.5rem; }
+
+.au-stars { color: #C9A84C; font-size: 0.8rem; gap: 1px; }
+
+.au-amenity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(201,168,76,0.08);
+  color: #8B7355;
+  border-radius: 50px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* ── Section helpers ────────────────────────────────────────── */
+.au-section-overline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Story section ──────────────────────────────────────────── */
+.au-story-section {
+  background: #F0EBE1;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+}
+
+/* ── CTA section ────────────────────────────────────────────── */
+.au-cta {
+  background: linear-gradient(135deg, #0A0F1E 0%, #1A2040 100%);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.au-cta::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
 """
 
 
-def room_card(room: dict[str, str], idx: int = 0) -> Any:
-    return Card(
-        Img(src=room["image"], cls="w-100 object-fit-cover rounded-top", style="height:220px;"),
+def stars(count: int = 5) -> Any:
+    return Div(
+        *[Icon("star-fill") for _ in range(count)],
+        cls="au-stars d-flex",
+    )
+
+
+def amenity_badges(amenity_keys: list[str]) -> Any:
+    return Div(
+        *[
+            Span(
+                Icon(k, style="font-size:0.7rem;"),
+                AMENITY_ICON_LABELS.get(k, k),
+                cls="au-amenity-badge me-1 mb-1",
+            )
+            for k in amenity_keys
+        ],
+        cls="d-flex flex-wrap mt-2 mb-3",
+    )
+
+
+def room_card(room: dict, idx: int = 0) -> Any:
+    return Div(
+        # Image
         Div(
-            Div(
-                Strong(room["name"], cls="fs-5"),
-                Badge(room["price"], variant="light", cls="text-dark"),
-                cls="d-flex justify-content-between align-items-center mb-2",
-            ),
-            P(room["desc"], cls="text-muted mb-3"),
-            Button("Check Availability", variant="danger", size="sm"),
-            cls="p-3",
+            Img(src=room["image"], alt=room["name"]),
+            Span(f"{room['price']} / night", cls="au-price-tag"),
+            cls="au-room-image-wrap",
         ),
-        cls=f"border-0 shadow-sm h-100 {Fx.base} {Fx.fade_in} {Fx.hover_lift} {Fx.delay_sm if idx % 2 else ''}",
+        # Body
+        Div(
+            stars(),
+            H5(room["name"], cls="fw-700 mt-2 mb-1"),
+            P(room["desc"], cls="text-muted small mb-0", style="line-height:1.5;"),
+            amenity_badges(room["amenities"]),
+            Div(
+                Div(
+                    Icon("rulers", cls="me-1 text-muted"),
+                    Span(room["size"], cls="small text-muted"),
+                    cls="d-flex align-items-center me-3",
+                ),
+                Div(
+                    Icon("moon-stars", cls="me-1 text-muted"),
+                    Span(room["beds"], cls="small text-muted"),
+                    cls="d-flex align-items-center",
+                ),
+                cls="d-flex mb-3",
+            ),
+            Button(
+                Icon("calendar2-check-fill", cls="me-2"),
+                "Check Availability",
+                cls="btn btn-sm fw-600 w-100",
+                style="background:#C9A84C;color:#fff;border-radius:50px;",
+            ),
+            cls="au-room-body",
+        ),
+        cls=f"au-room-card {Fx.fade_in}",
+        style=f"animation-delay:{idx*80}ms;",
     )
 
 
 @app.get("/")
 def home() -> Any:
     return Div(
-        Style(SHOWCASE_CSS),
+        Style(CSS),
+        PageMeta(
+            title="Aurelia Hotels — Luxury Hospitality Redefined",
+            description="Experience premium hospitality at Aurelia Hotels. Book your stay with fast, easy room reservations and world-class service.",
+        ),
         Container(
-            # Header
-            Div(
-                Navbar(
-                    brand=Span("Booking.com", cls="fw-bold text-danger"),
-                    items=[
+            # ── Navigation ─────────────────────────────────────────
+            Nav(
+                Div(
+                    A(Span("AURELIA", cls="au-brand"), cls="navbar-brand", href="#"),
+                    Button(
+                        Span(cls="navbar-toggler-icon"),
+                        cls="navbar-toggler border-0",
+                        type="button",
+                        data_bs_toggle="collapse",
+                        data_bs_target="#auNavCollapse",
+                        aria_controls="auNavCollapse",
+                        aria_expanded="false",
+                        aria_label="Toggle navigation",
+                    ),
+                    Div(
                         Div(
-                            A("Home", href="#home", cls="nav-link"),
-                            A("Rooms", href="#rooms", cls="nav-link"),
-                            A("Deals", href="#deals", cls="nav-link"),
-                            A("Contact", href="#contact", cls="nav-link"),
-                            cls="navbar-nav me-auto mb-2 mb-lg-0",
+                            A("Home", href="#home", cls="nav-link text-white-50 fw-500"),
+                            A("Rooms", href="#rooms", cls="nav-link text-white-50 fw-500"),
+                            A("Deals", href="#deals", cls="nav-link text-white-50 fw-500"),
+                            A("Contact", href="#contact", cls="nav-link text-white-50 fw-500"),
+                            cls="navbar-nav ms-auto align-items-center gap-3",
                         ),
-                        Div(
-                            Span(Icon("telephone", cls="me-1"), "(888) 234-5678", cls="me-3 small"),
-                            Button("Request a Quote", variant="danger", size="sm"),
-                            cls="d-flex align-items-center",
-                        ),
-                    ],
-                    variant="light",
-                    expand="lg",
-                    sticky="top",
-                    cls="hs-nav shadow-sm px-2",
+                        cls="collapse navbar-collapse",
+                        id="auNavCollapse",
+                    ),
+                    cls="container",
                 ),
-                cls="pt-3 position-sticky top-0 z-3",
+                cls="navbar navbar-expand-lg navbar-dark au-nav position-sticky top-0 z-3",
             ),
-            # Hero
+            # ── Hero ───────────────────────────────────────────────
             Div(
                 Row(
                     Col(
                         Div(
-                            Badge("WELCOME TO COMFORT", variant="light", cls="text-dark mb-3"),
+                            # Floating award badge
+                            Div(
+                                Badge(
+                                    Icon("award-fill", cls="me-1 text-warning"),
+                                    "Forbes Five-Star · 2026",
+                                    variant="light",
+                                    cls="au-float-badge",
+                                    style="background:rgba(255,255,255,0.12)!important;color:#fff;border:1px solid rgba(201,168,76,0.35);",
+                                ),
+                                cls="mb-3",
+                            ),
                             H1(
-                                "Your Trusted",
+                                "Your Trusted Partner",
                                 Br(),
-                                "Partner for",
-                                Br(),
-                                "Memorable Stays.",
-                                cls=f"display-4 text-white fw-bold {Fx.base} {Fx.slide_up}",
+                                "for Memorable Stays.",
+                                cls=f"display-4 text-white fw-700 {Fx.slide_up}",
                             ),
+                            Div(cls="au-gold-divider"),
                             P(
-                                "Experience premium hospitality and discover rooms designed "
-                                "for comfort, style, and unforgettable moments.",
-                                cls=f"text-light fs-5 mt-3 mb-4 {Fx.base} {Fx.fade_in} {Fx.delay_sm}",
+                                "Experience unmatched hospitality in rooms designed for comfort, "
+                                "elegance, and unforgettable moments. From city breaks to extended escapes.",
+                                cls=f"text-light mb-4 fs-5 {Fx.fade_in} {Fx.delay_sm}",
                             ),
+                            # Live demand badge
                             AutoRefresh(
                                 endpoint="/api/live-demand",
                                 target="this",
                                 interval=8000,
-                                content=Div("Checking live demand...", cls="text-light small"),
+                                content=Div("Checking live demand…", cls="text-light small"),
                                 cls="mb-3",
                             ),
                             cls="p-5",
                         ),
                         lg=7,
-                        cols=12,
                     ),
                     Col(
                         Div(
-                            Card(
-                                H4("Find Your Stay", cls="mb-3"),
+                            # Booking form
+                            Div(
+                                H4(
+                                    "Find Your Stay",
+                                    cls="mb-3 fw-700",
+                                    style="font-family:'Cormorant Garamond',serif;",
+                                ),
                                 FormGroup(
                                     Input("checkin", input_type="date"),
                                     label="Check In",
@@ -235,54 +567,83 @@ def home() -> Any:
                                     label="Guests",
                                 ),
                                 LoadingButton(
+                                    Icon("search", cls="me-2"),
                                     "Search Rooms",
                                     endpoint="/api/check-availability",
                                     target="#booking-result",
-                                    variant="danger",
-                                    cls="w-100",
+                                    variant="primary",
+                                    cls="w-100 fw-600",
+                                    style="background:#C9A84C;border-color:#C9A84C;border-radius:50px;",
                                 ),
                                 Div(id="booking-result", cls="mt-3"),
-                                cls=f"border-0 shadow hs-white-card {Fx.base} {Fx.zoom_in}",
+                                cls="au-booking-card p-4",
                             ),
                             cls="p-3",
                         ),
                         lg=5,
-                        cols=12,
                     ),
+                    cls="",
+                    cols=1,
+                    cols_lg=2,
                 ),
                 id="home",
-                cls="hs-hero rounded-4 overflow-hidden mt-3",
+                cls="au-hero mt-3",
             ),
-            # Search and room listing
+            # ── Amenities Strip ────────────────────────────────────
             Div(
+                Div(
+                    *[
+                        Div(
+                            Div(Icon(icon), cls="au-amenity-icon"),
+                            Div(label, cls="au-amenity-label"),
+                            Div(sub, cls="au-amenity-sublabel"),
+                            cls="au-amenity-item",
+                        )
+                        for icon, label, sub in AMENITIES
+                    ],
+                    cls="d-flex justify-content-center flex-wrap gap-0",
+                ),
+                cls="au-amenities-strip",
+            ),
+            # ── Room Search + Listing ──────────────────────────────
+            Div(
+                H2("Our Rooms & Suites", cls="fw-700 text-center mb-1"),
+                Span(
+                    "handcrafted for every kind of traveller",
+                    cls="au-section-overline text-center d-block mb-4",
+                ),
                 Div(
                     ActiveSearch(
                         endpoint="/api/search-rooms",
                         target="#room-search-results",
-                        placeholder="Search room type (e.g. deluxe, suite)...",
+                        placeholder="Search rooms (e.g. suite, twin, family)…",
                         debounce=250,
                     ),
                     cls="mb-3",
                 ),
                 Div(id="room-search-results"),
                 Row(
-                    *[
-                        Col(room_card(r, i), lg=3, md=6, cols=12, cls="mb-4")
-                        for i, r in enumerate(ROOMS)
-                    ],
+                    *[Col(room_card(r, i), cls="mb-4") for i, r in enumerate(ROOMS)],
                     cls="g-3",
+                    cols=1,
+                    cols_md=2,
+                    cols_lg=4,
                 ),
                 id="rooms",
                 cls="mt-5",
             ),
-            # Story + team section
+            # ── Story + Team ───────────────────────────────────────
             Div(
-                H2("Every stay has a story", cls="fw-bold mb-3"),
+                H2("Every Stay Has a Story", cls="fw-700 mb-3"),
                 LazyLoad(
                     endpoint="/api/lazy-testimonials",
-                    placeholder=Div("Loading guest stories...", cls="text-muted"),
+                    placeholder=Div(
+                        Icon("three-dots", cls="me-2 text-muted"),
+                        "Loading guest stories…",
+                        cls="text-muted small",
+                    ),
                 ),
-                H2("The Heart of Every Great Stay", cls="fw-bold mt-5 mb-3"),
+                H2("The Heart of Every Great Stay", cls="fw-700 mt-5 mb-3"),
                 Row(
                     *[
                         Col(
@@ -293,77 +654,91 @@ def home() -> Any:
                                     style="height:220px;",
                                 ),
                                 Div(
-                                    Strong(name),
-                                    P(role, cls="small text-muted"),
+                                    Strong(name, cls="d-block"),
+                                    P(role, cls="small text-muted mb-0"),
                                     cls="p-3 text-center",
                                 ),
-                                cls=f"border-0 shadow-sm {Fx.base} {Fx.fade_in} {Fx.hover_scale}",
+                                cls=f"border-0 shadow-sm h-100 {Fx.fade_in} {Fx.hover_lift}",
+                                style="border-radius:16px;overflow:hidden;",
                             ),
-                            lg=3,
-                            md=6,
-                            cols=12,
                             cls="mb-3",
                         )
                         for name, role, img in TEAM
                     ],
                     cls="g-3",
+                    cols=1,
+                    cols_md=2,
+                    cols_lg=4,
                 ),
-                cls="hs-soft p-4 mt-5",
+                cls="au-story-section mt-5",
             ),
-            # Offers
+            # ── Offers ─────────────────────────────────────────────
             Div(
-                H2("Indulge in Luxury for Less", cls="fw-bold mb-3"),
+                H2("Indulge in Luxury for Less", cls="fw-700 mb-1"),
+                Span("limited-time exclusive packages", cls="au-section-overline d-block mb-4"),
                 LazyLoad(
                     endpoint="/api/lazy-offers",
-                    placeholder=Div("Loading special offers...", cls="text-muted"),
+                    placeholder=Div("Loading offers…", cls="text-muted small"),
                 ),
                 id="deals",
                 cls="mt-5",
             ),
-            # Contact CTA + footer
+            # ── CTA ───────────────────────────────────────────────
             Div(
                 Row(
                     Col(
                         Div(
+                            Span("reserve your stay", cls="au-section-overline"),
                             H2(
-                                "Make your reservation today and create lasting memories",
-                                cls="text-white",
+                                "Make your reservation today\nand create lasting memories.",
+                                cls="text-white fw-700",
                             ),
                             P(
                                 "Fast booking, trusted support, and premium room experiences.",
-                                cls="text-light-emphasis",
+                                cls="text-white-50 mt-2",
                             ),
                             cls="p-4",
                         ),
                         lg=7,
-                        cols=12,
                     ),
                     Col(
                         Card(
-                            H4("Get in Touch"),
+                            H4(
+                                "Get in Touch",
+                                cls="fw-700 mb-3",
+                                style="font-family:'Cormorant Garamond',serif;",
+                            ),
                             FormGroup(Input("full_name", placeholder="Full Name"), label="Name"),
                             FormGroup(
                                 Input("email", input_type="email", placeholder="Email"),
                                 label="Email",
                             ),
                             FormGroup(Input("phone", placeholder="Phone"), label="Phone"),
-                            Button("Send Message", variant="danger", cls="w-100"),
+                            Button(
+                                Icon("send-fill", cls="me-2"),
+                                "Send Message",
+                                cls="btn w-100 fw-600",
+                                style="background:#C9A84C;color:#fff;border-radius:50px;",
+                            ),
                             cls="border-0 shadow",
+                            style="border-radius:16px;",
                         ),
                         lg=5,
-                        cols=12,
                     ),
                     cls="g-3 align-items-center",
+                    cols=1,
+                    cols_lg=2,
                 ),
                 id="contact",
-                cls="hs-dark-cta mt-5 p-4",
+                cls="au-cta mt-5",
             ),
+            # ── Footer ────────────────────────────────────────────
             FooterModern(
-                brand="Booking.com",
-                tagline="From quick business trips to family vacations, we make every stay remarkable.",
+                brand="AURELIA",
+                tagline="From business retreats to family vacations — we make every stay remarkable.",
                 columns=[
                     {
-                        "title": "Service",
+                        "title": "Services",
                         "links": [
                             {"text": "Room Booking", "href": "#rooms"},
                             {"text": "Special Offers", "href": "#deals"},
@@ -387,7 +762,7 @@ def home() -> Any:
                 bg_variant="dark",
                 text_variant="light",
                 cls="rounded-4 mt-4",
-                copyright_text="© 2026 Booking.com - All rights reserved.",
+                copyright_text="© 2026 Aurelia Hotels. All rights reserved.",
             ),
             cls="py-4",
         ),
@@ -395,13 +770,18 @@ def home() -> Any:
     )
 
 
+# ── API ─────────────────────────────────────────────────────────────────────────
+
+
 @app.get("/api/live-demand")
 def live_demand() -> Any:
     count = random.randint(24, 89)
     now = datetime.now().strftime("%H:%M")
     return Div(
-        Badge(f"{count} travelers are viewing rooms now", variant="danger", cls="me-2"),
-        Span(f"updated {now}", cls="small text-light"),
+        Icon("circle-fill", cls="me-1 text-danger", style="font-size:0.5rem;"),
+        Badge(f"{count} travelers viewing now", variant="danger", cls="me-2"),
+        Span(f"updated {now}", cls="small text-light opacity-75"),
+        cls="d-flex align-items-center",
     )
 
 
@@ -413,7 +793,7 @@ def check_availability() -> Any:
             "Rooms available! Scroll down to choose your preferred stay.",
             variant="success",
         ),
-        message="Availability updated successfully.",
+        message="Availability confirmed.",
         variant="success",
     )
 
@@ -425,8 +805,15 @@ def search_rooms(q: str = "") -> Any:
         return ""
     matches = [r for r in ROOMS if query in r["name"].lower() or query in r["desc"].lower()]
     if not matches:
-        return Div("No matching rooms found.", cls="alert alert-warning")
-    return Row(*[Col(room_card(r), md=6, cols=12, cls="mb-3") for r in matches], cls="g-3 mb-3")
+        return Div(
+            Icon("info-circle", cls="me-2"),
+            "No matching rooms found — try 'suite', 'twin', or 'deluxe'.",
+            cls="alert alert-warning",
+        )
+    return Row(
+        *[Col(room_card(r, i), md=6, cols=12, cls="mb-3") for i, r in enumerate(matches)],
+        cls="g-3 mb-3",
+    )
 
 
 @app.get("/api/lazy-testimonials")
@@ -434,7 +821,13 @@ def lazy_testimonials() -> Any:
     return Row(
         *[
             Col(
-                Testimonial(quote=q, author=a, role=city, rating=5, cls=f"{Fx.base} {Fx.fade_in}"),
+                Testimonial(
+                    quote=q,
+                    author=a,
+                    role=city,
+                    rating=5,
+                    cls=f"{Fx.fade_in}",
+                ),
                 lg=4,
                 cols=12,
                 cls="mb-3",
@@ -451,14 +844,30 @@ def lazy_offers() -> Any:
         *[
             Col(
                 Card(
-                    Img(src=img, cls="w-100 rounded-top object-fit-cover", style="height:180px;"),
                     Div(
-                        Badge(badge, variant="danger", cls="mb-2"),
-                        Strong(title, cls="d-block"),
-                        Button("Book Offer", variant="danger", outline=True, size="sm", cls="mt-2"),
+                        Img(
+                            src=img, cls="w-100 rounded-top object-fit-cover", style="height:180px;"
+                        ),
+                        style="overflow:hidden;",
+                    ),
+                    Div(
+                        Badge(
+                            Icon("tag-fill", cls="me-1"),
+                            badge,
+                            variant="warning",
+                            cls="text-dark fw-700 mb-2",
+                        ),
+                        Strong(title, cls="d-block mb-2"),
+                        Button(
+                            Icon("calendar-check-fill", cls="me-1"),
+                            "Book Offer",
+                            cls="btn btn-sm fw-600",
+                            style="background:#C9A84C;color:#fff;border-radius:50px;",
+                        ),
                         cls="p-3",
                     ),
-                    cls=f"border-0 shadow-sm h-100 {Fx.base} {Fx.fade_in} {Fx.hover_lift}",
+                    cls=f"border-0 shadow-sm h-100 {Fx.fade_in} {Fx.hover_lift}",
+                    style="border-radius:14px;overflow:hidden;",
                 ),
                 lg=4,
                 cols=12,
@@ -470,4 +879,5 @@ def lazy_offers() -> Any:
     )
 
 
-serve()
+if __name__ == "__main__":
+    serve(port=5015)

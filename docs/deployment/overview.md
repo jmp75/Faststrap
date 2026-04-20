@@ -40,7 +40,10 @@ Does your app need SSE, WebSockets, or background workers?
 !!! warning "Serverless requirements"
     Serverless platforms (Vercel, AWS Lambda, Cloud Run) require:
 
-    1. `add_bootstrap(app, use_cdn=True)` - no local static files
+    1. `add_bootstrap(app, use_cdn=True)` - Faststrap assets must come from CDN
     2. Do **not** call `serve()` - expose the bare `app` object
     3. App must be stateless - no in-memory dicts, no file writes
     4. SSE and WebSockets are not supported on serverless
+
+    If your app uses project-specific assets such as `/assets/custom.css` or local images,
+    you must also configure your platform to serve those files explicitly.

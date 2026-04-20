@@ -1,21 +1,36 @@
-# Admin Dashboard
+# Dashboard Showcases
 
-The Admin Dashboard showcase demonstrates how FastStrap components power complex internal tools and data-heavy applications.
+Faststrap now has two dashboard references with different roles.
 
-## Key Features
+## Current Primary Dashboard Reference
 
-### 📈 KPI Overview
-A responsive grid of `StatCard` components providing real-time insights into revenue, users, and server health.
+### Northstar Ops Dashboard
 
-### 📑 Tabular Data
-A full implementation of the `Table` system, including:
-- **THead/TBody**: Logical separation of headers and data.
-- **Responsive Classes**: Using `striped` and `hover` variants.
-- **Component Injection**: Embedding `Badge` and `Button` directly into table cells.
+Use `showcase/northstar_ops_dashboard.py` as the main dashboard reference.
 
-### 🏛️ Structural Cards
-Using the `Card` component as a layout container for tables and system health reports.
+It demonstrates:
 
----
+- `DashboardGrid`
+- `Chart`
+- `DataTable`
+- `MetricCard`, `TrendCard`, `KPICard`
+- filtering and export surfaces
+- theme-aware operational UI
 
-**Source Code**: [admin_dashboard.py](https://github.com/Faststrap-org/Faststrap/blob/main/examples/showcase/admin_dashboard.py)
+## Legacy Dashboard Reference
+
+### Admin Dashboard
+
+`showcase/admin_dashboard.py` is still a useful reference, but it is now secondary to Northstar for modern dashboard composition.
+
+## Sources
+
+- `showcase/northstar_ops_dashboard.py`
+- `showcase/admin_dashboard.py`
+
+## Screenshot Slot
+
+When screenshots are added, place them here:
+
+- `docs/assets/showcase/northstar-ops-dashboard-light.png`
+- `docs/assets/showcase/northstar-ops-dashboard-dark.png`

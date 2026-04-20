@@ -1,140 +1,203 @@
 # Navbar
 
-The `Navbar` is a responsive meta-component that serves as a navigation header for your application. It supports branding, links, dropdowns, and forms (like search).
+`Navbar` is Faststrap's Bootstrap-native responsive navigation shell.
+
+It handles:
+
+- brand content
+- automatic mobile collapse/toggler wiring
+- simple navigation items through `items=[...]`
+- mixed custom content when you need more than plain links
 
 !!! tip "Bootstrap Reference"
     [Bootstrap 5 Navbar](https://getbootstrap.com/docs/5.3/components/navbar/)
 
----
-
 ## Quick Start
 
-<div class="component-preview">
-  <div class="preview-header">Live Preview</div>
-  <div class="preview-render p-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100 px-3">
-      <a class="navbar-brand" href="#">🚀 FastStrap</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav01">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="nav01">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Docs</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <div class="preview-code" markdown>
 ```python
+from faststrap import Button, Navbar, ThemeToggle
+
 Navbar(
-    NavbarBrand("🚀 FastStrap", href="/"),
-    NavItem("Home", href="/"),
-    NavItem("Docs", href="/docs"),
-    NavItem("Pricing", href="/pricing"),
+    brand="Faststrap",
+    items=[
+        ("Home", "/"),
+        ("Docs", "/docs"),
+        {"text": "Pricing", "href": "/pricing", "active": True},
+        ThemeToggle(endpoint="/theme/toggle"),
+        Button("Get Started", href="/signup", variant="primary", cls="ms-lg-3"),
+    ],
     expand="lg",
-    variant="dark",
-    bg_variant="primary"
+    color_scheme="dark",
+    bg="primary",
 )
 ```
-  </div>
-</div>
 
----
+## Supported `items` Forms
 
-## Visual Examples & Use Cases
+`items=` is meant for common navbar composition and now supports:
 
-### 1. Positioning & Sticky
-Keep the navigation visible while scrolling using `sticky="top"` or `fixed="top"`.
+1. Strings
 
 ```python
-Navbar(..., sticky="top") # Pushes content down
-Navbar(..., fixed="top")  # Floats over content
+Navbar(brand="App", items=["Home", "Docs", "Pricing"])
 ```
 
-### 2. Dark vs Light Themes
-Match your application's aesthetic.
+These render as standard `nav-item` / `nav-link` pairs with `href="#"`.
 
-<div class="component-preview">
-  <div class="preview-header">Live Preview</div>
-  <div class="preview-render p-0 flex-column overflow-hidden">
-    <!-- Dark Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100 px-3 border-bottom border-white-50">
-      <a class="navbar-brand" href="#">Dark Brand</a>
-    </nav>
-    <!-- Light Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 px-3">
-      <a class="navbar-brand" href="#">Light Brand</a>
-    </nav>
-  </div>
-  <div class="preview-code" markdown>
-```python
-# Dark brand: Primary background, light text
-Navbar(NavbarBrand("Dark Brand"), variant="dark", bg_variant="primary")
+2. Tuples
 
-# Light brand: Light background, dark text
-Navbar(NavbarBrand("Light Brand"), variant="light", bg_variant="light")
-```
-  </div>
-</div>
-
-### 3. Adding a Search Form
-Navbars are common places for search inputs.
-
-<div class="component-preview">
-  <div class="preview-header">Live Preview</div>
-  <div class="preview-render p-0">
-    <nav class="navbar navbar-expand-md navbar-light bg-light w-100 px-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">My App</a>
-        <form class="d-flex" role="search">
-          <input class="form-control form-control-sm me-2" type="search" placeholder="Search...">
-          <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-  </div>
-  <div class="preview-code" markdown>
 ```python
 Navbar(
-    NavbarBrand("My App"),
-    Form(
-        Input("search", placeholder="Search...", size="sm", cls="me-2"),
-        Button("Search", variant="outline-success", size="sm"),
-        cls="d-flex"
-    ),
-    expand="md"
+    brand="App",
+    items=[
+        ("Home", "/"),
+        ("Docs", "/docs"),
+        ("Pricing", "/pricing", True),  # active item
+    ],
 )
 ```
-  </div>
-</div>
 
----
+Tuple format is:
 
-## Technical Hierarchy (LLM Spec)
+- `(text, href)`
+- `(text, href, active)`
 
-To build a correct Navbar, follow this nested structure:
+3. Dictionaries
 
-1.  **Navbar** (Main Container)
-    *   **Container** (Optional, for centered alignment)
-        *   **NavbarBrand** (Text or Logo)
-        *   **NavbarToggler** (Created automatically if `expand` is set)
-        *   **NavbarCollapse** (Parent for menu items)
-            *   **NavItem** (Single Link)
-            *   **Dropdown** (Grouped Links)
+```python
+Navbar(
+    brand="App",
+    items=[
+        {"text": "Home", "href": "/"},
+        {"text": "Docs", "href": "/docs", "active": True},
+        {"text": "Pricing", "href": "/pricing", "cls": "fw-semibold"},
+        {"text": "Disabled", "href": "#", "disabled": True},
+    ],
+)
+```
 
----
+Supported keys:
 
-## Parameter Reference
+- `text`
+- `href`
+- `active`
+- `disabled`
+- `cls` for the link
+- `item_cls` for the `nav-item` wrapper
 
-| FastStrap Param | Type | Bootstrap Class | Description |
-| :--- | :--- | :--- | :--- |
-| `expand` | `str` | `.navbar-expand-{val}` | Responsive breakpoint: `sm`, `md`, `lg`, `xl`. |
-| `variant` | `str` | `.navbar-{variant}` | Text contrast: `light` (dark text) or `dark` (light text). |
-| `bg_variant` | `str` | `.bg-{variant}` | Background color (e.g., `primary`, `white`). |
-| `sticky` | `str` | `.sticky-top` | Position style. |
-| `fixed` | `str` | `.fixed-top` | Floating position style. |
+4. Raw/custom children
+
+If an item is already a custom element, Faststrap preserves it instead of forcing it into plain-link markup.
+
+This lets you mix standard nav links with:
+
+- `ThemeToggle`
+- CTA buttons
+- search forms
+- custom dropdown wrappers
+
+## How Grouping Works
+
+Simple link-style items are automatically grouped into a Bootstrap `navbar-nav` wrapper.
+
+Custom items are preserved outside that wrapper so mixed compositions still work cleanly.
+
+That means this:
+
+```python
+Navbar(
+    brand="Faststrap",
+    items=[
+        ("Home", "/"),
+        ("Docs", "/docs"),
+        Button("Start", href="/signup", variant="primary", cls="ms-lg-3"),
+    ],
+)
+```
+
+produces the correct Bootstrap navigation structure without making you manually build `navbar-nav`.
+
+## When To Use Raw Composition
+
+Use `Navbar(items=[...])` for normal navigation bars.
+
+Drop to raw/custom composition only when you need a more unusual structure such as:
+
+- multiple nav groups
+- highly customized action rails
+- custom collapse content layout
+- premium marketing navbars with special wrappers
+
+For those cases, `NavbarModern` or direct child composition is still a good option.
+
+## Common Patterns
+
+### Sticky Navbar
+
+```python
+Navbar(
+    brand="Faststrap",
+    items=[("Home", "/"), ("Docs", "/docs")],
+    sticky="top",
+    expand="lg",
+)
+```
+
+### Light Navbar
+
+```python
+Navbar(
+    brand="Faststrap",
+    items=[("Home", "/"), ("Docs", "/docs")],
+    color_scheme="light",
+    bg="light",
+)
+```
+
+### Dark Navbar
+
+```python
+Navbar(
+    brand="Faststrap",
+    items=[("Home", "/"), ("Docs", "/docs")],
+    color_scheme="dark",
+    bg="dark",
+)
+```
+
+### Mixed Links + Actions
+
+```python
+Navbar(
+    brand="Faststrap",
+    items=[
+        ("Components", "/components"),
+        ("Showcase", "/showcase"),
+        ThemeToggle(endpoint="/theme/toggle", cls="ms-lg-3"),
+        Button("GitHub", href="https://github.com/Faststrap-org/Faststrap", cls="ms-lg-2"),
+    ],
+    expand="lg",
+)
+```
+
+## Key Parameters
+
+| Parameter | Purpose |
+| --- | --- |
+| `brand` | Brand text, logo, or custom element |
+| `items` | Common navbar items and actions |
+| `brand_href` | Brand link target |
+| `color_scheme` | Bootstrap navbar text scheme |
+| `bg` | Bootstrap background variant |
+| `expand` | Collapse breakpoint |
+| `sticky` | Sticky positioning |
+| `fixed` | Fixed positioning |
+| `container` | Container wrapper behavior |
+
+## Notes
+
+- `items=` is no longer a known workaround path; it is the preferred API for standard navbars.
+- For highly branded/premium navbars, use `NavbarModern` or custom child composition on top of `Navbar`.
 
 ::: faststrap.components.navigation.navbar.Navbar
     options:

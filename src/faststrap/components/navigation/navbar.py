@@ -24,6 +24,82 @@ def _get_next_navbar_id() -> str:
     return next_sequential_id("navbar")
 
 
+def _normalize_nav_item(item: Any) -> Any:
+    """Normalize simple navbar items into Bootstrap nav-item/nav-link markup."""
+    if isinstance(item, str):
+        return Div(A(item, href="#", cls="nav-link"), cls="nav-item")
+
+    if isinstance(item, tuple):
+        text = item[0] if len(item) > 0 else ""
+        href = item[1] if len(item) > 1 else "#"
+        active = bool(item[2]) if len(item) > 2 else False
+        link_cls = "nav-link active" if active else "nav-link"
+        link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
+        if active:
+            link_attrs["aria_current"] = "page"
+        return Div(A(text, **link_attrs), cls="nav-item")
+
+    if isinstance(item, dict):
+        text = item.get("text", "")
+        href = item.get("href", "#")
+        active = bool(item.get("active", False))
+        disabled = bool(item.get("disabled", False))
+        nav_item_cls = merge_classes("nav-item", item.get("item_cls", ""))
+        link_cls = merge_classes("nav-link", item.get("cls", ""))
+        if active:
+            link_cls = merge_classes(link_cls, "active")
+        if disabled:
+            link_cls = merge_classes(link_cls, "disabled")
+
+        link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
+        if active:
+            link_attrs["aria_current"] = "page"
+        if disabled:
+            link_attrs["aria_disabled"] = "true"
+            link_attrs["tabindex"] = "-1"
+
+        return Div(A(text, **link_attrs), cls=nav_item_cls)
+
+    if getattr(item, "tag", None) == "a":
+        classes = str(
+            getattr(item, "attrs", {}).get("class") or getattr(item, "attrs", {}).get("cls") or ""
+        )
+        if "nav-link" not in classes:
+            classes = merge_classes(classes, "nav-link")
+            item.attrs["cls"] = classes
+        return Div(item, cls="nav-item")
+
+    return item
+
+
+def _is_simple_nav_item(item: Any) -> bool:
+    """Return True when the item can be normalized into standard navbar navigation markup."""
+    return isinstance(item, (str, tuple, dict)) or getattr(item, "tag", None) == "a"
+
+
+def _group_nav_items(items: list[Any]) -> list[Any]:
+    """Group simple items into a navbar-nav wrapper while preserving custom content."""
+    grouped: list[Any] = []
+    simple_buffer: list[Any] = []
+
+    def flush_simple_items() -> None:
+        if not simple_buffer:
+            return
+        grouped.append(Div(*simple_buffer, cls="navbar-nav"))
+        simple_buffer.clear()
+
+    for item in items:
+        normalized = _normalize_nav_item(item)
+        if _is_simple_nav_item(item):
+            simple_buffer.append(normalized)
+        else:
+            flush_simple_items()
+            grouped.append(normalized)
+
+    flush_simple_items()
+    return grouped
+
+
 @stable
 @register(category="navigation", requires_js=True)
 def Navbar(
@@ -125,7 +201,7 @@ def Navbar(
     # Merge *children and items
     nav_content = list(children)
     if items:
-        nav_content.extend(items)
+        nav_content.extend(_group_nav_items(items))
 
     # Wrap in container if requested
     if c_container:

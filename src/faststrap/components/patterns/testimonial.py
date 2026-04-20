@@ -128,6 +128,16 @@ def TestimonialSection(
     title: str = "What Our Customers Say",
     subtitle: str | None = None,
     columns: int = 3,
+    header_cls: str | None = None,
+    title_cls: str | None = None,
+    subtitle_cls: str | None = None,
+    row_cls: str | None = None,
+    col_cls: str | None = None,
+    header_attrs: dict[str, Any] | None = None,
+    title_attrs: dict[str, Any] | None = None,
+    subtitle_attrs: dict[str, Any] | None = None,
+    row_attrs: dict[str, Any] | None = None,
+    col_attrs: dict[str, Any] | None = None,
     **kwargs: Any,
 ) -> Div:
     """Section displaying multiple testimonials in a grid.
@@ -137,6 +147,16 @@ def TestimonialSection(
         title: Section title
         subtitle: Optional subtitle
         columns: Number of columns in grid (default: 3)
+        header_cls: Additional classes for the section header
+        title_cls: Additional classes for the title element
+        subtitle_cls: Additional classes for the subtitle element
+        row_cls: Additional classes for the row wrapper
+        col_cls: Additional classes for each column wrapper
+        header_attrs: Extra attributes for the section header
+        title_attrs: Extra attributes for the title element
+        subtitle_attrs: Extra attributes for the subtitle element
+        row_attrs: Extra attributes for the row wrapper
+        col_attrs: Extra attributes for each column wrapper
         **kwargs: Additional HTML attributes
 
     Returns:
@@ -175,31 +195,58 @@ def TestimonialSection(
     """
     from ..layout.grid import Col, Container, Row
 
+    header_attrs = convert_attrs(dict(header_attrs or {}))
+    title_attrs = convert_attrs(dict(title_attrs or {}))
+    subtitle_attrs = convert_attrs(dict(subtitle_attrs or {}))
+    row_attrs = convert_attrs(dict(row_attrs or {}))
+    col_attrs = convert_attrs(dict(col_attrs or {}))
+
     # Build header
     header_content = [
         Div(
             title,
-            cls="h2 text-center mb-2",
+            cls=merge_classes("h2 text-center mb-2", title_cls, title_attrs.pop("cls", "")),
+            **title_attrs,
         )
     ]
     if subtitle:
-        header_content.append(P(subtitle, cls="text-center text-muted mb-5"))
+        header_content.append(
+            P(
+                subtitle,
+                cls=merge_classes(
+                    "text-center text-muted mb-5",
+                    subtitle_cls,
+                    subtitle_attrs.pop("cls", ""),
+                ),
+                **subtitle_attrs,
+            )
+        )
 
-    header = Div(*header_content)
+    header = Div(
+        *header_content,
+        cls=merge_classes(header_cls, header_attrs.pop("cls", "")),
+        **header_attrs,
+    )
 
     # Build testimonial grid
     col_size = 12 // columns
     testimonial_cols = []
     for testimonial in testimonials:
+        current_col_attrs = dict(col_attrs)
         testimonial_cols.append(
             Col(
                 testimonial,
                 md=col_size,
-                cls="mb-4",
+                cls=merge_classes("mb-4", col_cls, current_col_attrs.pop("cls", "")),
+                **current_col_attrs,
             )
         )
 
-    testimonial_grid = Row(*testimonial_cols)
+    testimonial_grid = Row(
+        *testimonial_cols,
+        cls=merge_classes(row_cls, row_attrs.pop("cls", "")),
+        **row_attrs,
+    )
 
     # Build classes
     base_classes = ["py-5"]

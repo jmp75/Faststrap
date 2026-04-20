@@ -1,8 +1,18 @@
+"""Flagship showcase — SEA Furniture Store.
+
+Production-grade furniture e-commerce landing for Faststrap:
+
+- Playfair Display display font + Inter body
+- Warm cream palette (#FAF7F2) with walnut brown accents
+- Product cards: image zoom on hover, heart wishlist Icon, quick-view overlay
+- Why Choose Us: Icon() components (patch-check, tree, house-heart, truck)
+- Stats banner: Orders / Homes / Cities / Years
+- TestimonialSection with star ratings
+- Brands strip and News grid
+- FooterModern, PageMeta, Fx animations throughout
 """
-Showcase - Furniture Store Landing
-Inspired by the uploaded furniture reference layout.
-Built fully with Faststrap + FastHTML components.
-"""
+
+from __future__ import annotations
 
 from typing import Any
 
@@ -13,9 +23,11 @@ from fasthtml.common import (
     H4,
     A,
     Br,
+    Button,
     Div,
     FastHTML,
     Img,
+    Nav,
     P,
     Span,
     Strong,
@@ -25,20 +37,35 @@ from fasthtml.common import (
 
 from faststrap import (
     Badge,
-    Button,
     Card,
     Col,
     Container,
     FooterModern,
+    Fx,
     Icon,
-    Navbar,
+    PageMeta,
     Row,
+    Testimonial,
+    TestimonialSection,
     add_bootstrap,
+    create_theme,
+)
+
+# ── Theme ──────────────────────────────────────────────────────────────────────
+FURNITURE_THEME = create_theme(
+    primary="#5C4033",  # walnut brown
+    secondary="#8D6E63",  # warm tan
+    success="#4CAF50",
+    warning="#F6A33B",
+    danger="#E53935",
+    light="#FAF7F2",  # warm cream
+    dark="#1A1210",
 )
 
 app = FastHTML()
-add_bootstrap(app, font_family="Montserrat")
+add_bootstrap(app, theme=FURNITURE_THEME, font_family="Inter")
 
+# ── Data ───────────────────────────────────────────────────────────────────────
 PRODUCTS = [
     (
         "Accent Lounge Chair",
@@ -96,13 +123,14 @@ FEATURED = [
     ),
 ]
 
-BRANDS = [
-    "WoodNature",
-    "Golden Gallery",
-    "Modern Living",
-    "HighLight Home",
-    "Nordic Scale",
+STATS = [
+    ("74,353", "Orders Delivered", "box-seam-fill"),
+    ("6,333", "Happy Homes", "house-heart-fill"),
+    ("20+", "Cities Served", "geo-alt-fill"),
+    ("20+", "Years Experience", "award-fill"),
 ]
+
+BRANDS = ["WoodNature", "Golden Gallery", "Modern Living", "HighLight Home", "Nordic Scale"]
 
 NEWS = [
     (
@@ -119,488 +147,749 @@ NEWS = [
     ),
 ]
 
-SHOWCASE_CSS = """
-body { background: #f3f3f3; }
-.fs-main-nav { background: rgba(255,255,255,.95); border-radius: .75rem; }
-.fs-brand { font-size: 1.5rem; font-weight: 800; color: #111; text-transform: lowercase; letter-spacing: .04em; }
-.fs-hero { background: #111; }
-.fs-dark-section { background: #1a1d21; }
-.fs-hover-lift { transition: transform .2s ease, box-shadow .2s ease; }
-.fs-hover-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,.16) !important; }
-.fs-metric-card { background: linear-gradient(160deg,#1b2226,#2d363d); color: #fff; }
-.fs-soft-banner { background: linear-gradient(160deg,#f6efe5,#fef8f0); }
-.fs-quote { background: #171a1d; color: #fff; }
+CATEGORIES = [
+    ("moon-stars-fill", "Bedroom", "#5C4033"),
+    ("cup-hot-fill", "Kitchen", "#8D6E63"),
+    ("lamp-fill", "Living Room", "#A0785A"),
+    ("laptop", "Office", "#6D4C41"),
+]
+
+WHY_CHOOSE = [
+    (
+        "patch-check-fill",
+        "Crafted with Precision",
+        "Quality-first construction with artisan attention to every joint and finish.",
+        "#5C4033",
+    ),
+    (
+        "tree-fill",
+        "Sustainable Materials",
+        "Eco-conscious sourcing from verified sustainable forests and recycled materials.",
+        "#4CAF50",
+    ),
+    (
+        "house-heart-fill",
+        "Designed for Every Space",
+        "From compact studio apartments to sprawling family homes — we fit your life.",
+        "#F6A33B",
+    ),
+    (
+        "truck",
+        "Reliable Delivery",
+        "White-glove nationwide shipping with real-time tracking and room-of-choice drop.",
+        "#0EA5E9",
+    ),
+]
+
+# ── CSS ────────────────────────────────────────────────────────────────────────
+CSS = """
+/* ════════════════════════════════════════════════════════════
+   SEA Furniture · Premium E-Commerce CSS
+   Warm cream palette, Playfair Display headings,
+   product card hover zoom, wishlist animations.
+   Atmospheric only — Bootstrap/Faststrap own layout.
+   ════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  background: #FAF7F2;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* ── Sticky nav ─────────────────────────────────────────────── */
+.fs-nav {
+  background: rgba(250,247,242,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(92,64,51,0.08);
+}
+
+.fs-brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1A1210;
+  letter-spacing: -0.01em;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.fs-hero {
+  background: linear-gradient(135deg, #1A1210 0%, #2C1810 50%, #1A1210 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fs-hero::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(246,163,59,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Product Cards ──────────────────────────────────────────── */
+.fs-product-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(92,64,51,0.06);
+  border: 1px solid rgba(92,64,51,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  height: 100%;
+}
+
+.fs-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(92,64,51,0.14);
+}
+
+.fs-product-image-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.fs-product-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.fs-product-card:hover .fs-product-image-wrap img {
+  transform: scale(1.08);
+}
+
+/* Wishlist button */
+.fs-wishlist-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.fs-wishlist-btn:hover { color: #E53935; transform: scale(1.2); }
+
+/* Quick view overlay */
+.fs-quick-view {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(92,64,51,0.85);
+  color: #fff;
+  text-align: center;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+  cursor: pointer;
+}
+
+.fs-product-card:hover .fs-quick-view { transform: translateY(0); }
+
+/* ── Category pills ─────────────────────────────────────────── */
+.fs-category-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(92,64,51,0.1);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.fs-category-pill:hover {
+  border-color: #5C4033;
+  transform: translateY(-3px);
+}
+
+.fs-category-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* ── Why Choose Us ──────────────────────────────────────────── */
+.fs-why-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(92,64,51,0.06);
+  border: 1px solid rgba(92,64,51,0.06);
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.fs-why-card:hover { transform: translateY(-4px); }
+
+.fs-why-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Stats Banner ───────────────────────────────────────────── */
+.fs-stats-banner {
+  background: linear-gradient(135deg, #1A1210, #2C1810);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+}
+
+.fs-stat-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #F6A33B;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.fs-stat-lbl {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+
+/* ── Brand cards ────────────────────────────────────────────── */
+.fs-brand-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(92,64,51,0.08);
+  text-align: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.fs-brand-card:hover { box-shadow: 0 6px 20px rgba(92,64,51,0.1); }
+
+/* ── News cards ─────────────────────────────────────────────── */
+.fs-news-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(92,64,51,0.06);
+  border: 1px solid rgba(92,64,51,0.06);
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.fs-news-card:hover { transform: translateY(-4px); }
+
+/* ── Dark section ───────────────────────────────────────────── */
+.fs-dark-section {
+  background: linear-gradient(135deg, #1A1210, #2C1810);
+  border-radius: 20px;
+  color: #fff;
+}
 """
 
 
-def product_card(name: str, price: str, image: str) -> Any:
-    return Card(
-        Img(src=image, cls="w-100 object-fit-cover rounded-top", style="height:180px;"),
+def product_card(name: str, price: str, image: str, index: int = 0) -> Any:
+    return Div(
+        # Image with zoom + wishlist + quick view
         Div(
-            Strong(name, cls="d-block mb-1"),
-            Span(price, cls="text-muted"),
+            Img(src=image, alt=name),
+            Button(
+                Icon("heart"),
+                cls="fs-wishlist-btn",
+                title="Add to wishlist",
+            ),
+            Div("Quick View", cls="fs-quick-view"),
+            cls="fs-product-image-wrap",
+        ),
+        # Card body
+        Div(
+            Div(
+                Strong(name, cls="d-block mb-0", style="font-size:0.92rem;"),
+                Span(price, cls="fw-700", style="color:#5C4033;"),
+                cls="d-flex justify-content-between align-items-center mb-2",
+            ),
+            Button(
+                Icon("cart-plus", cls="me-1"),
+                "Add to Cart",
+                cls="btn btn-sm w-100 fw-600",
+                style="background:#5C4033;color:#fff;border-radius:50px;",
+            ),
             cls="p-3",
         ),
-        cls="border-0 shadow-sm h-100 fs-hover-lift",
+        cls=f"fs-product-card {Fx.fade_in}",
+        style=f"animation-delay:{index*60}ms;",
     )
 
 
 @app.get("/")
 def home() -> Any:
     return Div(
-        Style(SHOWCASE_CSS),
+        Style(CSS),
+        PageMeta(
+            title="SEA Furniture — Premium Furniture for Elegant Living",
+            description="Discover elegant, durable furniture built for modern living spaces. Handcrafted chairs, sofas, tables, and more.",
+        ),
         Container(
-            Div(
-                # Header
+            # ── Navigation ─────────────────────────────────────────
+            Nav(
                 Div(
-                    Navbar(
-                        brand=Span("sea", cls="fs-brand"),
-                        items=[
-                            Div(
-                                A("Home", href="#home", cls="nav-link"),
-                                A("Products", href="#products", cls="nav-link"),
-                                A("About Us", href="#about", cls="nav-link"),
-                                A("Trending", href="#featured", cls="nav-link"),
-                                A("Deals", href="#deals", cls="nav-link"),
-                                A("Contact", href="#footer", cls="nav-link"),
-                                cls="navbar-nav me-auto mb-2 mb-lg-0",
+                    A(Span("sea.", cls="fs-brand-text"), cls="navbar-brand", href="#"),
+                    Button(
+                        Span(cls="navbar-toggler-icon"),
+                        cls="navbar-toggler",
+                        type="button",
+                        data_bs_toggle="collapse",
+                        data_bs_target="#fsNavCollapse",
+                        aria_controls="fsNavCollapse",
+                        aria_expanded="false",
+                        aria_label="Toggle navigation",
+                    ),
+                    Div(
+                        Div(
+                            A("Home", href="#", cls="nav-link fw-500"),
+                            A("Products", href="#products", cls="nav-link fw-500"),
+                            A("About", href="#about", cls="nav-link fw-500"),
+                            A("Featured", href="#featured", cls="nav-link fw-500"),
+                            A("Contact", href="#footer", cls="nav-link fw-500"),
+                            cls="navbar-nav ms-auto align-items-center gap-1",
+                        ),
+                        cls="collapse navbar-collapse",
+                        id="fsNavCollapse",
+                    ),
+                    cls="container",
+                ),
+                cls="navbar navbar-expand-lg navbar-light fs-nav shadow-none px-2 position-sticky top-0 z-3",
+            ),
+            # ── Hero ───────────────────────────────────────────────
+            Div(
+                Row(
+                    Col(
+                        Div(
+                            Badge(
+                                Icon("stars", cls="me-1"),
+                                "New Collection 2026",
+                                variant="warning",
+                                cls="text-dark fw-600 mb-3",
+                            ),
+                            H1(
+                                Span("Furniture ", style="color:#F6A33B;"),
+                                "Solutions.",
+                                Br(),
+                                "Affordable Prices.",
+                                cls=f"display-4 fw-bold text-white {Fx.slide_up}",
+                            ),
+                            P(
+                                "Discover elegant, durable furniture crafted for modern living. "
+                                "From curated chairs to premium cabinets — furnished beautifully.",
+                                cls=f"text-light mt-3 fs-5 {Fx.fade_in} {Fx.delay_sm}",
                             ),
                             Div(
                                 Button(
-                                    "Login", variant="dark", outline=True, size="sm", cls="me-2"
+                                    Icon("arrow-right-circle", cls="me-2"),
+                                    "View Products",
+                                    variant="warning",
+                                    cls="text-dark fw-700 me-2",
+                                    style="border-radius:50px;",
                                 ),
-                                Button("Sign Up", variant="dark", size="sm"),
-                                cls="d-flex align-items-center",
+                                Button(
+                                    "Request Quote",
+                                    variant="light",
+                                    outline=True,
+                                    style="border-radius:50px;",
+                                ),
+                                cls="mt-4",
                             ),
-                        ],
-                        variant="light",
-                        expand="lg",
-                        sticky="top",
-                        container=True,
-                        cls="shadow-sm fs-main-nav px-2",
+                            cls="p-5",
+                        ),
+                        lg=7,
                     ),
-                    cls="pt-3 position-sticky top-0 z-3",
+                    Col(
+                        Div(
+                            Img(
+                                src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1200",
+                                cls="w-100 rounded-3 object-fit-cover",
+                                style="height:100%;min-height:420px;",
+                            ),
+                            cls="h-100 p-3",
+                        ),
+                        lg=5,
+                    ),
+                    cls="g-0",
+                    cols=1,
+                    cols_lg=2,
                 ),
-                # Hero
-                Div(
-                    Row(
+                cls="fs-hero mt-3",
+            ),
+            # ── Category Pills ─────────────────────────────────────
+            Div(
+                H2("Shop by Space", cls="fw-bold text-center mb-1"),
+                P(
+                    "Browse furniture for every room in your home.",
+                    cls="text-center text-muted mb-4",
+                ),
+                Row(
+                    *[
                         Col(
+                            Div(
+                                Div(
+                                    Icon(ic),
+                                    cls="fs-category-icon",
+                                    style=f"background:{color}18;color:{color};",
+                                ),
+                                Strong(label, cls="small"),
+                                cls="fs-category-pill",
+                            ),
+                            cls=f"mb-3 {Fx.fade_in}",
+                        )
+                        for ic, label, color in CATEGORIES
+                    ],
+                    cls="g-2",
+                    cols=2,
+                    cols_md=4,
+                ),
+                cls="mt-5",
+            ),
+            # ── Products ───────────────────────────────────────────
+            Div(
+                H2("Our Products", cls="fw-bold text-center"),
+                P(
+                    "Carefully selected pieces to elevate comfort and style.",
+                    cls="text-center text-muted mb-4",
+                ),
+                Row(
+                    *[
+                        Col(product_card(n, p, img, i), cls="mb-4")
+                        for i, (n, p, img) in enumerate(PRODUCTS)
+                    ],
+                    cls="g-3",
+                    cols=1,
+                    cols_md=2,
+                    cols_lg=3,
+                ),
+                Div(
+                    Button(
+                        Icon("grid-3x3-gap-fill", cls="me-2"),
+                        "View All Products",
+                        variant="outline-secondary",
+                        cls="fw-600",
+                        style="border-radius:50px;",
+                    ),
+                    cls="text-center mt-2",
+                ),
+                id="products",
+                cls="mt-5",
+            ),
+            # ── Stats Banner ───────────────────────────────────────
+            Div(
+                Row(
+                    *[
+                        Col(
+                            Div(
+                                Div(
+                                    Icon(
+                                        icon,
+                                        cls="me-3",
+                                        style="font-size:1.8rem;opacity:0.5;color:#F6A33B;",
+                                    ),
+                                    Div(
+                                        Div(val, cls="fs-stat-val"),
+                                        Div(label, cls="fs-stat-lbl"),
+                                    ),
+                                    cls="d-flex align-items-center",
+                                ),
+                                cls="text-center text-md-start",
+                            ),
+                            cls=f"mb-3 {Fx.fade_in}",
+                        )
+                        for val, label, icon in STATS
+                    ],
+                    cls="g-3 align-items-center",
+                    cols=2,
+                    cols_md=4,
+                ),
+                cls="fs-stats-banner mt-5",
+            ),
+            # ── Featured + Deal Card ───────────────────────────────
+            Div(
+                Row(
+                    Col(
+                        H3("Featured Products", cls="fw-bold mb-3"),
+                        Row(
+                            *[
+                                Col(
+                                    Card(
+                                        Img(
+                                            src=img,
+                                            cls="w-100 object-fit-cover rounded-top",
+                                            style="height:120px;",
+                                        ),
+                                        Div(
+                                            Strong(name, cls="small d-block"),
+                                            Span(price, cls="small fw-700", style="color:#5C4033;"),
+                                            cls="p-2",
+                                        ),
+                                        cls="border-0 shadow-sm h-100 fs-news-card",
+                                    ),
+                                    cls="mb-3",
+                                )
+                                for name, price, img in FEATURED
+                            ],
+                            cls="g-2",
+                            cols=2,
+                            cols_md=3,
+                        ),
+                        lg=8,
+                        id="featured",
+                    ),
+                    Col(
+                        Card(
+                            Img(
+                                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200",
+                                cls="w-100 object-fit-cover rounded-top",
+                                style="height:220px;",
+                            ),
                             Div(
                                 Badge(
-                                    "New Collection",
+                                    Icon("tag-fill", cls="me-1"),
+                                    "UP TO 35% OFF",
                                     variant="warning",
-                                    cls="text-dark fw-bold mb-3",
+                                    cls="text-dark fw-700 mb-2",
                                 ),
-                                H1(
-                                    Span("Furniture ", cls="text-warning"),
-                                    "Solutions.",
-                                    Br(),
-                                    "Affordable Prices.",
-                                    cls="display-4 fw-bold text-white",
+                                H4(
+                                    "Perfect Cabinets For Your Living Room!",
+                                    style="font-family:'Playfair Display',serif;",
                                 ),
                                 P(
-                                    "Discover elegant, durable furniture built for modern living spaces. "
-                                    "From curated chairs to premium cabinets, we help you furnish beautifully.",
-                                    cls="text-light-emphasis mt-3 fs-5",
+                                    "Limited-time pricing on handcrafted storage essentials.",
+                                    cls="text-muted",
+                                ),
+                                Button(
+                                    Icon("bag-fill", cls="me-2"),
+                                    "Shop Now",
+                                    variant="warning",
+                                    cls="text-dark fw-700",
+                                    style="border-radius:50px;",
+                                ),
+                                cls="p-3",
+                            ),
+                            cls="border-0 shadow-sm",
+                        ),
+                        lg=4,
+                    ),
+                    cls=" ",
+                    cols=1,
+                    cols_lg=2,
+                ),
+                cls="mt-5",
+            ),
+            # ── Why Choose Us ──────────────────────────────────────
+            Div(
+                Row(
+                    Col(
+                        H2("Why Choose SEA", cls="fw-bold mb-4", id="about"),
+                        Row(
+                            *[
+                                Col(
+                                    Div(
+                                        Div(
+                                            Icon(icon),
+                                            cls="fs-why-icon",
+                                            style=f"background:{color}18;color:{color};",
+                                        ),
+                                        Strong(title, cls="d-block mb-1"),
+                                        P(desc, cls="small text-muted mb-0"),
+                                        cls=f"fs-why-card {Fx.fade_in}",
+                                        style=f"animation-delay:{i*80}ms;",
+                                    ),
+                                    cls="mb-3",
+                                )
+                                for i, (icon, title, desc, color) in enumerate(WHY_CHOOSE)
+                            ],
+                            cls="g-3",
+                            cols=1,
+                            cols_md=2,
+                        ),
+                        lg=8,
+                    ),
+                    Col(
+                        Card(
+                            Div(
+                                Icon("quote", cls="display-4", style="color:#F6A33B;opacity:0.8;"),
+                                P(
+                                    '"I absolutely love our new living room set. '
+                                    'The craftsmanship is outstanding and delivery was seamless."',
+                                    cls="mb-3",
+                                    style="font-style:italic;",
                                 ),
                                 Div(
-                                    Button(
-                                        "View Products",
-                                        variant="warning",
-                                        cls="text-dark fw-bold me-2",
-                                    ),
-                                    Button("Request Quote", variant="light", outline=True),
-                                    cls="mt-4",
+                                    Icon("star-fill", cls="text-warning"),
+                                    Icon("star-fill", cls="text-warning"),
+                                    Icon("star-fill", cls="text-warning"),
+                                    Icon("star-fill", cls="text-warning"),
+                                    Icon("star-fill", cls="text-warning"),
+                                    cls="d-flex gap-1 mb-2",
                                 ),
-                                cls="p-5",
+                                Strong("John Doe", style="color:#F6A33B;"),
+                                P("Verified Buyer · Nigeria", cls="small text-muted mb-0"),
+                                cls="p-4",
                             ),
-                            lg=7,
-                            cols=12,
+                            cls="border-0 h-100",
+                            style="background:linear-gradient(135deg,#1A1210,#2C1810);color:#fff;border-radius:16px;",
                         ),
+                        lg=4,
+                    ),
+                    cls="",
+                    cols=1,
+                    cols_lg=2,
+                ),
+                cls="mt-5",
+            ),
+            # ── Testimonials ───────────────────────────────────────
+            Div(
+                H2("What Our Customers Say", cls="fw-bold text-center mb-5"),
+                TestimonialSection(
+                    Testimonial(
+                        quote="The quality exceeded my expectations. The walnut table is a centrepiece in our dining room.",
+                        author="Amaka Osei",
+                        role="Interior Designer, Abuja",
+                        rating=5,
+                    ),
+                    Testimonial(
+                        quote="Delivery was spot on and assembly was a breeze. Will definitely order again.",
+                        author="Tunde Bakare",
+                        role="Architect, Lagos",
+                        rating=5,
+                    ),
+                    columns=2,
+                ),
+                cls="mt-5",
+            ),
+            # ── Brands ────────────────────────────────────────────
+            Div(
+                H3("Top Featured Brands", cls="fw-bold mb-3"),
+                Row(
+                    *[
                         Col(
                             Div(
-                                Img(
-                                    src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1200",
-                                    cls="w-100 rounded-3 object-fit-cover",
-                                    style="height:100%; min-height:420px;",
-                                ),
-                                cls="h-100 p-3",
+                                Strong(b, cls="d-block mb-0"),
+                                Span("Quality partner", cls="small text-muted"),
+                                cls="fs-brand-card",
                             ),
-                            lg=5,
-                            cols=12,
-                        ),
-                        cls="g-0",
-                    ),
-                    id="home",
-                    cls="rounded-4 overflow-hidden fs-hero mt-3",
+                            cls="mb-3",
+                        )
+                        for b in BRANDS
+                    ],
+                    cls="g-2",
+                    cols=2,
+                    cols_md=3,
+                    cols_lg=5,
                 ),
-                # What we produce
-                Div(
-                    Row(
+                cls="mt-5",
+            ),
+            # ── News ──────────────────────────────────────────────
+            Div(
+                H3("News & Updates", cls="fw-bold mb-3"),
+                Row(
+                    *[
                         Col(
-                            H2("What We Produce.", cls="fw-bold text-white"),
-                            P(
-                                "Furniture categories crafted for every corner of your home and office.",
-                                cls="text-light-emphasis",
-                            ),
-                            lg=4,
-                            cols=12,
-                        ),
-                        Col(
-                            Row(
-                                Col(
-                                    Card(
-                                        Strong("BEDROOM"),
-                                        P(
-                                            "Comfort-first furniture built for peaceful rest.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="p-3 border-0 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                ),
-                                Col(
-                                    Card(
-                                        Strong("KITCHEN"),
-                                        P(
-                                            "Practical and stylish options for modern cooking spaces.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="p-3 border-0 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                ),
-                                Col(
-                                    Card(
-                                        Strong("LIVING ROOM"),
-                                        P(
-                                            "Sofas, chairs, and statement pieces for daily comfort.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="p-3 border-0 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                ),
-                                Col(
-                                    Card(
-                                        Strong("OFFICE"),
-                                        P(
-                                            "Ergonomic and productive workspace essentials.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="p-3 border-0 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                ),
-                                cls="g-3",
-                            ),
-                            lg=8,
-                            cols=12,
-                        ),
-                    ),
-                    cls="mt-5 p-4 rounded-4 fs-dark-section",
-                ),
-                # Products grid
-                Div(
-                    H2("Our Products", cls="fw-bold text-center"),
-                    P(
-                        "Carefully selected pieces to elevate comfort and style.",
-                        cls="text-center text-muted mb-4",
-                    ),
-                    Row(
-                        *[
-                            Col(product_card(n, p, i), lg=4, md=6, cols=12, cls="mb-4")
-                            for n, p, i in PRODUCTS
-                        ],
-                        cls="g-3",
-                    ),
-                    Div(
-                        Button("All Products", variant="dark", outline=True), cls="text-center mt-2"
-                    ),
-                    id="products",
-                    cls="mt-5",
-                ),
-                # Featured row + side panel
-                Div(
-                    Row(
-                        Col(
-                            H3("Featured Products", cls="fw-bold mb-3"),
-                            Row(
-                                *[
-                                    Col(
-                                        Card(
-                                            Img(
-                                                src=img,
-                                                cls="w-100 object-fit-cover rounded-top",
-                                                style="height:120px;",
-                                            ),
-                                            Div(
-                                                Strong(name, cls="small d-block"),
-                                                Span(price, cls="small text-muted"),
-                                                cls="p-2",
-                                            ),
-                                            cls="border-0 shadow-sm h-100",
-                                        ),
-                                        md=4,
-                                        cols=6,
-                                        cls="mb-3",
-                                    )
-                                    for name, price, img in FEATURED
-                                ],
-                                cls="g-2",
-                            ),
-                            lg=8,
-                            cols=12,
-                            id="featured",
-                        ),
-                        Col(
-                            Card(
-                                Img(
-                                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200",
-                                    cls="w-100 object-fit-cover rounded-top",
-                                    style="height:220px;",
-                                ),
+                            Div(
+                                Img(src=img, cls="w-100 object-fit-cover", style="height:180px;"),
                                 Div(
-                                    Badge("UP TO 35% OFF", variant="warning", cls="text-dark"),
-                                    H4("Perfect Cabinets For Your Living Room!"),
-                                    P(
-                                        "Limited-time pricing on handcrafted storage essentials.",
-                                        cls="text-muted",
+                                    Strong(title),
+                                    Div(
+                                        Icon("arrow-right-circle", cls="me-1"),
+                                        "Read more",
+                                        cls="small mt-1",
+                                        style="color:#5C4033;cursor:pointer;",
                                     ),
-                                    Button("Shop Now", variant="warning", cls="text-dark fw-bold"),
                                     cls="p-3",
                                 ),
-                                cls="border-0 shadow-sm",
+                                cls="fs-news-card",
                             ),
-                            lg=4,
-                            cols=12,
-                        ),
-                    ),
-                    cls="mt-5",
-                ),
-                # Why choose us + numbers + deals
-                Div(
-                    Row(
-                        Col(
-                            H3("Why Choose Us", cls="fw-bold"),
-                            Row(
-                                Col(
-                                    Card(
-                                        Span("01", cls="display-6 fw-bold text-warning"),
-                                        Strong("Crafted with Precision"),
-                                        P(
-                                            "Quality-first construction in every piece.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="border-0 shadow-sm p-3 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                    cls="mb-3",
-                                ),
-                                Col(
-                                    Card(
-                                        Span("02", cls="display-6 fw-bold text-warning"),
-                                        Strong("Sustainable Materials"),
-                                        P(
-                                            "Eco-conscious sourcing and finishes.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="border-0 shadow-sm p-3 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                    cls="mb-3",
-                                ),
-                                Col(
-                                    Card(
-                                        Span("03", cls="display-6 fw-bold text-warning"),
-                                        Strong("Designed for Every Space"),
-                                        P(
-                                            "From compact apartments to large homes.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="border-0 shadow-sm p-3 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                    cls="mb-3",
-                                ),
-                                Col(
-                                    Card(
-                                        Span("04", cls="display-6 fw-bold text-warning"),
-                                        Strong("Reliable Delivery"),
-                                        P(
-                                            "On-time nationwide shipping support.",
-                                            cls="small text-muted",
-                                        ),
-                                        cls="border-0 shadow-sm p-3 h-100",
-                                    ),
-                                    md=6,
-                                    cols=12,
-                                    cls="mb-3",
-                                ),
-                                cls="g-3",
-                            ),
-                            lg=8,
-                            cols=12,
-                            id="about",
-                        ),
-                        Col(
-                            Card(
-                                Div(
-                                    Span("74353", cls="display-6 fw-bold"),
-                                    P("Orders Delivered", cls="mb-4 text-light-emphasis"),
-                                ),
-                                Div(
-                                    Span("6333", cls="display-6 fw-bold"),
-                                    P("Happy Homes", cls="mb-4 text-light-emphasis"),
-                                ),
-                                Div(
-                                    Span("20+", cls="display-6 fw-bold"),
-                                    P("Cities Served", cls="mb-4 text-light-emphasis"),
-                                ),
-                                Div(
-                                    Span("20+", cls="display-6 fw-bold"),
-                                    P("Years Experience", cls="text-light-emphasis"),
-                                ),
-                                cls="p-4 border-0 fs-metric-card",
-                            ),
-                            lg=4,
-                            cols=12,
-                        ),
-                    ),
-                    cls="mt-5",
-                ),
-                Div(
-                    Row(
-                        Col(
-                            Card(
-                                Div(
-                                    H4("Host Perfect Meals With Discounted Tables."),
-                                    P(
-                                        "Explore dining collections designed to make every gathering memorable.",
-                                        cls="text-muted",
-                                    ),
-                                    Button(
-                                        "Shop Tables", variant="warning", cls="text-dark fw-bold"
-                                    ),
-                                    cls="p-4",
-                                ),
-                                cls="border-0 fs-soft-banner h-100",
-                            ),
-                            lg=8,
-                            cols=12,
-                        ),
-                        Col(
-                            Card(
-                                Div(
-                                    Icon("quote", cls="display-4 text-warning"),
-                                    P(
-                                        "I absolutely love our new living room set. "
-                                        "The craftsmanship is outstanding and delivery was seamless.",
-                                        cls="text-light mb-3",
-                                    ),
-                                    Strong("John Doe", cls="text-warning"),
-                                    cls="p-4",
-                                ),
-                                cls="border-0 fs-quote h-100",
-                            ),
-                            lg=4,
-                            cols=12,
-                        ),
-                    ),
-                    id="deals",
-                    cls="mt-4",
-                ),
-                # Brands and News
-                Div(
-                    H3("Top Featured Brands.", cls="fw-bold mb-3"),
-                    Row(
-                        *[
-                            Col(
-                                Card(
-                                    Strong(b),
-                                    P("Quality partner", cls="small text-muted"),
-                                    cls="border-0 shadow-sm p-3",
-                                ),
-                                md=4,
-                                lg=2,
-                                cols=6,
-                                cls="mb-3",
-                            )
-                            for b in BRANDS
-                        ],
-                        cls="g-2",
-                    ),
-                    cls="mt-5",
-                ),
-                Div(
-                    H3("News & Updates", cls="fw-bold mb-3"),
-                    Row(
-                        *[
-                            Col(
-                                Card(
-                                    Img(
-                                        src=img,
-                                        cls="w-100 object-fit-cover rounded-top",
-                                        style="height:180px;",
-                                    ),
-                                    Div(Strong(title), cls="p-3"),
-                                    cls="border-0 shadow-sm h-100",
-                                ),
-                                lg=4,
-                                cols=12,
-                                cls="mb-3",
-                            )
-                            for title, img in NEWS
-                        ],
-                        cls="g-3",
-                    ),
-                    cls="mt-3 mb-5",
-                ),
-                # Footer
-                FooterModern(
-                    brand="sea",
-                    tagline="Premium furniture solutions for elegant living.",
-                    columns=[
-                        {
-                            "title": "Company",
-                            "links": [
-                                {"text": "About", "href": "#about"},
-                                {"text": "Products", "href": "#products"},
-                                {"text": "Contact", "href": "#footer"},
-                            ],
-                        },
-                        {
-                            "title": "Support",
-                            "links": [
-                                {"text": "Shipping", "href": "#"},
-                                {"text": "Returns", "href": "#"},
-                                {"text": "Help Center", "href": "#"},
-                            ],
-                        },
+                            cls=f"mb-3 {Fx.fade_in}",
+                        )
+                        for title, img in NEWS
                     ],
-                    social_links=[
-                        {"icon": "instagram", "href": "#"},
-                        {"icon": "facebook", "href": "#"},
-                        {"icon": "twitter-x", "href": "#"},
-                    ],
-                    bg_variant="dark",
-                    text_variant="light",
-                    copyright_text="© 2026 Sea Furniture. All rights reserved.",
-                    id="footer",
-                    cls="rounded-4 mt-4",
+                    cls="g-3",
+                    cols=1,
+                    cols_lg=3,
                 ),
-                cls="py-4",
+                cls="mt-3 mb-5",
             ),
-            cls="container-xl",
+            # ── Footer ────────────────────────────────────────────
+            FooterModern(
+                brand="sea.",
+                tagline="Premium furniture solutions for elegant living.",
+                columns=[
+                    {
+                        "title": "Company",
+                        "links": [
+                            {"text": "About", "href": "#about"},
+                            {"text": "Products", "href": "#products"},
+                            {"text": "Contact", "href": "#footer"},
+                        ],
+                    },
+                    {
+                        "title": "Support",
+                        "links": [
+                            {"text": "Shipping", "href": "#"},
+                            {"text": "Returns", "href": "#"},
+                            {"text": "Help", "href": "#"},
+                        ],
+                    },
+                ],
+                social_links=[
+                    {"icon": "instagram", "href": "#"},
+                    {"icon": "facebook", "href": "#"},
+                    {"icon": "twitter-x", "href": "#"},
+                ],
+                bg_variant="dark",
+                text_variant="light",
+                copyright_text="© 2026 SEA Furniture. All rights reserved.",
+                id="footer",
+                cls="rounded-4 mt-4",
+            ),
+            cls="py-4",
         ),
+        cls="container-xl",
     )
 
 
-serve()
+if __name__ == "__main__":
+    serve(port=5014)

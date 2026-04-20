@@ -2,6 +2,9 @@
 
 `DataTable` is a higher-level table with sorting, search, and pagination built in. It accepts `list[dict]` and pandas or polars DataFrames.
 
+!!! warning "Beta API"
+    `DataTable` is currently marked `@beta`. It is stable enough for real apps, but query contracts and helper ergonomics may still evolve in minor releases.
+
 ---
 
 ## Quick Start

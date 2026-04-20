@@ -183,7 +183,9 @@ def SEO(
                 elements.append(Meta(property="article:tag", content=tag))
 
     # Twitter Card tags
-    elements.append(Meta(name="twitter:card", content=twitter_card))
+    has_twitter_content = any([title, description, image, twitter_site, twitter_creator])
+    if has_twitter_content:
+        elements.append(Meta(name="twitter:card", content=twitter_card))
 
     if title:
         elements.append(Meta(name="twitter:title", content=title))

@@ -5,6 +5,7 @@ Use these real user projects as the primary reference set for how FastHTML and F
 - `C:\Users\Meshell\Desktop\FastHTML\NIS`
 - `C:\Users\Meshell\Desktop\FastHTML\Final-Year`
 - `C:\Users\Meshell\Desktop\FastHTML\siwes-logbook-automation`
+- `C:\Users\Meshell\Desktop\FastHTML\mmercyj_beddings`
 
 ## Read first
 
@@ -19,6 +20,9 @@ Use these real user projects as the primary reference set for how FastHTML and F
 - `siwes-logbook-automation/main.py`
 - `siwes-logbook-automation/app/presentation/components/shared/theme.py`
 - `siwes-logbook-automation/app/presentation/assets/custom.css`
+- `mmercyj_beddings/app.py`
+- `mmercyj_beddings/components.py`
+- `mmercyj_beddings/routes.py`
 
 ## Patterns to copy
 
@@ -68,6 +72,15 @@ From `landing.py` and `custom.css`:
 - use typography, spacing, and visual contrast to create hierarchy
 - make CTAs obvious and section transitions intentional
 
+### Mobile-first composition
+
+From `mmercyj_beddings/components.py`:
+
+- when a hero or section has two horizontal content blocks, explicitly set row stacking with patterns like `cols=1, cols_lg=2`
+- keep the primary sales/message column visible on all sizes and treat supporting highlight cards as optional at smaller breakpoints
+- use Bootstrap display utilities like `d-none d-lg-block` when a supporting card improves desktop composition but overloads mobile/tablet
+- prefer solving these cases with Bootstrap/Faststrap row and display controls before reaching for custom CSS or JavaScript
+
 ## Priority rules extracted from the user's apps
 
 - Bootstrap responsiveness should do most of the structural work.
@@ -94,3 +107,4 @@ When the user asks for a company site, portal, or dashboard with Faststrap:
 - keep layout and responsiveness Bootstrap-first
 - keep interactivity HTMX-first
 - escalate to JavaScript only when justified by the feature
+- when in doubt, preserve mobile clarity by stacking first and hiding non-essential dense content until large screens

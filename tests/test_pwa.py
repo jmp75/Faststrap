@@ -3,6 +3,7 @@
 from fasthtml.common import FastHTML
 from starlette.testclient import TestClient
 
+from faststrap.core.assets import add_bootstrap
 from faststrap.pwa import PwaMeta, add_pwa
 
 
@@ -21,6 +22,25 @@ def test_pwa_meta_generation():
     assert any(t.tag == "link" and t.attrs.get("rel") == "apple-touch-icon" for t in tags)
     viewport = next(t for t in tags if t.tag == "meta" and t.attrs.get("name") == "viewport")
     assert viewport.attrs.get("content") == "width=device-width, initial-scale=1"
+
+
+def test_pwa_meta_supports_dedicated_manifest_icon_sizes():
+    """Dedicated 192px and 512px icons should be reflected in the generated tags."""
+    tags = PwaMeta(
+        name="Test App",
+        icon_path="/icon.png",
+        icon_192="/icon-192.png",
+        icon_512="/icon-512.png",
+    )
+
+    apple_icon = next(
+        t for t in tags if t.tag == "link" and t.attrs.get("rel") == "apple-touch-icon"
+    )
+    tile_meta = next(
+        t for t in tags if t.tag == "meta" and t.attrs.get("name") == "msapplication-TileImage"
+    )
+    assert apple_icon.attrs.get("href") == "/icon-192.png"
+    assert tile_meta.attrs.get("content") == "/icon-512.png"
 
 
 def test_add_pwa_injection():
@@ -115,6 +135,43 @@ def test_service_worker_accepts_cache_and_precache_configuration():
     assert 'const CACHE_NAME = "myapp-cache-v2026-02-23";' in sw
     assert '"/health"' in sw
     assert '"/assets/logo.png"' in sw
+
+
+def test_service_worker_uses_cdn_precache_defaults_when_app_assets_use_cdn():
+    """CDN bootstrap mode should precache CDN-hosted Faststrap CSS instead of local static CSS."""
+    app = FastHTML()
+    add_bootstrap(app, use_cdn=True)
+    add_pwa(app, service_worker=True)
+
+    client = TestClient(app)
+    response = client.get("/sw.js")
+
+    assert response.status_code == 200
+    sw = response.text
+    assert "https://cdn.jsdelivr.net/gh/Faststrap-org/Faststrap@" in sw
+    assert "/src/faststrap/static/css/faststrap-fx.css" in sw
+    assert '"/static/css/faststrap-fx.css"' not in sw
+
+
+def test_manifest_uses_dedicated_icon_sizes_when_provided():
+    """Manifest should use dedicated 192x192 and 512x512 icon paths when given."""
+    app = FastHTML()
+    add_pwa(
+        app,
+        icon_path="/icon.png",
+        icon_192="/icon-192.png",
+        icon_512="/icon-512.png",
+    )
+
+    client = TestClient(app)
+    response = client.get("/manifest.json")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["icons"][0]["src"] == "/icon-192.png"
+    assert payload["icons"][0]["sizes"] == "192x192"
+    assert payload["icons"][1]["src"] == "/icon-512.png"
+    assert payload["icons"][1]["sizes"] == "512x512"
 
 
 def test_add_pwa_scope_uses_scoped_routes_and_registration():

@@ -63,6 +63,51 @@ def test_theme_css_generation():
     assert "@media (prefers-color-scheme: dark) {\n  :root {" in auto_css
 
 
+def test_theme_surface_tokens_are_present_in_generated_css():
+    """Theme CSS includes Faststrap surface polish tokens and component overrides."""
+    theme = get_builtin_theme("blue-ocean")
+    css = str(theme.to_style(mode="light"))
+
+    assert "--fs-surface-bg: #ffffff;" in css
+    assert "--fs-radius: 0.9rem;" in css
+    assert ".card," in css
+    assert "box-shadow: var(--fs-surface-shadow-sm);" in css
+    assert ".form-control," in css
+
+
+def test_create_theme_supports_faststrap_surface_tokens():
+    """create_theme maps surface and radius kwargs to Faststrap tokens."""
+    theme = create_theme(
+        primary="#112233",
+        radius="1.1rem",
+        surface_bg_light="#f5f0ff",
+        surface_bg_dark="#17131f",
+        surface_shadow="0 20px 50px rgba(10, 10, 20, 0.2)",
+    )
+
+    assert theme.variables["--fs-radius"] == "1.1rem"
+    assert theme.variables["--fs-surface-bg-light"] == "#f5f0ff"
+    assert theme.variables["--fs-surface-bg-dark"] == "#17131f"
+    assert theme.variables["--fs-surface-shadow"] == "0 20px 50px rgba(10, 10, 20, 0.2)"
+
+
+def test_mode_specific_surface_tokens_apply_to_matching_mode():
+    """Light/dark surface token overrides should resolve per mode."""
+    theme = create_theme(
+        surface_bg_light="#f7f4ff",
+        surface_bg_dark="#15121d",
+        surface_border_dark="rgba(255, 255, 255, 0.18)",
+    )
+
+    light_css = str(theme.to_style(mode="light"))
+    dark_css = str(theme.to_style(mode="dark"))
+
+    assert "--fs-surface-bg: #f7f4ff;" in light_css
+    assert "--fs-surface-bg: #15121d;" in dark_css
+    assert "--fs-surface-border: rgba(255, 255, 255, 0.18);" in dark_css
+    assert "--fs-surface-bg-dark" not in dark_css
+
+
 def test_resolve_defaults_mechanics():
     """Test the priority logic of resolve_defaults."""
     reset_component_defaults()

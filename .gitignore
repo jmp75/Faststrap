@@ -33,6 +33,7 @@ venv.bak/
 
 # Testing
 .pytest_cache/
+.pytest_tmp/
 .coverage
 .coverage.*
 htmlcov/
@@ -42,6 +43,8 @@ coverage.xml
 test_output.txt
 pytest_fail.txt
 test_fail.txt
+test_tmp_run/
+test_tmp_run2/
 debug_imports.py
 log.txt
 fasthtml_exports.txt
@@ -65,3 +68,4 @@ dmypy.json
 # Distribution
 *.tar.gz
 *.whl
+site/

@@ -160,6 +160,24 @@ CUSTOM_STYLES_CSS = """
 
 [data-bs-theme="dark"] { transition: background-color 0.3s, color 0.3s; }
 
+.fs-theme-toggle {
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.fs-theme-toggle .fs-theme-toggle-icon {
+  flex-shrink: 0;
+}
+
+.fs-theme-toggle .form-check-input {
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.fs-theme-toggle .form-check-label {
+  margin-bottom: 0;
+}
+
 /* Simple Toast animations (no JavaScript required) */
 @keyframes toastFadeOut {
   0% { opacity: 1; transform: translateX(0); }

@@ -1,30 +1,35 @@
 # Portfolio Showcases
 
-We provide two distinct portfolio layouts to demonstrate how FastStrap can be used for personal branding, from minimalist defaults to high-impact custom designs.
+Faststrap portfolio references are meant to show that the framework can support brand-led, presentation-heavy sites, not just dashboards and forms.
 
-## 1. Standard Portfolio
-A clean, professional layout using default FastStrap components and the basic "light" theme.
+## Current Primary Portfolio Reference
 
-### Key Features
-- **Responsive Navbar**: With sticky positioning and brand slot.
-- **Hero Section**: Centered headline and call-to-action using the default background.
-- **Project Grid**: Cards with headers and footers to display work.
-- **Skill Badges**: Using the `Badge` component with pill styling.
+### Agency Portfolio
 
-> [!TIP]
-> This layout is perfect for developers who want a fast, batteries-included look without custom CSS.
+`showcase/agency_portfolio.py` is the main internal portfolio showcase right now.
 
-**Source Code**: [portfolio_standard.py](https://github.com/Faststrap-org/Faststrap/blob/main/examples/showcase/portfolio_standard.py)
+It demonstrates:
 
----
+- a more expressive visual direction than the older sample set
+- strong layout rhythm for agency/client-facing work
+- modern navigation, testimonial, and CTA composition
+- custom polish layered over Bootstrap-native structure
 
-## 2. Premium Portfolio
-A dark-themed, high-impact portfolio featuring custom backgrounds and advanced statistics.
+## Related Showcase Categories
 
-### Key Features
-- **Premium Hero**: Demonstrated with a custom background image and linear gradient overlay via the `style` attribute.
-- **Stat Cards**: Showcasing achievements using `StatCard` with icons and dark variants.
-- **Dark Mode**: Integrated with `add_bootstrap(mode="dark")`.
-- **Card-Base Gallery**: Using images and custom border colors for a "Zinc" look.
+Portfolio-adjacent references also include:
 
-**Source Code**: [portfolio_premium.py](https://github.com/Faststrap-org/Faststrap/blob/main/examples/showcase/portfolio_premium.py)
+- `showcase/lexbridge_corporate.py`
+- `showcase/hotel_booking_showcase.py`
+- `showcase/furniture_store_showcase.py`
+
+## Screenshot Slot
+
+When screenshots are added, place them here:
+
+- `docs/assets/showcase/agency-portfolio-light.png`
+- `docs/assets/showcase/agency-portfolio-dark.png`
+
+## Source
+
+- `showcase/agency_portfolio.py`

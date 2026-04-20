@@ -21,6 +21,7 @@ def ThemeToggle(
     toggle_id: str = "theme-toggle",
     show_label: bool = False,
     label_text: str = "Dark Mode",
+    show_icon: bool = False,
     **kwargs: Any,
 ) -> Div:
     """Dark/light mode toggle switch with HTMX persistence.
@@ -35,6 +36,7 @@ def ThemeToggle(
         toggle_id: Unique ID for the toggle
         show_label: Whether to show label text
         label_text: Label text to display
+        show_icon: Whether to render the decorative theme icon
         **kwargs: Additional HTML attributes
 
     Returns:
@@ -103,11 +105,19 @@ def ThemeToggle(
         )
 
     # Build icon (optional visual enhancement)
-    icon_class = "bi-moon-stars-fill" if is_checked else "bi-sun-fill"
-    icon = I(cls=f"bi {icon_class} me-2")
+    icon = None
+    if show_icon:
+        icon_class = "bi-moon-stars-fill" if is_checked else "bi-sun-fill"
+        icon = I(cls=f"bi {icon_class} me-2 fs-theme-toggle-icon", aria_hidden="true")
 
     # Build container
-    base_classes = ["form-check", "form-switch", "d-flex", "align-items-center"]
+    base_classes = [
+        "form-check",
+        "form-switch",
+        "d-flex",
+        "align-items-center",
+        "fs-theme-toggle",
+    ]
     user_cls = kwargs.pop("cls", "")
     all_classes = merge_classes(" ".join(base_classes), user_cls)
 
@@ -115,7 +125,9 @@ def ThemeToggle(
     attrs.update(convert_attrs(kwargs))
 
     # Assemble toggle
-    elements = [icon, toggle_input]
+    elements = [toggle_input]
+    if icon is not None:
+        elements.insert(0, icon)
     if label_element:
         elements.append(label_element)
 

@@ -21,7 +21,7 @@ def test_theme_toggle_light_theme():
     html = to_xml(toggle)
 
     assert "checked" not in html or 'checked="False"' in html
-    assert "bi-sun" in html  # Sun icon for light mode
+    assert "bi-sun" not in html
 
 
 def test_theme_toggle_dark_theme():
@@ -30,7 +30,7 @@ def test_theme_toggle_dark_theme():
     html = to_xml(toggle)
 
     assert "checked" in html
-    assert "bi-moon" in html  # Moon icon for dark mode
+    assert "bi-moon" not in html  # Decorative icon is opt-in
 
 
 def test_theme_toggle_custom_endpoint():
@@ -95,3 +95,12 @@ def test_theme_toggle_custom_classes():
     assert "custom-toggle" in html
     assert "form-check" in html
     assert "form-switch" in html
+
+
+def test_theme_toggle_icon_is_opt_in():
+    """ThemeToggle only renders a decorative icon when explicitly requested."""
+    toggle = ThemeToggle(current_theme="dark", show_icon=True)
+    html = to_xml(toggle)
+
+    assert "bi-moon-stars-fill" in html
+    assert "fs-theme-toggle-icon" in html

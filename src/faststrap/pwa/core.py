@@ -8,7 +8,13 @@ from fasthtml.common import Link, Meta, Script, Title
 from starlette.responses import JSONResponse, Response
 
 from ..components.display.empty_state import EmptyState
-from ..core.assets import BOOTSTRAP_ICONS_VERSION, BOOTSTRAP_VERSION
+from ..core.assets import (
+    BOOTSTRAP_CSS_URL,
+    BOOTSTRAP_ICONS_URL,
+    BOOTSTRAP_JS_URL,
+    FASTSTRAP_CDN_CSS_FILES,
+    _get_faststrap_cdn_version,
+)
 
 
 def _join_scope_path(scope: str, path: str) -> str:
@@ -58,13 +64,41 @@ if ('serviceWorker' in navigator) {{
 """
 
 
-_DEFAULT_PRECACHE_URLS = (
-    f"https://cdn.jsdelivr.net/npm/bootstrap@{BOOTSTRAP_VERSION}/dist/css/bootstrap.min.css",
-    f"https://cdn.jsdelivr.net/npm/bootstrap@{BOOTSTRAP_VERSION}/dist/js/bootstrap.bundle.min.js",
-    f"https://cdn.jsdelivr.net/npm/bootstrap-icons@{BOOTSTRAP_ICONS_VERSION}/font/bootstrap-icons.min.css",
+_DEFAULT_LOCAL_PRECACHE_URLS = (
+    BOOTSTRAP_CSS_URL,
+    BOOTSTRAP_JS_URL,
+    BOOTSTRAP_ICONS_URL,
     "/static/css/faststrap-fx.css",
     "/static/css/faststrap-layouts.css",
 )
+
+
+def _default_precache_urls(*, use_cdn: bool) -> tuple[str, ...]:
+    """Return the default service-worker precache list for the asset mode."""
+    if not use_cdn:
+        return _DEFAULT_LOCAL_PRECACHE_URLS
+
+    version = _get_faststrap_cdn_version()
+    ref = "main" if version == "main" else version if version.startswith("v") else f"v{version}"
+    static_base = f"https://cdn.jsdelivr.net/gh/Faststrap-org/Faststrap@{ref}/src/faststrap/static"
+    faststrap_css = tuple(f"{static_base}/{css_path}" for css_path in FASTSTRAP_CDN_CSS_FILES)
+    return (
+        BOOTSTRAP_CSS_URL,
+        BOOTSTRAP_JS_URL,
+        BOOTSTRAP_ICONS_URL,
+        *faststrap_css,
+    )
+
+
+def _app_uses_cdn_assets(app: Any) -> bool:
+    """Best-effort detection of CDN asset usage from injected app headers."""
+    for header in getattr(app, "hdrs", []):
+        attrs = getattr(header, "attrs", {})
+        for key in ("href", "src"):
+            value = attrs.get(key)
+            if isinstance(value, str) and "cdn.jsdelivr.net" in value:
+                return True
+    return False
 
 
 def _render_sw_script(
@@ -263,6 +297,8 @@ def PwaMeta(
     background_color: str = "#ffffff",
     description: str | None = None,
     icon_path: str = "/static/icon.png",  # Default path
+    icon_192: str | None = None,
+    icon_512: str | None = None,
     manifest_path: str = "/manifest.json",
 ) -> tuple[Any, ...]:
     """
@@ -280,11 +316,15 @@ def PwaMeta(
         background_color: Background color for splash screen
         description: Description of the app
         icon_path: Path to the main icon (should be square, ideally 512x512)
+        icon_192: Optional dedicated 192x192 icon path
+        icon_512: Optional dedicated 512x512 icon path
         manifest_path: URL path to the manifest file
 
     Returns:
         Tuple of FastHTML Meta and Link elements
     """
+    primary_icon = icon_192 or icon_path
+    tile_icon = icon_512 or icon_path
     tags = [
         # Basic Mobile Meta
         Meta(
@@ -297,10 +337,10 @@ def PwaMeta(
         Meta(name="apple-mobile-web-app-capable", content="yes"),
         Meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent"),
         Meta(name="apple-mobile-web-app-title", content=short_name or name or "App"),
-        Link(rel="apple-touch-icon", href=icon_path),
+        Link(rel="apple-touch-icon", href=primary_icon),
         # Windows
         Meta(name="msapplication-TileColor", content=theme_color),
-        Meta(name="msapplication-TileImage", content=icon_path),
+        Meta(name="msapplication-TileImage", content=tile_icon),
         # Manifest
         Link(rel="manifest", href=manifest_path),
     ]
@@ -319,6 +359,8 @@ def add_pwa(
     theme_color: str = "#ffffff",
     background_color: str = "#ffffff",
     icon_path: str = "/assets/icon.png",
+    icon_192: str | None = None,
+    icon_512: str | None = None,
     display: str = "standalone",
     start_url: str = "/",
     scope: str = "/",
@@ -327,6 +369,7 @@ def add_pwa(
     cache_name: str = "faststrap-app",
     cache_version: str = "v1",
     pre_cache_urls: Sequence[str] | None = None,
+    use_cdn: bool | None = None,
     enable_background_sync: bool = False,
     background_sync_tag: str = "faststrap-background-sync",
     route_cache_policies: dict[str, str] | None = None,
@@ -350,6 +393,8 @@ def add_pwa(
         theme_color: Theme color
         background_color: Splash screen background color
         icon_path: Path to icon file
+        icon_192: Optional dedicated 192x192 icon path for the manifest and touch icon
+        icon_512: Optional dedicated 512x512 icon path for the manifest/tile icon
         display: Display mode (standalone, fullscreen, minimal-ui, browser)
         start_url: URL to open on launch
         scope: Scope of the PWA
@@ -358,6 +403,7 @@ def add_pwa(
         cache_name: Service worker cache name prefix
         cache_version: Cache version suffix used for cache invalidation
         pre_cache_urls: Optional extra URLs to precache (in addition to defaults)
+        use_cdn: Force CDN-aware precache defaults; when omitted this is auto-detected
         enable_background_sync: Enable Background Sync foundation hooks
         background_sync_tag: Tag used for Background Sync registrations
         route_cache_policies: Optional route prefix -> strategy mapping
@@ -379,6 +425,8 @@ def add_pwa(
         background_color=background_color,
         description=description,
         icon_path=icon_path,
+        icon_192=icon_192,
+        icon_512=icon_512,
         manifest_path=manifest_path,
     )
 
@@ -387,6 +435,8 @@ def add_pwa(
     app.hdrs = current_hdrs + list(pwa_headers)
 
     # 2. Serve Manifest
+    icon_192_src = icon_192 or icon_path
+    icon_512_src = icon_512 or icon_path
     manifest_data = {
         "name": name,
         "short_name": short_name,
@@ -398,12 +448,12 @@ def add_pwa(
         "scope": scope,
         "icons": [
             {
-                "src": icon_path,
+                "src": icon_192_src,
                 "sizes": "192x192",
                 "type": "image/png",
             },
             {
-                "src": icon_path,
+                "src": icon_512_src,
                 "sizes": "512x512",
                 "type": "image/png",
             },
@@ -417,8 +467,15 @@ def add_pwa(
     # 3. Serve Service Worker
     if service_worker:
         # Build robust service worker script with safe defaults and optional extension points.
+        resolved_use_cdn = _app_uses_cdn_assets(app) if use_cdn is None else use_cdn
         deduped_precache = list(
-            dict.fromkeys([*_DEFAULT_PRECACHE_URLS, *(pre_cache_urls or []), offline_path])
+            dict.fromkeys(
+                [
+                    *_default_precache_urls(use_cdn=resolved_use_cdn),
+                    *(pre_cache_urls or []),
+                    offline_path,
+                ]
+            )
         )
         sw_script = _render_sw_script(
             cache_name=cache_name,

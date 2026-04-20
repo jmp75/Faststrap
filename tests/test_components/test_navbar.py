@@ -2,7 +2,7 @@
 
 from concurrent.futures import ThreadPoolExecutor
 
-from fasthtml.common import A, to_xml
+from fasthtml.common import A, Div, to_xml
 
 from faststrap.components.navigation import Navbar
 from faststrap.components.navigation.navbar import _get_next_navbar_id
@@ -167,3 +167,55 @@ def test_navbar_custom_root_id_keeps_unique_collapse_id():
     assert 'id="main-nav"' in html
     assert 'id="main-nav-collapse"' in html
     assert 'data-bs-target="#main-nav-collapse"' in html
+
+
+def test_navbar_items_are_wrapped_in_navbar_nav():
+    """Simple items= usage should emit Bootstrap navbar-nav structure."""
+    html = to_xml(
+        Navbar(
+            brand="Faststrap",
+            items=[
+                ("Home", "/"),
+                ("Docs", "/docs"),
+            ],
+            expand="lg",
+        )
+    )
+
+    assert "navbar-nav" in html
+    assert html.count('class="nav-item"') == 2
+    assert html.count('class="nav-link"') >= 2
+
+
+def test_navbar_items_support_dict_configuration():
+    """Dict items should become nav-item/nav-link entries with active support."""
+    html = to_xml(
+        Navbar(
+            items=[
+                {"text": "Work", "href": "#work", "active": True},
+                {"text": "Contact", "href": "#contact"},
+            ]
+        )
+    )
+
+    assert "navbar-nav" in html
+    assert 'href="#work"' in html
+    assert 'aria-current="page"' in html
+    assert "nav-link active" in html
+
+
+def test_navbar_groups_simple_items_without_swallowing_custom_content():
+    """Custom content should remain outside the automatic navbar-nav wrapper."""
+    html = to_xml(
+        Navbar(
+            items=[
+                ("Features", "#features"),
+                Div("Actions", cls="ms-auto d-flex gap-2"),
+            ],
+            expand="lg",
+        )
+    )
+
+    assert "navbar-nav" in html
+    assert 'class="ms-auto d-flex gap-2"' in html
+    assert html.index("navbar-nav") < html.index("ms-auto d-flex gap-2")

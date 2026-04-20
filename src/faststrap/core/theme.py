@@ -172,6 +172,15 @@ _BUILTIN_THEME_CACHE: dict[str, Theme] = {}
 # ============================================================================
 
 _LIGHT_MODE_VARS: dict[str, str] = {
+    "--fs-radius-sm": "0.5rem",
+    "--fs-radius": "0.9rem",
+    "--fs-radius-lg": "1.25rem",
+    "--fs-surface-bg": "#ffffff",
+    "--fs-surface-muted-bg": "#f8f9fa",
+    "--fs-surface-border": "rgba(15, 23, 42, 0.08)",
+    "--fs-surface-shadow-sm": "0 10px 24px rgba(15, 23, 42, 0.06)",
+    "--fs-surface-shadow": "0 18px 40px rgba(15, 23, 42, 0.08)",
+    "--fs-surface-shadow-lg": "0 24px 56px rgba(15, 23, 42, 0.12)",
     "--bs-body-bg": "#ffffff",
     "--bs-body-color": "#212529",
     "--bs-light": "#F8F9FA",
@@ -191,9 +200,21 @@ _LIGHT_MODE_VARS: dict[str, str] = {
     "--bs-link-color": "#0d6efd",
     "--bs-link-hover-color": "#0a58ca",
     "--bs-code-color": "#d63384",
+    "--bs-border-radius-sm": "var(--fs-radius-sm)",
+    "--bs-border-radius": "var(--fs-radius)",
+    "--bs-border-radius-lg": "var(--fs-radius-lg)",
 }
 
 _DARK_MODE_VARS: dict[str, str] = {
+    "--fs-radius-sm": "0.5rem",
+    "--fs-radius": "0.9rem",
+    "--fs-radius-lg": "1.25rem",
+    "--fs-surface-bg": "#23272f",
+    "--fs-surface-muted-bg": "#1c2128",
+    "--fs-surface-border": "rgba(255, 255, 255, 0.08)",
+    "--fs-surface-shadow-sm": "0 12px 28px rgba(0, 0, 0, 0.28)",
+    "--fs-surface-shadow": "0 20px 44px rgba(0, 0, 0, 0.36)",
+    "--fs-surface-shadow-lg": "0 28px 64px rgba(0, 0, 0, 0.45)",
     "--bs-body-bg": "#212529",
     "--bs-body-color": "#dee2e6",
     "--bs-light": "#343A40",
@@ -213,6 +234,33 @@ _DARK_MODE_VARS: dict[str, str] = {
     "--bs-link-color": "#6ea8fe",
     "--bs-link-hover-color": "#8bb9fe",
     "--bs-code-color": "#e685b5",
+    "--bs-border-radius-sm": "var(--fs-radius-sm)",
+    "--bs-border-radius": "var(--fs-radius)",
+    "--bs-border-radius-lg": "var(--fs-radius-lg)",
+}
+
+_FASTSTRAP_THEME_TOKEN_NAMES = {
+    "radius_sm",
+    "radius",
+    "radius_lg",
+    "surface_bg",
+    "surface_bg_light",
+    "surface_bg_dark",
+    "surface_muted_bg",
+    "surface_muted_bg_light",
+    "surface_muted_bg_dark",
+    "surface_border",
+    "surface_border_light",
+    "surface_border_dark",
+    "surface_shadow_sm",
+    "surface_shadow_sm_light",
+    "surface_shadow_sm_dark",
+    "surface_shadow",
+    "surface_shadow_light",
+    "surface_shadow_dark",
+    "surface_shadow_lg",
+    "surface_shadow_lg_light",
+    "surface_shadow_lg_dark",
 }
 
 
@@ -245,6 +293,15 @@ class Theme:
         """Get CSS variables for a specific mode."""
         base_mode_vars = _LIGHT_MODE_VARS if mode == "light" else _DARK_MODE_VARS
         merged = {**base_mode_vars, **self.variables}
+
+        mode_suffix = f"-{mode}"
+        opposite_suffix = "-dark" if mode == "light" else "-light"
+        for key, value in self.variables.items():
+            if key.endswith(mode_suffix):
+                merged[key.removesuffix(mode_suffix)] = value
+                merged.pop(key, None)
+            elif key.endswith(opposite_suffix):
+                merged.pop(key, None)
 
         # Smart mapping: If user provided a "dark" or "light" color,
         # use it for the body background in that mode.
@@ -322,6 +379,58 @@ class Theme:
 
 .progress-bar {{ background-color: var(--bs-primary); }}
 .spinner-border.text-primary, .spinner-grow.text-primary {{ color: var(--bs-primary) !important; }}
+
+/* Faststrap surface polish tokens */
+.card,
+.dropdown-menu,
+.modal-content,
+.offcanvas,
+.toast,
+.list-group,
+.accordion-item,
+.popover {{
+    background-color: var(--fs-surface-bg);
+    border-color: var(--fs-surface-border);
+    box-shadow: var(--fs-surface-shadow-sm);
+}}
+
+.card,
+.modal-content,
+.offcanvas,
+.toast,
+.accordion-item,
+.popover {{
+    border-radius: var(--fs-radius-lg);
+}}
+
+.dropdown-menu,
+.list-group,
+.page-link,
+.input-group-text,
+.form-control,
+.form-select,
+.btn {{
+    border-radius: var(--fs-radius);
+}}
+
+.card-header,
+.card-footer,
+.list-group-item,
+.table-light,
+.table > :not(caption) > * > * {{
+    background-color: var(--fs-surface-muted-bg);
+}}
+
+.card-header,
+.card-footer,
+.list-group-item,
+.accordion-button,
+.page-link,
+.input-group-text,
+.form-control,
+.form-select {{
+    border-color: var(--fs-surface-border);
+}}
 """
         style = Style(css_content.strip())
         self._style_cache[mode] = style
@@ -359,7 +468,10 @@ def create_theme(
         danger: Danger color (defaults to Bootstrap red)
         warning: Warning color (defaults to Bootstrap yellow)
         info: Info color (defaults to Bootstrap cyan)
-        **extra_vars: Additional CSS variables
+        **extra_vars: Additional CSS variables. Keys like ``surface_bg_dark``,
+            ``surface_shadow``, or ``radius_lg`` are mapped to Faststrap design
+            tokens (``--fs-*``); other keys map to Bootstrap variables
+            (``--bs-*``).
 
     Returns:
         Theme instance
@@ -395,7 +507,12 @@ def create_theme(
     for key, value in extra_vars.items():
         # Normalize key to CSS variable format
         if not key.startswith("--"):
-            key = f"--bs-{key.replace('_', '-')}"
+            if key.startswith("fs_"):
+                key = f"--fs-{key.removeprefix('fs_').replace('_', '-')}"
+            elif key in _FASTSTRAP_THEME_TOKEN_NAMES:
+                key = f"--fs-{key.replace('_', '-')}"
+            else:
+                key = f"--bs-{key.replace('_', '-')}"
         variables[key] = value
 
     return Theme(variables)

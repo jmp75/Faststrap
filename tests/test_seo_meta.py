@@ -292,6 +292,13 @@ class TestTwitterCardTags:
         assert len(tw_creator) == 1
         assert tw_creator[0].attrs.get("content") == "@johndoe"
 
+    def test_twitter_tags_are_omitted_without_twitter_content(self):
+        """Twitter card markup should not be emitted for bare pages with no social metadata."""
+        result = SEO()
+        elements = list(result)
+
+        assert not any(e.tag == "meta" and e.attrs.get("name") == "twitter:card" for e in elements)
+
 
 class TestSEOIntegration:
     """Test SEO component integration scenarios."""

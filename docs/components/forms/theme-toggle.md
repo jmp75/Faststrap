@@ -1,6 +1,6 @@
 # Theme Toggle
 
-The `ThemeToggle` component creates a dark/light mode switch with HTMX server-side persistence. It uses Bootstrap's form-switch styling with icon indicators and integrates seamlessly with session-based theme management.
+The `ThemeToggle` component creates a dark/light mode switch with HTMX server-side persistence. It uses Bootstrap's form-switch styling and integrates seamlessly with session-based theme management. Decorative icons are optional.
 
 !!! success "Goal"
     By the end of this guide, you'll be able to add a professional dark mode toggle to your app **with server-side persistence in minutes.**
@@ -15,7 +15,6 @@ Here's the simplest way to add a theme toggle.
   <div class="preview-header">Live Preview</div>
   <div class="preview-render">
     <div class="form-check form-switch d-flex align-items-center">
-      <i class="bi bi-sun-fill me-2"></i>
       <input class="form-check-input" type="checkbox" role="switch" id="theme-demo">
       <label class="form-check-label ms-2" for="theme-demo">Dark Mode</label>
     </div>
@@ -34,7 +33,7 @@ ThemeToggle(
 
 ## Visual Examples & Use Cases
 
-### 1. Icon-Only Toggle
+### 1. Toggle With Optional Icon
 
 Minimal toggle without label.
 
@@ -48,8 +47,8 @@ Minimal toggle without label.
   </div>
   <div class="preview-code" markdown>
 ```python
-# Clean, icon-only toggle
-ThemeToggle(current_theme="dark")
+# Clean toggle with an explicit decorative icon
+ThemeToggle(current_theme="dark", show_icon=True)
 ```
   </div>
 </div>
@@ -257,6 +256,7 @@ body {
 | `toggle_id` | `str` | "theme-toggle" | Unique ID for the toggle |
 | `show_label` | `bool` | `False` | Whether to show label text |
 | `label_text` | `str` | "Dark Mode" | Label text to display |
+| `show_icon` | `bool` | `False` | Whether to show the decorative sun/moon icon |
 | `**kwargs` | `Any` | - | Additional HTML attributes |
 
 ---

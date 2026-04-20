@@ -149,3 +149,48 @@ def test_card_empty_body():
     assert "Only Footer" in html
     assert "card-header" in html
     assert "card-footer" in html
+
+
+def test_card_supports_nested_attr_escape_hatches():
+    """Card exposes nested attribute hooks for composite sections."""
+    card = Card(
+        "Body copy",
+        title="Title",
+        subtitle="Subtitle",
+        header="Header",
+        footer="Footer",
+        header_attrs={"data_role": "card-header"},
+        body_attrs={"data_section": "card-body"},
+        footer_attrs={"id": "card-footer"},
+        title_attrs={"data_title": "main"},
+        subtitle_attrs={"data_subtitle": "supporting"},
+        text_attrs={"data_copy": "body"},
+    )
+    html = to_xml(card)
+
+    assert 'data-role="card-header"' in html
+    assert 'data-section="card-body"' in html
+    assert 'id="card-footer"' in html
+    assert 'data-title="main"' in html
+    assert 'data-subtitle="supporting"' in html
+    assert 'data-copy="body"' in html
+
+
+def test_card_nested_attrs_merge_with_nested_classes():
+    """Nested attrs should merge classes instead of overriding component defaults."""
+    card = Card(
+        "Body copy",
+        title="Title",
+        header="Header",
+        header_cls="border-0",
+        body_cls="p-4",
+        title_cls="text-primary",
+        header_attrs={"cls": "bg-primary-subtle"},
+        body_attrs={"cls": "shadow-sm"},
+        title_attrs={"cls": "display-6"},
+    )
+    html = to_xml(card)
+
+    assert "card-header border-0 bg-primary-subtle" in html
+    assert "card-body p-4 shadow-sm" in html
+    assert "card-title text-primary display-6" in html

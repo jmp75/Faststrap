@@ -1,6 +1,6 @@
 ---
 name: faststrap-app-builder
-description: Use when building or redesigning real FastHTML applications with Faststrap, such as company websites, SaaS landing pages, dashboards, portals, auth flows, admin systems, or multi-page product sites. This skill helps Codex inspect the right local framework repo, sample apps, and project files first so the result matches production-grade Faststrap + FastHTML patterns instead of generic Bootstrap output.
+description: Use when building or redesigning real FastHTML applications with Faststrap, such as company websites, SaaS landing pages, dashboards, portals, auth flows, admin systems, or multi-page product sites. This skill helps the AI produce premium Faststrap output by using Faststrap components first, Bootstrap for structure, HTMX for interactivity, and custom CSS for polish rather than generic Bootstrap presentation.
 ---
 
 # Faststrap App Builder
@@ -15,13 +15,16 @@ Before writing code:
 2. If the user provides a Faststrap repo path, inspect:
    - `AGENTS.md`
    - `README.md`
+   - the relevant component modules under `src/faststrap/components/`
+   - the relevant docs pages under `docs/components/`
    - the most relevant files in `examples/` and `showcase/`
 3. If the user provides a reference app, inspect it before designing.
 4. Match the page type to the closest reference:
    - marketing/landing: see `references/reference-apps.md`
    - dashboard/admin: see `references/reference-apps.md`
    - auth/onboarding: see `references/nis-patterns.md`
-5. Follow the implementation order of precedence below before inventing custom structure.
+5. Inventory the existing Faststrap component surface before inventing new UI structure. Faststrap has a large component library, so check what already exists for navigation, forms, data display, feedback, patterns, and layout before building custom HTML.
+6. Follow the implementation order of precedence below before inventing custom structure.
 
 ## Implementation order of precedence
 
@@ -35,19 +38,67 @@ Use this order unless the task clearly requires otherwise:
 This means:
 
 - prefer Bootstrap spacing, grid, display, flex, container, offcanvas, modal, collapse, and utility classes before writing custom layout CSS
+- prefer existing Faststrap components and patterns before creating bespoke wrappers or raw HTML structures
 - prefer HTMX before custom JavaScript for interactivity, filtering, partial refresh, form flows, and inline actions
 - use custom CSS to elevate visuals, not to reimplement Bootstrap responsiveness or hide/show behavior unnecessarily
 - allow JavaScript for legitimate cases such as PWA flows, geolocation, service workers, media capture, complex charts/maps, or browser APIs HTMX cannot replace
+- when two cards or columns sit side by side, define the mobile stack explicitly first with `Row(..., cols=1, cols_md=2)` or `Row(..., cols=1, cols_lg=2)` rather than assuming desktop structure will collapse well on its own
+- if a supporting/highlight card is too content-heavy for mobile or tablet, hide it intentionally with Bootstrap display classes such as `d-none d-lg-block` instead of squeezing it into a weak small-screen composition
 
 ## Non-negotiable standards
 
 - Do not ship generic Bootstrap-looking pages.
 - Do not default to plain white sections, weak typography, or boilerplate hero-card-grid-footer layouts unless the references support that exact direction.
 - Prefer composing existing Faststrap components and patterns first, then layer custom CSS for polish.
+- Assume there is probably already a relevant Faststrap component or pattern somewhere in the 100+ component surface; check the framework before inventing a new one.
 - Build shared theme tokens and layout structure before polishing individual pages.
 - Keep the UI responsive, accessible, and visually intentional.
 - Do not rely on external CSS CDNs for project styling. Keep styling in local project assets and Faststrap/Bootstrap.
 - Treat JavaScript as the last interaction tool, not the first one.
+- Before finishing, run a dedicated Bootstrap-smell pass and remove untouched default pills, soft default shadows, over-rounded surfaces, and generic section treatment.
+
+## Visual system rules
+
+- Define a typography hierarchy before polishing components:
+  - hero headline: large, tight line-height, deliberate tracking
+  - section headline: clearly smaller than hero but still high-contrast
+  - body copy: readable, quieter, and visibly distinct from headings
+  - eyebrow/kicker text: compact and intentional, not decorative noise
+- Establish spacing rhythm at the section level first:
+  - major sections should feel intentionally separated
+  - cards should have consistent internal padding
+  - stacked controls should keep consistent gaps across breakpoints
+- Use Bootstrap for structure, but do not leave Bootstrap's default radii, shadows, and surface treatment untouched on flagship pages.
+- Give every polished page a clear surface strategy:
+  - dark shell with lighter cards
+  - soft light shell with elevated white cards
+  - editorial split backgrounds
+  - glass or layered atmosphere where it genuinely helps
+
+## States and UX coverage
+
+- Do not finish a page without checking empty, loading, success, and error states for the main interactive surfaces.
+- Empty states should explain what to do next, not just say "No data".
+- Loading states should use Faststrap or Bootstrap primitives visibly rather than leaving dead-looking blank areas.
+- Error states should be readable, specific, and visually integrated with the page.
+- Forms should show validation feedback, helper text where needed, and clear submit affordances.
+
+## Accessibility rules
+
+- Preserve semantic headings in descending order.
+- Ensure interactive controls have discernible labels or `aria-label`s.
+- Keep contrast strong enough in both light and dark themes.
+- Do not hide important meaning in color alone.
+- Preserve keyboard focus visibility; do not style it away.
+- When using icon-only controls, provide accessible labels.
+- Prefer buttons for actions and links for navigation; do not blur the two casually.
+
+## CSS organization rules
+
+- For single-file showcases or isolated demos, inline `Style(...)` blocks are acceptable.
+- For multi-route or production-style apps, move custom CSS into local asset files and mount them properly.
+- Keep Bootstrap utilities for layout/responsiveness and custom CSS for brand identity, surface treatment, and advanced polish.
+- Avoid scattering one-off inline `style=` strings across a codebase when the app is larger than a simple showcase.
 
 ## Working pattern
 
@@ -62,6 +113,7 @@ This means:
 - Define layout wrappers before page-level sections.
 - Use custom CSS for depth: gradients, glass, section contrast, spacing rhythm, shadows, image treatment, and state styling.
 - Keep structural responsiveness primarily in Bootstrap/Faststrap usage, not hand-written media-query-heavy layout rewrites unless clearly necessary.
+- Treat mobile as the base layout. Build the one-column version first, then opt into multi-column layouts at `md`/`lg` breakpoints where the content can breathe.
 
 3. Build pages from references, not from scratch
 - Pick the nearest reference app.
@@ -78,6 +130,17 @@ This means:
 - Check that Faststrap theme/defaults are actually applied.
 - Check empty states, CTA clarity, spacing consistency, and contrast.
 - Run relevant tests; if the project has none, add at least focused smoke or route tests when practical.
+
+## Finish checklist
+
+Before you consider the UI done, verify:
+
+- typography hierarchy is deliberate
+- spacing rhythm is consistent
+- mobile layout is intentional, not just collapsed desktop
+- empty/loading/error states exist for key flows
+- accessibility labels and focus states remain intact
+- at least one final pass was made specifically to remove Bootstrap-default visual leakage
 
 ## Design bar
 
@@ -99,9 +162,11 @@ Good Faststrap app work should feel:
 - reaching for JavaScript before HTMX
 - replacing Bootstrap layout/responsive utilities with avoidable custom CSS
 - importing third-party styling CDNs for things Faststrap/Bootstrap and local CSS should handle
+- forcing dense secondary cards, stat panels, or highlight boxes to remain visible on mobile when Bootstrap display utilities can preserve a cleaner small-screen hierarchy
 
 ## Read these references as needed
 
 - `references/nis-patterns.md`: real production-style project wiring and theming patterns from the user's NIS, Final-Year, and SIWES apps
+- `references/mmercyj-patterns.md`: polished company-site composition and mobile-first responsive simplification patterns from `mmercyj_beddings`
 - `references/reference-apps.md`: which local Faststrap showcase files to inspect by page type
 - `references/project-agents-template.md`: template instructions to place in fresh app repos so future sessions start with the right guardrails
