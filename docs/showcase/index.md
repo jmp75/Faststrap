@@ -1,36 +1,32 @@
 # Showcase Gallery
 
-Faststrap now keeps a dedicated `showcase/` layer for polished, production-style references.
+Faststrap keeps a dedicated `showcase/` layer for polished, production-style references.
 
-These apps are not tiny component demos. They are intentionally built to prove that Faststrap can carry:
+These are not tiny component demos. They are fuller applications and landing pages meant to show what the framework looks like when the design system, layout, and interaction patterns are working together.
+
+## Why The Showcase Layer Exists
+
+The smaller examples in `examples/` are still useful for learning individual APIs, but they do not fully communicate the visual ceiling of the framework.
+
+The showcase layer exists to highlight:
 
 - premium landing pages
 - dense internal dashboards
-- vertical product sites
-- polished client-facing web apps
-
-## Why This Matters
-
-The small examples in `examples/` are still useful for learning, but they do not fully communicate the ceiling of the framework.
-
-The showcase layer exists to do three things:
-
-1. give adopters real, aspirational references
-2. give AI builders better composition examples
-3. help docs and README communicate visual confidence, not just API breadth
+- vertical product applications
+- polished client-facing websites
 
 ## Current Flagship Set
 
 ### Product and SaaS
 
 - `showcase/novaflow_ai_saas.py`
-- `showcase/fastcloud_generated_saas.py` (compact minimal-good reference)
-- `showcase/saas_landing.py` (legacy reference, no longer the primary SaaS bar)
+- `showcase/fastcloud_generated_saas.py`
+- `showcase/saas_landing.py` as an older comparison point
 
 ### Dashboards and Data
 
 - `showcase/northstar_ops_dashboard.py`
-- `showcase/admin_dashboard.py` (legacy reference)
+- `showcase/admin_dashboard.py`
 - `showcase/ledgerleaf_finance.py`
 
 ### Portfolio and Brand Sites
@@ -49,29 +45,28 @@ The showcase layer exists to do three things:
 - `showcase/learnloop_academy.py`
 - `showcase/forgedocs_platform.py`
 
-## Screenshot Folder
+## Selected Gallery
 
-To keep screenshot usage consistent across docs and README, place showcase screenshots in:
+### NovaFlow AI SaaS
+
+![NovaFlow AI SaaS in light mode](../assets/showcase/novaflow-ai-saas-light.png)
+
+### Northstar Ops Dashboard
+
+![Northstar Ops Dashboard in dark mode](../assets/showcase/northstar-ops-dashboard-dark.png)
+
+### FastCloud Generated SaaS
+
+![FastCloud Generated SaaS in light mode](../assets/showcase/fastcloud-generated-saas-light.png)
+
+### Agency Portfolio
+
+![Agency Portfolio showcase](../assets/showcase/agency-portfolio-home.png)
+
+## Screenshot Assets
+
+Showcase screenshots live in:
 
 - `docs/assets/showcase/`
 
-Recommended naming:
-
-- `novaflow-ai-saas-light.png`
-- `novaflow-ai-saas-dark.png`
-- `northstar-ops-dashboard-light.png`
-- `northstar-ops-dashboard-dark.png`
-
-When screenshots are added, the individual showcase pages should reference those files directly.
-
-## What These Pages Should Demonstrate
-
-Each flagship showcase should prove a few things clearly:
-
-- strong Bootstrap-first structure with Faststrap components
-- minimal JavaScript and HTMX-first interactions where possible
-- custom CSS polish without looking like raw Bootstrap defaults
-- real mobile responsiveness
-- real product surfaces instead of one-off component dumps
-
-See `showcase/README.md` and `SHOWCASE_PROGRAM_PLAN.md` for the internal standards and rollout plan.
+That keeps the documentation pages, README, and future gallery updates aligned around one asset location.

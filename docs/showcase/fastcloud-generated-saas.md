@@ -1,52 +1,33 @@
 # FastCloud Generated SaaS
 
-`showcase/fastcloud_generated_saas.py` is the compact “minimal good example” showcase.
+`showcase/fastcloud_generated_saas.py` is a compact landing-page showcase that demonstrates how far Faststrap can go without needing one of the largest flagship files.
 
-It exists to prove that Faststrap can still produce a polished, reference-grade landing page without needing one of the largest flagship files.
+It sits between tiny learning examples and the bigger flagship showcases: small enough to study quickly, but polished enough to feel like a real product surface.
 
-## Why It Exists
+## Gallery
 
-This showcase fills an important gap between:
+![FastCloud Generated SaaS in light mode](../assets/showcase/fastcloud-generated-saas-light.png)
 
-- tiny learning demos
-- large flagship showcases
+![FastCloud Generated SaaS in dark mode](../assets/showcase/fastcloud-generated-saas-dark.png)
 
-It is meant to be:
+## What It Shows
 
-- shorter than the flagship references
-- still visually intentional
-- HTMX-first
-- theme-aware
-- useful as a copyable starting point
+- a focused SaaS landing-page structure
+- theme-aware presentation across light and dark modes
+- Faststrap patterns such as `NavbarModern`, `FeatureGrid`, `PricingGroup`, and `TestimonialSection`
+- HTMX-friendly feedback through `ToastContainer` and `toast_response`
+- custom theme work and local CSS polish layered over Bootstrap-native structure
 
-## What It Demonstrates
+## Where It Fits
 
-- `NavbarModern`
-- `FeatureGrid`
-- `PricingGroup`
-- `TestimonialSection`
-- `ThemeToggle`
-- `ToastContainer`
-- `toast_response`
-- custom theme + local CSS polish
+This showcase is a good reference when you want a page that is:
+
+- easier to digest than the largest flagship SaaS examples
+- still visually intentional and production-minded
+- useful as a practical starting point for a landing page or marketing site
+
+If you want the highest-end SaaS marketing reference in the current set, start with `showcase/novaflow_ai_saas.py`.
 
 ## Source
 
 - `showcase/fastcloud_generated_saas.py`
-
-## Position In The Reference Stack
-
-Use this file when you want:
-
-- a smaller reference than `novaflow_ai_saas.py`
-- a polished starting point that is easier to digest
-- a “minimal good example” for AI and human builders
-
-Use `novaflow_ai_saas.py` when you want the stronger flagship SaaS bar.
-
-## Screenshot Slot
-
-When screenshots are added, place them here:
-
-- `docs/assets/showcase/fastcloud-generated-saas-light.png`
-- `docs/assets/showcase/fastcloud-generated-saas-dark.png`

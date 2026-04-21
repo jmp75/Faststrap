@@ -1,47 +1,49 @@
 # Vertical Apps
 
-Faststrap now has several domain-specific showcases that help demonstrate how the framework adapts across industries instead of only producing generic demos.
+Faststrap now includes several domain-specific showcases that demonstrate how the framework adapts across industries instead of only producing generic demos.
 
-## Current Vertical References
+## Healthcare
 
-### Healthcare
+### Carenest Clinic
 
-- `showcase/carenest_clinic.py`
+`showcase/carenest_clinic.py` shows a healthcare-focused product surface with trust-heavy layout, appointment flows, and theme-aware styling.
 
-### Finance
+![Carenest Clinic in light mode](../assets/showcase/carenest-clinic-light.png)
 
-- `showcase/ledgerleaf_finance.py`
+![Carenest Clinic in dark mode](../assets/showcase/carenest-clinic-dark.png)
 
-### Education
+## Finance
 
-- `showcase/learnloop_academy.py`
+### LedgerLeaf Finance
 
-### Corporate / Professional Services
+`showcase/ledgerleaf_finance.py` demonstrates a finance-oriented product surface with mobile-aware navigation, data summaries, and denser operational cards.
 
-- `showcase/lexbridge_corporate.py`
+![LedgerLeaf Finance in light mode](../assets/showcase/ledgerleaf-finance-light.png)
 
-### Developer Tools / Docs
+![LedgerLeaf Finance in dark mode](../assets/showcase/ledgerleaf-finance-dark.png)
 
-- `showcase/forgedocs_platform.py`
+## Education
 
-## Why These Matter
+### LearnLoop Academy
 
-These files help close a real gap in the sample layer:
+`showcase/learnloop_academy.py` shows how Faststrap can support course and progress-oriented product interfaces with a more energetic visual system.
 
-- they show component composition in believable product contexts
-- they make AI-assisted Faststrap builds more grounded
-- they prove that Faststrap can carry more than dashboards and toy landing pages
+![LearnLoop Academy showcase](../assets/showcase/learnloop-academy-home.png)
 
-## Screenshot Folder
+## Corporate and Professional Services
 
-When adding visuals for these pages, keep them in:
+### Lexbridge Corporate
 
-- `docs/assets/showcase/`
+`showcase/lexbridge_corporate.py` demonstrates a more restrained brand style suited to consulting, legal, and professional-service sites.
 
-Suggested naming:
+![Lexbridge Corporate showcase](../assets/showcase/lexbridge-corporate-home.png)
 
-- `carenest-clinic-light.png`
-- `ledgerleaf-finance-dark.png`
-- `learnloop-academy-light.png`
-- `lexbridge-corporate-light.png`
-- `forgedocs-platform-dark.png`
+## Developer Tools and Docs
+
+### ForgeDocs Platform
+
+`showcase/forgedocs_platform.py` shows a developer-facing product surface with documentation-oriented layout and theme-aware UI treatment.
+
+![ForgeDocs Platform in light mode](../assets/showcase/forgedocs-platform-light.png)
+
+![ForgeDocs Platform in dark mode](../assets/showcase/forgedocs-platform-dark.png)

@@ -1,36 +1,35 @@
 # Dashboard Showcases
 
-Faststrap now has two dashboard references with different roles.
+Faststrap currently has two dashboard references with different roles.
 
-## Current Primary Dashboard Reference
+## Primary Dashboard Reference
 
 ### Northstar Ops Dashboard
 
-Use `showcase/northstar_ops_dashboard.py` as the main dashboard reference.
+`showcase/northstar_ops_dashboard.py` is the main dashboard showcase and the stronger reference for modern operational UI.
 
 It demonstrates:
 
-- `DashboardGrid`
-- `Chart`
-- `DataTable`
-- `MetricCard`, `TrendCard`, `KPICard`
-- filtering and export surfaces
-- theme-aware operational UI
+- data-heavy page composition
+- KPI cards and chart surfaces
+- filtering and export flows
+- theme-aware dashboard styling
+
+![Northstar Ops Dashboard in light mode](../assets/showcase/northstar-ops-dashboard-light.png)
+
+![Northstar Ops Dashboard in dark mode](../assets/showcase/northstar-ops-dashboard-dark.png)
 
 ## Legacy Dashboard Reference
 
 ### Admin Dashboard
 
-`showcase/admin_dashboard.py` is still a useful reference, but it is now secondary to Northstar for modern dashboard composition.
+`showcase/admin_dashboard.py` remains useful as an older, simpler dashboard example.
+
+It is still helpful as a learning reference, but it is no longer the strongest guide for premium dashboard composition.
+
+![Admin Dashboard legacy reference](../assets/showcase/admin-dashboard-legacy.png)
 
 ## Sources
 
 - `showcase/northstar_ops_dashboard.py`
 - `showcase/admin_dashboard.py`
-
-## Screenshot Slot
-
-When screenshots are added, place them here:
-
-- `docs/assets/showcase/northstar-ops-dashboard-light.png`
-- `docs/assets/showcase/northstar-ops-dashboard-dark.png`
