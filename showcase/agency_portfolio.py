@@ -66,7 +66,7 @@ VORTEX_THEME = create_theme(
 )
 
 app = FastHTML()
-add_bootstrap(app, theme=VORTEX_THEME, font_family="Inter")
+add_bootstrap(app, theme=VORTEX_THEME, font_family="Inter", mode="dark")
 
 # ── Data ───────────────────────────────────────────────────────────────────────
 PROJECTS = [

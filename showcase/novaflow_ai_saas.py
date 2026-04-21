@@ -878,6 +878,43 @@ SHOWCASE_CSS = """
   border-color: rgba(15,23,42,0.08);
 }
 
+/* ── Footer light-mode overrides ───────────────────────────── */
+/* Without these, near-white footer text is invisible on light bg */
+[data-bs-theme="light"] .nova-footer {
+  color: #334155 !important;
+  border-top-color: rgba(15,23,42,0.07) !important;
+  background: #f2f4f8 !important;
+}
+[data-bs-theme="light"] .nova-footer h4,
+[data-bs-theme="light"] .nova-footer h5,
+[data-bs-theme="light"] .nova-footer h6,
+[data-bs-theme="light"] .nova-footer strong,
+[data-bs-theme="light"] .nova-footer .fs-4 {
+  color: #0f172a !important;
+}
+[data-bs-theme="light"] .nova-footer .text-muted {
+  color: #64748b !important;
+}
+[data-bs-theme="light"] .nova-footer a {
+  color: #475569 !important;
+}
+[data-bs-theme="light"] .nova-footer a:hover {
+  color: #0f172a !important;
+}
+
+/* ── Section-dark inherits text in light mode ───────────────── */
+/* nova-section-dark becomes light-bg (see rule above) — ensure */
+/* child text stays dark and readable                           */
+[data-bs-theme="light"] .nova-section-dark {
+  color: #0f172a;
+}
+[data-bs-theme="light"] .nova-checklist-item {
+  color: #1e293b;
+}
+[data-bs-theme="light"] .nova-mini-stat {
+  color: #1e293b;
+}
+
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 991.98px) {
   .nova-display { font-size: clamp(2.2rem, 9vw, 3.5rem); letter-spacing: -0.03em; }

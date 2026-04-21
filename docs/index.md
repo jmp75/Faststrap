@@ -99,6 +99,22 @@ def home():
 - **Data UI**: DataTable, Chart, MetricCard, TrendCard, KPICard, DashboardGrid.
 - **Renderers**: Markdown, SVG, Mermaid.
 
+## Showcase Layer
+
+Faststrap now has a dedicated `showcase/` layer for polished, production-style references.
+
+- `novaflow_ai_saas.py`
+- `fastcloud_generated_saas.py` (compact minimal-good example)
+- `northstar_ops_dashboard.py`
+- `agency_portfolio.py`
+- `carenest_clinic.py`
+- `ledgerleaf_finance.py`
+- `learnloop_academy.py`
+- `lexbridge_corporate.py`
+- `forgedocs_platform.py`
+
+See the Showcase section in the docs for the current flagship set and screenshot conventions.
+
 ## Stats
 
 - **110+ exports** implemented.
@@ -115,6 +131,9 @@ def home():
 - **UI extensions**: Timeline, ProfileDropdown, SearchBar
 - **Icon packs**: optional icon registries beyond Bootstrap Icons
 - **Notebook helpers**: render-to-HTML convenience for notebooks
+- **Modern feedback and charts**: ModernToast and optional `ChartJS` integration
+
+See `components/proposed.md` for the current planned component direction.
 
 ## License
 

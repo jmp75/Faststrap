@@ -74,7 +74,7 @@ NEXUS_THEME = create_theme(
 )
 
 app = FastHTML()
-add_bootstrap(app, theme=NEXUS_THEME, font_family="Inter")
+add_bootstrap(app, theme=NEXUS_THEME, font_family="Inter", mode="dark")
 
 # ── Mock Data ──────────────────────────────────────────────────────────────────
 USERS: list[dict[str, Any]] = [
@@ -745,10 +745,17 @@ def nx_activity_feed() -> Any:
     )
 
 
-def nx_stat_col(endpoint: str, stat_id: str, color: str, cols: int = 3) -> Any:
+def nx_stat_col(endpoint: str, stat_id: str, color: str, initial: Any = None, cols: int = 3) -> Any:
     return Col(
         Div(cls=f"nx-stat-accent bg-{color}"),
-        AutoRefresh(endpoint=endpoint, target=f"#{stat_id}", interval=10000),
+        # AutoRefresh targets itself so the accent bar is preserved.
+        # initial= provides immediate content — no blank-state flash.
+        AutoRefresh(
+            endpoint=endpoint,
+            target="this",
+            interval=10000,
+            content=initial,
+        ),
         id=stat_id,
         cols=12,
         md=6,
@@ -794,12 +801,12 @@ def home() -> Any:
                         ),
                         cls="d-flex justify-content-between align-items-center mb-4",
                     ),
-                    # ── Stat Cards ──────────────────────────────
+                    # Stat cards — pre-populated on page load, refreshed every 10 s
                     Row(
-                        nx_stat_col("/api/stats/users", "stat-users", "primary"),
-                        nx_stat_col("/api/stats/revenue", "stat-revenue", "success"),
-                        nx_stat_col("/api/stats/orders", "stat-orders", "warning"),
-                        nx_stat_col("/api/stats/uptime", "stat-uptime", "info"),
+                        nx_stat_col("/api/stats/users",   "stat-users",   "primary", initial=stats_users()),
+                        nx_stat_col("/api/stats/revenue", "stat-revenue", "success", initial=stats_revenue()),
+                        nx_stat_col("/api/stats/orders",  "stat-orders",  "warning", initial=stats_orders()),
+                        nx_stat_col("/api/stats/uptime",  "stat-uptime",  "info",    initial=stats_uptime()),
                         cls="mb-2",
                     ),
                     # ── Tabs ────────────────────────────────────
@@ -988,7 +995,7 @@ def stats_users() -> Any:
     return StatCard(
         title="Total Users",
         value=f"{val:,}",
-        icon="people-fill",
+        icon=Icon("people-fill"),
         trend=f"+{random.randint(1, 10)}",
         trend_label="today",
         cls=f"{Fx.fade_in}",
@@ -1001,7 +1008,7 @@ def stats_revenue() -> Any:
     return StatCard(
         title="Monthly Revenue",
         value=f"${val:,.0f}",
-        icon="currency-dollar",
+        icon=Icon("currency-dollar"),
         trend=f"+{random.randint(2, 12)}%",
         trend_label="vs last month",
         cls=f"{Fx.fade_in}",
@@ -1014,7 +1021,7 @@ def stats_orders() -> Any:
     return StatCard(
         title="Orders",
         value=str(val),
-        icon="cart-fill",
+        icon=Icon("cart-fill"),
         trend=f"+{random.randint(1, 20)}",
         trend_label="this week",
         cls=f"{Fx.fade_in}",
@@ -1027,7 +1034,7 @@ def stats_uptime() -> Any:
     return StatCard(
         title="Uptime",
         value=f"{val}%",
-        icon="check-circle-fill",
+        icon=Icon("check-circle-fill"),
         trend="Healthy",
         trend_label="all systems",
         cls=f"{Fx.fade_in}",

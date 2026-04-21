@@ -34,10 +34,10 @@ def _normalize_nav_item(item: Any) -> Any:
         href = item[1] if len(item) > 1 else "#"
         active = bool(item[2]) if len(item) > 2 else False
         link_cls = "nav-link active" if active else "nav-link"
-        link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
+        tuple_link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
         if active:
-            link_attrs["aria_current"] = "page"
-        return Div(A(text, **link_attrs), cls="nav-item")
+            tuple_link_attrs["aria_current"] = "page"
+        return Div(A(text, **tuple_link_attrs), cls="nav-item")
 
     if isinstance(item, dict):
         text = item.get("text", "")
@@ -51,14 +51,14 @@ def _normalize_nav_item(item: Any) -> Any:
         if disabled:
             link_cls = merge_classes(link_cls, "disabled")
 
-        link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
+        dict_link_attrs: dict[str, Any] = {"href": href, "cls": link_cls}
         if active:
-            link_attrs["aria_current"] = "page"
+            dict_link_attrs["aria_current"] = "page"
         if disabled:
-            link_attrs["aria_disabled"] = "true"
-            link_attrs["tabindex"] = "-1"
+            dict_link_attrs["aria_disabled"] = "true"
+            dict_link_attrs["tabindex"] = "-1"
 
-        return Div(A(text, **link_attrs), cls=nav_item_cls)
+        return Div(A(text, **dict_link_attrs), cls=nav_item_cls)
 
     if getattr(item, "tag", None) == "a":
         classes = str(

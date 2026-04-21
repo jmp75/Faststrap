@@ -8,9 +8,10 @@ When working in this repo, build context in this order:
 
 1. `README.md`
 2. `BUILDING_COMPONENTS.md`
-3. The relevant docs page under `docs/`
-4. The closest test file under `tests/`
-5. The closest example under `examples/` or `showcase/`
+3. The relevant component modules under `src/faststrap/components/`
+4. The relevant docs page under `docs/`
+5. The closest test file under `tests/`
+6. The closest example under `examples/` or `showcase/`
 
 Do not invent Faststrap APIs from memory when local source, examples, and tests already define the contract.
 
@@ -26,10 +27,13 @@ Faststrap is a Python component layer on top of FastHTML and Bootstrap 5.
 For real application work built with Faststrap + FastHTML:
 
 - Bootstrap and Faststrap should carry most structure, layout, spacing, and responsiveness.
+- Faststrap has a broad component surface, so check existing components/patterns before inventing new UI primitives.
 - HTMX should be the first interaction tool before custom JavaScript.
 - Custom CSS should primarily provide brand polish and modern visual treatment, not replace Bootstrap utilities without good reason.
 - JavaScript should be used deliberately for needs like PWA features, browser APIs, maps, media, or interactions HTMX/Bootstrap cannot handle cleanly.
 - Avoid external CSS CDNs for app styling.
+- When placing two cards or content-heavy columns side by side, default to mobile-safe stacking first with Bootstrap/Faststrap row controls such as `cols=1`, `cols_md=2`, or `cols_lg=2`.
+- If a secondary card is valuable on desktop but too dense for mobile/tablet, hide it with Bootstrap display utilities like `d-none d-lg-block` instead of forcing cramped small-screen layouts.
 
 ## Preferred Build Workflow
 
@@ -98,6 +102,7 @@ Use these local references before improvising:
 - If JavaScript is required, integrate it through Faststrap's asset pipeline rather than ad hoc page snippets when the behavior is reusable.
 - Keep Bootstrap semantics intact so classes, ARIA, and built-in JS plugins continue to work as expected.
 - Treat docs and examples as part of the product surface. Broken examples are release bugs.
+- Mobile layout is not an afterthought: start from the small-screen stack, then expand upward with Bootstrap breakpoints.
 
 ## Before Finishing Work
 

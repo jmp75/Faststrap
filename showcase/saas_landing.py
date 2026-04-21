@@ -693,7 +693,7 @@ def home() -> Any:
                                 cls=f"sl-code-card {Fx.slide_left} {Fx.delay_md}",
                             ),
                             lg=6,
-                            cls="d-none d-lg-block",
+                            cls="d-none d-md-block",
                         ),
                         cls="align-items-center",
                         cols=1,

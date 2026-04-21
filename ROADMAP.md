@@ -333,6 +333,34 @@ Faststrap commits to the following architectural contracts:
 * Automatic validation from Pydantic
 * Complete documentation with 20+ examples
 
+### Proposed Frontend Primitives & Experience Layer (post-v0.6)
+
+These are the next frontend-focused additions that would most improve day-to-day product building for Faststrap users.
+
+| Component | Purpose | Notes |
+|-----------|---------|-------|
+| `Stack` | Vertical spacing primitive | Reduce repeated flex-column/gap scaffolding |
+| `Cluster` | Inline wrapping action/chip layout | Great for toolbars, chips, and metadata rows |
+| `Center` | Centered constrained content wrapper | Useful for auth, empty states, and hero content |
+| `Switcher` | Responsive switch layout primitive | Better abstraction for summary cards and adaptive panels |
+| `Sidebar` | Composable app-shell sidebar | Distinct from navbar-only composition |
+| `SearchBar` | Polished global search surface | Optional HTMX suggestions |
+| `ProfileDropdown` | Authenticated user menu | Strong fit for dashboards and portals |
+| `Timeline` | Chronological event feed | Audits, bookings, releases, activities |
+| `Stepper` | Multi-step progress indicator | Form flows and onboarding |
+| `FormWizard` | Server-driven multi-step form helper | Built around HTMX + existing form primitives |
+| `SplitPane` | Two-pane productivity layout | Docs, editors, inspectors, master/detail screens |
+| `MegaMenu` | Premium expanded navigation | SaaS, docs, ecommerce |
+| `CommandPalette` | Keyboard-driven command/search launcher | Progressive enhancement; minimal JS |
+| `ModernToast` | Premium toast surface | Should remain server-rendered first, JS-enhanced only where valuable |
+| `ChartJS` | Optional modern chart integration | Proposed extra: `faststrap[chartjs]` |
+
+**Implementation stance:**
+
+* Prefer zero-JS or HTMX-first where practical.
+* Allow minimal progressive JavaScript when the UX benefit is high and the server-rendered baseline remains complete.
+* Keep optional integrations, such as `ChartJS`, outside the default install footprint.
+
 > **Note:** `ActiveSearch` and `InfiniteScroll` are already available in v0.5.6 as part of the `faststrap.presets` module.
 
 ---

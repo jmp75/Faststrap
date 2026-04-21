@@ -4,16 +4,7 @@ This file is intentionally kept in ``showcase/`` so it can serve as a real
 reference app instead of an untracked scratch page at the repository root.
 """
 
-# ruff: noqa: E402
-
-import sys
-from pathlib import Path
 from typing import Any
-
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SRC_PATH = REPO_ROOT / "src"
-if str(SRC_PATH) not in sys.path:
-    sys.path.insert(0, str(SRC_PATH))
 
 from fasthtml.common import (
     H1,
@@ -81,8 +72,27 @@ APP_CSS = """
   overflow-x: clip;
 }
 
+/* Light mode: coherent light gradient so split design still reads */
 .app-shell[data-bs-theme="light"] {
   color: #0f172a;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(106, 111, 245, 0.14), transparent 26%),
+    radial-gradient(circle at 88% 8%, rgba(77, 171, 247, 0.09), transparent 22%),
+    linear-gradient(180deg, #eef2ff 0%, #f0f4fe 30%, #f4f7fc 30%, #f4f7fc 100%);
+}
+
+/* Light-mode nav: white frosted glass instead of always-dark */
+.app-shell[data-bs-theme="light"] .app-nav-wrap {
+  background: rgba(250, 251, 255, 0.92);
+  border-bottom-color: rgba(106, 111, 245, 0.1);
+}
+.app-shell[data-bs-theme="light"] .app-navbar .nav-link {
+  color: rgba(15, 23, 42, 0.68);
+}
+.app-shell[data-bs-theme="light"] .app-navbar .nav-link:hover,
+.app-shell[data-bs-theme="light"] .app-navbar .nav-link.active {
+  color: #4f52d4;
+  background: rgba(106, 111, 245, 0.07);
 }
 
 .app-shell[data-bs-theme="dark"] {
@@ -127,9 +137,7 @@ APP_CSS = """
   padding: 5.5rem 0 4.5rem;
 }
 
-.hero-copy {
-  max-width: 44rem;
-}
+.hero-copy { max-width: 44rem; }
 
 .hero-kicker {
   display: inline-flex;
@@ -188,9 +196,7 @@ APP_CSS = """
   color: #fff;
 }
 
-.section-surface {
-  padding: 4.5rem 0;
-}
+.section-surface { padding: 4.5rem 0; }
 
 .surface-panel {
   padding: 1.6rem;
@@ -211,19 +217,13 @@ APP_CSS = """
   color: #e5edf8;
 }
 
-.section-headline {
-  max-width: 42rem;
-}
-
+.section-headline { max-width: 42rem; }
 .section-headline h2 {
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
 }
-
-.section-headline p {
-  font-size: 1.06rem;
-}
+.section-headline p { font-size: 1.06rem; }
 
 .feature-shell {
   height: 100%;
@@ -244,15 +244,8 @@ APP_CSS = """
   color: white;
 }
 
-.feature-shell h3 {
-  font-size: 1.28rem;
-  letter-spacing: -0.03em;
-}
-
-.feature-shell p {
-  font-size: 0.98rem;
-  color: #64748b;
-}
+.feature-shell h3 { font-size: 1.28rem; letter-spacing: -0.03em; }
+.feature-shell p  { font-size: 0.98rem; color: #64748b; }
 
 .app-shell[data-bs-theme="dark"] .feature-shell p,
 .app-shell[data-bs-theme="dark"] .pricing-group .card .text-muted,
@@ -293,22 +286,20 @@ APP_CSS = """
   font-weight: 700;
 }
 
-.testimonial-card {
-  border-radius: 1.35rem;
-}
-
-.footer-modern {
-  margin-top: 0 !important;
-}
+.testimonial-card { border-radius: 1.35rem; }
+.footer-modern    { margin-top: 0 !important; }
 
 @media (max-width: 991.98px) {
-  .hero-section {
-    padding-top: 4.5rem;
-  }
+  .hero-section { padding-top: 4.5rem; }
+}
 
-  .hero-metrics {
-    grid-template-columns: 1fr;
-  }
+/* 2-col on tablet, full-stack only on very small phones */
+@media (max-width: 767.98px) {
+  .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 479.98px) {
+  .hero-metrics { grid-template-columns: 1fr; }
 }
 """
 
@@ -660,7 +651,7 @@ def home(req):
         TestimonialSection(
             *TESTIMONIALS,
             title="Trusted by shipping teams",
-            subtitle="The strongest signal is not the hero copy ? it is whether operations, deploys, and debugging all feel calmer after the switch.",
+            subtitle="The strongest signal is not the hero copy — it is whether operations, deploys, and debugging all feel calmer after the switch.",
             cls="section-surface",
             id="testimonials",
         )

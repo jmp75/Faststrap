@@ -63,7 +63,7 @@ FURNITURE_THEME = create_theme(
 )
 
 app = FastHTML()
-add_bootstrap(app, theme=FURNITURE_THEME, font_family="Inter")
+add_bootstrap(app, theme=FURNITURE_THEME, font_family="Inter", mode="light")
 
 # ── Data ───────────────────────────────────────────────────────────────────────
 PRODUCTS = [

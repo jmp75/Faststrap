@@ -90,6 +90,7 @@ nav:
     - VPS: deployment/vps.md
     - Split Architecture: deployment/split-architecture.md
   - Components:
+    - Proposed Components: components/proposed.md
     - Forms:
       - Button: components/forms/button.md
       - Input: components/forms/input.md
@@ -179,9 +180,12 @@ nav:
     - Overview: seo/index.md
     - PageMeta: components/seo/page-meta.md
   - Showcase:
+    - Overview: showcase/index.md
+    - NovaFlow AI SaaS: showcase/novaflow-ai-saas.md
+    - FastCloud Generated SaaS: showcase/fastcloud-generated-saas.md
+    - Northstar Ops Dashboard: showcase/northstar-ops-dashboard.md
     - Portfolios: showcase/portfolios.md
-    - SaaS Landing: showcase/saas-landing.md
-    - Admin Dashboard: showcase/admin-dashboard.md
+    - Vertical Apps: showcase/vertical-apps.md
   - API Reference:
     - Core: api/core.md
     - Presets: api/presets.md

@@ -112,6 +112,9 @@ h6 {
   min-height: 120px;
   background: var(--bs-body-bg, #fff);
   color: var(--bs-body-color, #212529);
+  background-image:
+    radial-gradient(circle at top right, rgba(30, 58, 95, 0.06), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.96));
   /* Theme-aware primary colors */
   --bs-primary: #1e3a5f;
   --bs-primary-rgb: 30, 58, 95;
@@ -144,6 +147,60 @@ h6 {
   --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
   --bs-table-hover-color: #ffffff;
   --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+  background-image:
+    radial-gradient(circle at top right, rgba(139, 185, 255, 0.14), transparent 40%),
+    linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.98));
+}
+
+.component-preview .btn {
+  position: relative;
+  z-index: 1;
+}
+
+.component-preview .btn-light {
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.component-preview .btn-outline-light {
+  color: #f8fafc;
+  border-color: rgba(248, 250, 252, 0.9);
+}
+
+.component-preview .btn-link {
+  color: var(--bs-link-color) !important;
+}
+
+.component-preview .btn-link:hover,
+.component-preview .btn-link:focus-visible {
+  color: var(--bs-link-hover-color) !important;
+}
+
+.component-preview .page-link,
+.component-preview .nav-link,
+.component-preview .dropdown-toggle.btn-link {
+  color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .component-preview .btn-dark,
+[data-md-color-scheme="slate"] .component-preview .btn-dark {
+  border-color: rgba(248, 250, 252, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(248, 250, 252, 0.04);
+}
+
+[data-bs-theme="dark"] .component-preview .btn-outline-dark,
+[data-md-color-scheme="slate"] .component-preview .btn-outline-dark {
+  color: #e5e7eb;
+  border-color: rgba(229, 231, 235, 0.55);
+}
+
+[data-bs-theme="dark"] .component-preview .page-link,
+[data-bs-theme="dark"] .component-preview .nav-link,
+[data-bs-theme="dark"] .component-preview .dropdown-toggle.btn-link,
+[data-md-color-scheme="slate"] .component-preview .page-link,
+[data-md-color-scheme="slate"] .component-preview .nav-link,
+[data-md-color-scheme="slate"] .component-preview .dropdown-toggle.btn-link {
+  color: var(--bs-body-color);
 }
 
 .component-preview a:not(.btn) {

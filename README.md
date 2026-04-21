@@ -427,6 +427,31 @@ Docs are actively being expanded to match the full API surface. See the docs sit
 
 **View docs**: [https://faststrap-org.github.io/Faststrap/](https://faststrap-org.github.io/Faststrap/)
 
+## Showcase References
+
+Faststrap now has a dedicated `showcase/` layer for polished, product-style references. These files are meant to show what the framework looks like beyond small demos:
+
+- `showcase/novaflow_ai_saas.py`
+- `showcase/fastcloud_generated_saas.py` (compact minimal-good example)
+- `showcase/northstar_ops_dashboard.py`
+- `showcase/agency_portfolio.py`
+- `showcase/carenest_clinic.py`
+- `showcase/ledgerleaf_finance.py`
+- `showcase/learnloop_academy.py`
+- `showcase/lexbridge_corporate.py`
+- `showcase/forgedocs_platform.py`
+
+Recommended screenshot folder for docs/README assets:
+
+- `docs/assets/showcase/`
+
+Recommended naming:
+
+- `novaflow-ai-saas-light.png`
+- `novaflow-ai-saas-dark.png`
+- `northstar-ops-dashboard-light.png`
+- `northstar-ops-dashboard-dark.png`
+
 ---
 
 ## Examples
@@ -558,6 +583,9 @@ Comprehensive examples organized by learning path:
 - **Chart presets**: common analysis plots + insight helpers
 - **Form extensions**: FormWizard, Stepper, error summary patterns
 - **UI extensions**: Timeline, ProfileDropdown, SearchBar
+- **Workspace and navigation**: SplitPane, MegaMenu, CommandPalette
+- **Feedback**: ModernToast (progressive enhancement, minimal JS)
+- **Optional chart integration**: `ChartJS` via `faststrap[chartjs]`
 - **Icon packs**: optional icon registries beyond Bootstrap Icons
 - **Notebook helpers**: render-to-HTML convenience for notebooks
 - **MegaMenu**
@@ -590,6 +618,8 @@ theme = create_theme(primary="#7BA05B", secondary="#48C774")
 add_bootstrap(app, theme=theme)
 
 # Using CDN
+# Note: this covers Faststrap-managed assets only.
+# Your own app CSS/images still need to be served by your deployment setup.
 add_bootstrap(app, use_cdn=True)
 ```
 

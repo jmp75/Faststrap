@@ -601,7 +601,7 @@ def home() -> Any:
                         )
                         for icon, label, sub in AMENITIES
                     ],
-                    cls="d-flex justify-content-center flex-wrap gap-0",
+                    cls="d-flex justify-content-center flex-wrap gap-2 gap-md-0",
                 ),
                 cls="au-amenities-strip",
             ),
