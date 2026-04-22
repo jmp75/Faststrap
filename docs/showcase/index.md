@@ -20,13 +20,13 @@ The showcase layer exists to highlight:
 ### Product and SaaS
 
 - `showcase/novaflow_ai_saas.py`
-- `showcase/fastcloud_generated_saas.py`
-- `showcase/saas_landing.py` as an older comparison point
+- `showcase/fastcloud_generated_saas.py` as a rescued/minimal comparison point
+- `showcase/saas_landing.py` as a legacy comparison point
 
 ### Dashboards and Data
 
 - `showcase/northstar_ops_dashboard.py`
-- `showcase/admin_dashboard.py`
+- `showcase/admin_dashboard.py` as a legacy dashboard comparison point
 - `showcase/ledgerleaf_finance.py`
 
 ### Portfolio and Brand Sites
@@ -44,6 +44,25 @@ The showcase layer exists to highlight:
 - `showcase/carenest_clinic.py`
 - `showcase/learnloop_academy.py`
 - `showcase/forgedocs_platform.py`
+
+## Reference Quality Matrix
+
+Use this table when choosing a reference to study first.
+
+| Showcase | Role | Best Use |
+| --- | --- | --- |
+| `showcase/novaflow_ai_saas.py` | Flagship | Premium SaaS landing pages |
+| `showcase/northstar_ops_dashboard.py` | Flagship | Analytics, operations, and internal dashboards |
+| `showcase/hotel_booking_showcase.py` | Premium | Luxury, hospitality, and editorial product marketing |
+| `showcase/ledgerleaf_finance.py` | Strong | Mobile-aware finance and account surfaces |
+| `showcase/learnloop_academy.py` | Strong | Education and progress-driven product apps |
+| `showcase/furniture_store_showcase.py` | Strong | Commerce and product storytelling |
+| `showcase/agency_portfolio.py` | Strong | Brand-heavy portfolio and agency sites |
+| `showcase/forgedocs_platform.py` | Strong | Documentation-oriented product shells |
+| `showcase/carenest_clinic.py` | Acceptable | Healthcare and trust-heavy layouts |
+| `showcase/fastcloud_generated_saas.py` | Rescued | Compact comparison example, not the premium default |
+| `showcase/admin_dashboard.py` | Legacy | Simpler dashboard baseline and comparison |
+| `showcase/saas_landing.py` | Legacy | Older SaaS baseline and comparison |
 
 ## Selected Gallery
 

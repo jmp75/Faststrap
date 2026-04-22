@@ -1,6 +1,6 @@
 ---
 name: faststrap-app-builder
-description: Use when building or redesigning real FastHTML applications with Faststrap, such as company websites, SaaS landing pages, dashboards, portals, auth flows, admin systems, or multi-page product sites. This skill helps the AI produce premium Faststrap output by using Faststrap components first, Bootstrap for structure, HTMX for interactivity, and custom CSS for polish rather than generic Bootstrap presentation.
+description: Use when building or redesigning real FastHTML applications with Faststrap, such as company websites, SaaS landing pages, dashboards, portals, auth flows, admin systems, or multi-page product sites. This skill guides Faststrap work toward production-grade results by using Faststrap components first, Bootstrap for structure, HTMX for interactivity, and custom CSS for polish rather than generic Bootstrap presentation.
 ---
 
 # Faststrap App Builder
@@ -20,8 +20,9 @@ Before writing code:
    - the most relevant files in `examples/` and `showcase/`
 3. If the user provides a reference app, inspect it before designing.
 4. Match the page type to the closest reference:
-   - marketing/landing: see `references/reference-apps.md`
-   - dashboard/admin: see `references/reference-apps.md`
+   - start with `references/reference-index.md`
+   - marketing/landing: use the reference index, then open `references/reference-apps.md` only if needed
+   - dashboard/admin: use the reference index, then open `references/reference-apps.md` only if needed
    - auth/onboarding: see `references/nis-patterns.md`
 5. Inventory the existing Faststrap component surface before inventing new UI structure. Faststrap has a large component library, so check what already exists for navigation, forms, data display, feedback, patterns, and layout before building custom HTML.
 6. Follow the implementation order of precedence below before inventing custom structure.
@@ -49,6 +50,7 @@ This means:
 
 - Do not ship generic Bootstrap-looking pages.
 - Do not default to plain white sections, weak typography, or boilerplate hero-card-grid-footer layouts unless the references support that exact direction.
+- Choose one explicit primary reference before writing the page.
 - Prefer composing existing Faststrap components and patterns first, then layer custom CSS for polish.
 - Assume there is probably already a relevant Faststrap component or pattern somewhere in the 100+ component surface; check the framework before inventing a new one.
 - Build shared theme tokens and layout structure before polishing individual pages.
@@ -56,6 +58,30 @@ This means:
 - Do not rely on external CSS CDNs for project styling. Keep styling in local project assets and Faststrap/Bootstrap.
 - Treat JavaScript as the last interaction tool, not the first one.
 - Before finishing, run a dedicated Bootstrap-smell pass and remove untouched default pills, soft default shadows, over-rounded surfaces, and generic section treatment.
+
+## Reference discipline
+
+- Always open `references/reference-index.md` first when selecting a showcase reference.
+- Pick one primary reference and at most one secondary reference.
+- Prefer flagship references over legacy/simple ones unless the user explicitly asks for a simpler build.
+- Reuse structure, responsiveness, and quality bar from the reference; do not copy text or brand voice.
+- If the chosen reference is a legacy/simple example, compensate with stronger CSS and hierarchy decisions.
+
+## Bootstrap-smell audit
+
+Run this pass before finishing any polished page:
+
+- palette feels branded, not stock Bootstrap blue
+- cards and sections have intentional surface treatment, not untouched default Bootstrap panels
+- typography hierarchy is obvious across hero, section, body, and label text
+- border radii feel deliberate rather than default Bootstrap rounding
+- spacing rhythm is consistent across sections, cards, controls, and stacks
+- primary buttons feel intentional, not flat defaults
+- mobile layout is designed explicitly, not just desktop collapsed downward
+- light and dark variants both remain legible and intentional when both are supported
+- empty, loading, success, and error states exist for key flows
+- HTMX is used where interaction is needed instead of defaulting to custom JavaScript
+- no generic hero-card-grid-footer boilerplate survived untouched
 
 ## Visual system rules
 
@@ -97,8 +123,47 @@ This means:
 
 - For single-file showcases or isolated demos, inline `Style(...)` blocks are acceptable.
 - For multi-route or production-style apps, move custom CSS into local asset files and mount them properly.
+- Prefer a small production CSS shape such as:
+  - `_brand.css`
+  - `_typography.css`
+  - `_layout.css`
+  - `_surfaces.css`
+  - `_interactions.css`
 - Keep Bootstrap utilities for layout/responsiveness and custom CSS for brand identity, surface treatment, and advanced polish.
 - Avoid scattering one-off inline `style=` strings across a codebase when the app is larger than a simple showcase.
+
+See `references/css-architecture.md` for a recommended production CSS structure.
+
+## HTMX-first recipes
+
+Prefer these patterns before reaching for custom JavaScript:
+
+- `ActiveSearch` for live search/filtering
+- `AutoRefresh` for polling dashboards or activity surfaces
+- `LazyLoad` for deferred sections or below-the-fold content
+- `LoadingButton` for async actions with visible feedback
+- `ConfirmDialog` for destructive actions
+- `FormGroup` + HTMX validation endpoints for live field feedback
+- `DataTable` with built-in sort/search/pagination before inventing raw table wiring
+
+When not to use HTMX as the primary tool:
+
+- complex client-side charting behavior
+- real-time collaboration
+- browser/device APIs such as camera, geolocation, or push/service-worker flows
+
+See `references/htmx-recipes.md` for concrete build patterns.
+
+## Component selection
+
+Before inventing a wrapper or custom HTML structure, check `references/component-selection.md`.
+
+Use it to answer:
+
+- which card/data surface fits this need?
+- is there already a form or validation helper?
+- should this be a navigation component, a layout primitive, or a preset?
+- is this actually a CSS problem rather than a missing component?
 
 ## Working pattern
 
@@ -129,6 +194,7 @@ This means:
 - Check mobile and desktop structure.
 - Check that Faststrap theme/defaults are actually applied.
 - Check empty states, CTA clarity, spacing consistency, and contrast.
+- Run the Bootstrap-smell audit explicitly.
 - Run relevant tests; if the project has none, add at least focused smoke or route tests when practical.
 
 ## Finish checklist
@@ -141,6 +207,12 @@ Before you consider the UI done, verify:
 - empty/loading/error states exist for key flows
 - accessibility labels and focus states remain intact
 - at least one final pass was made specifically to remove Bootstrap-default visual leakage
+
+See also:
+
+- `references/visual-design-rules.md`
+- `references/troubleshooting.md`
+- `references/form-workflow.md`
 
 ## Design bar
 
@@ -166,6 +238,13 @@ Good Faststrap app work should feel:
 
 ## Read these references as needed
 
+- `references/reference-index.md`: canonical first-stop guide for picking the right showcase or production reference by page type and quality bar
+- `references/htmx-recipes.md`: concrete HTMX-first interaction patterns for search, refresh, validation, confirm, lazy loading, and inline editing
+- `references/component-selection.md`: practical guide for choosing existing Faststrap components before inventing new ones
+- `references/css-architecture.md`: production CSS file organization and token structure
+- `references/form-workflow.md`: complete form, validation, submit, and success/error flow patterns
+- `references/visual-design-rules.md`: baseline design quality bar for typography, surfaces, spacing, and responsiveness
+- `references/troubleshooting.md`: common failure modes and how to correct them quickly
 - `references/nis-patterns.md`: real production-style project wiring and theming patterns from the user's NIS, Final-Year, and SIWES apps
 - `references/mmercyj-patterns.md`: polished company-site composition and mobile-first responsive simplification patterns from `mmercyj_beddings`
 - `references/reference-apps.md`: which local Faststrap showcase files to inspect by page type

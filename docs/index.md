@@ -127,8 +127,9 @@ See the Showcase section in the docs for the current flagship set and screenshot
 - **Layout primitives**: Stack, Cluster, Center, Switcher, Sidebar
 - **Data tooling**: DataFrameViewer (virtualized), DataProfiler, ModelReport layout
 - **Chart presets**: common analysis plots + insight helpers
-- **Form extensions**: FormWizard, Stepper, error summary patterns
-- **UI extensions**: Timeline, ProfileDropdown, SearchBar
+- **Form extensions**: FormWizard, Stepper, inline editing, validation workflow recipes
+- **UI extensions**: Timeline, ProfileDropdown, SearchBar, Avatar, ResultCard
+- **List/navigation helpers**: standalone PaginationControls for non-table views
 - **Icon packs**: optional icon registries beyond Bootstrap Icons
 - **Notebook helpers**: render-to-HTML convenience for notebooks
 - **Modern feedback and charts**: ModernToast and optional `ChartJS` integration

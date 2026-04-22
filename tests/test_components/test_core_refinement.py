@@ -1,6 +1,7 @@
-from fasthtml.common import to_xml
+from fasthtml.common import Div, to_xml
 
 from faststrap import Button, set_component_defaults
+from faststrap.core.base import BaseComponent
 
 
 def test_defaults_resolution():
@@ -50,3 +51,25 @@ def test_defaults_resolution():
 
 if __name__ == "__main__":
     test_defaults_resolution()
+
+
+class DemoComponent(BaseComponent):
+    def render(self):
+        return Div("demo", **self.merge_attrs(cls="demo-card"))
+
+
+def test_base_component_merge_attrs_converts_and_merges() -> None:
+    component = DemoComponent(
+        hx_get="/demo",
+        data={"mode": "inline"},
+        css_vars={"brand_color": "#5B6CFF"},
+        cls="user-class",
+    )
+    component.add_class("extra-class")
+
+    html = to_xml(component.render())
+
+    assert 'hx-get="/demo"' in html
+    assert 'data-mode="inline"' in html
+    assert "--brand-color: #5B6CFF" in html
+    assert 'class="demo-card user-class extra-class"' in html

@@ -41,10 +41,38 @@ Container(
 
 ---
 
+## Recommended Pattern
+
+Prefer `Row(..., cols=...)` when you want evenly sized cards or repeated items,
+and define the mobile layout first.
+
+```python
+Row(
+    Card("Revenue"),
+    Card("Retention"),
+    Card("Pipeline"),
+    cols=1,
+    cols_md=2,
+    cols_lg=3,
+    gutter=3,
+)
+```
+
+This makes the intended stack explicit:
+
+- mobile: 1 item per row
+- tablet: 2 items per row
+- desktop: 3 items per row
+
+Use custom `cls="row ..."` only when you specifically need raw Bootstrap row
+behavior that is not already covered by `Row()` arguments.
+
+---
+
 ## Visual Examples & Use Cases
 
 ### 1. Responsive Breakpoints
-You can specify different widths for different screen sizes (sm, md, lg, xl, xxl).
+You can specify different widths for different screen sizes (`sm`, `md`, `lg`, `xl`, `xxl`).
 
 !!! note "Code & Output"
 <div class="component-preview">
@@ -67,6 +95,19 @@ Row(
 ```
   </div>
 </div>
+
+You can also control equal-width card grids at the row level:
+
+```python
+Row(
+    Card("Item 1"),
+    Card("Item 2"),
+    Card("Item 3"),
+    cols=1,
+    cols_md=2,
+    cols_lg=3,
+)
+```
 
 ### 2. Alignment & Spacing (Gutter)
 Bootstrap's Flexbox utilities are available through the `Row` and `Col` arguments.
@@ -134,6 +175,12 @@ Row(
 ### Row
 | Param | Type | Bootstrap Class | Description |
 | :--- | :--- | :--- | :--- |
+| `cols` | `int` | `.row-cols-{val}` | Equal columns for the default/mobile layout. |
+| `cols_sm` | `int` | `.row-cols-sm-{val}` | Equal columns from the `sm` breakpoint upward. |
+| `cols_md` | `int` | `.row-cols-md-{val}` | Equal columns from the `md` breakpoint upward. |
+| `cols_lg` | `int` | `.row-cols-lg-{val}` | Equal columns from the `lg` breakpoint upward. |
+| `cols_xl` | `int` | `.row-cols-xl-{val}` | Equal columns from the `xl` breakpoint upward. |
+| `cols_xxl` | `int` | `.row-cols-xxl-{val}` | Equal columns from the `xxl` breakpoint upward. |
 | `gutter` | `int` | `.g-{val}` | Spacing between columns (0-5). |
 | `gx` | `int` | `.gx-{val}` | Horizontal gutter only. |
 | `gy` | `int` | `.gy-{val}` | Vertical gutter only. |
@@ -143,11 +190,18 @@ Row(
 ### Col
 | Param | Type | Bootstrap Class | Description |
 | :--- | :--- | :--- | :--- |
-| `width` | `int` | `.col-{val}` | Mobile/default width (1-12). |
-| `sm` | `int` | `.col-sm-{val}` | Tablet width. |
-| `md` | `int` | `.col-md-{val}` | Desktop width. |
-| `lg` | `int` | `.col-lg-{val}` | Large screen width. |
+| `span` | `int \| bool` | `.col` / `.col-{val}` | Auto width when `True`, or a specific mobile/default span (1-12). |
+| `sm` | `int` | `.col-sm-{val}` | Width from the `sm` breakpoint upward. |
+| `md` | `int` | `.col-md-{val}` | Width from the `md` breakpoint upward. |
+| `lg` | `int` | `.col-lg-{val}` | Width from the `lg` breakpoint upward. |
+| `xl` | `int` | `.col-xl-{val}` | Width from the `xl` breakpoint upward. |
+| `xxl` | `int` | `.col-xxl-{val}` | Width from the `xxl` breakpoint upward. |
 | `offset` | `int` | `.offset-{val}` | Prepend empty columns. |
+| `offset_sm` | `int` | `.offset-sm-{val}` | Offset from the `sm` breakpoint upward. |
+| `offset_md` | `int` | `.offset-md-{val}` | Offset from the `md` breakpoint upward. |
+| `offset_lg` | `int` | `.offset-lg-{val}` | Offset from the `lg` breakpoint upward. |
+| `offset_xl` | `int` | `.offset-xl-{val}` | Offset from the `xl` breakpoint upward. |
+| `offset_xxl` | `int` | `.offset-xxl-{val}` | Offset from the `xxl` breakpoint upward. |
 
 ::: faststrap.components.layout.grid.Container
     options:

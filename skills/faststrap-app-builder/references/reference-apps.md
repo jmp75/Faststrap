@@ -1,5 +1,9 @@
 # Reference apps
 
+Use `reference-index.md` first.
+
+This file remains the detailed companion list for when you already know the app type and need supporting paths or extra notes.
+
 When building a Faststrap + FastHTML application, inspect the nearest matching local reference before coding.
 
 ## Marketing and company sites

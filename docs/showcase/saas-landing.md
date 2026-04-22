@@ -29,6 +29,22 @@ It is still useful for comparison and learning, but it is no longer the best gui
 
 ![Legacy SaaS landing reference](../assets/showcase/saas-landing-legacy.png)
 
+## Comparison
+
+| Aspect | `novaflow_ai_saas.py` | `saas_landing.py` |
+| --- | --- | --- |
+| Role | Flagship premium SaaS reference | Legacy/simple SaaS reference |
+| Visual direction | Strong branding, stronger hierarchy, more custom surface treatment | Simpler structure with lighter customization |
+| HTMX usage | More interaction-focused | More limited interaction surface |
+| Best use | New premium landing pages | Comparison, learning, or intentionally simpler builds |
+| Default recommendation | Start here first | Use only when a simpler baseline is explicitly desired |
+
+## How To Use These References
+
+- Start with `showcase/novaflow_ai_saas.py` for structure, responsiveness, and quality bar.
+- Use `showcase/saas_landing.py` only as a lighter comparison point.
+- Do not blend both references equally; pick one primary direction before building.
+
 ## Sources
 
 - `showcase/novaflow_ai_saas.py`

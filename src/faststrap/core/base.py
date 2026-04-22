@@ -3,6 +3,8 @@
 from abc import ABC, abstractmethod
 from typing import Any, Protocol
 
+from ..utils.attrs import convert_attrs
+
 
 class Component(Protocol):
     """Protocol for FastStrap components."""
@@ -59,22 +61,26 @@ class BaseComponent(Component, ABC):
         return self
 
     def merge_attrs(self, **defaults: Any) -> dict[str, Any]:
-        """Merge component attributes with defaults."""
+        """Merge component attributes with defaults.
+
+        The merged attribute set is passed through ``convert_attrs()`` so
+        class-based components preserve the same HTMX, ``data_*``, ``aria_*``,
+        ``style={...}``, and ``css_vars={...}`` behavior as function-based
+        FastStrap components.
+        """
         merged = {**defaults, **self.attrs}
 
-        # Merge classes
-        all_classes: list[str] = []
-        if "cls" in defaults:
-            all_classes.append(defaults["cls"])
-        if "cls" in self.attrs:
-            all_classes.append(self.attrs["cls"])
-        if self._classes:
-            all_classes.extend(self._classes)
+        default_cls = defaults.get("cls")
+        user_cls = self.attrs.get("cls")
+        merged.pop("cls", None)
 
+        attrs = convert_attrs(merged)
+
+        all_classes = merge_classes(default_cls, user_cls, self._classes)
         if all_classes:
-            merged["cls"] = " ".join(all_classes)
+            attrs["cls"] = all_classes
 
-        return merged
+        return attrs
 
 
 def merge_classes(*class_lists: Any) -> str:

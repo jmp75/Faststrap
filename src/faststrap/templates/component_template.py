@@ -11,6 +11,9 @@ from fasthtml.common import Div  # Or appropriate FT type
 # NOTE: When copying this template, adjust the import path:
 # from ...core.base import merge_classes
 # from ...utils.attrs import convert_attrs
+#
+# `convert_attrs(kwargs)` is required for FastStrap components so HTMX,
+# `data_*`, `aria_*`, `style={...}`, and `css_vars={...}` keep working.
 
 # For template validation only (remove when using):
 try:
@@ -68,7 +71,9 @@ def ComponentName(
     user_cls = kwargs.pop("cls", "")
     all_classes = merge_classes(" ".join(classes), user_cls)
 
-    # Build attributes
+    # Build attributes.
+    # Always pass remaining kwargs through convert_attrs so Python-friendly
+    # attributes become valid HTML attributes.
     attrs: dict[str, Any] = {"cls": all_classes}
     attrs.update(convert_attrs(kwargs))
 

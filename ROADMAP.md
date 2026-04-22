@@ -32,6 +32,8 @@
 - Advanced DataTable query contract and optional ORM bridges
 - Production map provider integrations and geospatial presets
 - Extended PWA reliability presets (queue persistence, richer retry/telemetry)
+- Workflow/UI helpers where audits keep showing repetition: `ResultCard`, `InlineEditor`, `Avatar`, and standalone `PaginationControls`
+- Documentation-first polish for validation workflows, filter/search recipes, and non-table pagination guidance
 
 ### Suggested release cut
 

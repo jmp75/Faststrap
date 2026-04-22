@@ -6,6 +6,7 @@ from fasthtml.common import Div, Main
 
 from ..components.layout.grid import Container
 from ..core._stability import beta
+from ..utils.attrs import convert_attrs
 
 
 @beta
@@ -25,10 +26,12 @@ def LandingLayout(
         fluid: Use fluid container for main content
         **kwargs: Additional attributes
     """
+    attrs = {"cls": "d-flex flex-column min-vh-100 landing-layout"}
+    attrs.update(convert_attrs(kwargs))
+
     return Div(
         navbar or "",
         Main(Container(*content, fluid=fluid) if content else "", cls="flex-shrink-0"),
         footer or "",
-        cls="d-flex flex-column min-vh-100 landing-layout",
-        **kwargs,
+        **attrs,
     )

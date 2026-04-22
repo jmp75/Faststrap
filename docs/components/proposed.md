@@ -15,6 +15,37 @@ The proposed components below are meant to close that gap without drifting away 
 
 ---
 
+## Audit Triage Notes
+
+Recent external audits surfaced a mix of real gaps and already-covered ideas. We keep this page focused by separating proposals from duplicates.
+
+Already implemented today:
+
+- `StatCard`
+- `EmptyState`
+- `Breadcrumb`
+- `ConfirmDialog`
+- `FilterBar`
+- `SearchableSelect`
+- `DataTable` with sorting, search, and pagination
+
+Better handled as docs, recipes, or examples rather than new components:
+
+- HTMX field validation patterns built on `FormGroup`
+- responsive breadcrumb composition
+- loading overlays built from `Spinner`
+- skeleton states built from `Placeholder` / `PlaceholderCard`
+- richer usage guidance for `FilterBar`, `SearchableSelect`, and `EmptyState`
+
+Retained below as real future-component candidates:
+
+- `ResultCard`
+- `InlineEditor`
+- `Avatar`
+- `PaginationControls`
+
+---
+
 ## Layout Primitives
 
 These are high-leverage building blocks that make polished layout composition faster and more consistent across apps.
@@ -36,7 +67,7 @@ Why it matters:
 
 - removes repeated `d-flex flex-column gap-*`
 - improves section rhythm
-- helps AI builders avoid ad hoc spacing
+- encourages consistent spacing across pages and sections
 
 ### Cluster
 
@@ -89,7 +120,7 @@ Switcher(
 
 Why it matters:
 
-- a better abstraction for “three across until they shouldn’t be”
+- captures the common multi-card summary layout that collapses cleanly as space tightens
 - very useful in dashboards and marketing summaries
 
 ### Sidebar
@@ -113,7 +144,7 @@ Why it matters:
 
 ### SplitPane
 
-Two-pane layout for docs, productivity tools, builders, and master/detail screens.
+Two-pane layout for docs, productivity tools, editors, and master/detail screens.
 
 ```python
 SplitPane(
@@ -126,7 +157,7 @@ SplitPane(
 Why it matters:
 
 - useful for documentation tools, editors, data inspectors, and admin workflows
-- gives frontend developers a better default than ad hoc grid hacks
+- provides a stronger default than ad hoc grid composition
 
 ---
 
@@ -149,7 +180,7 @@ SearchBar(
 Why it matters:
 
 - very common app-shell need
-- should feel more intentional than raw `Input(...)`
+- provides a more complete header-search pattern than raw `Input(...)`
 
 ### ProfileDropdown
 
@@ -266,11 +297,87 @@ Why it matters:
 - a high-value abstraction for onboarding, checkout, and application flows
 - should remain server-first and HTMX-friendly
 
+### InlineEditor
+
+Edit-in-place primitive for HTMX-first dashboards, admin tools, and profile surfaces.
+
+```python
+InlineEditor(
+    value="Revenue Operations",
+    field_name="team_name",
+    endpoint="/settings/team-name",
+    input_type="text",
+)
+```
+
+Why it matters:
+
+- repeated pattern in tables, profile settings, and admin views
+- should reduce ad hoc "click to edit" markup
+- fits Faststrap well when implemented as server-driven swap targets
+
+### PaginationControls
+
+Composable pagination helper for list and search pages outside the full `DataTable` surface.
+
+```python
+PaginationControls(
+    current_page=2,
+    total_pages=10,
+    endpoint="/orders",
+    page_param="page",
+)
+```
+
+Why it matters:
+
+- `DataTable` already handles pagination well, but non-table views still repeat pager markup
+- useful for card grids, search result pages, docs indexes, and gallery views
+- keeps paging behavior consistent without forcing a full table abstraction
+
+### Avatar
+
+Identity primitive with image fallback, initials fallback, and optional presence indicator.
+
+```python
+Avatar(
+    name="Maya Yusuf",
+    src="/assets/maya.jpg",
+    size="md",
+    status="online",
+)
+```
+
+Why it matters:
+
+- repeated in dashboards, comments, account menus, and messaging UIs
+- stronger than raw `Image(...)` when apps need initials fallback and status treatment
+- pairs naturally with `ProfileDropdown` and team/member lists
+
 ---
 
 ## Feedback & Visualization Proposals
 
-These proposals are slightly more opinionated because they touch richer interaction and rendering concerns.
+These proposals involve richer interaction and rendering concerns than the layout and flow primitives above.
+
+### ResultCard
+
+Structured success/error/warning feedback card for form submissions, setup flows, and post-action states.
+
+```python
+ResultCard(
+    status="success",
+    title="Profile updated",
+    message="Your account changes were saved successfully.",
+    action=("View profile", "/profile"),
+)
+```
+
+Why it matters:
+
+- repeated pattern after saves, onboarding completion, billing actions, and empty-success handoffs
+- stronger and more consistent than ad hoc `Alert(...)` + `Button(...)` composition
+- complements `EmptyState` instead of replacing it
 
 ### ModernToast
 
@@ -285,25 +392,22 @@ ModernToast(
 )
 ```
 
-**My take on JS here:**
+Implementation notes:
 
-- a modern toast is still worth adding
-- **minimal JavaScript is acceptable** if it is progressive enhancement, tiny in scope, and not required for core rendering
-- if we want features like:
+- extends the existing toast surfaces with a more polished presentation option
+- minimal JavaScript is acceptable when used only for progressive enhancement and not required for core rendering
+- advanced behavior such as the following can remain optional:
   - animated stack coordination
   - pause on hover
   - progress timers
   - swipe or advanced dismiss gestures
-  then some JS becomes reasonable
 
-Recommended contract:
+Recommended behavior:
 
 - server-rendered first
-- usable without JS
-- advanced animation/timer behavior only when Faststrap JS is present
+- usable without JavaScript
+- advanced animation or timer behavior only when Faststrap JavaScript is present
 - no client-side state store
-
-That keeps it aligned with Faststrap instead of turning it into a mini frontend framework.
 
 ### ChartJS
 
@@ -317,17 +421,17 @@ ChartJS(
 )
 ```
 
-**My take on Chart.js:**
+Implementation notes:
 
-- yes, this is worth doing
-- it should be **optional**, just like `MapView`, Markdown sanitization, or Mermaid-style extras
-- the right packaging shape is something like:
+- adds an optional integration alongside the generic chart surface
+- should remain optional, similar to `MapView`, Markdown sanitization, or Mermaid-style extras
+- a packaging shape such as the following fits that model well:
   - `faststrap[chartjs]`
 
-Recommended design:
+Design notes:
 
 - keep the current `Chart` component as the generic abstraction
-- add `ChartJS` as an opinionated, modern-chart path
+- add `ChartJS` as a more specialized integration path
 - bundle no chart assets by default
 - allow:
   - CDN mode
@@ -336,8 +440,8 @@ Recommended design:
 
 Why it matters:
 
-- Chart.js gives frontend developers a more familiar modern charting feel
-- it helps close the gap where Matplotlib/Altair/Plotly are powerful but not always visually aligned with modern SaaS dashboards by default
+- Chart.js provides a familiar charting option for product and dashboard interfaces
+- it complements Python charting workflows when teams need a charting surface aligned with modern dashboard styling
 
 Security / correctness notes:
 
@@ -349,25 +453,29 @@ Security / correctness notes:
 
 ## Suggested Build Order
 
-If implemented soon, this is the order that gives the biggest frontend value fastest:
+If implemented soon, this order provides the highest immediate frontend value:
 
 1. `Stack`
 2. `Cluster`
 3. `Center`
 4. `Switcher`
 5. `ProfileDropdown`
-6. `Timeline`
-7. `SearchBar`
-8. `Sidebar`
-9. `Stepper`
-10. `FormWizard`
-11. `ModernToast`
-12. `SplitPane`
-13. `MegaMenu`
-14. `CommandPalette`
-15. `ChartJS`
+6. `ResultCard`
+7. `Timeline`
+8. `InlineEditor`
+9. `SearchBar`
+10. `Sidebar`
+11. `Stepper`
+12. `Avatar`
+13. `FormWizard`
+14. `PaginationControls`
+15. `ModernToast`
+16. `SplitPane`
+17. `MegaMenu`
+18. `CommandPalette`
+19. `ChartJS`
 
-This order intentionally prioritizes:
+Build-order rationale:
 
 - low-JS layout leverage first
 - common product UI next

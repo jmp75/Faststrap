@@ -27,6 +27,32 @@ Button(Icon("download"), " Download", variant="primary")
 
 ---
 
+## Finding the Right Icon Name
+
+FastStrap uses the Bootstrap Icons naming convention directly. If an icon does
+not render, the most common cause is an incorrect icon name.
+
+Helpful checks:
+
+- browse the official library at [icons.getbootstrap.com](https://icons.getbootstrap.com/)
+- search by noun first (`house`, `gear`, `person`, `search`)
+- try the `-fill` variant when you want a stronger filled shape
+- prefer the exact Bootstrap Icons name rather than an alias such as
+  `checkmark` or `right-arrow`
+
+Examples:
+
+```python
+Icon("check-circle")      # good
+Icon("arrow-right")       # good
+Icon("person-fill")       # good
+
+Icon("checkmark")         # wrong
+Icon("right-arrow")       # wrong
+```
+
+---
+
 ## Common Use Cases
 
 ### 1. In Buttons
@@ -113,6 +139,19 @@ Icon("star", cls="fs-1")
 | `arrow-left`, `arrow-right` | Navigation |
 | `list` | Menu |
 | `three-dots-vertical` | More options |
+
+---
+
+## Naming Patterns
+
+Bootstrap Icons often follow these suffix patterns:
+
+- `-fill` for filled versions: `heart-fill`, `star-fill`
+- `-circle` / `-circle-fill` for status-style icons: `check-circle`, `x-circle-fill`
+- directional names such as `arrow-left`, `arrow-right`, `chevron-down`
+- object nouns such as `house`, `gear`, `person`, `envelope`, `cart`
+
+When in doubt, search the Bootstrap Icons catalog for the exact final name.
 
 ---
 

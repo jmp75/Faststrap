@@ -6,6 +6,7 @@ from fasthtml.common import A, Button, Div, Footer, Nav, Span
 
 from ..components.layout.grid import Container
 from ..core._stability import beta
+from ..utils.attrs import convert_attrs
 
 
 @beta
@@ -87,4 +88,6 @@ def DashboardLayout(
         cls="main-content-wrapper d-flex flex-column flex-grow-1",
     )
 
-    return Div(sidebar, main_content, cls="d-flex dashboard-layout", style="min-height: 100vh;")
+    attrs = {"cls": "d-flex dashboard-layout", "style": "min-height: 100vh;"}
+    attrs.update(convert_attrs(kwargs))
+    return Div(sidebar, main_content, **attrs)

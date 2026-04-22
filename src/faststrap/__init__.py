@@ -177,6 +177,7 @@ from .seo import SEO, PageMeta, StructuredData
 # Utils
 from .utils import cleanup_static_resources, get_faststrap_static_url
 from .utils.icons import Icon
+from .utils.attrs import convert_attrs
 
 __all__ = [
     # Core
@@ -184,6 +185,7 @@ __all__ = [
     "get_assets",
     "mount_assets",
     "merge_classes",
+    "convert_attrs",
     # Accessibility
     "SkipLink",
     "LiveRegion",

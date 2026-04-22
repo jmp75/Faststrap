@@ -1,6 +1,6 @@
 """Tests for HTML attribute conversion helpers."""
 
-from faststrap.utils.attrs import convert_attrs
+from faststrap import convert_attrs
 
 
 def test_convert_attrs_merges_style_and_css_vars() -> None:
@@ -37,3 +37,18 @@ def test_convert_attrs_preserves_structured_false_values() -> None:
 def test_convert_attrs_preserves_direct_aria_false() -> None:
     attrs = convert_attrs({"aria_hidden": False})
     assert attrs["aria-hidden"] == "false"
+
+
+def test_convert_attrs_supports_htmx_style_and_data_from_top_level_import() -> None:
+    attrs = convert_attrs(
+        {
+            "hx_get": "/search",
+            "hx_target": "#results",
+            "data": {"state": "ready"},
+            "style": {"margin_top": "1rem"},
+        }
+    )
+    assert attrs["hx-get"] == "/search"
+    assert attrs["hx-target"] == "#results"
+    assert attrs["data-state"] == "ready"
+    assert "margin-top: 1rem" in attrs["style"]

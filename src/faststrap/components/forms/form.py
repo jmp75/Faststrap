@@ -15,6 +15,7 @@ from fasthtml.common import Option
 from fasthtml.common import Select as FTSelect
 
 from ...core._stability import beta
+from ...utils.attrs import convert_attrs
 from .formgroup import FormGroup
 
 
@@ -174,6 +175,7 @@ class FormBuilder:
         if action:
             form_attrs["action"] = action
         form_attrs.update(kwargs)
+        form_attrs = convert_attrs(form_attrs)
 
         return FTForm(*fields, **form_attrs)
 
