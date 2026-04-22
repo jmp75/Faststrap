@@ -2,7 +2,6 @@
 
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 WRAPPER_FILES = {
     "src/faststrap/components/display/sheet.py",

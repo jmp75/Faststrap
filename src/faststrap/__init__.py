@@ -176,8 +176,8 @@ from .seo import SEO, PageMeta, StructuredData
 
 # Utils
 from .utils import cleanup_static_resources, get_faststrap_static_url
-from .utils.icons import Icon
 from .utils.attrs import convert_attrs
+from .utils.icons import Icon
 
 __all__ = [
     # Core
