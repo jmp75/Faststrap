@@ -49,6 +49,51 @@ InlineEditor(
 )
 ```
 
+## Complete HTMX Flow
+
+This is the simplest read/edit loop:
+
+```python
+from fasthtml.common import fast_app
+from faststrap import InlineEditor
+
+app, rt = fast_app()
+
+title = "Quarterly planning"
+
+
+def title_editor(editing: bool = False):
+    return InlineEditor(
+        "title",
+        title,
+        editing=editing,
+        endpoint="/title",
+        edit_endpoint="/title/edit",
+        id="title-editor",
+        method="patch",
+    )
+
+
+@rt("/")
+def home():
+    return title_editor()
+
+
+@rt("/title/edit")
+def edit_title():
+    return title_editor(editing=True)
+
+
+@rt("/title", methods=["PATCH"])
+async def save_title(request):
+    global title
+    form = await request.form()
+    title = form.get("title", "")
+    return title_editor()
+```
+
+The important idea: the edit endpoint returns `editing=True`, and the save endpoint returns the read view again.
+
 ## Parameters
 
 | Param | Type | Description |

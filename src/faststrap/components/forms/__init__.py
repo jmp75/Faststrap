@@ -2,6 +2,7 @@
 
 from .button import Button, CloseButton
 from .buttongroup import ButtonGroup, ButtonToolbar
+from .calendar_date_picker import CalendarDatePicker
 from .checks import Checkbox, Radio, Range, Switch
 from .date_range_picker import DateRangePicker
 from .errors import (
@@ -40,6 +41,7 @@ __all__ = [
     "FormBuilder",
     "FormGroup",
     "FilterBar",
+    "CalendarDatePicker",
     "DateRangePicker",
     "ExportButton",
     "extract_field_error",

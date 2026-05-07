@@ -1,7 +1,7 @@
 # Proposed Components
 
-!!! warning "Planned Surface Only"
-    Everything on this page is a proposal for future Faststrap releases. These components are **not implemented yet**. This page exists to document the intended direction clearly before code is written.
+!!! warning "Planning Surface"
+    This page tracks proposed and recently shipped component ideas. Check the "Already implemented today" list before treating an item below as future work.
 
 Faststrap now has enough real-world showcases to expose the next meaningful gap: frontend developers can build polished pages today, but they still repeat a lot of structural and product-UI patterns by hand.
 
@@ -28,6 +28,15 @@ Already implemented today:
 - `FilterBar`
 - `SearchableSelect`
 - `DataTable` with sorting, search, and pagination
+- `ResultCard`
+- `InlineEditor`
+- `Avatar`
+- `AvatarGroup`
+- `StatusBadge`
+- `BadgeGroup`
+- `Timeline`
+- `Stepper`
+- `CalendarDatePicker`
 
 Better handled as docs, recipes, or examples rather than new components:
 
@@ -39,10 +48,11 @@ Better handled as docs, recipes, or examples rather than new components:
 
 Retained below as real future-component candidates:
 
-- `ResultCard`
-- `InlineEditor`
-- `Avatar`
 - `PaginationControls`
+- `FormWizard`
+- `CommandPalette`
+- `ModernToast`
+- `ChartJS`
 
 ---
 

@@ -418,18 +418,18 @@ These integrations are intentionally opt-in. They should not change Faststrap's 
 
 **Wave 1: Fast wins and reusable foundations**
 
-- `ResultCard`
-- `Avatar`
-- `AvatarGroup`
-- `StatusBadge`
-- `BadgeGroup`
-- `InlineEditor`
+- `ResultCard` - shipped
+- `Avatar` - shipped
+- `AvatarGroup` - shipped
+- `StatusBadge` - shipped
+- `BadgeGroup` - shipped
+- `InlineEditor` - shipped
 
 **Wave 2: Workflow and UI polish**
 
-- `Timeline`
-- `Stepper`
-- `CalendarDatePicker`
+- `Timeline` - shipped
+- `Stepper` - shipped
+- `CalendarDatePicker` - shipped
 
 **Wave 3: Bigger interactive surfaces and optional integrations**
 

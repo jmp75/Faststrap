@@ -17,9 +17,11 @@ from .sheet import Sheet
 from .sse_target import SSETarget
 from .stat_card import KPICard, MetricCard, StatCard, TrendCard
 from .status_badge import BadgeGroup, StatusBadge
+from .stepper import Stepper, StepperStep
 from .svg import Svg, render_svg
 from .table import BsTable, BsTBody, BsTCell, BsTHead, BsTRow, Table, TBody, TCell, THead, TRow
 from .text_clamp import TextClamp
+from .timeline import Timeline, TimelineItem
 
 __all__ = [
     "Badge",
@@ -49,7 +51,11 @@ __all__ = [
     "TrendCard",
     "KPICard",
     "StatCard",
+    "Stepper",
+    "StepperStep",
     "TextClamp",
+    "Timeline",
+    "TimelineItem",
     "BsTable",
     "BsTHead",
     "BsTBody",

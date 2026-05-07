@@ -9,6 +9,7 @@ from fasthtml.common import Span
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
+from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 from ...utils.icons import Icon
 from .badge import Badge
@@ -25,7 +26,7 @@ StatusType = Literal[
     "inactive",
 ]
 
-STATUS_VARIANTS = {
+STATUS_VARIANTS: dict[StatusType, VariantType] = {
     "success": "success",
     "active": "success",
     "warning": "warning",
@@ -56,7 +57,7 @@ def StatusBadge(
     label: str,
     *,
     status: StatusType = "neutral",
-    variant: str | None = None,
+    variant: VariantType | None = None,
     icon: str | None = None,
     show_dot: bool = False,
     pill: bool = True,

@@ -103,6 +103,7 @@ nav:
       - FormGroup: components/forms/formgroup.md
       - FilterBar: components/forms/filter-bar.md
       - DateRangePicker: components/forms/date-range-picker.md
+      - CalendarDatePicker: components/forms/calendar-date-picker.md
       - MultiSelect: components/forms/multi-select.md
       - RangeSlider: components/forms/range-slider.md
       - ExportButton: components/forms/export-button.md
@@ -120,6 +121,8 @@ nav:
       - Badge: components/display/badge.md
       - StatusBadge: components/display/status-badge.md
       - Avatar: components/display/avatar.md
+      - Timeline: components/display/timeline.md
+      - Stepper: components/display/stepper.md
       - Icon: components/display/icon.md
       - MapView: components/display/map-view.md
       - Markdown: components/display/markdown.md
