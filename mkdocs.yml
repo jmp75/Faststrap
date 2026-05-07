@@ -186,6 +186,8 @@ nav:
     - Northstar Ops Dashboard: showcase/northstar-ops-dashboard.md
     - Portfolios: showcase/portfolios.md
     - Vertical Apps: showcase/vertical-apps.md
+  - Integrations:
+    - GSAP Motion: integrations/gsap.md
   - API Reference:
     - Core: api/core.md
     - Presets: api/presets.md

@@ -51,6 +51,7 @@ markdown = [
     "markdown>=3.6",
     "bleach>=6.0",
 ]
+gsap = []
 
 [project.urls]
 Homepage = "https://github.com/Faststrap-org/Faststrap"
