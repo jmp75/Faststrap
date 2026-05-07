@@ -525,9 +525,9 @@ Comprehensive examples organized by learning path:
 
 ### 05_new_components/
 
-- `v100_component_wave.py` - Core v1.0 component wave demo
-- `v100_workflow_patterns.py` - HTMX workflow and helper patterns
-- `v100_optional_integrations.py` - ModernToast, ChartJS, and GSAP opt-in integrations
+- `v070_component_wave.py` - Core v0.7.0 component wave demo
+- `v070_workflow_patterns.py` - HTMX workflow and helper patterns
+- `v070_optional_integrations.py` - ModernToast, ChartJS, and GSAP opt-in integrations
 
 **See**: `examples/README.md` for complete guide
 
@@ -599,9 +599,9 @@ Comprehensive examples organized by learning path:
 - `ErrorPage`, `ErrorDialog`, `FormGroup`, `ThemeToggle`, `SearchableSelect`
 - `FooterModern`, `Testimonial`, `TestimonialSection`, `AuthLayout`
 
-## Release Snapshot (current main - major release candidate)
+## Release Snapshot (current main - v0.7.0 release candidate)
 
-The planned component roadmap is now complete on `main`. The next release should be treated as a major release candidate because the public API surface now includes the full planned component wave, optional integrations, and framework ergonomics.
+The planned v0.7.0 component roadmap is now complete on `main`. The next release should be treated as a substantial minor release because the public API surface now includes the planned component wave, optional integrations, and framework ergonomics.
 
 ### Data Foundations
 
@@ -638,7 +638,7 @@ The planned component roadmap is now complete on `main`. The next release should
 - Finalize release notes/changelog and version metadata
 - Run full CI locally and on GitHub Actions
 
-**Status: v1.0 component scope reached.**
+**Status: v0.7.0 planned component scope reached.**
 
 ### Canonical Next-Component Plan
 
@@ -989,4 +989,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 **Built with  for the FastHTML community**
+
+
 

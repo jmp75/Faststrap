@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+No unreleased changes.
+
+## [0.7.0] - 2026-05-07
+
+### Added
+
+- Completed the planned v0.7.0 component wave:
+  - `ResultCard`
+  - `Avatar` and `AvatarGroup`
+  - `StatusBadge` and `BadgeGroup`
+  - `InlineEditor`
+  - `Timeline` and `TimelineItem`
+  - `Stepper` and `StepperStep`
+  - `CalendarDatePicker`
+  - `FormWizard` and `WizardStep`
+  - `CommandPalette` and `CommandItem`
+- Added optional integrations:
+  - `ModernToast` and `ModernToastStack`
+  - `ChartJS`, `add_chartjs()`, and `chartjs_assets()` for `faststrap[chartjs]` workflows
+  - GSAP motion helpers: `Gsap`, `GsapReveal`, `Motion`, `add_gsap()`, and `gsap_assets()` for `faststrap[gsap]` workflows
+- Added framework ergonomics and pattern helpers:
+  - `ConfirmAction` for HTMX-friendly destructive action confirmation
+  - `LiveValidationField` and `ValidationMessage` for live field validation flows
+  - `DataTable.query_params()` and `DataTable.page_url()`
+  - `Pagination` query preservation, custom page parameter support, and HTMX link support
+  - `theme_variant_css()` for light/dark CSS variant generation
+  - registry discovery helpers: `find_components()`, `get_components_by_pattern()`, and `list_component_metadata()`
+- Added focused examples for the v0.7.0 component wave:
+  - `examples/05_new_components/v070_component_wave.py`
+  - `examples/05_new_components/v070_workflow_patterns.py`
+  - `examples/05_new_components/v070_optional_integrations.py`
+- Added v0.7.0 showcase references:
+  - `showcase/atlas_command_center.py`
+  - `showcase/onboardflow_workspace.py`
+
+### Changed
+
+- Updated README component inventory to 128 registered UI components and 145+ total components/helpers/presets.
+- Updated examples, showcase docs, and roadmap references for the completed v0.7.0 scope.
+- Refined `StatCard` with `delta` / `delta_type` aliases, default resolution, and the `faststrap-stat-card` theme hook.
+
 ### Fixed
 
 - Hardened `require_auth()` redirects to preserve only relative return paths and avoid open redirect behavior.
@@ -21,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SEO()` now emits `og:type` only when Open Graph content is present.
 - `StructuredData.local_business()` now normalizes common weekday ranges into valid Schema.org values.
 
-### Changed
+### Documentation
 
 - Corrected docs and examples for `Input`, `DataTable`, `DateRangePicker`, `SSETarget`, `InfiniteScroll`, `require_auth`, and SEO helpers so the published contract matches shipped behavior.
 - Promoted mature components to stable where the public API is now considered safe to depend on:
@@ -33,8 +74,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Quality
 
 - Added regression coverage for auth redirects, infinite scroll thresholds, SEO metadata, structured data normalization, stable markers, and the v0.6.0 patch fixes.
-- Full gate pass:
-  - `pytest -q` (694 passed)
+- Release gate target for v0.7.0:
+  - `black --check src/faststrap tests`
+  - `ruff check src/faststrap tests`
+  - `mypy src/faststrap --exclude 'src/faststrap/templates/.*'`
+  - `pytest -q` (779 collected tests)
+  - `mkdocs build -q`
 
 ## [0.6.0] - 2026-03-17
 
@@ -678,6 +723,10 @@ First production-ready release with 12 core components.
 
 Initial release establishing the foundation.
 
+[0.7.0]: https://github.com/Faststrap-org/Faststrap/compare/v0.6.0...v0.7.0
+[0.6.0]: https://github.com/Faststrap-org/Faststrap/compare/v0.5.9...v0.6.0
+[0.5.9]: https://github.com/Faststrap-org/Faststrap/compare/v0.5.8...v0.5.9
+[0.5.8]: https://github.com/Faststrap-org/Faststrap/compare/v0.5.6.post3...v0.5.8
 [0.4.5]: https://github.com/Faststrap-org/Faststrap/compare/v0.4.0...v0.4.5
 [0.4.0]: https://github.com/Faststrap-org/Faststrap/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/Faststrap-org/Faststrap/compare/v0.3.0...v0.3.1
@@ -697,3 +746,4 @@ Initial release establishing the foundation.
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+

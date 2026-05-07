@@ -1,6 +1,6 @@
 # Atlas Command Center
 
-`showcase/atlas_command_center.py` is a v1 dashboard reference that demonstrates the new Faststrap component wave in a dense operations product surface.
+`showcase/atlas_command_center.py` is a v0.7.0 dashboard reference that demonstrates the new Faststrap component wave in a dense operations product surface.
 
 ## Highlights
 
@@ -21,3 +21,4 @@ python showcase/atlas_command_center.py
 ```
 
 The app serves on port `5028`.
+

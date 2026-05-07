@@ -1,6 +1,6 @@
 # OnboardFlow Workspace
 
-`showcase/onboardflow_workspace.py` is a v1 onboarding/workflow reference that demonstrates Faststrap's new guided-flow and validation surfaces.
+`showcase/onboardflow_workspace.py` is a v0.7.0 onboarding/workflow reference that demonstrates Faststrap's new guided-flow and validation surfaces.
 
 ## Highlights
 
@@ -20,3 +20,4 @@ python showcase/onboardflow_workspace.py
 ```
 
 The app serves on port `5029`.
+

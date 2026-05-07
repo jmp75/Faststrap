@@ -1,6 +1,6 @@
-"""Flagship v1 showcase - OnboardFlow Workspace.
+"""Flagship v0.7.0 showcase - OnboardFlow Workspace.
 
-A polished onboarding/product-workflow reference for the v1 component set:
+A polished onboarding/product-workflow reference for the v0.7.0 component set:
 
 - FormWizard and Stepper for guided setup
 - LiveValidationField for HTMX-friendly validation
@@ -173,7 +173,7 @@ def page() -> Div:
                         Span("ONBOARDFLOW", cls="badge rounded-pill text-bg-success mb-3"),
                         H1("A calmer way to launch new workspaces", cls="flow-title mb-4"),
                         P(
-                            "A v1 Faststrap reference for onboarding surfaces, server-driven wizards, live validation, and optional motion.",
+                            "A v0.7.0 Faststrap reference for onboarding surfaces, server-driven wizards, live validation, and optional motion.",
                             cls="lead text-muted mb-4",
                         ),
                         Div(

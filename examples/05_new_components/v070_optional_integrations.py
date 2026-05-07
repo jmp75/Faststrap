@@ -1,5 +1,5 @@
 """
-Faststrap v1.0 Optional Integrations Demo
+Faststrap v0.7.0 Optional Integrations Demo
 
 Demonstrates opt-in polished integrations:
 - ModernToast and ModernToastStack
@@ -34,7 +34,7 @@ CHART_DATA = {
 @app.get("/")
 def home():
     return Container(
-        H1("Faststrap v1.0 Optional Integrations", cls="display-5 fw-bold mb-2"),
+        H1("Faststrap v0.7.0 Optional Integrations", cls="display-5 fw-bold mb-2"),
         P(
             "These integrations are opt-in so Faststrap stays zero-JS by default, but polished teams can add richer behavior when they want it.",
             cls="lead text-muted mb-4",

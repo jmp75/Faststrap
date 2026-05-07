@@ -1,6 +1,6 @@
-"""Flagship v1 showcase - Atlas Command Center.
+"""Flagship v0.7.0 showcase - Atlas Command Center.
 
-A premium operations dashboard that proves the v1 component wave works together:
+A premium operations dashboard that proves the v0.7.0 component wave works together:
 
 - CommandPalette for quick navigation/search
 - ChartJS optional integration for rich charts
@@ -199,7 +199,7 @@ def page() -> Div:
                         cls="atlas-title display-4 fw-bold mb-3",
                     ),
                     P(
-                        "A v1 Faststrap reference for operations dashboards: command palette, data helpers, rich charts, toasts, timelines, and team surfaces in one shell.",
+                        "A v0.7.0 Faststrap reference for operations dashboards: command palette, data helpers, rich charts, toasts, timelines, and team surfaces in one shell.",
                         cls="lead text-muted mb-0",
                     ),
                     cls="col-lg-8",

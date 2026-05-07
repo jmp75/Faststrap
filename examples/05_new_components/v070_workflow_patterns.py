@@ -1,5 +1,5 @@
 """
-Faststrap v1.0 Workflow Patterns Demo
+Faststrap v0.7.0 Workflow Patterns Demo
 
 Demonstrates:
 - CommandPalette and CommandItem
@@ -59,7 +59,7 @@ def home(page: int = 1, q: str = ""):
     next_url = DataTable.page_url("/", page=min(current_page + 1, 3), per_page=2, search=q)
     return Container(
         Style(CUSTOM_CSS),
-        H1("Faststrap v1.0 Workflow Patterns", cls="display-5 fw-bold mb-2"),
+        H1("Faststrap v0.7.0 Workflow Patterns", cls="display-5 fw-bold mb-2"),
         P(
             "Server-driven interaction patterns that stay Pythonic and HTMX-friendly.",
             cls="lead text-muted mb-4",

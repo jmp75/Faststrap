@@ -1,5 +1,5 @@
 """
-Faststrap v1.0 Component Wave Demo
+Faststrap v0.7.0 Component Wave Demo
 
 Demonstrates newly added core UI surfaces:
 - ResultCard
@@ -29,9 +29,9 @@ TEAM = [
 @app.get("/")
 def home():
     return Container(
-        H1("Faststrap v1.0 Component Wave", cls="display-5 fw-bold mb-2"),
+        H1("Faststrap v0.7.0 Component Wave", cls="display-5 fw-bold mb-2"),
         P(
-            "A focused tour of the new reusable components added during the v1.0 roadmap.",
+            "A focused tour of the new reusable components added during the v0.7.0 roadmap.",
             cls="lead text-muted mb-4",
         ),
         Row(

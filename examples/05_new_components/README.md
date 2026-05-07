@@ -1,10 +1,10 @@
 # New Components Examples
 
-This directory contains comprehensive examples demonstrating newly added components, presets, and optional integrations up to the v1.0 roadmap completion.
+This directory contains comprehensive examples demonstrating newly added components, presets, and optional integrations up to the v0.7.0 roadmap completion.
 
-## New in v1.0 Roadmap
+## New in v0.7.0 Roadmap
 
-### `v100_component_wave.py` - Core Component Wave Demo
+### `v070_component_wave.py` - Core Component Wave Demo
 
 Single app that demonstrates:
 
@@ -19,10 +19,10 @@ Single app that demonstrates:
 **Run:**
 
 ```bash
-python examples/05_new_components/v100_component_wave.py
+python examples/05_new_components/v070_component_wave.py
 ```
 
-### `v100_workflow_patterns.py` - Workflow Patterns Demo
+### `v070_workflow_patterns.py` - Workflow Patterns Demo
 
 Single app that demonstrates:
 
@@ -37,10 +37,10 @@ Single app that demonstrates:
 **Run:**
 
 ```bash
-python examples/05_new_components/v100_workflow_patterns.py
+python examples/05_new_components/v070_workflow_patterns.py
 ```
 
-### `v100_optional_integrations.py` - Optional Integrations Demo
+### `v070_optional_integrations.py` - Optional Integrations Demo
 
 Single app that demonstrates:
 
@@ -51,7 +51,7 @@ Single app that demonstrates:
 **Run:**
 
 ```bash
-python examples/05_new_components/v100_optional_integrations.py
+python examples/05_new_components/v070_optional_integrations.py
 ```
 
 ## Naming Note for v0.6.1+
@@ -358,3 +358,4 @@ Found a bug or have an improvement? We welcome contributions!
 3. Submit a pull request
 
 See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
+

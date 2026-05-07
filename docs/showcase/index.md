@@ -53,8 +53,8 @@ Use this table when choosing a reference to study first.
 
 | Showcase | Role | Best Use |
 | --- | --- | --- |
-| `showcase/atlas_command_center.py` | Flagship v1 | Operations dashboards using CommandPalette, ChartJS, ModernToast, Timeline, and DataTable helpers |
-| `showcase/onboardflow_workspace.py` | Flagship v1 | Onboarding/workflow apps using FormWizard, live validation, ConfirmAction, AvatarGroup, and GSAP motion |
+| `showcase/atlas_command_center.py` | Flagship v0.7.0 | Operations dashboards using CommandPalette, ChartJS, ModernToast, Timeline, and DataTable helpers |
+| `showcase/onboardflow_workspace.py` | Flagship v0.7.0 | Onboarding/workflow apps using FormWizard, live validation, ConfirmAction, AvatarGroup, and GSAP motion |
 | `showcase/novaflow_ai_saas.py` | Flagship | Premium SaaS landing pages |
 | `showcase/northstar_ops_dashboard.py` | Flagship | Analytics, operations, and internal dashboards |
 | `showcase/hotel_booking_showcase.py` | Premium | Luxury, hospitality, and editorial product marketing |
@@ -93,3 +93,4 @@ Showcase screenshots live in:
 - `docs/assets/showcase/`
 
 That keeps the documentation pages, README, and future gallery updates aligned around one asset location.
+
