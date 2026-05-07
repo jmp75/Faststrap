@@ -31,18 +31,39 @@ from faststrap import Card, Gsap
 Card(
     "Revenue is up 12%",
     header="Today",
-    **Gsap.attrs("fade-up", duration=0.5, delay=0.1),
+    **Gsap.fade_up_attrs(duration=0.5, delay=0.1),
 )
+```
+
+You can also use the generic helper when the preset is dynamic:
+
+```python
+Card("Pipeline refreshed", **Gsap.attrs(Gsap.pop, duration=0.35))
 ```
 
 ## Reveal Wrapper
 
 ```python
-from faststrap import Button, GsapReveal
+from faststrap import Button, Motion
 
-GsapReveal(
+Motion(
     Button("Save", variant="primary"),
     preset="pop",
+)
+```
+
+`Motion` is an alias for `GsapReveal`. Use whichever name reads better in your app.
+
+## Staggered Children
+
+```python
+from faststrap import Card, Row, Gsap
+
+Row(
+    Card("One"),
+    Card("Two"),
+    Card("Three"),
+    **Gsap.stagger_attrs("fade-up", stagger=0.08),
 )
 ```
 
@@ -55,6 +76,18 @@ GsapReveal(
 - `slide-right`
 - `scale`
 - `pop`
+
+## Python Helpers
+
+- `Gsap.attrs(...)`
+- `Gsap.fade_attrs(...)`
+- `Gsap.fade_up_attrs(...)`
+- `Gsap.fade_down_attrs(...)`
+- `Gsap.slide_left_attrs(...)`
+- `Gsap.slide_right_attrs(...)`
+- `Gsap.scale_attrs(...)`
+- `Gsap.pop_attrs(...)`
+- `Gsap.stagger_attrs(...)`
 
 ## Philosophy
 

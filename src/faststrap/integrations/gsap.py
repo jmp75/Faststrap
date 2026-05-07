@@ -25,6 +25,7 @@ GsapPreset = Literal[
     "scale",
     "pop",
 ]
+MotionPreset = GsapPreset
 
 VALID_GSAP_PRESETS = {
     "fade",
@@ -175,6 +176,52 @@ class Gsap:
         return convert_attrs(attrs)
 
     reveal = attrs
+    reveal_attrs = attrs
+
+    @staticmethod
+    def fade_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a fade reveal."""
+        return Gsap.attrs("fade", **kwargs)
+
+    @staticmethod
+    def fade_up_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a fade-up reveal."""
+        return Gsap.attrs("fade-up", **kwargs)
+
+    @staticmethod
+    def fade_down_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a fade-down reveal."""
+        return Gsap.attrs("fade-down", **kwargs)
+
+    @staticmethod
+    def slide_left_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a slide-left reveal."""
+        return Gsap.attrs("slide-left", **kwargs)
+
+    @staticmethod
+    def slide_right_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a slide-right reveal."""
+        return Gsap.attrs("slide-right", **kwargs)
+
+    @staticmethod
+    def scale_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a scale reveal."""
+        return Gsap.attrs("scale", **kwargs)
+
+    @staticmethod
+    def pop_attrs(**kwargs: Any) -> dict[str, Any]:
+        """Return attributes for a pop reveal."""
+        return Gsap.attrs("pop", **kwargs)
+
+    @staticmethod
+    def stagger_attrs(
+        preset: GsapPreset = "fade-up",
+        *,
+        stagger: float = 0.08,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Return attributes for revealing a container's children in sequence."""
+        return Gsap.attrs(preset, stagger=stagger, **kwargs)
 
 
 def GsapReveal(
@@ -198,3 +245,6 @@ def GsapReveal(
     )
     attrs["cls"] = merge_classes("faststrap-gsap-reveal", user_cls)
     return Div(*children, **attrs)
+
+
+Motion = GsapReveal

@@ -166,7 +166,17 @@ from .core.theme import (
     resolve_defaults,
     set_component_defaults,
 )
-from .integrations import GSAP_CDN_URL, GSAP_VERSION, Gsap, GsapReveal, add_gsap, gsap_assets
+from .integrations import (
+    GSAP_CDN_URL,
+    GSAP_VERSION,
+    Gsap,
+    GsapPreset,
+    GsapReveal,
+    Motion,
+    MotionPreset,
+    add_gsap,
+    gsap_assets,
+)
 from .layouts import AuthLayout, DashboardLayout, LandingLayout
 
 # PWA
@@ -192,7 +202,10 @@ __all__ = [
     "GSAP_CDN_URL",
     "GSAP_VERSION",
     "Gsap",
+    "GsapPreset",
     "GsapReveal",
+    "Motion",
+    "MotionPreset",
     # Accessibility
     "SkipLink",
     "LiveRegion",

@@ -3,7 +3,7 @@
 import pytest
 from fasthtml.common import FastHTML, to_xml
 
-from faststrap import GSAP_CDN_URL, Gsap, GsapReveal, add_gsap, gsap_assets
+from faststrap import GSAP_CDN_URL, Gsap, GsapReveal, Motion, add_gsap, gsap_assets
 
 
 def _hdrs_to_text(app: FastHTML) -> str:
@@ -48,6 +48,23 @@ def test_gsap_attrs_convert_to_html_data_attributes() -> None:
     assert attrs["id"] == "hero-card"
 
 
+def test_gsap_named_preset_helpers_are_pythonic_shortcuts() -> None:
+    attrs = Gsap.fade_up_attrs(duration=0.4, delay=0.2, cls="metric-card")
+
+    assert attrs["data-fs-gsap"] == "fade-up"
+    assert attrs["data-fs-gsap-duration"] == "0.4"
+    assert attrs["data-fs-gsap-delay"] == "0.2"
+    assert attrs["cls"] == "metric-card"
+
+
+def test_gsap_stagger_attrs_default_to_child_sequence() -> None:
+    attrs = Gsap.stagger_attrs(Gsap.pop, duration=0.35)
+
+    assert attrs["data-fs-gsap"] == "pop"
+    assert attrs["data-fs-gsap-stagger"] == "0.08"
+    assert attrs["data-fs-gsap-duration"] == "0.35"
+
+
 def test_gsap_attrs_reject_unknown_preset() -> None:
     with pytest.raises(ValueError, match="Unknown GSAP preset"):
         Gsap.attrs("spin-around")  # type: ignore[arg-type]
@@ -59,3 +76,10 @@ def test_gsap_reveal_wraps_children_with_motion_attributes() -> None:
     assert "faststrap-gsap-reveal mb-3" in html
     assert 'data-fs-gsap="pop"' in html
     assert "Hello" in html
+
+
+def test_motion_alias_matches_gsap_reveal() -> None:
+    html = to_xml(Motion("Hello", preset="scale"))
+
+    assert "faststrap-gsap-reveal" in html
+    assert 'data-fs-gsap="scale"' in html
