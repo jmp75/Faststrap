@@ -475,6 +475,8 @@ Docs are actively being expanded to match the full API surface. See the docs sit
 Faststrap now has a dedicated `showcase/` layer for polished, product-style references. These files are meant to show what the framework looks like beyond small demos:
 
 - `showcase/novaflow_ai_saas.py`
+- `showcase/atlas_command_center.py`
+- `showcase/onboardflow_workspace.py`
 - `showcase/fastcloud_generated_saas.py` (compact minimal-good example)
 - `showcase/northstar_ops_dashboard.py`
 - `showcase/agency_portfolio.py`

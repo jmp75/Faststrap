@@ -25,6 +25,7 @@ The showcase layer exists to highlight:
 
 ### Dashboards and Data
 
+- `showcase/atlas_command_center.py`
 - `showcase/northstar_ops_dashboard.py`
 - `showcase/admin_dashboard.py` as a legacy dashboard comparison point
 - `showcase/ledgerleaf_finance.py`
@@ -41,6 +42,7 @@ The showcase layer exists to highlight:
 
 ### Vertical Product Apps
 
+- `showcase/onboardflow_workspace.py`
 - `showcase/carenest_clinic.py`
 - `showcase/learnloop_academy.py`
 - `showcase/forgedocs_platform.py`
@@ -51,6 +53,8 @@ Use this table when choosing a reference to study first.
 
 | Showcase | Role | Best Use |
 | --- | --- | --- |
+| `showcase/atlas_command_center.py` | Flagship v1 | Operations dashboards using CommandPalette, ChartJS, ModernToast, Timeline, and DataTable helpers |
+| `showcase/onboardflow_workspace.py` | Flagship v1 | Onboarding/workflow apps using FormWizard, live validation, ConfirmAction, AvatarGroup, and GSAP motion |
 | `showcase/novaflow_ai_saas.py` | Flagship | Premium SaaS landing pages |
 | `showcase/northstar_ops_dashboard.py` | Flagship | Analytics, operations, and internal dashboards |
 | `showcase/hotel_booking_showcase.py` | Premium | Luxury, hospitality, and editorial product marketing |

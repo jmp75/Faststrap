@@ -19,6 +19,8 @@ Showcase apps should:
 These are the strongest internal showcase files and should be treated as the first stop for visual inspiration, AI reference work, and docs screenshots:
 
 - `novaflow_ai_saas.py`
+- `atlas_command_center.py`
+- `onboardflow_workspace.py`
 - `northstar_ops_dashboard.py`
 - `agency_portfolio.py`
 - `hotel_booking_showcase.py`

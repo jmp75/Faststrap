@@ -191,6 +191,8 @@ nav:
     - PageMeta: components/seo/page-meta.md
   - Showcase:
     - Overview: showcase/index.md
+    - Atlas Command Center: showcase/atlas-command-center.md
+    - OnboardFlow Workspace: showcase/onboardflow-workspace.md
     - NovaFlow AI SaaS: showcase/novaflow-ai-saas.md
     - FastCloud Generated SaaS: showcase/fastcloud-generated-saas.md
     - Northstar Ops Dashboard: showcase/northstar-ops-dashboard.md
