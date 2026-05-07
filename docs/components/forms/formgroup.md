@@ -305,6 +305,34 @@ FormGroup(
 
 ---
 
+## Live Validation With HTMX
+
+Use `LiveValidationField` when one field should validate itself on blur/change without hand-writing HTMX attributes each time.
+
+```python
+from faststrap import Input, LiveValidationField, ValidationMessage
+
+LiveValidationField(
+    Input(name="email", type="email"),
+    "/validate/email",
+    label="Email",
+    help_text="We'll send a confirmation link here.",
+    indicator="#email-spinner",
+)
+```
+
+The endpoint can return a replacement `LiveValidationField`, a normal `FormGroup`, or a small feedback fragment:
+
+```python
+@app.post("/validate/email")
+def validate_email(email: str):
+    if "@" not in email:
+        return ValidationMessage("Enter a valid email address.", state="invalid")
+    return ValidationMessage("Email looks good.", state="valid")
+```
+
+---
+
 ## Parameter Reference
 
 | Parameter | Type | Default | Description |

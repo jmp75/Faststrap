@@ -518,6 +518,33 @@ def create_theme(
     return Theme(variables)
 
 
+def theme_variant_css(
+    selector: str,
+    *,
+    light: dict[str, str] | None = None,
+    dark: dict[str, str] | None = None,
+) -> Style:
+    """Create light/dark CSS blocks for a selector.
+
+    This helper keeps premium component styling aligned with Faststrap's
+    ``data-bs-theme`` mode convention without requiring every app to hand-write
+    repetitive selectors.
+
+    Example:
+        >>> theme_variant_css(
+        ...     ".metric-card",
+        ...     light={"background": "rgba(255,255,255,.85)"},
+        ...     dark={"background": "rgba(15,23,42,.72)"},
+        ... )
+    """
+    blocks = []
+    if light:
+        blocks.append(f'[data-bs-theme="light"] {selector} {{\n{_format_declarations(light)}\n}}')
+    if dark:
+        blocks.append(f'[data-bs-theme="dark"] {selector} {{\n{_format_declarations(dark)}\n}}')
+    return Style("\n".join(blocks))
+
+
 def _hex_to_rgb(hex_color: str) -> str | None:
     """Convert color inputs to an ``r, g, b`` string.
 
@@ -592,6 +619,13 @@ def list_builtin_themes() -> list[str]:
 def _format_css_vars(variables: dict[str, str], *, indent: str = "  ") -> str:
     """Format CSS custom properties one declaration per line."""
     return "\n".join(f"{indent}{key}: {value};" for key, value in variables.items())
+
+
+def _format_declarations(declarations: dict[str, str], *, indent: str = "  ") -> str:
+    """Format regular CSS declarations one declaration per line."""
+    return "\n".join(
+        f"{indent}{key.replace('_', '-')}: {value};" for key, value in declarations.items()
+    )
 
 
 # ============================================================================

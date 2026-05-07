@@ -26,6 +26,8 @@ def StatCard(
     variant: VariantType | None = None,
     inverse: bool = False,
     icon_bg: str | None = None,
+    delta: str | int | float | None = None,
+    delta_type: Literal["up", "down", "neutral"] | None = None,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Statistic Card component.
@@ -41,6 +43,8 @@ def StatCard(
         variant: Card background variant
         inverse: Invert text colors (white text)
         icon_bg: Background color class for icon (e.g. "bg-primary-subtle")
+        delta: Alias for trend, useful for KPI-style APIs
+        delta_type: Alias for trend_type when using delta
         **kwargs: Additional HTML attributes
 
     Returns:
@@ -49,11 +53,30 @@ def StatCard(
     Example:
         >>> StatCard("Revenue", "$50k", trend="+12%", trend_type="up")
     """
+    user_cls = kwargs.pop("cls", "")
+    kwargs["cls"] = merge_classes("faststrap-stat-card", user_cls)
+
+    cfg = resolve_defaults(
+        "StatCard",
+        trend_type=trend_type,
+        variant=variant,
+        inverse=inverse,
+        icon_bg=icon_bg,
+    )
+    c_trend_type = cfg.get("trend_type", trend_type)
+    c_variant = cfg.get("variant", variant)
+    c_inverse = cfg.get("inverse", inverse)
+    c_icon_bg = cfg.get("icon_bg", icon_bg)
+
+    if trend is None and delta is not None:
+        trend = str(delta)
+        c_trend_type = delta_type or c_trend_type
+
     # Trend logic
     trend_cls = "text-muted"
-    if trend_type == "up":
+    if c_trend_type == "up":
         trend_cls = "text-success"
-    elif trend_type == "down":
+    elif c_trend_type == "down":
         trend_cls = "text-danger"
 
     trend_el = Span(trend, cls=f"{trend_cls} small fw-bold ms-2") if trend else None
@@ -63,7 +86,7 @@ def StatCard(
 
     # Title
     title_cls = "text-muted small text-uppercase fw-semibold"
-    if inverse:
+    if c_inverse:
         title_cls = "text-white-50 small text-uppercase fw-semibold"
 
     title_el = P(title, cls=title_cls)
@@ -72,8 +95,8 @@ def StatCard(
     icon_el = None
     if icon:
         icon_wrapper_cls = "d-flex align-items-center justify-content-center rounded p-3"
-        if icon_bg:
-            icon_wrapper_cls = f"{icon_wrapper_cls} {icon_bg}"
+        if c_icon_bg:
+            icon_wrapper_cls = f"{icon_wrapper_cls} {c_icon_bg}"
         else:
             icon_wrapper_cls = f"{icon_wrapper_cls} bg-body-tertiary"
 
@@ -89,7 +112,7 @@ def StatCard(
     else:
         body_content = Div(title_el, value_el)
 
-    return Card(body_content, variant=variant, inverse=inverse, **kwargs)
+    return Card(body_content, variant=c_variant, inverse=c_inverse, **kwargs)
 
 
 def _trend_badge(

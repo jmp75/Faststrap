@@ -150,13 +150,18 @@ Apply color to the icon or card borders using the `variant` argument.
 
 | FastStrap Param | Type | Description |
 | :--- | :--- | :--- |
-| `label` | `str` | Title of the metric (e.g. "Total Sales"). |
-| `value` | `str | int` | The main display number or value. |
-| `icon` | `str` | Bootstrap icon name. |
-| `trend` | `str` | Percentage or text indicating change (e.g. "+12%"). |
-| `trend_label` | `str` | Context for the trend (e.g. "since yesterday"). |
-| `trend_variant` | `str` | Color of trend text: `success`, `danger`, `warning`. |
-| `variant` | `str` | Color theme for the icon/label. |
+| `title` | `str` | Title of the metric, such as `"Total Sales"`. |
+| `value` | `str | int | float` | The main display number or value. |
+| `icon` | `Any | None` | Optional icon/component slot. |
+| `trend` | `str | None` | Percentage or text indicating change, such as `"+12%"`. |
+| `trend_type` | `"up" | "down" | "neutral"` | Semantic trend color. |
+| `delta` | `str | int | float | None` | Alias for `trend`, useful when composing KPI-style APIs. |
+| `delta_type` | `"up" | "down" | "neutral" | None` | Alias for `trend_type` when using `delta`. |
+| `variant` | `str | None` | Bootstrap card background variant. |
+| `inverse` | `bool` | Use inverse text colors for dark variant cards. |
+| `icon_bg` | `str | None` | Bootstrap class for the icon background. |
+
+`StatCard` also adds the `faststrap-stat-card` class so apps can theme metric cards consistently.
 
 ::: faststrap.components.display.stat_card.StatCard
     options:

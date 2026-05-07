@@ -4,6 +4,7 @@ from fasthtml.common import to_xml
 
 from faststrap import (
     Button,
+    ConfirmAction,
     ConfirmDialog,
     EmptyState,
     Figure,
@@ -81,6 +82,13 @@ def test_stat_card():
     assert "text-success" in html  # Up trend
 
 
+def test_stat_card_accepts_delta_alias_and_theme_hook():
+    html = to_xml(StatCard("Revenue", "$12k", delta="+8%", delta_type="up"))
+    assert "faststrap-stat-card" in html
+    assert "+8%" in html
+    assert "text-success" in html
+
+
 def test_confirm_dialog():
     """Test ConfirmDialog component."""
     cd = ConfirmDialog(
@@ -92,6 +100,23 @@ def test_confirm_dialog():
     # Check confirm button attributes
     assert 'hx-delete="/do-it"' in html
     assert "Confirm" in html
+
+
+def test_confirm_action_renders_htmx_confirm_button():
+    html = to_xml(
+        ConfirmAction(
+            "Archive",
+            url="/items/1/archive",
+            method="delete",
+            confirm="Archive this item?",
+            target="#items",
+            swap="outerHTML",
+        )
+    )
+    assert 'hx-delete="/items/1/archive"' in html
+    assert 'hx-confirm="Archive this item?"' in html
+    assert 'hx-target="#items"' in html
+    assert 'hx-swap="outerHTML"' in html
 
 
 def test_hero():

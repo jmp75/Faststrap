@@ -85,6 +85,67 @@ def list_components(category: str | None = None) -> list[str]:
     return [name for name, meta in _component_registry.items() if meta.get("category") == category]
 
 
+def list_component_metadata(category: str | None = None) -> list[dict[str, Any]]:
+    """List registered component metadata records.
+
+    Args:
+        category: Optional category filter.
+
+    Returns:
+        Metadata dictionaries with a stable ``name`` key added.
+    """
+    ensure_autodiscovered()
+    records = []
+    for name, meta in _component_registry.items():
+        if category is not None and meta.get("category") != category:
+            continue
+        records.append({"name": name, **meta})
+    return records
+
+
+def find_components(
+    query: str,
+    *,
+    category: str | None = None,
+) -> list[str]:
+    """Find components by name, category, module, or docstring text."""
+    ensure_autodiscovered()
+    normalized = query.casefold().strip()
+    if not normalized:
+        return list_components(category=category)
+
+    matches = []
+    for name, meta in _component_registry.items():
+        if category is not None and meta.get("category") != category:
+            continue
+        haystack = " ".join(
+            [
+                name,
+                str(meta.get("category") or ""),
+                str(meta.get("module") or ""),
+                str(meta.get("doc") or ""),
+            ]
+        ).casefold()
+        if normalized in haystack:
+            matches.append(name)
+    return matches
+
+
+def get_components_by_pattern(
+    pattern: str, *, category: str | None = None
+) -> list[Callable[..., Any]]:
+    """Return component callables matching a pattern.
+
+    This is a convenience API for agents and app builders that need to discover
+    existing components before inventing new UI.
+    """
+    return [
+        component
+        for name in find_components(pattern, category=category)
+        if (component := get_component(name)) is not None
+    ]
+
+
 def autodiscover() -> None:
     """Auto-discover and register all components."""
     try:

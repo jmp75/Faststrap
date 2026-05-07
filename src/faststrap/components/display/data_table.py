@@ -135,6 +135,53 @@ def datatable_export_params(
     return params
 
 
+def datatable_query_params(
+    *,
+    sort: str | None = None,
+    direction: SortableDirection = "asc",
+    search: str | None = None,
+    search_param: str = "q",
+    filters: dict[str, Any] | None = None,
+    page: int | None = None,
+    per_page: int | None = None,
+) -> dict[str, Any]:
+    """Build the common DataTable query contract for links and handlers."""
+    return datatable_export_params(
+        sort=sort,
+        direction=direction,
+        search=search,
+        search_param=search_param,
+        filters=filters,
+        include_pagination=page is not None or per_page is not None,
+        page=page,
+        per_page=per_page,
+    )
+
+
+def datatable_page_url(
+    base_url: str,
+    *,
+    page: int,
+    per_page: int | None = None,
+    sort: str | None = None,
+    direction: SortableDirection = "asc",
+    search: str | None = None,
+    search_param: str = "q",
+    filters: dict[str, Any] | None = None,
+) -> str:
+    """Build a URL for one DataTable page while preserving current state."""
+    params = datatable_query_params(
+        sort=sort,
+        direction=direction,
+        search=search,
+        search_param=search_param,
+        filters=filters,
+        page=max(1, page),
+        per_page=per_page,
+    )
+    return _build_url(base_url, params)
+
+
 def _link_attrs(
     url: str,
     *,
@@ -535,3 +582,5 @@ def DataTable(
 
 
 DataTable.export_params = datatable_export_params  # type: ignore[attr-defined]
+DataTable.query_params = datatable_query_params  # type: ignore[attr-defined]
+DataTable.page_url = datatable_page_url  # type: ignore[attr-defined]

@@ -9,6 +9,22 @@ from ...core.types import VariantType
 from ..feedback.modal import Modal
 from ..forms.button import Button
 
+HtmxMethod = str
+
+
+def _apply_hx_method(attrs: dict[str, Any], method: HtmxMethod, url: str) -> None:
+    normalized = method.lower()
+    if normalized == "get":
+        attrs["hx_get"] = url
+    elif normalized == "put":
+        attrs["hx_put"] = url
+    elif normalized == "patch":
+        attrs["hx_patch"] = url
+    elif normalized == "delete":
+        attrs["hx_delete"] = url
+    else:
+        attrs["hx_post"] = url
+
 
 @register(category="feedback", requires_js=True)
 def ConfirmDialog(
@@ -61,16 +77,7 @@ def ConfirmDialog(
 
     if hx_confirm_url:
         # We pass hx arguments directly to Button
-        if hx_confirm_method == "get":
-            btn_attrs["hx_get"] = hx_confirm_url
-        elif hx_confirm_method == "post":
-            btn_attrs["hx_post"] = hx_confirm_url
-        elif hx_confirm_method == "put":
-            btn_attrs["hx_put"] = hx_confirm_url
-        elif hx_confirm_method == "patch":
-            btn_attrs["hx_patch"] = hx_confirm_url
-        elif hx_confirm_method == "delete":
-            btn_attrs["hx_delete"] = hx_confirm_url
+        _apply_hx_method(btn_attrs, hx_confirm_method, hx_confirm_url)
 
     if hx_target:
         btn_attrs["hx_target"] = hx_target
@@ -92,3 +99,32 @@ def ConfirmDialog(
         centered=True,
         **kwargs,
     )
+
+
+@register(category="feedback")
+def ConfirmAction(
+    *children: Any,
+    url: str,
+    confirm: str = "Are you sure?",
+    method: HtmxMethod = "post",
+    target: str | None = None,
+    swap: str | None = None,
+    variant: VariantType = "danger",
+    **kwargs: Any,
+) -> Any:
+    """HTMX-friendly action button with a browser confirmation prompt.
+
+    Use this when a full modal is too heavy and the action can be confirmed
+    with HTMX's built-in `hx-confirm` behavior.
+    """
+    btn_attrs: dict[str, Any] = {
+        "variant": variant,
+        "hx_confirm": confirm,
+    }
+    _apply_hx_method(btn_attrs, method, url)
+    if target:
+        btn_attrs["hx_target"] = target
+    if swap:
+        btn_attrs["hx_swap"] = swap
+    btn_attrs.update(kwargs)
+    return Button(*children, **btn_attrs)

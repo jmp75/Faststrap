@@ -406,13 +406,13 @@ These integrations are intentionally opt-in. They should not change Faststrap's 
 
 | Item | Type | Priority | Complexity | Wave | Notes |
 |------|------|----------|------------|------|-------|
-| `StatCard` refinement | Existing component improvement | Medium | Low | 4 | Tighten ergonomics so metric-card usage is more obvious and reusable |
-| `Pagination` improvements | Existing component improvement | High | Medium | 4 | Extend current `Pagination` for card feeds, non-table collections, HTMX targets, and richer URL control |
-| Form validation helpers | Pattern/helper | High | Medium | 4 | Codify live validation and submission feedback patterns around `FormGroup` |
-| Data table pagination/sorting helpers | Pattern/helper | High | Medium | 4 | Reduce friction for common `DataTable` flows without forcing heavy abstractions |
-| Confirmation/destructive-action helpers | Pattern/helper | Medium | Medium | 4 | Standardize delete/archive/confirm flows with HTMX-friendly patterns |
-| Theme-variant utility support | Framework utility | Medium | Medium | 4 | Reduce repetitive light/dark CSS duplication in premium apps |
-| Component discovery/registry improvements | Framework utility | Medium | Medium | 4 | Improve discoverability so users reuse components before inventing new ones |
+| `StatCard` refinement | Existing component improvement | Medium | Low | 4 | Shipped: `delta` alias, default resolution, and `faststrap-stat-card` theme hook |
+| `Pagination` improvements | Existing component improvement | High | Medium | 4 | Shipped: query preservation, custom page param, HTMX links, and URL control |
+| Form validation helpers | Pattern/helper | High | Medium | 4 | Shipped: `LiveValidationField` and `ValidationMessage` for HTMX field validation |
+| Data table pagination/sorting helpers | Pattern/helper | High | Medium | 4 | Shipped: `DataTable.query_params()` and `DataTable.page_url()` helpers |
+| Confirmation/destructive-action helpers | Pattern/helper | Medium | Medium | 4 | Shipped: `ConfirmAction` HTMX confirmation button |
+| Theme-variant utility support | Framework utility | Medium | Medium | 4 | Shipped: `theme_variant_css()` helper |
+| Component discovery/registry improvements | Framework utility | Medium | Medium | 4 | Shipped: metadata, search, and pattern lookup helpers |
 
 #### Delivery Logic
 
@@ -441,13 +441,13 @@ These integrations are intentionally opt-in. They should not change Faststrap's 
 
 **Wave 4: Framework ergonomics and pattern codification**
 
-- `StatCard` refinement
-- `Pagination` improvements
-- Form validation helpers
-- Data table pagination/sorting helpers
-- Confirmation/destructive-action helpers
-- Theme-variant utility support
-- Component discovery/registry improvements
+- `StatCard` refinement - shipped
+- `Pagination` improvements - shipped
+- Form validation helpers - shipped
+- Data table pagination/sorting helpers - shipped
+- Confirmation/destructive-action helpers - shipped
+- Theme-variant utility support - shipped
+- Component discovery/registry improvements - shipped
 
 #### Planning Notes
 

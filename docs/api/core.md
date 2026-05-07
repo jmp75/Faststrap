@@ -91,3 +91,69 @@ the framework.
     options:
         show_root_heading: true
         show_source: true
+
+## Component Discovery
+
+Faststrap exposes a small registry so users and agents can discover existing components before inventing new wrappers.
+
+```python
+from faststrap import (
+    find_components,
+    get_component,
+    get_components_by_pattern,
+    list_component_metadata,
+    list_components,
+)
+
+list_components(category="display")
+find_components("card")
+get_components_by_pattern("toast")
+metadata = list_component_metadata()
+Button = get_component("Button")
+```
+
+::: faststrap.core.registry.list_components
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.registry.find_components
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.registry.get_components_by_pattern
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.registry.list_component_metadata
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.registry.get_component
+    options:
+        show_root_heading: true
+        show_source: true
+
+## Theme Variant CSS
+
+Use `theme_variant_css()` when a polished component needs small light/dark CSS differences without repeating selector boilerplate.
+
+```python
+from fasthtml.common import Style\nfrom faststrap import theme_variant_css
+
+Style(
+    theme_variant_css(
+        ".premium-card",
+        light={"background": "rgba(255, 255, 255, 0.78)"},
+        dark={"background": "rgba(15, 23, 42, 0.62)"},
+    )
+)
+```
+
+::: faststrap.core.theme.theme_variant_css
+    options:
+        show_root_heading: true
+        show_source: true

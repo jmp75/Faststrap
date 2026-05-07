@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
-from typing import Any
+from typing import Any, Literal
 
 from fasthtml.common import H6, Div, Li, Ul
 
 from ...core.registry import register
 from ...core.theme import resolve_defaults
+from ...utils.attrs import convert_attrs
 from ..feedback.alert import Alert
 from .formgroup import FormGroup
 
@@ -42,6 +43,80 @@ def map_formgroup_validation(
         "error": error,
         "is_invalid": bool(error),
     }
+
+
+@register(category="forms")
+def ValidationMessage(
+    message: str | None,
+    *,
+    state: Literal["invalid", "valid", "neutral"] = "invalid",
+    **kwargs: Any,
+) -> Div | None:
+    """Render a Bootstrap-compatible validation feedback message.
+
+    This is useful for HTMX live validation endpoints that return only the
+    small feedback fragment for one field.
+    """
+    if not message:
+        return None
+
+    cls = kwargs.pop("cls", "")
+    state_cls = {
+        "invalid": "invalid-feedback d-block",
+        "valid": "valid-feedback d-block",
+        "neutral": "form-text text-muted",
+    }[state]
+    attrs: dict[str, Any] = {"cls": f"{state_cls} {cls}".strip()}
+    attrs.update(convert_attrs(kwargs))
+    return Div(message, **attrs)
+
+
+@register(category="forms")
+def LiveValidationField(
+    input_element: Any,
+    validate_url: str,
+    *,
+    label: str | None = None,
+    help_text: str | None = None,
+    error: str | None = None,
+    success: str | None = None,
+    is_invalid: bool = False,
+    is_valid: bool = False,
+    required: bool = False,
+    method: Literal["get", "post"] = "post",
+    trigger: str = "blur changed delay:300ms",
+    target: str = "closest .mb-3",
+    swap: str = "outerHTML",
+    indicator: str | None = None,
+    **kwargs: Any,
+) -> Any:
+    """FormGroup wrapper that wires an input for HTMX live validation.
+
+    The validation endpoint should return a replacement `FormGroup` or another
+    fragment compatible with the configured `hx_target`/`hx_swap`.
+    """
+    if hasattr(input_element, "attrs"):
+        if method == "get":
+            input_element.attrs["hx-get"] = validate_url
+        else:
+            input_element.attrs["hx-post"] = validate_url
+        input_element.attrs["hx-trigger"] = trigger
+        input_element.attrs["hx-target"] = target
+        input_element.attrs["hx-swap"] = swap
+        if indicator:
+            input_element.attrs["hx-indicator"] = indicator
+
+    return FormGroup(
+        input_element,
+        label=label,
+        help_text=help_text,
+        error=error,
+        success=success,
+        is_invalid=is_invalid,
+        is_valid=is_valid,
+        required=required,
+        **kwargs,
+    )
 
 
 @register(category="forms")

@@ -155,7 +155,7 @@ DataTable(
 
 ## Export Integration
 
-Use the helper to reuse the table query state for exports:
+Use the helpers to reuse the table query state for exports, links, and handlers:
 
 ```python
 from faststrap import DataTable, ExportButton
@@ -168,6 +168,32 @@ params = DataTable.export_params(
 )
 
 ExportButton("Export CSV", endpoint="/export", export_format="csv", extra_params=params)
+```
+
+Build the same query contract for non-export actions:
+
+```python
+params = DataTable.query_params(
+    sort="name",
+    direction="asc",
+    search="alice",
+    filters={"team": "ops"},
+    page=2,
+    per_page=25,
+)
+```
+
+Build one page URL while preserving table state:
+
+```python
+url = DataTable.page_url(
+    "/users?view=active",
+    page=3,
+    per_page=25,
+    sort="name",
+    search="alice",
+    filters={"team": "ops"},
+)
 ```
 
 ---

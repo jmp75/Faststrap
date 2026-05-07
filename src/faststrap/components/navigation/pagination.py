@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from fasthtml.common import A, Li, Nav, Span, Ul
 
@@ -11,6 +12,43 @@ from ...core.registry import register
 from ...core.theme import resolve_defaults
 from ...core.types import AlignType, SizeType
 from ...utils.attrs import convert_attrs
+
+
+def _page_href(
+    base_url: str,
+    page: int,
+    *,
+    page_param: str,
+    query_params: dict[str, Any] | None,
+) -> str:
+    split = urlsplit(base_url)
+    params = dict(parse_qsl(split.query, keep_blank_values=True))
+    if query_params:
+        params.update({key: value for key, value in query_params.items() if value is not None})
+    params[page_param] = str(page)
+    query = urlencode(params, doseq=True)
+    return urlunsplit((split.scheme, split.netloc, split.path, query, split.fragment))
+
+
+def _htmx_attrs(
+    href: str,
+    *,
+    htmx: bool,
+    hx_target: str | None,
+    hx_swap: str | None,
+    hx_push_url: bool,
+) -> dict[str, Any]:
+    if not htmx:
+        return {}
+
+    attrs: dict[str, Any] = {"hx_get": href}
+    if hx_target:
+        attrs["hx_target"] = hx_target
+    if hx_swap:
+        attrs["hx_swap"] = hx_swap
+    if hx_push_url:
+        attrs["hx_push_url"] = "true"
+    return attrs
 
 
 @register(category="navigation")
@@ -23,6 +61,12 @@ def Pagination(
     base_url: str | None = None,
     show_first_last: bool | None = None,
     show_prev_next: bool | None = None,
+    page_param: str = "page",
+    query_params: dict[str, Any] | None = None,
+    htmx: bool = False,
+    hx_target: str | None = None,
+    hx_swap: str | None = "outerHTML",
+    hx_push_url: bool = False,
     **kwargs: Any,
 ) -> Nav:
     """Bootstrap Pagination component for page navigation.
@@ -36,9 +80,14 @@ def Pagination(
         base_url: Base URL for page links
         show_first_last: Show first/last page buttons
         show_prev_next: Show previous/next buttons
+        page_param: Query-string parameter used for page links
+        query_params: Extra query parameters to preserve
+        htmx: Add hx-get attributes to generated page links
+        hx_target: Optional HTMX target for nav and generated links
+        hx_swap: Optional HTMX swap mode for generated links
+        hx_push_url: Push generated URLs when HTMX links are clicked
         **kwargs: Additional HTML attributes
     """
-    # Resolve API defaults
     cfg = resolve_defaults(
         "Pagination",
         size=size,
@@ -56,12 +105,10 @@ def Pagination(
     c_show_first_last = cfg.get("show_first_last", False)
     c_show_prev_next = cfg.get("show_prev_next", True)
 
-    # Build pagination classes
     classes = ["pagination"]
     if c_size:
         classes.append(f"pagination-{c_size}")
 
-    # Alignment
     justify_class = {
         "center": "justify-content-center",
         "end": "justify-content-end",
@@ -70,55 +117,72 @@ def Pagination(
     user_cls = kwargs.pop("cls", "")
     ul_cls = merge_classes(" ".join(classes), user_cls)
 
-    # Calculate page range
-    half = c_max_pages // 2
-    start = max(1, current_page - half)
-    end = min(total_pages, start + c_max_pages - 1)
+    safe_total = max(1, total_pages)
+    safe_current = max(1, min(current_page, safe_total))
+    safe_max_pages = max(1, c_max_pages)
 
-    # Adjust if at end
-    if end == total_pages:
-        start = max(1, end - c_max_pages + 1)
+    half = safe_max_pages // 2
+    start = max(1, safe_current - half)
+    end = min(safe_total, start + safe_max_pages - 1)
+    if end == safe_total:
+        start = max(1, end - safe_max_pages + 1)
 
-    # Build page links
+    def href_for(page: int) -> str:
+        return _page_href(
+            c_base_url,
+            page,
+            page_param=page_param,
+            query_params=query_params,
+        )
+
+    def link_attrs(href: str) -> dict[str, Any]:
+        return _htmx_attrs(
+            href,
+            htmx=htmx,
+            hx_target=hx_target,
+            hx_swap=hx_swap,
+            hx_push_url=hx_push_url,
+        )
+
     links: list[Any] = []
 
-    # First page
-    if c_show_first_last and current_page > 1:
+    if c_show_first_last and safe_current > 1:
+        href = href_for(1)
         links.append(
             Li(
-                A("«", href=f"{c_base_url}?page=1", cls="page-link", aria_label="First"),
+                A("<<", href=href, cls="page-link", aria_label="First", **link_attrs(href)),
                 cls="page-item",
             )
         )
 
-    # Previous page
     if c_show_prev_next:
-        prev_disabled = current_page == 1
-        prev_page = max(1, current_page - 1)
+        prev_disabled = safe_current == 1
+        prev_page = max(1, safe_current - 1)
+        href = href_for(prev_page)
         links.append(
             Li(
                 (
                     A(
-                        "‹",
-                        href=f"{c_base_url}?page={prev_page}",
+                        "<",
+                        href=href,
                         cls="page-link",
                         aria_label="Previous",
+                        **link_attrs(href),
                     )
                     if not prev_disabled
-                    else Span("‹", cls="page-link", aria_hidden="true")
+                    else Span("<", cls="page-link", aria_hidden="true")
                 ),
                 cls="page-item" + (" disabled" if prev_disabled else ""),
             )
         )
 
-    # Page numbers
     for page in range(start, end + 1):
-        active = page == current_page
-        href = f"{c_base_url}?page={page}"
+        active = page == safe_current
+        href = href_for(page)
         links.append(
             Li(
                 (
-                    A(str(page), href=href, cls="page-link")
+                    A(str(page), href=href, cls="page-link", **link_attrs(href))
                     if not active
                     else Span(str(page), cls="page-link")
                 ),
@@ -127,40 +191,35 @@ def Pagination(
             )
         )
 
-    # Next page
     if c_show_prev_next:
-        next_disabled = current_page == total_pages
-        next_page = min(total_pages, current_page + 1)
+        next_disabled = safe_current == safe_total
+        next_page = min(safe_total, safe_current + 1)
+        href = href_for(next_page)
         links.append(
             Li(
                 (
-                    A(
-                        "›",
-                        href=f"{c_base_url}?page={next_page}",
-                        cls="page-link",
-                        aria_label="Next",
-                    )
+                    A(">", href=href, cls="page-link", aria_label="Next", **link_attrs(href))
                     if not next_disabled
-                    else Span("›", cls="page-link", aria_hidden="true")
+                    else Span(">", cls="page-link", aria_hidden="true")
                 ),
                 cls="page-item" + (" disabled" if next_disabled else ""),
             )
         )
 
-    # Last page
-    if c_show_first_last and current_page < total_pages:
+    if c_show_first_last and safe_current < safe_total:
+        href = href_for(safe_total)
         links.append(
             Li(
-                A("»", href=f"{c_base_url}?page={total_pages}", cls="page-link", aria_label="Last"),
+                A(">>", href=href, cls="page-link", aria_label="Last", **link_attrs(href)),
                 cls="page-item",
             )
         )
 
-    # Build pagination
     ul = Ul(*links, cls=ul_cls)
 
-    # Convert remaining kwargs
     nav_attrs: dict[str, Any] = {"aria_label": "Page navigation"}
+    if hx_target:
+        nav_attrs["hx_target"] = hx_target
     nav_attrs.update(convert_attrs(kwargs))
 
     return Nav(ul, cls=justify_class, **nav_attrs)

@@ -5,6 +5,8 @@ from fasthtml.common import Input, to_xml
 from faststrap.components.forms import (
     FormErrorSummary,
     FormGroupFromErrors,
+    LiveValidationField,
+    ValidationMessage,
     extract_field_error,
     map_formgroup_validation,
 )
@@ -32,6 +34,29 @@ def test_formgroup_from_errors():
     )
     assert "invalid-feedback" in html
     assert "is-invalid" in html
+
+
+def test_validation_message_renders_feedback_state():
+    html = to_xml(ValidationMessage("Looks good", state="valid"))
+    assert "valid-feedback" in html
+    assert "Looks good" in html
+
+
+def test_live_validation_field_adds_htmx_attrs_to_input():
+    html = to_xml(
+        LiveValidationField(
+            Input(name="email"),
+            "/validate/email",
+            label="Email",
+            method="post",
+            indicator="#email-spinner",
+        )
+    )
+    assert 'hx-post="/validate/email"' in html
+    assert 'hx-trigger="blur changed delay:300ms"' in html
+    assert 'hx-target="closest .mb-3"' in html
+    assert 'hx-swap="outerHTML"' in html
+    assert 'hx-indicator="#email-spinner"' in html
 
 
 def test_form_error_summary_empty_returns_none():

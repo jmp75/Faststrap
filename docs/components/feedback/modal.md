@@ -143,7 +143,31 @@ ConfirmDialog(
         show_source: false
         heading_level: 4
 
-### 2. Real-time Loading
+### 2. ConfirmAction (HTMX Prompt)
+
+Use `ConfirmAction` when a browser confirmation prompt is enough and a full modal would be too heavy.
+
+```python
+from faststrap import ConfirmAction
+
+ConfirmAction(
+    "Archive",
+    url="/items/1/archive",
+    method="delete",
+    confirm="Archive this item?",
+    target="#items",
+    swap="outerHTML",
+)
+```
+
+This renders a themed `Button` with `hx-confirm` plus the selected HTMX method attribute.
+
+::: faststrap.components.feedback.confirm.ConfirmAction
+    options:
+        show_source: false
+        heading_level: 4
+
+### 3. Real-time Loading
 You can put HTMX content inside a modal body to load data only when opened.
 
 ```python

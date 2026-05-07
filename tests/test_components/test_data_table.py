@@ -118,6 +118,35 @@ def test_data_table_export_params_helper():
     assert params["per_page"] == 50
 
 
+def test_data_table_query_params_and_page_url_helpers():
+    params = DataTable.query_params(
+        sort="name",
+        direction="asc",
+        search="alice",
+        filters={"team": "ops"},
+        page=3,
+        per_page=25,
+    )
+    assert params == {
+        "team": "ops",
+        "sort": "name",
+        "direction": "asc",
+        "q": "alice",
+        "page": 3,
+        "per_page": 25,
+    }
+
+    url = DataTable.page_url(
+        "/users?view=active",
+        page=2,
+        per_page=10,
+        sort="name",
+        search="al",
+        filters={"team": "ops"},
+    )
+    assert url == "/users?view=active&team=ops&sort=name&direction=asc&q=al&page=2&per_page=10"
+
+
 def test_data_table_auto_ids_are_unique_across_threads():
     data = [{"name": "Alice"}]
 

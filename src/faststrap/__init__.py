@@ -59,12 +59,15 @@ from .components.display import (
     TrendCard,
     TRow,
     datatable_export_params,
+    datatable_page_url,
+    datatable_query_params,
     render_svg,
 )
 
 # Feedback
 from .components.feedback import (
     Alert,
+    ConfirmAction,
     ConfirmDialog,
     ErrorDialog,
     ErrorPage,
@@ -115,6 +118,7 @@ from .components.forms import (
     Input,
     InputGroup,
     InputGroupText,
+    LiveValidationField,
     MultiSelect,
     Radio,
     Range,
@@ -124,6 +128,7 @@ from .components.forms import (
     Switch,
     ThemeToggle,
     ToggleGroup,
+    ValidationMessage,
     WizardStep,
     extract_field_error,
     map_formgroup_validation,
@@ -174,6 +179,13 @@ from .core._stability import beta, experimental, stable
 from .core.assets import add_bootstrap, get_assets, mount_assets
 from .core.base import merge_classes
 from .core.effects import Fx
+from .core.registry import (
+    find_components,
+    get_component,
+    get_components_by_pattern,
+    list_component_metadata,
+    list_components,
+)
 from .core.theme import (
     Theme,
     create_theme,
@@ -182,6 +194,7 @@ from .core.theme import (
     reset_component_defaults,
     resolve_defaults,
     set_component_defaults,
+    theme_variant_css,
 )
 from .integrations import (
     CHARTJS_CDN_URL,
@@ -220,6 +233,12 @@ __all__ = [
     "mount_assets",
     "merge_classes",
     "convert_attrs",
+    "find_components",
+    "get_component",
+    "get_components_by_pattern",
+    "list_component_metadata",
+    "list_components",
+    "theme_variant_css",
     "add_chartjs",
     "add_gsap",
     "chartjs_assets",
@@ -281,6 +300,8 @@ __all__ = [
     "Select",
     "ThemeToggle",
     "ToggleGroup",
+    "LiveValidationField",
+    "ValidationMessage",
     "WizardStep",
     "extract_field_error",
     "map_formgroup_validation",
@@ -296,6 +317,8 @@ __all__ = [
     "Chart",
     "DataTable",
     "datatable_export_params",
+    "datatable_page_url",
+    "datatable_query_params",
     "EmptyState",
     "Figure",
     "Image",
@@ -331,6 +354,7 @@ __all__ = [
     "ErrorPage",
     "ErrorDialog",
     "InstallPrompt",
+    "ConfirmAction",
     "ConfirmDialog",
     "Toast",
     "SimpleToast",

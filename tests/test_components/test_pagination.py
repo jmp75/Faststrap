@@ -46,7 +46,6 @@ def test_pagination_max_pages():
     pagination = Pagination(10, 100, max_pages=3)
     html = to_xml(pagination)
 
-    # Should show limited page numbers
     assert "pagination" in html
 
 
@@ -55,8 +54,8 @@ def test_pagination_prev_next():
     pagination = Pagination(3, 10, show_prev_next=True)
     html = to_xml(pagination)
 
-    assert "‹" in html  # Previous
-    assert "›" in html  # Next
+    assert "&lt;" in html
+    assert "&gt;" in html
 
 
 def test_pagination_first_last():
@@ -64,8 +63,8 @@ def test_pagination_first_last():
     pagination = Pagination(5, 10, show_first_last=True)
     html = to_xml(pagination)
 
-    assert "«" in html  # First
-    assert "»" in html  # Last
+    assert "&lt;&lt;" in html
+    assert "&gt;&gt;" in html
 
 
 def test_pagination_disabled_prev():
@@ -97,8 +96,7 @@ def test_pagination_page_links():
     pagination = Pagination(1, 3, base_url="/items")
     html = to_xml(pagination)
 
-    # Note: Page 1 is active (Span), pages 2-3 have links
-    assert "/items?page=2" in html  # ✅ Fixed
+    assert "/items?page=2" in html
     assert "/items?page=3" in html
 
 
@@ -112,7 +110,7 @@ def test_pagination_custom_classes():
 
 
 def test_pagination_htmx():
-    """Pagination supports HTMX attributes."""
+    """Pagination supports HTMX attributes on the nav wrapper."""
     pagination = Pagination(2, 5, hx_boost="true", hx_target="#content")
     html = to_xml(pagination)
 
@@ -126,3 +124,34 @@ def test_pagination_aria_label():
     html = to_xml(pagination)
 
     assert 'aria-label="Page navigation"' in html
+
+
+def test_pagination_preserves_existing_query_params():
+    """Pagination merges existing and extra query parameters."""
+    pagination = Pagination(
+        1,
+        3,
+        base_url="/items?sort=new",
+        query_params={"filter": "open"},
+        page_param="p",
+    )
+    html = to_xml(pagination)
+
+    assert "/items?sort=new&amp;filter=open&amp;p=2" in html
+
+
+def test_pagination_can_render_htmx_page_links():
+    """Pagination can add HTMX attributes to generated links."""
+    pagination = Pagination(
+        1,
+        3,
+        base_url="/items",
+        htmx=True,
+        hx_target="#items",
+        hx_push_url=True,
+    )
+    html = to_xml(pagination)
+
+    assert 'hx-get="/items?page=2"' in html
+    assert 'hx-target="#items"' in html
+    assert 'hx-push-url="true"' in html

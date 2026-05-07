@@ -1,7 +1,7 @@
 """Feedback components."""
 
 from .alert import Alert
-from .confirm import ConfirmDialog
+from .confirm import ConfirmAction, ConfirmDialog
 from .error_dialog import ErrorDialog
 from .error_page import ErrorPage
 from .install_prompt import InstallPrompt
@@ -24,6 +24,7 @@ from .toast import SimpleToast, Toast, ToastContainer
 
 __all__ = [
     "Alert",
+    "ConfirmAction",
     "ConfirmDialog",
     "ErrorDialog",
     "ErrorPage",

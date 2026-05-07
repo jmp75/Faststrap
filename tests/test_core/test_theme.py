@@ -10,6 +10,7 @@ from faststrap.core.theme import (
     reset_component_defaults,
     resolve_defaults,
     set_component_defaults,
+    theme_variant_css,
 )
 
 
@@ -106,6 +107,22 @@ def test_mode_specific_surface_tokens_apply_to_matching_mode():
     assert "--fs-surface-bg: #15121d;" in dark_css
     assert "--fs-surface-border: rgba(255, 255, 255, 0.18);" in dark_css
     assert "--fs-surface-bg-dark" not in dark_css
+
+
+def test_theme_variant_css_outputs_light_and_dark_blocks():
+    css = str(
+        theme_variant_css(
+            ".premium-card",
+            light={"background": "#fff", "border_color": "#eee"},
+            dark={"background": "#111", "border_color": "#333"},
+        )
+    )
+
+    assert '[data-bs-theme="light"] .premium-card' in css
+    assert "background: #fff;" in css
+    assert "border-color: #eee;" in css
+    assert '[data-bs-theme="dark"] .premium-card' in css
+    assert "background: #111;" in css
 
 
 def test_resolve_defaults_mechanics():
