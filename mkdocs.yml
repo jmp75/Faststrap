@@ -110,6 +110,7 @@ nav:
       - SearchableSelect: components/forms/searchable-select.md
       - ThemeToggle: components/forms/theme-toggle.md
       - ToggleGroup: components/forms/toggle-group.md
+      - InlineEditor: components/forms/inline-editor.md
     - Display:
       - Card: components/display/card.md
       - Chart: components/display/chart.md
@@ -117,6 +118,8 @@ nav:
       - DataTable: components/display/data-table.md
       - Figure: components/display/figure.md
       - Badge: components/display/badge.md
+      - StatusBadge: components/display/status-badge.md
+      - Avatar: components/display/avatar.md
       - Icon: components/display/icon.md
       - MapView: components/display/map-view.md
       - Markdown: components/display/markdown.md
@@ -127,6 +130,7 @@ nav:
       - Sheet: components/display/sheet.md
       - Empty State: components/display/empty_state.md
       - Stat Card: components/display/stat_card.md
+      - Result Card: components/display/result-card.md
       - TextClamp: components/display/text-clamp.md
       - SSETarget: components/display/sse-target.md
     - Feedback:

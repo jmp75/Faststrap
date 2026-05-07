@@ -15,6 +15,7 @@ from .file import FileInput
 from .filter_bar import FilterBar
 from .form import Form, FormBuilder
 from .formgroup import FormGroup
+from .inline_editor import InlineEditor
 from .input import Input
 from .inputgroup import FloatingLabel, InputGroup, InputGroupText
 from .multi_select import MultiSelect
@@ -48,6 +49,7 @@ __all__ = [
     "Input",
     "InputGroup",
     "InputGroupText",
+    "InlineEditor",
     "FloatingLabel",
     "MultiSelect",
     "RangeSlider",

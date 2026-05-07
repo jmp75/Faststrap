@@ -1,5 +1,6 @@
 """Display components."""
 
+from .avatar import Avatar, AvatarGroup
 from .badge import Badge
 from .card import Card
 from .carousel import Carousel, CarouselItem
@@ -11,15 +12,20 @@ from .image import Image
 from .map_view import MapView
 from .markdown import Markdown, render_markdown
 from .mermaid import Mermaid
+from .result_card import ResultCard
 from .sheet import Sheet
 from .sse_target import SSETarget
 from .stat_card import KPICard, MetricCard, StatCard, TrendCard
+from .status_badge import BadgeGroup, StatusBadge
 from .svg import Svg, render_svg
 from .table import BsTable, BsTBody, BsTCell, BsTHead, BsTRow, Table, TBody, TCell, THead, TRow
 from .text_clamp import TextClamp
 
 __all__ = [
     "Badge",
+    "BadgeGroup",
+    "Avatar",
+    "AvatarGroup",
     "Card",
     "Carousel",
     "CarouselItem",
@@ -33,7 +39,9 @@ __all__ = [
     "Markdown",
     "render_markdown",
     "Mermaid",
+    "ResultCard",
     "Sheet",
+    "StatusBadge",
     "SSETarget",
     "Svg",
     "render_svg",
