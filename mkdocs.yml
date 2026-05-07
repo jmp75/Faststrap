@@ -104,6 +104,7 @@ nav:
       - FilterBar: components/forms/filter-bar.md
       - DateRangePicker: components/forms/date-range-picker.md
       - CalendarDatePicker: components/forms/calendar-date-picker.md
+      - FormWizard: components/forms/form-wizard.md
       - MultiSelect: components/forms/multi-select.md
       - RangeSlider: components/forms/range-slider.md
       - ExportButton: components/forms/export-button.md
@@ -149,8 +150,10 @@ nav:
       - Install Prompt: components/feedback/install-prompt.md
       - Notification Presets: components/feedback/notification-presets.md
       - Notification Center: components/feedback/notification-center.md
+      - ModernToast: components/feedback/modern-toast.md
     - Navigation:
       - Navbar: components/navigation/navbar.md
+      - CommandPalette: components/navigation/command-palette.md
       - Tabs: components/navigation/tabs.md
       - Dropdown: components/navigation/dropdown.md
       - Breadcrumb: components/navigation/breadcrumb.md
@@ -195,6 +198,7 @@ nav:
     - Vertical Apps: showcase/vertical-apps.md
   - Integrations:
     - GSAP Motion: integrations/gsap.md
+    - ChartJS: integrations/chartjs.md
   - API Reference:
     - Core: api/core.md
     - Presets: api/presets.md

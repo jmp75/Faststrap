@@ -52,6 +52,7 @@ markdown = [
     "bleach>=6.0",
 ]
 gsap = []
+chartjs = []
 
 [project.urls]
 Homepage = "https://github.com/Faststrap-org/Faststrap"

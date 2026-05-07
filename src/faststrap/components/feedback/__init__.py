@@ -6,6 +6,7 @@ from .error_dialog import ErrorDialog
 from .error_page import ErrorPage
 from .install_prompt import InstallPrompt
 from .modal import Modal
+from .modern_toast import ModernToast, ModernToastStack
 from .notification_center import NotificationCenter
 from .notifications import (
     ErrorToast,
@@ -28,6 +29,8 @@ __all__ = [
     "ErrorPage",
     "InstallPrompt",
     "Modal",
+    "ModernToast",
+    "ModernToastStack",
     "NotificationCenter",
     "NoticeToast",
     "NoticeAlert",

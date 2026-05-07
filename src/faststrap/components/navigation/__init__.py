@@ -3,6 +3,7 @@
 from .accordion import Accordion, AccordionItem
 from .bottom_nav import BottomNav, BottomNavItem
 from .breadcrumb import Breadcrumb
+from .command_palette import CommandItem, CommandPalette
 from .drawer import Drawer
 from .dropdown import Dropdown, DropdownDivider, DropdownItem
 from .glass_navbar import GlassNavbar, GlassNavItem
@@ -20,6 +21,8 @@ __all__ = [
     "BottomNavItem",
     "Breadcrumb",
     "Collapse",
+    "CommandItem",
+    "CommandPalette",
     "Drawer",
     "Dropdown",
     "DropdownDivider",

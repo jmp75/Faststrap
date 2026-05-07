@@ -37,6 +37,10 @@ Already implemented today:
 - `Timeline`
 - `Stepper`
 - `CalendarDatePicker`
+- `FormWizard`
+- `CommandPalette`
+- `ModernToast`
+- `ChartJS`
 
 Better handled as docs, recipes, or examples rather than new components:
 
@@ -49,10 +53,6 @@ Better handled as docs, recipes, or examples rather than new components:
 Retained below as real future-component candidates:
 
 - `PaginationControls`
-- `FormWizard`
-- `CommandPalette`
-- `ModernToast`
-- `ChartJS`
 
 ---
 

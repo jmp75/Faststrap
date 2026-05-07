@@ -15,6 +15,7 @@ from .export_button import ExportButton
 from .file import FileInput
 from .filter_bar import FilterBar
 from .form import Form, FormBuilder
+from .form_wizard import FormWizard, WizardStep
 from .formgroup import FormGroup
 from .inline_editor import InlineEditor
 from .input import Input
@@ -39,6 +40,7 @@ __all__ = [
     "FileInput",
     "Form",
     "FormBuilder",
+    "FormWizard",
     "FormGroup",
     "FilterBar",
     "CalendarDatePicker",
@@ -58,4 +60,5 @@ __all__ = [
     "SearchableSelect",
     "Select",
     "ThemeToggle",
+    "WizardStep",
 ]

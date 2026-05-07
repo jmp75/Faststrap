@@ -433,11 +433,11 @@ These integrations are intentionally opt-in. They should not change Faststrap's 
 
 **Wave 3: Bigger interactive surfaces and optional integrations**
 
-- `FormWizard`
-- `CommandPalette`
-- `ModernToast`
-- `ChartJS`
-- `GSAP Motion`
+- `FormWizard` - shipped
+- `CommandPalette` - shipped
+- `ModernToast` - shipped
+- `ChartJS` - shipped
+- `GSAP Motion` - shipped
 
 **Wave 4: Framework ergonomics and pattern codification**
 
