@@ -521,6 +521,12 @@ Comprehensive examples organized by learning path:
 - `custom_themes.py` - Theme customization
 - `component_defaults.py` - Global configuration
 
+### 05_new_components/
+
+- `v100_component_wave.py` - Core v1.0 component wave demo
+- `v100_workflow_patterns.py` - HTMX workflow and helper patterns
+- `v100_optional_integrations.py` - ModernToast, ChartJS, and GSAP opt-in integrations
+
 **See**: `examples/README.md` for complete guide
 
 | **Dropdown** | Contextual menus with split buttons |  |

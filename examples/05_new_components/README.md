@@ -1,6 +1,58 @@
-# New Components Examples (v0.5.9)
+# New Components Examples
 
-This directory contains comprehensive examples demonstrating newly added components and presets up to Faststrap v0.5.9.
+This directory contains comprehensive examples demonstrating newly added components, presets, and optional integrations up to the v1.0 roadmap completion.
+
+## New in v1.0 Roadmap
+
+### `v100_component_wave.py` - Core Component Wave Demo
+
+Single app that demonstrates:
+
+- `ResultCard`
+- `Avatar` and `AvatarGroup`
+- `StatusBadge` and `BadgeGroup`
+- `Timeline` and `TimelineItem`
+- `Stepper` and `StepperStep`
+- `CalendarDatePicker`
+- `InlineEditor`
+
+**Run:**
+
+```bash
+python examples/05_new_components/v100_component_wave.py
+```
+
+### `v100_workflow_patterns.py` - Workflow Patterns Demo
+
+Single app that demonstrates:
+
+- `CommandPalette` and `CommandItem`
+- `FormWizard` and `WizardStep`
+- `LiveValidationField` and `ValidationMessage`
+- `Pagination` query preservation and HTMX links
+- `DataTable.query_params()` and `DataTable.page_url()`
+- `ConfirmAction`
+- `theme_variant_css()`
+
+**Run:**
+
+```bash
+python examples/05_new_components/v100_workflow_patterns.py
+```
+
+### `v100_optional_integrations.py` - Optional Integrations Demo
+
+Single app that demonstrates:
+
+- `ModernToast` and `ModernToastStack`
+- `ChartJS` and `add_chartjs(app)`
+- `GsapReveal`, `Gsap` attribute helpers, and `add_gsap(app)`
+
+**Run:**
+
+```bash
+python examples/05_new_components/v100_optional_integrations.py
+```
 
 ## Naming Note for v0.6.1+
 
