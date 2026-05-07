@@ -586,12 +586,17 @@ Comprehensive examples organized by learning path:
 - **Workspace and navigation**: SplitPane, MegaMenu, CommandPalette
 - **Feedback**: ModernToast (progressive enhancement, minimal JS)
 - **Optional chart integration**: `ChartJS` via `faststrap[chartjs]`
+- **Optional motion integration**: GSAP-based motion presets via `faststrap[gsap]`
 - **Icon packs**: optional icon registries beyond Bootstrap Icons
 - **Notebook helpers**: render-to-HTML convenience for notebooks
 - **MegaMenu**
 - And 40+ more components...
 
 **Target: 100+ components by v1.0.0 (Aug 2026)**
+
+### Canonical Next-Component Plan
+
+For the current merged source of truth on what we plan to build next, see the `Canonical Next Build Roadmap` section in [`ROADMAP.md`](ROADMAP.md). That section consolidates the audit follow-ups, implementation-first additions, and broader component suggestions into one prioritized wave plan.
 
 See [ROADMAP.md](ROADMAP.md) for complete timeline.
 

@@ -32,7 +32,7 @@
 - Advanced DataTable query contract and optional ORM bridges
 - Production map provider integrations and geospatial presets
 - Extended PWA reliability presets (queue persistence, richer retry/telemetry)
-- Workflow/UI helpers where audits keep showing repetition: `ResultCard`, `InlineEditor`, `Avatar`, and standalone `PaginationControls`
+- Workflow/UI helpers where audits keep showing repetition: `ResultCard`, `InlineEditor`, `Avatar`, and richer `Pagination` ergonomics
 - Documentation-first polish for validation workflows, filter/search recipes, and non-table pagination guidance
 
 ### Suggested release cut
@@ -364,6 +364,101 @@ These are the next frontend-focused additions that would most improve day-to-day
 * Keep optional integrations, such as `ChartJS`, outside the default install footprint.
 
 > **Note:** `ActiveSearch` and `InfiniteScroll` are already available in v0.5.6 as part of the `faststrap.presets` module.
+
+### Canonical Next Build Roadmap
+
+This section is the main source of truth for the next Faststrap buildout after the v0.6 data foundations. It merges the component suggestions from audits, implementation planning, and the Kilo/Gemini-style review into one roadmap so we stop tracking overlapping lists in different places.
+
+#### Scope Summary
+
+- **11 core component additions**
+- **3 optional integration systems**
+- **7 supporting framework and pattern improvements**
+- **4 delivery waves** so we can ship meaningful value without bundling every idea into one release
+
+#### Component Roadmap
+
+| Item | Type | Priority | Complexity | Wave | Notes |
+|------|------|----------|------------|------|-------|
+| `ResultCard` | Component | High | Low | 1 | Common success/error/result surface for settings, forms, and post-action feedback |
+| `Avatar` | Component | High | Low | 1 | Foundational identity primitive for dashboards, nav, comments, and teams |
+| `AvatarGroup` | Component | High | Low | 1 | Natural pair with `Avatar`; overlap stacks and count indicators |
+| `StatusBadge` | Component | High | Low | 1 | Stronger semantic status surface than generic `Badge` for ops/admin UIs |
+| `BadgeGroup` | Component | High | Low | 1 | Grouped badges/chips for status collections, tags, and compact metadata rows |
+| `InlineEditor` | Component | High | Medium | 1 | Useful for editable tables, profile settings, and compact admin workflows |
+| `Timeline` | Component | Medium | Medium | 2 | Good fit for activity, audit, booking, and release views |
+| `Stepper` | Component | Medium | Medium | 2 | Progress indicator for onboarding, checkout, and setup flows |
+| `CalendarDatePicker` | Component | Medium | Medium | 2 | Calendar-oriented date input distinct from range-first filtering controls |
+| `FormWizard` | Component | Medium | High | 3 | Server-driven multi-step form flow; should build on `Stepper` + form helpers |
+| `CommandPalette` | Component | Medium | High | 3 | Progressive enhancement feature with careful minimal-JS design |
+
+#### Optional Integration Roadmap
+
+These integrations are intentionally opt-in. They should not change Faststrap's zero-JS default path or add dependencies to the base install.
+
+| Item | Type | Priority | Complexity | Wave | Notes |
+|------|------|----------|------------|------|-------|
+| `ModernToast` | Optional integration | Medium | Medium | 3 | Alternative modern toast system with configurable position, timing, style, and queue behavior |
+| `ChartJS` | Optional integration | Medium | High | 3 | Optional Chart.js integration via an extra such as `faststrap[chartjs]` |
+| `GSAP Motion` | Optional integration | Medium | High | 3 | Optional animation system via `faststrap[gsap]`; richer motion without changing core `Fx` defaults |
+
+#### Supporting Framework and Pattern Improvements
+
+| Item | Type | Priority | Complexity | Wave | Notes |
+|------|------|----------|------------|------|-------|
+| `StatCard` refinement | Existing component improvement | Medium | Low | 4 | Tighten ergonomics so metric-card usage is more obvious and reusable |
+| `Pagination` improvements | Existing component improvement | High | Medium | 4 | Extend current `Pagination` for card feeds, non-table collections, HTMX targets, and richer URL control |
+| Form validation helpers | Pattern/helper | High | Medium | 4 | Codify live validation and submission feedback patterns around `FormGroup` |
+| Data table pagination/sorting helpers | Pattern/helper | High | Medium | 4 | Reduce friction for common `DataTable` flows without forcing heavy abstractions |
+| Confirmation/destructive-action helpers | Pattern/helper | Medium | Medium | 4 | Standardize delete/archive/confirm flows with HTMX-friendly patterns |
+| Theme-variant utility support | Framework utility | Medium | Medium | 4 | Reduce repetitive light/dark CSS duplication in premium apps |
+| Component discovery/registry improvements | Framework utility | Medium | Medium | 4 | Improve discoverability so users reuse components before inventing new ones |
+
+#### Delivery Logic
+
+**Wave 1: Fast wins and reusable foundations**
+
+- `ResultCard`
+- `Avatar`
+- `AvatarGroup`
+- `StatusBadge`
+- `BadgeGroup`
+- `InlineEditor`
+
+**Wave 2: Workflow and UI polish**
+
+- `Timeline`
+- `Stepper`
+- `CalendarDatePicker`
+
+**Wave 3: Bigger interactive surfaces and optional integrations**
+
+- `FormWizard`
+- `CommandPalette`
+- `ModernToast`
+- `ChartJS`
+- `GSAP Motion`
+
+**Wave 4: Framework ergonomics and pattern codification**
+
+- `StatCard` refinement
+- `Pagination` improvements
+- Form validation helpers
+- Data table pagination/sorting helpers
+- Confirmation/destructive-action helpers
+- Theme-variant utility support
+- Component discovery/registry improvements
+
+#### Planning Notes
+
+- `Avatar` and `AvatarGroup` are tracked separately even though they will likely ship close together.
+- `SkeletonLoader` is not tracked as a new component because `Placeholder`, `PlaceholderCard`, and `PlaceholderButton` already cover skeleton loading states.
+- `PaginationControls` is folded into `Pagination` improvements because the core `Pagination` component already exists.
+- `ChartJS` remains optional and should not change the zero-JS baseline for the rest of the framework.
+- `GSAP Motion` follows the same optional integration stance as `ChartJS`: useful when requested, never part of the default runtime contract.
+- `FormWizard` should not be built before `Stepper`; the step model needs to settle first.
+- `CommandPalette` should keep a usable server-rendered baseline even if keyboard enhancements use small progressive JavaScript.
+- This roadmap intentionally separates **new components** from **framework ergonomics** so release planning stays honest.
 
 ---
 
