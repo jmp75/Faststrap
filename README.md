@@ -15,13 +15,13 @@
 FastHTML is amazing for building web apps in pure Python, but it lacks pre-built UI components. FastStrap fills that gap by providing:
 
 
- **110+ components and utilities** - Buttons, Cards, Modals, Forms, Navigation, presets, and more  
- **HTMX Presets Module** - 14 ready-to-use patterns for common interactions  
+ **145+ components, helpers, and presets** - 128 registered UI components plus HTMX, SEO, PWA, and optional integrations  
+ **HTMX Presets Module** - 17 ready-to-use patterns for common interactions  
  **SEO Module** - Comprehensive meta tags, Open Graph, Twitter Cards, and structured data  
  **Zero JavaScript knowledge required** - Components just work  
  **No build steps** - Pure Python, no npm/webpack/vite  
  **Full HTMX integration** - Dynamic updates without page reloads  
- **Zero-JS animations** - Beautiful effects with pure CSS (Fx module)  
+ **Zero-JS animations by default** - Beautiful effects with pure CSS (`Fx`), with optional GSAP motion via `faststrap[gsap]`  
  **Dark mode built-in** - Automatic theme switching  
  **Type-safe** - Full type hints for better IDE support  
  **Pythonic API** - Intuitive kwargs style  
@@ -229,15 +229,23 @@ Available built-in themes:
 - `cyan-sky`
 - `gray-mist`
 
-### 6. Registry Metadata
+### 6. Registry Metadata And Discovery
 
-Components include metadata about JavaScript requirements:
+Components include metadata about category, stability, and JavaScript requirements. The registry also helps developers and AI agents discover existing components before inventing new wrappers:
 
 ```python
-from faststrap.core.registry import list_components, get_component
+from faststrap import (
+    find_components,
+    get_component,
+    get_components_by_pattern,
+    list_component_metadata,
+    list_components,
+)
 
-# List all components
-components = list_components()
+components = list_components(category="display")
+cards = find_components("card")
+toast_components = get_components_by_pattern("toast")
+metadata = list_component_metadata()
 
 # Check if component requires JS
 modal = get_component("Modal")
@@ -246,9 +254,9 @@ modal = get_component("Modal")
 
 ---
 
-## Available Components (110+ Total)
+## Available Components And Helpers (145+ Total)
 
-Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
+Faststrap currently exposes **128 registered UI components** across forms, display, feedback, navigation, layout, and patterns, plus **17 HTMX presets**, SEO/PWA helpers, accessibility helpers, core utilities, and optional integrations. Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
 
 ### Presets Module (17 Utilities)
 
@@ -270,11 +278,12 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `sse_comment`
 - `@require_auth`
 
-### Forms (26 Components + compatibility alias)
+### Forms (33 Public Components / Helpers)
 
 - `Button`
 - `ButtonGroup`
 - `ButtonToolbar`
+- `CalendarDatePicker`
 - `Checkbox`
 - `CloseButton`
 - `DateRangePicker`
@@ -287,9 +296,12 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `FormErrorSummary`
 - `FormGroup`
 - `FormGroupFromErrors`
+- `FormWizard`
 - `Input`
 - `InputGroup`
 - `InputGroupText`
+- `InlineEditor`
+- `LiveValidationField`
 - `MultiSelect`
 - `Radio`
 - `Range`
@@ -299,10 +311,15 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `Switch`
 - `ThemeToggle`
 - `ToggleGroup`
+- `ValidationMessage`
+- `WizardStep`
 
-### Display (25 Components + optional aliases)
+### Display (34 Components + 5 table aliases)
 
+- `Avatar`
+- `AvatarGroup`
 - `Badge`
+- `BadgeGroup`
 - `Card`
 - `Carousel`
 - `CarouselItem`
@@ -316,9 +333,13 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `Markdown`
 - `Mermaid`
 - `MetricCard`
+- `ResultCard`
 - `Sheet`
 - `SSETarget`
 - `StatCard`
+- `StatusBadge`
+- `Stepper`
+- `StepperStep`
 - `Svg`
 - `BsTable` / `BsTHead` / `BsTBody` / `BsTRow` / `BsTCell`
 - `Table`
@@ -327,6 +348,8 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `TRow`
 - `TCell`
 - `TextClamp`
+- `Timeline`
+- `TimelineItem`
 - `TrendCard`
 
 ### v0.6.1 Naming Notes
@@ -334,9 +357,10 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `FormBuilder` is now the preferred name for the Pydantic form builder API. If you are on `v0.6.0` or earlier, keep using `Form.from_pydantic()`. In `v0.6.1+`, prefer `FormBuilder.from_pydantic()`. `Form` remains as a compatibility alias.
 - `Table`, `THead`, `TBody`, `TRow`, and `TCell` remain the primary table API. `v0.6.1` adds optional aliases `BsTable`, `BsTHead`, `BsTBody`, `BsTRow`, and `BsTCell` for projects that import both FastHTML and Faststrap table primitives.
 
-### Feedback (24 Components)
+### Feedback (27 Components)
 
 - `Alert`
+- `ConfirmAction`
 - `ConfirmDialog`
 - `ErrorDialog`
 - `ErrorPage`
@@ -344,6 +368,8 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `InfoToast`
 - `InstallPrompt`
 - `Modal`
+- `ModernToast`
+- `ModernToastStack`
 - `NoticeAlert`
 - `NoticeToast`
 - `NotificationCenter`
@@ -361,7 +387,7 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `Tooltip`
 - `WarningToast`
 
-### Navigation (21 Components)
+### Navigation (23 Components)
 
 - `Accordion`
 - `AccordionItem`
@@ -369,6 +395,8 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 - `BottomNavItem`
 - `Breadcrumb`
 - `Collapse`
+- `CommandItem`
+- `CommandPalette`
 - `Drawer`
 - `Dropdown`
 - `DropdownDivider`
@@ -420,6 +448,21 @@ Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability
 ### Effects (1 Module)
 
 - `Fx` - Zero-JS animations and visual effects
+
+### Optional Integrations (3 Opt-In Systems)
+
+- `ChartJS` - Optional Chart.js integration via `faststrap[chartjs]`
+- `Gsap` / `Motion` / `GsapReveal` - Optional GSAP motion integration via `faststrap[gsap]`
+- `ModernToast` - Opinionated modern toast surface that remains separate from the core Bootstrap toast API
+
+### Core Discovery And Theme Utilities
+
+- `list_components`
+- `get_component`
+- `find_components`
+- `get_components_by_pattern`
+- `list_component_metadata`
+- `theme_variant_css`
 
 ## Documentation Coverage
 
@@ -548,13 +591,18 @@ Comprehensive examples organized by learning path:
 - `ErrorPage`, `ErrorDialog`, `FormGroup`, `ThemeToggle`, `SearchableSelect`
 - `FooterModern`, `Testimonial`, `TestimonialSection`, `AuthLayout`
 
-## Release Snapshot (v0.6.0 - current)
+## Release Snapshot (current main - major release candidate)
 
-### Implemented in v0.6.0
+The planned component roadmap is now complete on `main`. The next release should be treated as a major release candidate because the public API surface now includes the full planned component wave, optional integrations, and framework ergonomics.
+
+### Data Foundations
 
 - DataTable with search, sort, pagination, and export helper
+- DataTable query helpers: `DataTable.query_params()` and `DataTable.page_url()`
 - Chart wrapper for Matplotlib, Plotly, Altair, and raw SVG/HTML
+- Optional Chart.js integration: `ChartJS`, `add_chartjs()`, and `faststrap[chartjs]`
 - Metric cards: `MetricCard`, `TrendCard`, `KPICard`
+- `StatCard` refinement with `delta` aliases and a theme hook
 - Dashboard layout primitives: `DashboardGrid`
 - Filter inputs: `FilterBar`, `DateRangePicker`, `MultiSelect`, `RangeSlider`, `ExportButton`
 - Realtime helpers: `SSEStream`, `SSETarget`
@@ -562,37 +610,27 @@ Comprehensive examples organized by learning path:
 - Renderers: `Markdown`, `Svg`, `Mermaid`
 - Form error summary: `FormErrorSummary`
 
-### Deferred to post-v0.6 (intentional)
+### Completed Component Waves
 
-- Rich DataTable query APIs + optional ORM bridges
-- Production map provider integrations and geospatial presets
-- Advanced PWA reliability presets (queue persistence/retry telemetry)
+- Wave 1: `ResultCard`, `Avatar`, `AvatarGroup`, `StatusBadge`, `BadgeGroup`, `InlineEditor`
+- Wave 2: `Timeline`, `Stepper`, `CalendarDatePicker`
+- Wave 3: `FormWizard`, `CommandPalette`, `ModernToast`, `ChartJS`, `GSAP Motion`
+- Wave 4: `Pagination` improvements, `LiveValidationField`, `ValidationMessage`, `ConfirmAction`, DataTable query helpers, registry discovery, `theme_variant_css`
 
-### Suggested release cut
+### Optional Integrations
 
-- `v0.5.6`: accessibility + toggle group + text clamp + notification presets
-- `v0.5.7`: PageMeta + form error mapper
-- `v0.5.8`: doctor CLI + docs/version/changelog consistency cleanup
-- `v0.5.9`: markdown/map/data bridges + PWA foundations
-- `v0.6.0`: data foundations + dashboard filters + realtime helpers
+- `faststrap[chartjs]` for Chart.js teams
+- `faststrap[gsap]` for richer motion while keeping core `Fx` zero-JS by default
+- `ModernToast` as an opinionated polished toast alternative beside the core Bootstrap toast components
 
-### Phase 6+ (post v0.6.0)
+### Remaining Before Major Release
 
-- **Layout primitives**: Stack, Cluster, Center, Switcher, Sidebar
-- **Data tooling**: DataFrameViewer (virtualized), DataProfiler, ModelReport layout
-- **Chart presets**: common analysis plots + insight helpers
-- **Form extensions**: FormWizard, Stepper, error summary patterns
-- **UI extensions**: Timeline, ProfileDropdown, SearchBar
-- **Workspace and navigation**: SplitPane, MegaMenu, CommandPalette
-- **Feedback**: ModernToast (progressive enhancement, minimal JS)
-- **Optional chart integration**: `ChartJS` via `faststrap[chartjs]`
-- **Optional motion integration**: GSAP-based motion presets via `faststrap[gsap]`
-- **Icon packs**: optional icon registries beyond Bootstrap Icons
-- **Notebook helpers**: render-to-HTML convenience for notebooks
-- **MegaMenu**
-- And 40+ more components...
+- Add focused examples for all newly added components and optional integrations
+- Add at least two showcase apps that exercise the new surfaces in realistic product contexts
+- Finalize release notes/changelog and version metadata
+- Run full CI locally and on GitHub Actions
 
-**Target: 100+ components by v1.0.0 (Aug 2026)**
+**Status: v1.0 component scope reached.**
 
 ### Canonical Next-Component Plan
 
@@ -791,14 +829,15 @@ Pagination(
 ```
 faststrap/
  src/faststrap/               # Library source
-    components/              # 93+ UI components
-    core/                    # Assets, theme, registry, base primitives
+    components/              # 128 registered UI components
+    core/                    # Assets, theme, registry, discovery, base primitives
+    integrations/            # Optional ChartJS and GSAP integrations
     presets/                 # HTMX interaction/response helpers
     seo/                     # SEO + structured data helpers
     pwa/                     # PWA manifest and install helpers
     layouts/                 # Composed page layouts
     static/                  # Vendored Bootstrap/Faststrap assets + favicon
- tests/                       # 646+ tests in CI
+ tests/                       # 779 collected tests in CI
  examples/                    # Structured examples by learning path
     01_getting_started/
     02_ui_components/
