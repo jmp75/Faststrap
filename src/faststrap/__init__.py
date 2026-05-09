@@ -187,6 +187,7 @@ from .core.registry import (
     list_components,
 )
 from .core.theme import (
+    UNSET,
     Theme,
     create_theme,
     get_builtin_theme,
@@ -264,6 +265,7 @@ __all__ = [
     "add_pwa",
     # Theme
     "Theme",
+    "UNSET",
     "create_theme",
     "get_builtin_theme",
     "list_builtin_themes",

@@ -6,7 +6,7 @@ from fasthtml.common import Div, Span
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 AnimationType = Literal["glow", "wave"]
@@ -17,9 +17,9 @@ SizeType = Literal["xs", "sm", "lg"]
 def Placeholder(
     width: str | None = None,
     height: str | None = None,
-    animation: AnimationType | None = None,
-    variant: str | None = None,
-    size: SizeType | None = None,
+    animation: AnimationType | None = UNSET,
+    variant: str | None = UNSET,
+    size: SizeType | None = UNSET,
     **kwargs: Any,
 ) -> Span:
     """Bootstrap Placeholder for skeleton loading screens.
@@ -114,7 +114,7 @@ def PlaceholderCard(
     show_image: bool = True,
     show_title: bool = True,
     show_text: bool = True,
-    animation: AnimationType | None = None,
+    animation: AnimationType | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Pre-built Card skeleton placeholder.
@@ -190,7 +190,7 @@ def PlaceholderCard(
 @register(category="feedback")
 def PlaceholderButton(
     width: str = "100px",
-    animation: AnimationType | None = None,
+    animation: AnimationType | None = UNSET,
     variant: str = "primary",
     **kwargs: Any,
 ) -> Span:

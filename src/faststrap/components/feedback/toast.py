@@ -9,7 +9,7 @@ from fasthtml.common import Button, Div, Strong
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import ToastPositionType, VariantType
 from ...utils.attrs import convert_attrs
 
@@ -18,9 +18,9 @@ from ...utils.attrs import convert_attrs
 def SimpleToast(
     *children: Any,
     title: str | None = None,
-    variant: VariantType | None = None,
-    duration: int | None = None,
-    position: ToastPositionType | None = None,
+    variant: VariantType | None = UNSET,
+    duration: int | None = UNSET,
+    position: ToastPositionType | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Simple Toast component that works without JavaScript."""
@@ -32,7 +32,9 @@ def SimpleToast(
     c_position = cfg.get("position", "top-right")
 
     # Build base classes
-    classes = ["alert", f"alert-{c_variant}", "alert-dismissible", "fade", "show"]
+    classes = ["alert", "alert-dismissible", "fade", "show"]
+    if c_variant:
+        classes.append(f"alert-{c_variant}")
 
     # Position classes for fixed overlay
     position_classes = {
@@ -62,7 +64,7 @@ def SimpleToast(
     }
 
     # Add CSS for auto-hide
-    if c_duration > 0:
+    if c_duration and c_duration > 0:
         duration_ms = int(c_duration)
         # Backward compatibility: historical API used seconds.
         if duration_ms <= 50:
@@ -112,10 +114,10 @@ def SimpleToast(
 def Toast(
     *children: Any,
     title: str | None = None,
-    variant: VariantType | None = None,
-    autohide: bool | None = None,
-    delay: int | None = None,
-    animation: bool | None = None,
+    variant: VariantType | None = UNSET,
+    autohide: bool | None = UNSET,
+    delay: int | None = UNSET,
+    animation: bool | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Toast component for temporary notifications."""
@@ -184,7 +186,7 @@ def Toast(
 @register(category="feedback")
 def ToastContainer(
     *toasts: Any,
-    position: ToastPositionType | None = None,
+    position: ToastPositionType | None = UNSET,
     container_id: str = "toast-container",
     **kwargs: Any,
 ) -> Div:

@@ -11,7 +11,7 @@ from fasthtml.common import H5, Div
 from ...core._ids import uniquify_id
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import ModalSizeType
 from ...utils.attrs import convert_attrs
 from ..forms.button import CloseButton
@@ -48,23 +48,23 @@ def Modal(
     modal_id: str | None = None,
     title: str | None = None,
     footer: Any | None = None,
-    size: ModalSizeType | None = None,
-    centered: bool | None = None,
-    scrollable: bool | None = None,
+    size: ModalSizeType | None = UNSET,
+    centered: bool | None = UNSET,
+    scrollable: bool | None = UNSET,
     fullscreen: (
         bool | Literal["sm-down", "md-down", "lg-down", "xl-down", "xxl-down"] | None
-    ) = None,
-    static_backdrop: bool | None = None,
-    fade: bool | None = None,
-    focus_trap: bool | None = None,
-    autofocus_selector: str | None = None,
-    dialog_cls: str | None = None,
-    content_cls: str | None = None,
-    header_cls: str | None = None,
-    body_cls: str | None = None,
-    footer_cls: str | None = None,
-    title_cls: str | None = None,
-    close_cls: str | None = None,
+    ) = UNSET,
+    static_backdrop: bool | None = UNSET,
+    fade: bool | None = UNSET,
+    focus_trap: bool | None = UNSET,
+    autofocus_selector: str | None = UNSET,
+    dialog_cls: str | None = UNSET,
+    content_cls: str | None = UNSET,
+    header_cls: str | None = UNSET,
+    body_cls: str | None = UNSET,
+    footer_cls: str | None = UNSET,
+    title_cls: str | None = UNSET,
+    close_cls: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Modal component for dialog boxes and overlays.

@@ -165,8 +165,12 @@ def test_navbar_custom_root_id_keeps_unique_collapse_id():
     html = to_xml(Navbar(A("Home", href="/"), id="main-nav"))
 
     assert 'id="main-nav"' in html
-    assert 'id="main-nav-collapse"' in html
-    assert 'data-bs-target="#main-nav-collapse"' in html
+    assert 'id="main-nav-navbar' in html
+    assert '-collapse"' in html
+    target = html.split('data-bs-target="#', 1)[1].split('"', 1)[0]
+    assert target.startswith("main-nav-navbar")
+    assert target.endswith("-collapse")
+    assert f'id="{target}"' in html
 
 
 def test_navbar_items_are_wrapped_in_navbar_nav():

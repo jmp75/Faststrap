@@ -10,7 +10,7 @@ from fasthtml.common import H3, Div, P, Span
 from ...core._stability import beta, stable
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from .card import Card
 
@@ -23,9 +23,9 @@ def StatCard(
     icon: Any | None = None,
     trend: str | None = None,
     trend_type: Literal["up", "down", "neutral"] = "neutral",
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     inverse: bool = False,
-    icon_bg: str | None = None,
+    icon_bg: str | None = UNSET,
     delta: str | int | float | None = None,
     delta_type: Literal["up", "down", "neutral"] | None = None,
     **kwargs: Any,
@@ -142,9 +142,9 @@ def MetricCard(
     delta: str | int | float | None = None,
     delta_type: Literal["up", "down", "neutral"] = "neutral",
     icon: Any | None = None,
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     inverse: bool = False,
-    icon_bg: str | None = None,
+    icon_bg: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Metric card with value and delta indicator."""
@@ -201,7 +201,7 @@ def TrendCard(
     sparkline_safe: bool = False,
     delta: str | int | float | None = None,
     delta_type: Literal["up", "down", "neutral"] = "neutral",
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     inverse: bool = False,
     **kwargs: Any,
 ) -> Div:
@@ -254,7 +254,7 @@ def KPICard(
     title: str,
     metrics: Sequence[Sequence[Any]],
     columns: int = 2,
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     inverse: bool = False,
     **kwargs: Any,
 ) -> Div:

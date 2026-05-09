@@ -8,7 +8,7 @@ from fasthtml.common import A, Button, Div, Li, Ul
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import DirectionType, VariantType
 from ...utils.attrs import convert_attrs
 
@@ -16,14 +16,14 @@ from ...utils.attrs import convert_attrs
 @register(category="navigation", requires_js=True)
 def Dropdown(
     *items: Any,
-    label: str | None = None,
-    variant: VariantType | None = None,
-    size: str | None = None,
-    split: bool | None = None,
-    direction: DirectionType | None = None,
-    toggle_cls: str | None = None,
-    menu_cls: str | None = None,
-    item_cls: str | None = None,
+    label: str | None = UNSET,
+    variant: VariantType | None = UNSET,
+    size: str | None = UNSET,
+    split: bool | None = UNSET,
+    direction: DirectionType | None = UNSET,
+    toggle_cls: str | None = UNSET,
+    menu_cls: str | None = UNSET,
+    item_cls: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Dropdown component for contextual menus.
@@ -71,14 +71,16 @@ def Dropdown(
             "start": "dropstart",
             "end": "dropend",
             "down": "dropdown",
-        }[c_direction]
+        }.get(c_direction, "dropdown")
     )
 
     if c_split:
         container_classes.append("btn-group")
 
     # ---- Button classes --------------------------------------------------- #
-    btn_classes = ["btn", f"btn-{c_variant}"]
+    btn_classes = ["btn"]
+    if c_variant:
+        btn_classes.append(f"btn-{c_variant}")
     if c_size:
         btn_classes.append(f"btn-{c_size}")
 

@@ -43,6 +43,20 @@ def test_pwa_meta_supports_dedicated_manifest_icon_sizes():
     assert tile_meta.attrs.get("content") == "/icon-512.png"
 
 
+def test_pwa_meta_default_icon_matches_add_pwa_manifest_default():
+    tags = PwaMeta(name="Test App")
+    apple_icon = next(
+        t for t in tags if t.tag == "link" and t.attrs.get("rel") == "apple-touch-icon"
+    )
+
+    app = FastHTML()
+    add_pwa(app)
+    client = TestClient(app)
+    manifest = client.get("/manifest.json").json()
+
+    assert apple_icon.attrs.get("href") == manifest["icons"][0]["src"]
+
+
 def test_add_pwa_injection():
     """Test add_pwa injects headers and routes."""
     app = FastHTML()
@@ -185,8 +199,8 @@ def test_add_pwa_scope_uses_scoped_routes_and_registration():
     assert "/myapp/offline" in route_paths
 
     script_text = "".join(str(h) for h in app.hdrs if getattr(h, "tag", "") == "script")
-    assert "register('/myapp/sw.js'" in script_text
-    assert "scope: '/myapp/'" in script_text
+    assert 'register("/myapp/sw.js"' in script_text
+    assert 'scope: "/myapp/"' in script_text
 
 
 def test_background_sync_foundation_disabled_by_default():
@@ -221,7 +235,7 @@ def test_background_sync_foundation_enabled_with_custom_tag():
     assert 'self.addEventListener("sync"' in sw
 
     script_text = "".join(str(h) for h in app.hdrs if getattr(h, "tag", "") == "script")
-    assert "reg.sync.register('faststrap-sync-queue')" in script_text
+    assert 'reg.sync.register("faststrap-sync-queue")' in script_text
 
 
 def test_pwa_route_cache_policies_are_embedded_in_sw():

@@ -25,10 +25,11 @@ btn = Button("Click Me")
 Most complex components support `set_component_defaults`. This is great for keeping your UI consistent across many pages.
 
 ### When to apply defaults
-Set component defaults once during app startup, close to `add_bootstrap(...)` or
-your shared theme setup. `set_component_defaults()` updates process-global
-state, so it is best treated as application configuration rather than something
-to call inside request handlers.
+Set component defaults once during app startup, before the first component is
+rendered, close to `add_bootstrap(...)` or your shared theme setup.
+`set_component_defaults()` updates process-global state, so it is best treated
+as application configuration rather than something to call inside request
+handlers.
 
 ```python
 from faststrap import add_bootstrap, create_theme, set_component_defaults
@@ -38,6 +39,18 @@ theme = create_theme(primary="#5B6CFF", success="#10B981")
 add_bootstrap(app, theme=theme)
 set_component_defaults("Button", variant="primary")
 set_component_defaults("Input", cls="rounded-3")
+```
+
+### Clearing a global default
+
+If a global default is set, pass `None` on a specific component call to clear it
+for that instance.
+
+```python
+set_component_defaults("Button", size="lg")
+
+Button("Large by default")
+Button("Normal size here", size=None)
 ```
 
 ---

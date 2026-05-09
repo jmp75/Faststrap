@@ -10,7 +10,7 @@ from ...core._ids import next_sequential_id
 from ...core._stability import stable
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import ExpandType
 from ...utils.attrs import convert_attrs
 
@@ -107,13 +107,13 @@ def Navbar(
     items: list[Any] | None = None,
     brand: Any | None = None,
     brand_href: str = "/",
-    variant: str | None = None,
-    color_scheme: str | None = None,
-    bg: str | None = None,
-    expand: ExpandType | None = None,
-    sticky: str | None = None,
-    fixed: str | None = None,
-    container: bool | str = True,
+    variant: str | None = UNSET,
+    color_scheme: str | None = UNSET,
+    bg: str | None = UNSET,
+    expand: ExpandType | None = UNSET,
+    sticky: str | None = UNSET,
+    fixed: str | None = UNSET,
+    container: bool | str | None = UNSET,
     **kwargs: Any,
 ) -> Nav:
     """Bootstrap Navbar component for responsive site navigation.
@@ -146,15 +146,15 @@ def Navbar(
 
     # Use color_scheme (with variant as fallback)
     # Priority: 1. explicit color_scheme, 2. explicit variant, 3. global default
-    if color_scheme is not None:
+    if color_scheme is not UNSET:
         c_scheme = color_scheme
-    elif variant is not None:
+    elif variant is not UNSET:
         c_scheme = variant
     else:
         c_scheme = cfg.get("color_scheme") or cfg.get("variant", "light")
 
     c_bg = cfg.get("bg")
-    c_expand = expand if expand is not None else cfg.get("expand", "lg")
+    c_expand = cfg.get("expand", "lg")
     c_sticky = cfg.get("sticky")
     c_fixed = cfg.get("fixed")
     c_container = cfg.get("container", True)
@@ -172,7 +172,8 @@ def Navbar(
             classes.append(f"navbar-expand-{c_expand}")
 
     # Add variant/color-scheme
-    classes.append(f"navbar-{c_scheme}")
+    if c_scheme:
+        classes.append(f"navbar-{c_scheme}")
 
     # Add background
     if c_bg:
@@ -217,7 +218,8 @@ def Navbar(
 
         # Toggler for mobile (collapse button)
         if c_expand:
-            toggler_id = f"{root_id}-collapse" if root_id else _get_next_navbar_id()
+            suffix = _get_next_navbar_id()
+            toggler_id = f"{root_id}-{suffix}-collapse" if root_id else suffix
 
             toggler = Button(
                 Span(cls="navbar-toggler-icon"),
@@ -246,7 +248,8 @@ def Navbar(
 
         if c_expand:
             # Still need collapse for mobile
-            toggler_id = f"{root_id}-collapse" if root_id else _get_next_navbar_id()
+            suffix = _get_next_navbar_id()
+            toggler_id = f"{root_id}-{suffix}-collapse" if root_id else suffix
 
             toggler = Button(
                 Span(cls="navbar-toggler-icon"),

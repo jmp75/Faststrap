@@ -8,7 +8,7 @@ from fasthtml.common import Button, Div, Li, Ul
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import TabType
 from ...utils.attrs import convert_attrs
 
@@ -16,11 +16,11 @@ from ...utils.attrs import convert_attrs
 @register(category="navigation", requires_js=True)
 def Tabs(
     *items: tuple[str, Any, bool] | tuple[str, Any],
-    variant: TabType | None = None,
-    justified: bool | None = None,
-    fill: bool | None = None,
-    vertical: bool | None = None,
-    htmx: bool | None = None,
+    variant: TabType | None = UNSET,
+    justified: bool | None = UNSET,
+    fill: bool | None = UNSET,
+    vertical: bool | None = UNSET,
+    htmx: bool | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Tabs navigation component.

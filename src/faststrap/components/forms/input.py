@@ -10,7 +10,7 @@ from fasthtml.common import Textarea as FTTextarea
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import InputType, SizeType
 from ...utils.attrs import convert_attrs
 
@@ -18,15 +18,15 @@ from ...utils.attrs import convert_attrs
 @register(category="forms")
 def Input(
     name: str,
-    input_type: InputType | None = None,
+    input_type: InputType | None = UNSET,
     placeholder: str | None = None,
     value: str | None = None,
     label: str | None = None,
     help_text: str | None = None,
-    size: SizeType | None = None,
-    disabled: bool | None = None,
-    readonly: bool | None = None,
-    required: bool | None = None,
+    size: SizeType | None = UNSET,
+    disabled: bool | None = UNSET,
+    readonly: bool | None = UNSET,
+    required: bool | None = UNSET,
     validation_state: str | None = None,
     validation_message: str | None = None,
     **kwargs: Any,
@@ -80,10 +80,11 @@ def Input(
     # Build attributes
     attrs: dict[str, Any] = {
         "cls": input_cls,
-        "type": c_type,
         "name": name,
         "id": input_id,
     }
+    if c_type:
+        attrs["type"] = c_type
 
     if placeholder:
         attrs["placeholder"] = placeholder

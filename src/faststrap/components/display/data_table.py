@@ -70,6 +70,31 @@ def _build_url(base_url: str, params: dict[str, Any]) -> str:
     return urlunsplit((parts.scheme, parts.netloc, parts.path, query, parts.fragment))
 
 
+def _pagination_window(
+    current: int,
+    total: int,
+    *,
+    wing: int = 2,
+) -> list[int | None]:
+    """Return visible page numbers, using None as an ellipsis marker."""
+    if total <= 0:
+        return []
+    if total <= (wing * 2) + 5:
+        return list(range(1, total + 1))
+
+    visible = {1, total}
+    visible.update(range(max(1, current - wing), min(total, current + wing) + 1))
+
+    window: list[int | None] = []
+    previous: int | None = None
+    for page_num in sorted(visible):
+        if previous is not None and page_num - previous > 1:
+            window.append(None)
+        window.append(page_num)
+        previous = page_num
+    return window
+
+
 def _matches_search(
     row: dict[str, Any],
     *,
@@ -538,7 +563,16 @@ def DataTable(
 
     if c_pagination and total_pages > 1:
         pager_links: list[Any] = []
-        for page_num in range(1, total_pages + 1):
+        for page_num in _pagination_window(page, total_pages):
+            if page_num is None:
+                pager_links.append(
+                    Li(
+                        Span("...", cls="page-link"),
+                        cls="page-item disabled",
+                        aria_hidden="true",
+                    )
+                )
+                continue
             active = page_num == page
             if link_base:
                 params = {**base_params, "page": page_num}

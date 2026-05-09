@@ -33,7 +33,10 @@ venv.bak/
 
 # Testing
 .pytest_cache/
+.codex-pytest-tmp/
+.pytest-release-*/
 .pytest_tmp/
+.pytest_tmp_run_*/
 .coverage
 .coverage.*
 htmlcov/
@@ -45,6 +48,8 @@ pytest_fail.txt
 test_fail.txt
 test_tmp_run/
 test_tmp_run2/
+pytest_tmp_env/
+release-pytest-temp-*/
 debug_imports.py
 log.txt
 fasthtml_exports.txt

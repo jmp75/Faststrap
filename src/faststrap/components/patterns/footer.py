@@ -10,6 +10,7 @@ from fasthtml.common import A, Div, Footer, Hr, P, Span
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 from ...utils.icons import Icon
 
@@ -22,8 +23,8 @@ def FooterModern(
     columns: list[dict[str, Any]] | None = None,
     social_links: list[dict[str, str]] | None = None,
     copyright_text: str | None = None,
-    bg_variant: str | None = None,
-    text_variant: str | None = None,
+    bg_variant: str | None = UNSET,
+    text_variant: str | None = UNSET,
     **kwargs: Any,
 ) -> Footer:
     """Modern multi-column footer with branding, links, and social icons.
@@ -82,7 +83,6 @@ def FooterModern(
     Note:
         Marked as @beta - API may change in future releases.
     """
-    from ...core.theme import resolve_defaults
     from ..layout.grid import Col, Container, Row
 
     # Resolve API defaults

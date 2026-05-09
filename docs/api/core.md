@@ -60,7 +60,8 @@ standard way to preserve HTMX support and attribute conversion consistently.
 
 Notes:
 - `add_bootstrap()` supports `font_family` and `font_weights` for Google Fonts injection.
-- `set_component_defaults()` modifies process-global defaults. Configure it at application startup.
+- `set_component_defaults()` modifies process-global defaults. Configure it at application startup before rendering components.
+- Component calls can pass `None` to clear a configured default for that instance.
 - `convert_attrs()` is available from `faststrap` directly for custom components and wrappers.
 - `BaseComponent` / `Component` are extension points for third-party class-based components; built-ins remain function-based.
 - `BaseComponent.merge_attrs()` applies `convert_attrs()` so class-based components keep the same attribute conversion behavior as function-based components.

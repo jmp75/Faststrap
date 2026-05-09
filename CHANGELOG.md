@@ -50,6 +50,13 @@ No unreleased changes.
 
 ### Fixed
 
+- Added pre-release audit hardening for default resolution, PWA script escaping, asset setup idempotency, registry discovery locking, and large `DataTable` pagination.
+- `resolve_defaults()` now distinguishes omitted values from explicit `None`, allowing a component call to clear a global default safely.
+- `PwaMeta()` and `add_pwa()` now share the same default icon path.
+- Repeated `add_bootstrap()` calls now warn and return instead of raising after a successful setup.
+- Large `DataTable` paginators now render a bounded page window with ellipses instead of every page link.
+- `Button()` now defaults rendered `<button>` elements to `type="button"` to avoid accidental form submission.
+- `Navbar()` collapse targets remain unique even when multiple navbars reuse the same root `id`.
 - Hardened `require_auth()` redirects to preserve only relative return paths and avoid open redirect behavior.
 - Corrected `InfiniteScroll` threshold handling for valid HTMX behavior while preserving existing length-based threshold usage through Faststrap runtime support.
 - Fixed `DataTable` local search/sort state, pagination index slicing, and `aria-sort` output.

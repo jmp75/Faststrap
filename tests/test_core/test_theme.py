@@ -4,6 +4,7 @@ from fasthtml.common import FastHTML
 from faststrap.core import assets as assets_module
 from faststrap.core.assets import add_bootstrap
 from faststrap.core.theme import (
+    UNSET,
     Theme,
     create_theme,
     get_builtin_theme,
@@ -129,19 +130,24 @@ def test_resolve_defaults_mechanics():
     """Test the priority logic of resolve_defaults."""
     reset_component_defaults()
 
-    # 1. Hardcoded fallback (resets to primary)
-    res = resolve_defaults("Button", variant=None)
+    # 1. Omitted values use global defaults
+    res = resolve_defaults("Button", variant=UNSET)
     assert res.get("variant") == "primary"
 
     # 2. Set global default
     set_component_defaults("Button", variant="success", size="lg")
-    res = resolve_defaults("Button", variant=None, size=None)
+    res = resolve_defaults("Button", variant=UNSET, size=UNSET)
     assert res["variant"] == "success"
     assert res["size"] == "lg"
 
     # 3. Explicit argument overrides global default
-    res = resolve_defaults("Button", variant="danger", size=None)
+    res = resolve_defaults("Button", variant="danger", size=UNSET)
     assert res["variant"] == "danger"
+    assert res["size"] == "lg"
+
+    # 4. Explicit None clears a default
+    res = resolve_defaults("Button", variant=None, size=UNSET)
+    assert res["variant"] is None
     assert res["size"] == "lg"
 
     reset_component_defaults()
@@ -169,8 +175,12 @@ def test_slot_classes_resolution():
     set_component_defaults("Card", header_cls="bg-primary text-white")
 
     # No explicit override
-    res = resolve_defaults("Card", header_cls=None)
+    res = resolve_defaults("Card", header_cls=UNSET)
     assert res["header_cls"] == "bg-primary text-white"
+
+    # Explicit None clears the slot class default
+    res = resolve_defaults("Card", header_cls=None)
+    assert res["header_cls"] is None
 
     # Explicit override
     res = resolve_defaults("Card", header_cls="custom-header")

@@ -8,6 +8,7 @@ from typing import Any
 from fasthtml.common import Div, P
 
 from ...core.registry import register
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.icons import Icon
 from ..forms.button import Button
@@ -18,7 +19,7 @@ from .modal import Modal
 def ErrorDialog(
     message: str,
     title: str = "Error",
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     modal_id: str = "error-dialog",
     retry_url: str | None = None,
     retry_text: str = "Retry",
@@ -92,9 +93,6 @@ def ErrorDialog(
         new bootstrap.Modal(document.getElementById('error-dialog')).show();
         ```
     """
-    # Resolve API defaults
-    from ...core.theme import resolve_defaults
-
     cfg = resolve_defaults("ErrorDialog", variant=variant)
     c_variant = cfg.get("variant", "danger")
 

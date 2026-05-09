@@ -9,7 +9,7 @@ from fasthtml.common import Button as FTButton
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import SizeType, VariantType
 from ...utils.attrs import convert_attrs
 
@@ -49,10 +49,10 @@ def CloseButton(
 def Button(
     *children: Any,
     as_: Literal["button", "a"] = "button",
-    variant: VariantType | None = None,
-    size: SizeType | None = None,
-    outline: bool = False,
-    disabled: bool = False,
+    variant: VariantType | None = UNSET,
+    size: SizeType | None = UNSET,
+    outline: bool | None = UNSET,
+    disabled: bool | None = UNSET,
     loading: bool = False,
     spinner: bool = True,
     loading_text: str | None = None,
@@ -61,9 +61,9 @@ def Button(
     icon_cls: str | None = None,
     spinner_pos: Literal["start", "end"] = "start",
     spinner_cls: str | None = None,
-    full_width: bool = False,
-    active: bool = False,
-    pill: bool = False,
+    full_width: bool | None = UNSET,
+    active: bool | None = UNSET,
+    pill: bool | None = UNSET,
     css_vars: dict[str, Any] | None = None,
     style: dict[str, Any] | str | None = None,
     **kwargs: Any,
@@ -170,6 +170,8 @@ def Button(
 
     # Convert remaining kwargs (including hx_*, data_*, etc.)
     attrs.update(convert_attrs(kwargs))
+    if as_ == "button":
+        attrs.setdefault("type", "button")
 
     # Build content
     content = list(children)

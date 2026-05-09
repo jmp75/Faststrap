@@ -9,7 +9,7 @@ from fasthtml.common import Div
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 
@@ -24,8 +24,8 @@ def _normalize_size(value: str | int) -> str:
 def Mermaid(
     diagram: str,
     *,
-    theme: str | None = None,
-    security_level: str | None = None,
+    theme: str | None = UNSET,
+    security_level: str | None = UNSET,
     min_width: str | int | None = None,
     **kwargs: Any,
 ) -> Div:

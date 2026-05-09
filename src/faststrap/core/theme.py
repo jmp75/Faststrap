@@ -10,6 +10,7 @@ This module provides:
 from __future__ import annotations
 
 import re
+import threading
 import warnings
 from typing import Any, Literal
 
@@ -734,6 +735,20 @@ _COMPONENT_DEFAULTS: dict[str, dict[str, Any]] = {
 }
 _COMPONENT_DEFAULTS_LOCKED = False
 _COMPONENT_DEFAULTS_WARNED = False
+_COMPONENT_DEFAULTS_LOCK = threading.RLock()
+
+
+class _UnsetDefault:
+    """Sentinel for parameters the caller did not provide."""
+
+    def __bool__(self) -> bool:
+        return False
+
+    def __repr__(self) -> str:
+        return "UNSET"
+
+
+UNSET: Any = _UnsetDefault()
 
 
 def get_component_defaults(component: str) -> dict[str, Any]:
@@ -745,7 +760,8 @@ def get_component_defaults(component: str) -> dict[str, Any]:
     Returns:
         Dict of default values
     """
-    return _COMPONENT_DEFAULTS.get(component, {}).copy()
+    with _COMPONENT_DEFAULTS_LOCK:
+        return _COMPONENT_DEFAULTS.get(component, {}).copy()
 
 
 def set_component_defaults(component: str, **defaults: Any) -> None:
@@ -764,18 +780,19 @@ def set_component_defaults(component: str, **defaults: Any) -> None:
     """
     global _COMPONENT_DEFAULTS_WARNED
 
-    if _COMPONENT_DEFAULTS_LOCKED and not _COMPONENT_DEFAULTS_WARNED:
-        warnings.warn(
-            "set_component_defaults() updates process-global state. "
-            "Prefer calling it during application startup before handling requests.",
-            RuntimeWarning,
-            stacklevel=2,
-        )
-        _COMPONENT_DEFAULTS_WARNED = True
+    with _COMPONENT_DEFAULTS_LOCK:
+        if _COMPONENT_DEFAULTS_LOCKED and not _COMPONENT_DEFAULTS_WARNED:
+            warnings.warn(
+                "set_component_defaults() updates process-global state. "
+                "Prefer calling it during application startup before handling requests.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+            _COMPONENT_DEFAULTS_WARNED = True
 
-    if component not in _COMPONENT_DEFAULTS:
-        _COMPONENT_DEFAULTS[component] = {}
-    _COMPONENT_DEFAULTS[component].update(defaults)
+        if component not in _COMPONENT_DEFAULTS:
+            _COMPONENT_DEFAULTS[component] = {}
+        _COMPONENT_DEFAULTS[component].update(defaults)
 
 
 def reset_component_defaults(component: str | None = None) -> None:
@@ -786,21 +803,23 @@ def reset_component_defaults(component: str | None = None) -> None:
     """
     global _COMPONENT_DEFAULTS, _COMPONENT_DEFAULTS_LOCKED, _COMPONENT_DEFAULTS_WARNED
 
-    if component is None:
-        # Reset all components to original defaults
-        _COMPONENT_DEFAULTS = {k: v.copy() for k, v in _DEFAULT_COMPONENT_DEFAULTS.items()}
-        _COMPONENT_DEFAULTS_LOCKED = False
-        _COMPONENT_DEFAULTS_WARNED = False
-    elif component in _DEFAULT_COMPONENT_DEFAULTS:
-        # Reset specific component to original default
-        _COMPONENT_DEFAULTS[component] = _DEFAULT_COMPONENT_DEFAULTS[component].copy()
+    with _COMPONENT_DEFAULTS_LOCK:
+        if component is None:
+            # Reset all components to original defaults
+            _COMPONENT_DEFAULTS = {k: v.copy() for k, v in _DEFAULT_COMPONENT_DEFAULTS.items()}
+            _COMPONENT_DEFAULTS_LOCKED = False
+            _COMPONENT_DEFAULTS_WARNED = False
+            _BUILTIN_THEME_CACHE.clear()
+        elif component in _DEFAULT_COMPONENT_DEFAULTS:
+            # Reset specific component to original default
+            _COMPONENT_DEFAULTS[component] = _DEFAULT_COMPONENT_DEFAULTS[component].copy()
 
 
 def resolve_defaults(component: str, **kwargs: Any) -> dict[str, Any]:
     """Resolve component attributes by merging defaults with user arguments.
 
     Priority (highest to lowest):
-    1. Explicit user arguments (if not None)
+    1. Explicit user arguments (including None when passed intentionally)
     2. Global component defaults (set via set_component_defaults)
 
     Args:
@@ -812,17 +831,20 @@ def resolve_defaults(component: str, **kwargs: Any) -> dict[str, Any]:
 
     Example:
         >>> set_component_defaults("Button", variant="secondary")
-        >>> resolve_defaults("Button", variant=None, size="lg")
+        >>> resolve_defaults("Button", variant=UNSET, size="lg")
         {"variant": "secondary", "size": "lg"}
+        >>> resolve_defaults("Button", variant=None)
+        {"variant": None, "size": None, "outline": False}
     """
     global _COMPONENT_DEFAULTS_LOCKED
-    _COMPONENT_DEFAULTS_LOCKED = True
 
-    defaults = get_component_defaults(component)
+    with _COMPONENT_DEFAULTS_LOCK:
+        _COMPONENT_DEFAULTS_LOCKED = True
+        defaults = _COMPONENT_DEFAULTS.get(component, {}).copy()
+
     resolved = defaults.copy()
 
     for key, value in kwargs.items():
-        if value is not None:
+        if value is not UNSET:
             resolved[key] = value
-
     return resolved

@@ -13,6 +13,7 @@ def test_button_basic():
     assert "Click Me" in html
     assert "btn" in html
     assert "btn-primary" in html
+    assert 'type="button"' in html
 
 
 def test_button_variants():

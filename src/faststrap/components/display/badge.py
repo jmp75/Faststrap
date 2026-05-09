@@ -9,7 +9,7 @@ from fasthtml.common import Span
 from ...core._stability import stable
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 
@@ -18,8 +18,8 @@ from ...utils.attrs import convert_attrs
 @stable
 def Badge(
     *children: Any,
-    variant: VariantType | None = None,
-    pill: bool | None = None,
+    variant: VariantType | None = UNSET,
+    pill: bool | None = UNSET,
     **kwargs: Any,
 ) -> Span:
     """Bootstrap Badge component for status indicators and labels.
@@ -47,7 +47,8 @@ def Badge(
     classes = ["badge"]
 
     # Add variant background
-    classes.append(f"text-bg-{c_variant}")
+    if c_variant:
+        classes.append(f"text-bg-{c_variant}")
 
     # Add pill style if requested
     if c_pill:

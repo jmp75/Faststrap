@@ -6,7 +6,7 @@ from fasthtml.common import A, Button, Div, Nav, Span
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 BlurStrength = Literal["low", "medium", "high"]
@@ -17,11 +17,11 @@ def GlassNavbar(
     *items: Any,
     brand: str | None = None,
     brand_href: str = "/",
-    blur_strength: BlurStrength | None = None,
-    transparency: float | None = None,
-    theme: str | None = None,
-    sticky: bool | None = None,
-    expand: str | None = None,
+    blur_strength: BlurStrength | None = UNSET,
+    transparency: float | None = UNSET,
+    theme: str | None = UNSET,
+    sticky: bool | None = UNSET,
+    expand: str | None = UNSET,
     **kwargs: Any,
 ) -> Nav:
     """Premium glassmorphism navbar with blur and transparency.

@@ -9,7 +9,7 @@ from fasthtml.common import Select as FTSelect
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import SizeType
 from ...utils.attrs import convert_attrs
 
@@ -20,10 +20,10 @@ def Select(
     *options: tuple[str, str] | tuple[str, str, bool],
     label: str | None = None,
     help_text: str | None = None,
-    size: SizeType | None = None,
-    disabled: bool | None = None,
-    required: bool | None = None,
-    multiple: bool | None = None,
+    size: SizeType | None = UNSET,
+    disabled: bool | None = UNSET,
+    required: bool | None = UNSET,
+    multiple: bool | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Select component for dropdown selections.

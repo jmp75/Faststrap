@@ -8,17 +8,17 @@ from fasthtml.common import Div, Span
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 
 
 @register(category="feedback")
 def Spinner(
-    variant: VariantType | None = None,
-    size: str | None = None,
-    spinner_type: str | None = None,
-    label: str | None = None,
+    variant: VariantType | None = UNSET,
+    size: str | None = UNSET,
+    spinner_type: str | None = UNSET,
+    label: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Spinner component for loading indicators.
@@ -44,13 +44,13 @@ def Spinner(
     c_label = cfg.get("label", "Loading...")
 
     # Build spinner classes
-    classes = [f"spinner-{c_type}"]
+    classes = [f"spinner-{c_type or 'border'}"]
 
     if c_variant:
         classes.append(f"text-{c_variant}")
 
     if c_size == "sm":
-        classes.append(f"spinner-{c_type}-sm")
+        classes.append(f"spinner-{c_type or 'border'}-sm")
 
     # Merge with user classes
     user_cls = kwargs.pop("cls", "")

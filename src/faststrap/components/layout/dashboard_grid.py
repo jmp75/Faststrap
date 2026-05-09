@@ -9,7 +9,7 @@ from fasthtml.common import Div
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 
@@ -29,7 +29,7 @@ def _normalize_px(value: str | int | float) -> str:
 @beta
 def DashboardGrid(
     *children: Any,
-    cols: int | None = None,
+    cols: int | None = UNSET,
     gap: str | int | float = 1.5,
     min_card_width: str | int | float = 240,
     dense: bool = False,

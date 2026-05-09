@@ -8,7 +8,7 @@ from fasthtml.common import A, Div, Nav, Small
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 from ...utils.icons import Icon
 
@@ -16,7 +16,7 @@ from ...utils.icons import Icon
 @register(category="navigation")
 def BottomNav(
     *children: Any,
-    variant: str | None = None,
+    variant: str | None = UNSET,
     fixed: bool | None = True,  # Default to fixed-bottom which is standard for apps
     labels: bool = True,
     **kwargs: Any,

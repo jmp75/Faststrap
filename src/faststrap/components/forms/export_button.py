@@ -11,7 +11,7 @@ from fasthtml.common import Input as FTInput
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 from .button import Button
@@ -56,7 +56,7 @@ def ExportButton(
     hx_target: str | None = None,
     hx_swap: str | None = "none",
     push_url: bool = False,
-    variant: VariantType | None = None,
+    variant: VariantType | None = UNSET,
     outline: bool = True,
     icon: str | None = "download",
     extra_params: dict[str, Any] | None = None,

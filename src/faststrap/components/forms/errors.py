@@ -8,7 +8,7 @@ from typing import Any, Literal
 from fasthtml.common import H6, Div, Li, Ul
 
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 from ..feedback.alert import Alert
 from .formgroup import FormGroup
@@ -124,11 +124,11 @@ def FormErrorSummary(
     errors: Mapping[str, Any] | Iterable[str] | str | None,
     *,
     title: str = "Please fix the following",
-    variant: str | None = None,
-    heading_cls: str | None = None,
+    variant: str | None = UNSET,
+    heading_cls: str | None = UNSET,
     list_cls: str | None = None,
     show_field_names: bool = True,
-    dismissible: bool | None = None,
+    dismissible: bool | None = UNSET,
     **kwargs: Any,
 ) -> Any | None:
     """Render a compact alert summary for validation errors."""

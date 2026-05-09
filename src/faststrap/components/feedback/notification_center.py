@@ -11,7 +11,7 @@ from fasthtml.common import A, Div, Span
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 from ...utils.icons import Icon
@@ -48,7 +48,7 @@ def NotificationCenter(
     center_id: str | None = None,
     menu_cls: str | None = None,
     button_cls: str | None = None,
-    badge_variant: VariantType | None = None,
+    badge_variant: VariantType | None = UNSET,
     empty_text: str = "No notifications",
     max_items: int | None = None,
     hx_swap: str | None = "innerHTML",

@@ -8,7 +8,7 @@ from fasthtml.common import H5, Div
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import PlacementType
 from ...utils.attrs import convert_attrs
 from ..forms.button import CloseButton
@@ -20,17 +20,17 @@ def Drawer(
     drawer_id: str | None = None,
     title: str | None = None,
     footer: Any | None = None,
-    placement: PlacementType | None = None,
-    backdrop: bool | None = None,
-    scroll: bool | None = None,
-    dark: bool | None = None,
-    focus_trap: bool | None = None,
-    autofocus_selector: str | None = None,
-    header_cls: str | None = None,
-    body_cls: str | None = None,
-    footer_cls: str | None = None,
-    title_cls: str | None = None,
-    close_cls: str | None = None,
+    placement: PlacementType | None = UNSET,
+    backdrop: bool | None = UNSET,
+    scroll: bool | None = UNSET,
+    dark: bool | None = UNSET,
+    focus_trap: bool | None = UNSET,
+    autofocus_selector: str | None = UNSET,
+    header_cls: str | None = UNSET,
+    body_cls: str | None = UNSET,
+    footer_cls: str | None = UNSET,
+    title_cls: str | None = UNSET,
+    close_cls: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Offcanvas (Drawer) component for side panels and menus.
@@ -86,7 +86,9 @@ def Drawer(
         drawer_id = f"drawer-{uuid4().hex}"
 
     # Build offcanvas classes
-    classes = ["offcanvas", f"offcanvas-{c_placement}"]
+    classes = ["offcanvas"]
+    if c_placement:
+        classes.append(f"offcanvas-{c_placement}")
 
     if c_dark:
         classes.append("offcanvas-dark")

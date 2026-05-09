@@ -842,12 +842,12 @@ def add_bootstrap(
         add_bootstrap(app, theme="blue-ocean", mode="auto", use_cdn=True)
     """
     if getattr(app, "_faststrap_bootstrap_added", False):
-        raise RuntimeError(
-            "add_bootstrap() has already been called on this app. "
-            "It should only be called once during app setup. "
-            "If you are using fast_app(), call add_bootstrap() after "
-            "fast_app() returns the app object."
+        warnings.warn(
+            "add_bootstrap() has already been called on this app. " "Subsequent calls are ignored.",
+            RuntimeWarning,
+            stacklevel=2,
         )
+        return
     if use_cdn is None:
         use_cdn = environ.get("FASTSTRAP_USE_CDN", "false").lower() == "true"
     include_js = True if components is None else _any_requires_js(components)

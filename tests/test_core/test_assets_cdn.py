@@ -1,5 +1,6 @@
 """Tests for CDN asset composition and add_bootstrap behavior."""
 
+import pytest
 from fasthtml.common import FastHTML
 
 from faststrap.core.assets import (
@@ -61,14 +62,11 @@ def test_add_bootstrap_use_cdn_does_not_mount_static_routes():
     assert not any(getattr(route, "name", "") == "faststrap_static" for route in app.routes)
 
 
-def test_add_bootstrap_duplicate_call_raises():
+def test_add_bootstrap_duplicate_call_warns_and_returns():
     app = FastHTML()
     add_bootstrap(app, use_cdn=True)
-    try:
+    with pytest.warns(RuntimeWarning, match="already been called"):
         add_bootstrap(app, use_cdn=True)
-        raise AssertionError("Expected duplicate add_bootstrap() guard")
-    except RuntimeError as exc:
-        assert "already been called" in str(exc)
 
 
 def test_add_bootstrap_sets_guard_only_after_success(monkeypatch):

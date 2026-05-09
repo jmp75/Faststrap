@@ -6,7 +6,7 @@ from fasthtml.common import A, Div, Nav, Span
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 from ...utils.icons import Icon
 
@@ -16,11 +16,11 @@ def SidebarNavbar(
     *items: Any,
     brand: str | None = None,
     brand_href: str = "/",
-    position: str | None = None,
-    width: str | None = None,
-    collapsible: bool | None = None,
-    theme: str | None = None,
-    sticky: bool | None = None,
+    position: str | None = UNSET,
+    width: str | None = UNSET,
+    collapsible: bool | None = UNSET,
+    theme: str | None = UNSET,
+    sticky: bool | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Premium vertical sidebar navbar with icon support.

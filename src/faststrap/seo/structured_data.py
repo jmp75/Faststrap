@@ -6,6 +6,7 @@ Provides helper methods for generating Schema.org structured data in JSON-LD for
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from fasthtml.common import Script
@@ -69,6 +70,21 @@ def _expand_day_spec(days: str) -> list[str]:
 
     single = _normalize_day_token(normalized)
     return [single] if single else []
+
+
+def _parse_time_range(time_range: str) -> tuple[str, str] | None:
+    """Parse a Schema.org opening-hours time range.
+
+    Accepts common 24-hour values such as ``"07:00-19:00"`` and avoids
+    emitting invalid ``opens``/``closes`` pairs for values like ``"closed"``.
+    """
+    match = re.fullmatch(
+        r"\s*(\d{1,2}:\d{2}(?::\d{2})?)\s*-\s*(\d{1,2}:\d{2}(?::\d{2})?)\s*",
+        time_range,
+    )
+    if not match:
+        return None
+    return match.group(1), match.group(2)
 
 
 class StructuredData:
@@ -361,9 +377,13 @@ class StructuredData:
         }
 
         if hours:
-            # Convert hours dict to OpeningHoursSpecification
+            # Convert hours dict to OpeningHoursSpecification.
             opening_hours = []
             for days, time_range in hours.items():
+                parsed_time_range = _parse_time_range(time_range)
+                if parsed_time_range is None:
+                    continue
+
                 normalized_days = _expand_day_spec(days)
                 day_of_week: str | list[str]
                 if normalized_days:
@@ -377,11 +397,12 @@ class StructuredData:
                     {
                         "@type": "OpeningHoursSpecification",
                         "dayOfWeek": day_of_week,
-                        "opens": time_range.split("-")[0] if "-" in time_range else time_range,
-                        "closes": time_range.split("-")[1] if "-" in time_range else time_range,
+                        "opens": parsed_time_range[0],
+                        "closes": parsed_time_range[1],
                     }
                 )
-            data["openingHoursSpecification"] = opening_hours
+            if opening_hours:
+                data["openingHoursSpecification"] = opening_hours
 
         # Add any additional properties
         data.update(kwargs)

@@ -6,7 +6,7 @@ from fasthtml.common import Img
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 AlignType = Literal["start", "center", "end"]
@@ -16,14 +16,14 @@ AlignType = Literal["start", "center", "end"]
 def Image(
     src: str,
     alt: str | None = None,
-    fluid: bool | None = None,
-    thumbnail: bool | None = None,
-    rounded: bool | None = None,
-    rounded_circle: bool | None = None,
-    align: AlignType | None = None,
+    fluid: bool | None = UNSET,
+    thumbnail: bool | None = UNSET,
+    rounded: bool | None = UNSET,
+    rounded_circle: bool | None = UNSET,
+    align: AlignType | None = UNSET,
     width: str | int | None = None,
     height: str | int | None = None,
-    loading: Literal["lazy", "eager"] | None = None,
+    loading: Literal["lazy", "eager"] | None = UNSET,
     **kwargs: Any,
 ) -> Img:
     """Bootstrap Image component with responsive utilities.

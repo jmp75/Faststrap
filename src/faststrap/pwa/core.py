@@ -16,6 +16,8 @@ from ..core.assets import (
     _get_faststrap_cdn_version,
 )
 
+_DEFAULT_ICON_PATH = "/assets/icon.png"
+
 
 def _join_scope_path(scope: str, path: str) -> str:
     """Join a deployment scope and absolute path into a scoped absolute URL."""
@@ -45,15 +47,18 @@ def _build_sw_register_script(
     """Build service worker registration script for the configured scope."""
     sync_registration = ""
     if enable_background_sync:
+        sync_tag = json.dumps(background_sync_tag)
         sync_registration = f"""
                 if ('sync' in reg) {{
-                    reg.sync.register({background_sync_tag!r}).catch(err => console.log('Sync register failed', err));
+                    reg.sync.register({sync_tag}).catch(err => console.log('Sync register failed', err));
                 }}
 """
+    sw_path_js = json.dumps(sw_path)
+    scope_js = json.dumps(scope)
     return f"""
 if ('serviceWorker' in navigator) {{
     window.addEventListener('load', () => {{
-        navigator.serviceWorker.register({sw_path!r}, {{ scope: {scope!r} }})
+        navigator.serviceWorker.register({sw_path_js}, {{ scope: {scope_js} }})
             .then(reg => {{
                 console.log('SW registered!', reg);
                 {sync_registration}
@@ -114,22 +119,26 @@ def _render_sw_script(
     default_push_title: str,
 ) -> str:
     """Render a robust network-first + runtime-caching service worker."""
-    escaped_urls = ",\n  ".join(f'"{url}"' for url in pre_cache_urls)
+    escaped_urls = ",\n  ".join(json.dumps(url) for url in pre_cache_urls)
     full_cache_name = f"{cache_name}-{cache_version}"
     serialized_route_policies = json.dumps(route_cache_policies or {})
+    cache_name_js = json.dumps(full_cache_name)
+    offline_fallback_js = json.dumps(offline_fallback_path)
+    background_sync_tag_js = json.dumps(background_sync_tag)
+    default_push_title_js = json.dumps(default_push_title)
 
-    return f"""const CACHE_NAME = "{full_cache_name}";
-const OFFLINE_FALLBACK = "{offline_fallback_path}";
+    return f"""const CACHE_NAME = {cache_name_js};
+const OFFLINE_FALLBACK = {offline_fallback_js};
 const PRECACHE_URLS = [
   {escaped_urls}
 ];
 
 const STATIC_DESTINATIONS = new Set(["style", "script", "image", "font"]);
 const ENABLE_BACKGROUND_SYNC = {"true" if enable_background_sync else "false"};
-const BACKGROUND_SYNC_TAG = "{background_sync_tag}";
+const BACKGROUND_SYNC_TAG = {background_sync_tag_js};
 const ROUTE_CACHE_POLICIES = {serialized_route_policies};
 const ENABLE_PUSH = {"true" if enable_push else "false"};
-const DEFAULT_PUSH_TITLE = "{default_push_title}";
+const DEFAULT_PUSH_TITLE = {default_push_title_js};
 
 function isHttpRequest(request) {{
   return request.url.startsWith("http://") || request.url.startsWith("https://");
@@ -296,7 +305,7 @@ def PwaMeta(
     theme_color: str = "#ffffff",
     background_color: str = "#ffffff",
     description: str | None = None,
-    icon_path: str = "/static/icon.png",  # Default path
+    icon_path: str = _DEFAULT_ICON_PATH,
     icon_192: str | None = None,
     icon_512: str | None = None,
     manifest_path: str = "/manifest.json",
@@ -358,7 +367,7 @@ def add_pwa(
     description: str = "A Progressive Web App built with Faststrap",
     theme_color: str = "#ffffff",
     background_color: str = "#ffffff",
-    icon_path: str = "/assets/icon.png",
+    icon_path: str = _DEFAULT_ICON_PATH,
     icon_192: str | None = None,
     icon_512: str | None = None,
     display: str = "standalone",

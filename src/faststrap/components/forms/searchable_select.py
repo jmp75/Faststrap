@@ -12,7 +12,7 @@ from fasthtml.common import A, Div, Input, Option, Select
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import SizeType
 from ...utils.attrs import convert_attrs
 
@@ -51,7 +51,7 @@ def SearchableSelect(
     debounce: int = 300,
     initial_options: list[tuple[str, str]] | None = None,
     required: bool = False,
-    size: SizeType | None = None,
+    size: SizeType | None = UNSET,
     select_id: str | None = None,
     csp_safe: bool | None = None,
     **kwargs: Any,

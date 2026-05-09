@@ -8,7 +8,7 @@ from fasthtml.common import Div
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 
@@ -17,9 +17,9 @@ from ...utils.attrs import convert_attrs
 def Progress(
     value: int,
     max_value: int = 100,
-    variant: VariantType | None = None,
-    striped: bool | None = None,
-    animated: bool | None = None,
+    variant: VariantType | None = UNSET,
+    striped: bool | None = UNSET,
+    animated: bool | None = UNSET,
     label: str | None = None,
     height: str | None = None,
     **kwargs: Any,
@@ -87,9 +87,9 @@ def Progress(
 def ProgressBar(
     value: int,
     max_value: int = 100,
-    variant: VariantType | None = None,
-    striped: bool | None = None,
-    animated: bool | None = None,
+    variant: VariantType | None = UNSET,
+    striped: bool | None = UNSET,
+    animated: bool | None = UNSET,
     label: str | None = None,
     **kwargs: Any,
 ) -> Div:

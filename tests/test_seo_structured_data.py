@@ -293,6 +293,26 @@ class TestLocalBusinessStructuredData:
         spec2 = data["openingHoursSpecification"][1]
         assert spec2["dayOfWeek"] == "https://schema.org/Saturday"
 
+    def test_local_business_ignores_invalid_hours(self):
+        """Invalid hour ranges should not emit malformed Schema.org data."""
+        address = {
+            "street": "123 Main St",
+            "city": "Springfield",
+            "state": "IL",
+            "zip": "62701",
+            "country": "US",
+        }
+
+        result = StructuredData.local_business(
+            name="Business",
+            address=address,
+            phone="+1-555-123-4567",
+            hours={"Sunday": "closed"},
+        )
+
+        data = json.loads(str(result.children[0]))
+        assert "openingHoursSpecification" not in data
+
     def test_local_business_with_extra_properties(self):
         """Test local business with additional properties."""
         address = {

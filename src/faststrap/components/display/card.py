@@ -7,7 +7,7 @@ from fasthtml.common import H5, Div, Img
 from ...core._stability import stable
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 
@@ -22,9 +22,9 @@ def Card(
     img_top: str | None = None,
     img_bottom: str | None = None,
     img_overlay: bool = False,
-    header_cls: str | None = None,
-    body_cls: str | None = None,
-    footer_cls: str | None = None,
+    header_cls: str | None = UNSET,
+    body_cls: str | None = UNSET,
+    footer_cls: str | None = UNSET,
     title_cls: str | None = None,
     subtitle_cls: str | None = None,
     text_cls: str | None = None,

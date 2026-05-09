@@ -9,7 +9,7 @@ from fasthtml.common import Div
 from ...core._stability import beta
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 SSESwapType = Literal[
@@ -34,7 +34,7 @@ def SSETarget(
     target: str | None = None,
     with_credentials: bool = False,
     reconnect: bool = True,
-    retry: int | None = None,
+    retry: int | None = UNSET,
     aria_live: str | None = "polite",
     content: Any | None = None,
     **kwargs: Any,

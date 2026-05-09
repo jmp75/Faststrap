@@ -186,6 +186,11 @@ StructuredData.local_business(
 )
 ```
 
+Hours format:
+- Use day names, abbreviations, comma lists, or ranges such as `"Monday-Friday"` or `"Mon,Wed,Fri"`.
+- Use 24-hour time ranges such as `"09:00-17:00"`.
+- Invalid ranges such as `"closed"` are ignored instead of producing invalid Schema.org `opens` / `closes` values.
+
 ## Usage Examples
 
 ### Basic Page SEO

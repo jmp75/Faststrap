@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib
 import pkgutil
+import threading
 import warnings
 from collections.abc import Callable
 from typing import Any, TypeVar
@@ -11,6 +12,7 @@ from typing import Any, TypeVar
 # Global registry for component metadata
 _component_registry: dict[str, dict[str, Any]] = {}
 _autodiscovered = False
+_autodiscover_lock = threading.Lock()
 
 F = TypeVar("F", bound=Callable[..., Any])
 
@@ -184,5 +186,8 @@ def ensure_autodiscovered() -> None:
     global _autodiscovered
     if _autodiscovered:
         return
-    autodiscover()
-    _autodiscovered = True
+    with _autodiscover_lock:
+        if _autodiscovered:
+            return
+        autodiscover()
+        _autodiscovered = True

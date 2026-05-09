@@ -147,6 +147,28 @@ def test_data_table_query_params_and_page_url_helpers():
     assert url == "/users?view=active&team=ops&sort=name&direction=asc&q=al&page=2&per_page=10"
 
 
+def test_data_table_pagination_is_windowed_for_large_result_sets():
+    data = [{"name": f"User {idx}"} for idx in range(10)]
+    html = to_xml(
+        DataTable(
+            data,
+            pagination=True,
+            page=500,
+            per_page=10,
+            total_rows=10000,
+            base_url="/users",
+        )
+    )
+
+    assert html.count('class="page-item') < 20
+    assert "page=1" in html
+    assert "page=498" in html
+    assert "page=500" in html
+    assert "page=502" in html
+    assert "page=1000" in html
+    assert "..." in html
+
+
 def test_data_table_auto_ids_are_unique_across_threads():
     data = [{"name": "Alice"}]
 

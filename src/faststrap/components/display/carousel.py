@@ -8,7 +8,7 @@ from fasthtml.common import Button, Div, Span
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...utils.attrs import convert_attrs
 
 _CAROUSEL_ID_COUNTS: dict[str, int] = {}
@@ -52,15 +52,15 @@ def _stable_carousel_id(
 def Carousel(
     *items: Any,
     carousel_id: str | None = None,
-    controls: bool | None = None,
-    indicators: bool | None = None,
-    interval: int | None = None,
-    keyboard: bool | None = None,
-    pause: bool | str | None = None,
-    ride: bool | str | None = None,
-    wrap: bool | None = None,
-    fade: bool | None = None,
-    dark: bool | None = None,
+    controls: bool | None = UNSET,
+    indicators: bool | None = UNSET,
+    interval: int | None = UNSET,
+    keyboard: bool | None = UNSET,
+    pause: bool | str | None = UNSET,
+    ride: bool | str | None = UNSET,
+    wrap: bool | None = UNSET,
+    fade: bool | None = UNSET,
+    dark: bool | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Carousel for image/content sliders.

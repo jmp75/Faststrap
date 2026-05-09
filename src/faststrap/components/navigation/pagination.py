@@ -9,7 +9,7 @@ from fasthtml.common import A, Li, Nav, Span, Ul
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import AlignType, SizeType
 from ...utils.attrs import convert_attrs
 
@@ -55,12 +55,12 @@ def _htmx_attrs(
 def Pagination(
     current_page: int,
     total_pages: int,
-    size: SizeType | None = None,
-    align: AlignType | None = None,
-    max_pages: int | None = None,
-    base_url: str | None = None,
-    show_first_last: bool | None = None,
-    show_prev_next: bool | None = None,
+    size: SizeType | None = UNSET,
+    align: AlignType | None = UNSET,
+    max_pages: int | None = UNSET,
+    base_url: str | None = UNSET,
+    show_first_last: bool | None = UNSET,
+    show_prev_next: bool | None = UNSET,
     page_param: str = "page",
     query_params: dict[str, Any] | None = None,
     htmx: bool = False,

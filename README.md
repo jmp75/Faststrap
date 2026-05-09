@@ -897,6 +897,17 @@ ruff check src/faststrap tests
 
 ## Troubleshooting
 
+### Run Faststrap Doctor
+
+Use `faststrap doctor` to catch common setup issues such as missing
+`add_bootstrap()`, serverless asset-mode mismatches, or unsupported dependency
+versions.
+
+```bash
+faststrap doctor
+faststrap doctor --path .
+```
+
 ### Static Files Not Loading (404 Errors)
 
 **Fixed in v0.4.6+!** If you're seeing 404 errors for Bootstrap CSS/JS files, update to the latest version:

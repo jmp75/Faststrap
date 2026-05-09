@@ -25,9 +25,13 @@ add_pwa(
     name="My App",
     short_name="MyApp",
     theme_color="#0d6efd",
-    icon_path="/static/icon.png",
+    icon_path="/assets/icon.png",
 )
 ```
+
+Icon note:
+- Use a square PNG icon for `icon_path` when you want reliable install behavior across iOS and Chromium browsers.
+- `PwaMeta()` and `add_pwa()` share the same default icon path, `/assets/icon.png`, so direct meta usage and manifest generation stay aligned.
 
 ## What `add_pwa()` Configures
 

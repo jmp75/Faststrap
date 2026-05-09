@@ -8,7 +8,7 @@ from fasthtml.common import Button, Div
 
 from ...core.base import merge_classes
 from ...core.registry import register
-from ...core.theme import resolve_defaults
+from ...core.theme import UNSET, resolve_defaults
 from ...core.types import VariantType
 from ...utils.attrs import convert_attrs
 
@@ -16,10 +16,10 @@ from ...utils.attrs import convert_attrs
 @register(category="feedback", requires_js=True)
 def Alert(
     *children: Any,
-    variant: VariantType | None = None,
-    dismissible: bool | None = None,
+    variant: VariantType | None = UNSET,
+    dismissible: bool | None = UNSET,
     heading: Any | None = None,
-    heading_cls: str | None = None,
+    heading_cls: str | None = UNSET,
     **kwargs: Any,
 ) -> Div:
     """Bootstrap Alert component for contextual feedback messages.
@@ -45,7 +45,9 @@ def Alert(
     c_heading_cls = cfg.get("heading_cls", "alert-heading h4")
 
     # Build base classes
-    classes = ["alert", f"alert-{c_variant}"]
+    classes = ["alert"]
+    if c_variant:
+        classes.append(f"alert-{c_variant}")
 
     # Add dismissible class if needed
     if c_dismissible:
