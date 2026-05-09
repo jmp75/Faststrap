@@ -26,6 +26,9 @@ def test_modern_toast_renders_configurable_surface() -> None:
     assert "Saved" in html
     assert "Undo" in html
     assert "bi-check-circle" in html
+    assert 'type="button"' in html
+    assert "data-bs-dismiss" not in html
+    assert ">x</button>" not in html
 
 
 def test_modern_toast_warning_uses_alert_role() -> None:

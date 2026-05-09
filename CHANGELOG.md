@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-No unreleased changes.
+### Fixed
+
+- Fixed `ModernToast` dismiss controls so the close button renders a single icon and removes the toast reliably.
+- Fixed `examples/05_new_components/v070_workflow_patterns.py` by avoiding a nested `Style(Style(...))` wrapper that caused FastHTML serialization errors.
 
 ## [0.7.0] - 2026-05-07
 

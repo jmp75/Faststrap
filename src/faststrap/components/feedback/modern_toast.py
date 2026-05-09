@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from fasthtml.common import Button as FTButton
 from fasthtml.common import Div, P, Span
 
 from ...core._stability import beta
@@ -79,12 +80,12 @@ def ModernToast(
 
     if dismissible:
         parts.append(
-            Span(
-                "x",
+            FTButton(
+                "",
+                type="button",
                 cls="btn-close",
-                role="button",
                 aria_label="Dismiss notification",
-                data_bs_dismiss="toast",
+                onclick="this.closest('[data-fs-modern-toast]').remove()",
             )
         )
 
