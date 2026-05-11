@@ -462,6 +462,130 @@ These integrations are intentionally opt-in. They should not change Faststrap's 
 
 ---
 
+## Forward Roadmap: Documents, Data Science, and Agent Surfaces
+
+This section tracks the next strategic roadmap after the v0.7.0 component wave.
+It is intentionally split between lightweight core additions and optional
+integration packs so Faststrap can keep its zero-JS core while becoming more
+useful for data science teams, ML engineers, frontend builders, and AI agents.
+
+### Existing Surface Check
+
+The following proposed component/API names were checked against the current
+Faststrap source, tests, docs, examples, README, and roadmap and are not
+currently shipped:
+
+- `PdfEmbed`
+- `PdfViewer`
+- `CodeBlock`
+- `JsonViewer`
+- `KeyValueList`
+- `LogViewer`
+- `FilePreview`
+- `DataCard`
+- `RecordDetail`
+- `PageHeader`
+- `SectionHeader`
+- `ResourceList`
+- `DataFramePreview`
+- `ModelCard`
+- `DatasetCard`
+- `ExperimentRunCard`
+- `ArtifactList`
+- `TrainingProgress`
+- `PredictionResult`
+- `AgentManifest`
+- `agent_action`
+- `ToolCallCard`
+- `AgentTrace`
+- `MessageThread`
+- `ReasoningTimeline`
+- `EvalResultCard`
+
+Adjacent existing capabilities that should not be duplicated:
+
+- `Chart` already covers the core chart wrapper.
+- `ChartJS` is the optional Chart.js integration.
+- `DataTable` already covers table search, sort, pagination, and query helpers.
+- `Markdown`, `Mermaid`, and `MapView` already cover existing renderer/integration surfaces.
+- `Placeholder`, `PlaceholderCard`, and `PlaceholderButton` already cover skeleton loading.
+- `ModernToast` already covers the polished toast alternative to core Bootstrap toasts.
+
+### Core Track: Document and App UI Utilities
+
+These should remain lightweight, HTML-first, and dependency-free where possible.
+
+| Candidate | Status | Rationale |
+|-----------|--------|-----------|
+| `PdfEmbed` / `PdfViewer` | Planned | Basic iframe/object PDF display with download fallback; no PDF.js in core. |
+| `CodeBlock` | Planned | Developer/docs/AI app primitive for displaying code snippets. |
+| `JsonViewer` | Planned | Useful for APIs, ML outputs, agent traces, and config dashboards. |
+| `KeyValueList` | Planned | Common metadata/detail display pattern. |
+| `LogViewer` | Planned | Useful for jobs, deployment logs, agent runs, and ML training logs. |
+| `FilePreview` | Planned | Generic file preview shell with safe fallback/download behavior. |
+| `DataCard` / `RecordDetail` | Planned | Structured object/detail display without hand-rolled markup. |
+| `PageHeader` / `SectionHeader` | Planned | Reusable product/dashboard headers with actions and status. |
+| `ResourceList` | Planned | Entity list pattern with icon/avatar/status/action support. |
+
+### Data Science and ML Track
+
+These should make Faststrap a strong option for internal analytics and ML
+operations apps without requiring React.
+
+| Candidate | Status | Rationale |
+|-----------|--------|-----------|
+| `DataFramePreview` | Planned | Friendly dataframe/table preview for pandas/polars-like workflows. |
+| `ModelCard` | Planned | Model metadata, version, task, metrics, and deployment status. |
+| `DatasetCard` | Planned | Dataset metadata, splits, license, rows, and source links. |
+| `ExperimentRunCard` | Planned | Run status, params, metrics, artifacts, and timestamps. |
+| `ArtifactList` | Planned | Files/checkpoints/reports produced by jobs or model runs. |
+| `TrainingProgress` | Planned | Epoch/progress/metric trend summary for ML jobs. |
+| `PredictionResult` | Planned | Human-readable model output with confidence and explanation slots. |
+
+### AI and Agent Track
+
+This is an optional structured surface for agents. Faststrap should not become
+a full app/state framework, but it can expose app structure and declared actions
+so agents do not need to rely on brittle screenshot/click workflows.
+
+| Candidate | Status | Rationale |
+|-----------|--------|-----------|
+| `faststrap[agents]` | Planned optional extra | Keeps agent tooling opt-in and out of the zero-JS/default core. |
+| `AgentManifest` | Planned | Generates a structured JSON description of routes, actions, forms, tables, and resources. |
+| `agent_action` | Planned | Python decorator for declaring structured actions callable by agents. |
+| `/.well-known/faststrap-agent.json` | Planned | Conventional discovery endpoint for capable agents. |
+| Form/table schema export | Planned | Allows agents to understand fields, filters, columns, and row actions. |
+| `AgentTrace` | Planned | Visual trace of agent steps and tool calls. |
+| `ToolCallCard` | Planned | Render one tool invocation/result pair. |
+| `MessageThread` | Planned | AI/chat thread display primitive. |
+| `ReasoningTimeline` | Planned | Timeline-style display for planning/evaluation steps. |
+| `EvalResultCard` | Planned | Compact display for eval scores, pass/fail status, and notes. |
+
+### Optional Integration Packs
+
+These are useful, but should remain explicit opt-ins:
+
+- `faststrap[pdfjs]` for rich PDF navigation, zoom, and search.
+- `faststrap[plots]` for Plotly, Altair, Vega-Lite, or ECharts bridges.
+- `faststrap[ml]` for ML/data-science cards and report patterns if the surface grows beyond core.
+- `faststrap[agents]` for structured agent manifests and action endpoints.
+- `faststrap[editor]` for rich text or markdown editing.
+- `faststrap[upload]` for advanced drag/drop uploads, queues, progress, and previews.
+- `faststrap[tables]` for heavier data-grid features such as pinning or virtualization.
+- `faststrap[maps]` for Leaflet/MapLibre/provider-backed map integrations.
+- `faststrap[docs]` for documentation-site primitives and component preview/playground patterns.
+
+### Guardrails
+
+- Core stays Bootstrap + FastHTML + HTMX friendly.
+- Core additions should work without custom JavaScript.
+- Heavy browser libraries live behind optional extras.
+- Optional integrations must degrade gracefully when assets are not loaded.
+- Agent-facing APIs should be explicit, inspectable, and safe by default.
+- New data/ML components should compose existing `Card`, `Badge`, `Table`, `DataTable`, `Progress`, and `Chart` primitives where possible.
+
+---
+
 ##  Data Science Positioning
 
 Faststrap is uniquely positioned for data scientists:
