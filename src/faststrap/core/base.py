@@ -27,7 +27,7 @@ class BaseComponent(Component, ABC):
     For most use cases, prefer function-based components as shown in the
     Faststrap component library (see Button, Card, Navbar, etc.).
 
-    Example:
+    Examples:
         Creating a custom stateful component:
 
         >>> from faststrap.core.base import BaseComponent

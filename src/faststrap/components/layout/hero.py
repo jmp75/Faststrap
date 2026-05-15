@@ -45,7 +45,7 @@ def Hero(
     Returns:
         FastHTML Div element
 
-    Example:
+    Examples:
         >>> Hero(
         ...     "Welcome",
         ...     "Building great apps",

@@ -34,7 +34,7 @@ def Scrollspy(
     Returns:
         FastHTML Div element with scrollspy data attributes
 
-    Example:
+    Examples:
         Basic scrollspy:
         >>> # Navigation
         >>> Navbar(

@@ -46,7 +46,7 @@ def ErrorDialog(
     Returns:
         Modal component with error content
 
-    Example:
+    Examples:
         Basic error dialog:
         >>> ErrorDialog(message="Failed to save record")
 

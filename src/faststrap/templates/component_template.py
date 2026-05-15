@@ -51,7 +51,7 @@ def ComponentName(
     Returns:
         FastHTML Div element
 
-    Example:
+    Examples:
         Basic:
         >>> ComponentName("Content", variant="success")
 

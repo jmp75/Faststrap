@@ -12,7 +12,7 @@ _BASE_ID_COUNTS: dict[str, int] = {}
 def next_sequential_id(prefix: str) -> str:
     """Return a process-unique ID using a shared prefix.
 
-    Example:
+    Examples:
         >>> next_sequential_id("navbar")
         "navbar1"
     """

@@ -42,7 +42,7 @@ def ThemeToggle(
     Returns:
         Div containing the theme toggle switch
 
-    Example:
+    Examples:
         Basic toggle:
         >>> ThemeToggle()
 

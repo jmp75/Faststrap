@@ -55,7 +55,7 @@ def ActiveSearch(
     Returns:
         Input element with HTMX search attributes
 
-    Example:
+    Examples:
         Basic usage:
         >>> ActiveSearch(endpoint="/search", target="#results")
 
@@ -132,7 +132,7 @@ def InfiniteScroll(
     Returns:
         Div element that triggers loading when scrolled into view
 
-    Example:
+    Examples:
         Basic usage:
         >>> InfiniteScroll(endpoint="/feed?page=2", target="#feed")
 
@@ -222,7 +222,7 @@ def AutoRefresh(
     Returns:
         Div element that auto-refreshes its content
 
-    Example:
+    Examples:
         Basic usage (refreshes itself):
         >>> AutoRefresh(endpoint="/metrics", target="this", interval=10000)
 
@@ -294,7 +294,7 @@ def LazyLoad(
     Returns:
         Div element that loads content on reveal
 
-    Example:
+    Examples:
         Basic usage:
         >>> LazyLoad(endpoint="/api/heavy-widget")
 
@@ -369,7 +369,7 @@ def LoadingButton(
     Returns:
         Button component with loading state
 
-    Example:
+    Examples:
         Basic POST button:
         >>> LoadingButton("Save", endpoint="/save", target="#form")
 

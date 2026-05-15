@@ -35,7 +35,7 @@ def Placeholder(
     Returns:
         FastHTML Span element with placeholder classes
 
-    Example:
+    Examples:
         Basic placeholder:
         >>> Placeholder(width="100%")
 
@@ -129,7 +129,7 @@ def PlaceholderCard(
     Returns:
         FastHTML Div element with card skeleton
 
-    Example:
+    Examples:
         Full card skeleton:
         >>> PlaceholderCard(animation="glow")
 
@@ -205,7 +205,7 @@ def PlaceholderButton(
     Returns:
         FastHTML Span element styled as button placeholder
 
-    Example:
+    Examples:
         >>> PlaceholderButton(width="120px", animation="glow")
 
     See Also:

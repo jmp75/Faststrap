@@ -33,7 +33,7 @@ def Container(
     Returns:
         FastHTML Div element with container classes
 
-    Example:
+    Examples:
         Fixed-width responsive:
         >>> Container(H1("Welcome"), P("Content"))
 
@@ -92,7 +92,7 @@ def Row(
     Returns:
         FastHTML Div element with row classes
 
-    Example:
+    Examples:
         Basic row:
         >>> Row(Col("Column 1"), Col("Column 2"))
 
@@ -172,7 +172,7 @@ def Col(
     Returns:
         FastHTML Div element with column classes
 
-    Example:
+    Examples:
         Auto-width column:
         >>> Col("Auto width")
 

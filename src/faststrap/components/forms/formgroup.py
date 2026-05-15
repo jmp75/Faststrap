@@ -43,7 +43,7 @@ def FormGroup(
     Returns:
         Div containing label, input, and feedback
 
-    Example:
+    Examples:
         Basic form group:
         >>> FormGroup(
         ...     Input(name="email", type="email"),

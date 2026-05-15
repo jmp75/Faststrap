@@ -68,7 +68,7 @@ def SEO(
     Returns:
         Tuple of meta tag elements to include in page head
 
-    Example:
+    Examples:
         Basic usage:
         >>> SEO(
         ...     title="My Page - Site Name",

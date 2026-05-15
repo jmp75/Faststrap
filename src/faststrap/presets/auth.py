@@ -54,7 +54,7 @@ def require_auth(
     Returns:
         Decorator function
 
-    Example:
+    Examples:
         Basic usage:
         >>> from faststrap.presets import require_auth
         >>>

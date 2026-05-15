@@ -60,7 +60,7 @@ def Accordion(
     Returns:
         FastHTML Div element with accordion structure
 
-    Example:
+    Examples:
         Basic accordion:
         >>> Accordion(
         ...     AccordionItem("Content 1", title="Section 1", expanded=True),
@@ -226,7 +226,7 @@ def AccordionItem(
     Returns:
         AccordionItemBuilder for deferred rendering within Accordion
 
-    Example:
+    Examples:
         >>> AccordionItem(
         ...     "This is the content of the panel.",
         ...     title="Click to expand",

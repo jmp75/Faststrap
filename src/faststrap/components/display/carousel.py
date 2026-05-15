@@ -82,7 +82,7 @@ def Carousel(
     Returns:
         FastHTML Div element with carousel structure
 
-    Example:
+    Examples:
         Basic carousel:
         >>> Carousel(
         ...     CarouselItem(Img(src="1.jpg"), caption="First slide"),
@@ -255,7 +255,7 @@ def CarouselItem(
     Returns:
         FastHTML Div element with carousel-item structure
 
-    Example:
+    Examples:
         Image with caption:
         >>> CarouselItem(
         ...     Img(src="slide1.jpg", cls="d-block w-100"),

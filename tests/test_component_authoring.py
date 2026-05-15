@@ -42,3 +42,19 @@ def test_component_files_with_kwargs_reference_convert_attrs() -> None:
         "Component files that accept **kwargs should route attributes through "
         f"convert_attrs(): {missing}"
     )
+
+
+def test_docstring_examples_use_mkdocstrings_google_heading() -> None:
+    """mkdocstrings recognizes Google-style "Examples:" sections."""
+    offenders: list[str] = []
+
+    for path in ROOT.glob("src/faststrap/**/*.py"):
+        text = path.read_text(encoding="utf-8")
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if line.strip() == "Example:":
+                offenders.append(f"{path.relative_to(ROOT).as_posix()}:{line_number}")
+
+    assert not offenders, (
+        'Use "Examples:" instead of "Example:" in docstrings so mkdocstrings '
+        f"renders examples correctly: {offenders}"
+    )

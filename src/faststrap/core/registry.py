@@ -29,7 +29,7 @@ def register(
         category: Component category (layout, display, etc.)
         bootstrap_version: Min Bootstrap version required
         requires_js: Whether component needs Bootstrap JS
-    Example:
+    Examples:
         >>> @register(category="feedback", requires_js=True)
         >>> def Modal(...): ...
     """
@@ -75,7 +75,7 @@ def list_components(category: str | None = None) -> list[str]:
         category: Filter by category (layout, display, feedback, etc.)
     Returns:
         List of component names
-    Example:
+    Examples:
         >>> list_components(category="feedback")
         ['Alert', 'Toast', 'Modal', 'Spinner']
     """

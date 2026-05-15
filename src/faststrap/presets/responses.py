@@ -31,7 +31,7 @@ def hx_redirect(url: str, status_code: int = 204) -> Response:
     Returns:
         Response with HX-Redirect header
 
-    Example:
+    Examples:
         After successful form submission:
         >>> @app.post("/login")
         >>> def login(req):
@@ -63,7 +63,7 @@ def hx_refresh(status_code: int = 200) -> Response:
     Returns:
         Response with HX-Refresh header
 
-    Example:
+    Examples:
         After data mutation that affects multiple parts of the page:
         >>> @app.post("/update-settings")
         >>> def update_settings(req):
@@ -97,7 +97,7 @@ def hx_trigger(
     Returns:
         Response with HX-Trigger header
 
-    Example:
+    Examples:
         Simple event:
         >>> return hx_trigger("itemUpdated")
 
@@ -147,7 +147,7 @@ def hx_reswap(strategy: str, status_code: int = 200, content: str = "") -> Respo
     Returns:
         Response with HX-Reswap header
 
-    Example:
+    Examples:
         Change swap strategy dynamically:
         >>> @app.get("/widget")
         >>> def widget(req):
@@ -177,7 +177,7 @@ def hx_retarget(selector: str, status_code: int = 200, content: str = "") -> Res
     Returns:
         Response with HX-Retarget header
 
-    Example:
+    Examples:
         Dynamically change target based on condition:
         >>> @app.post("/save")
         >>> def save(req):
@@ -217,7 +217,7 @@ def toast_response(
     Returns:
         Tuple of (content, toast with hx-swap-oob)
 
-    Example:
+    Examples:
         Success notification after save:
         >>> @app.post("/save")
         >>> def save(req):

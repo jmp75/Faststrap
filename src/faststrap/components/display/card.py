@@ -58,7 +58,7 @@ def Card(
     Returns:
         FastHTML Div element with card structure
 
-    Example:
+    Examples:
         Basic card:
         >>> Card("Card content", title="Card Title")
 

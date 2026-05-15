@@ -15,7 +15,7 @@ def Icon(name: str, **kwargs: Any) -> I:
     Returns:
         I element with Bootstrap icon class
 
-    Example:
+    Examples:
         >>> Icon("heart-fill", cls="text-danger")
     """
     cls = kwargs.pop("cls", "")

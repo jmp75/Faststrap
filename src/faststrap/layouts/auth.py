@@ -47,7 +47,7 @@ def AuthLayout(
     Returns:
         Div with centered auth layout
 
-    Example:
+    Examples:
         Login page:
         >>> AuthLayout(
         ...     FormGroup(Input(name="email", input_type="email"), label="Email"),

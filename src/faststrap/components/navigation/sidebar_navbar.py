@@ -42,7 +42,7 @@ def SidebarNavbar(
     Returns:
         FastHTML Div element with sidebar structure
 
-    Example:
+    Examples:
         Basic sidebar:
         >>> SidebarNavbar(
         ...     ("Dashboard", "/dashboard", "house"),
@@ -166,7 +166,7 @@ def SidebarNavItem(
     Returns:
         FastHTML A element with nav-link styling
 
-    Example:
+    Examples:
         >>> SidebarNavItem("Dashboard", href="/dashboard", icon="house", active=True)
     """
     # Build classes

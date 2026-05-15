@@ -50,7 +50,7 @@ def StatCard(
     Returns:
         Card component
 
-    Example:
+    Examples:
         >>> StatCard("Revenue", "$50k", trend="+12%", trend_type="up")
     """
     user_cls = kwargs.pop("cls", "")

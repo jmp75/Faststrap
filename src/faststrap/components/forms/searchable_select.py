@@ -78,7 +78,7 @@ def SearchableSelect(
     Returns:
         Div containing search input and select dropdown
 
-    Example:
+    Examples:
         Basic usage:
         >>> SearchableSelect(
         ...     endpoint="/api/users/search",

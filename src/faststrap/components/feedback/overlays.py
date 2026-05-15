@@ -38,7 +38,7 @@ def Tooltip(
     Returns:
         FastHTML element (Span by default) with tooltip attributes
 
-    Example:
+    Examples:
         >>> Tooltip("I am a tooltip", Button("Hover me"))
 
         >>> Tooltip("<b>Bold</b> tip", Icon("info"), html=True)
@@ -92,7 +92,7 @@ def Popover(
     Returns:
         FastHTML element with popover attributes
 
-    Example:
+    Examples:
         >>> Popover("Title", "Content here", Button("Click me"))
     """
     attrs: dict[str, Any] = {

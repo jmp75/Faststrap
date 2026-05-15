@@ -43,7 +43,7 @@ def GlassNavbar(
     Returns:
         FastHTML Nav element with glassmorphism styling
 
-    Example:
+    Examples:
         Basic glass navbar:
         >>> GlassNavbar(
         ...     ("Home", "/"),
@@ -210,7 +210,7 @@ def GlassNavItem(
     Returns:
         FastHTML A element with nav-link styling
 
-    Example:
+    Examples:
         >>> GlassNavItem("Home", href="/", active=True)
     """
     # Build classes

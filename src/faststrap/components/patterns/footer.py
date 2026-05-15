@@ -45,7 +45,7 @@ def FooterModern(
     Returns:
         Footer element with modern layout
 
-    Example:
+    Examples:
         Basic footer:
         >>> FooterModern(
         ...     brand="MyApp",

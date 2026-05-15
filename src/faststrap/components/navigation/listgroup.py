@@ -35,7 +35,7 @@ def ListGroup(
     Returns:
         FastHTML Ul or Div element with list-group structure
 
-    Example:
+    Examples:
         Basic list:
         >>> ListGroup(
         ...     ListGroupItem("Item 1"),
@@ -124,7 +124,7 @@ def ListGroupItem(
     Returns:
         FastHTML Li, A, or Button element
 
-    Example:
+    Examples:
         Basic item:
         >>> ListGroupItem("Simple item")
 
@@ -213,7 +213,7 @@ def Collapse(
     Returns:
         FastHTML Div element with collapse classes
 
-    Example:
+    Examples:
         Basic collapse:
         >>> Button("Toggle", data_bs_toggle="collapse", data_bs_target="#myCollapse")
         >>> Collapse("Hidden content", collapse_id="myCollapse")

@@ -66,7 +66,7 @@ def ErrorPage(
     Returns:
         Tuple of (Title, ErrorPage Div) for FastHTML page rendering
 
-    Example:
+    Examples:
         Default 404 page:
         >>> ErrorPage(404)
 

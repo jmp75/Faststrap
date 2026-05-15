@@ -55,7 +55,7 @@ def Table(
     Returns:
         FastHTML Table element, wrapped in Div if responsive
 
-    Example:
+    Examples:
         Basic table:
         >>> Table(
         ...     THead(TRow(TCell("Name", header=True), TCell("Age", header=True))),
@@ -145,7 +145,7 @@ def THead(
     Returns:
         FastHTML Thead element
 
-    Example:
+    Examples:
         >>> THead(
         ...     TRow(TCell("Name", header=True), TCell("Email", header=True)),
         ...     variant="dark"
@@ -186,7 +186,7 @@ def TBody(
     Returns:
         FastHTML Tbody element
 
-    Example:
+    Examples:
         >>> TBody(
         ...     TRow(TCell("Alice"), TCell("alice@example.com")),
         ...     TRow(TCell("Bob"), TCell("bob@example.com")),
@@ -231,7 +231,7 @@ def TRow(
     Returns:
         FastHTML Tr element
 
-    Example:
+    Examples:
         >>> TRow(TCell("Data 1"), TCell("Data 2"), variant="success")
         >>> TRow(TCell("Selected"), TCell("Row"), active=True)
     """
@@ -281,7 +281,7 @@ def TCell(
     Returns:
         FastHTML Th or Td element
 
-    Example:
+    Examples:
         >>> TCell("Header", header=True, scope="col")
         >>> TCell("Data", variant="warning")
         >>> TCell("Wide Cell", colspan=2)

@@ -44,7 +44,7 @@ def Image(
     Returns:
         FastHTML Img element with Bootstrap image classes
 
-    Example:
+    Examples:
         Basic responsive image:
         >>> Image(src="photo.jpg", alt="Photo", fluid=True)
 

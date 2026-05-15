@@ -41,7 +41,7 @@ def EmptyState(
     Returns:
         FastHTML Div element
 
-    Example:
+    Examples:
         >>> EmptyState(
         ...     Icon("inbox", cls="display-1"),
         ...     title="No messages",

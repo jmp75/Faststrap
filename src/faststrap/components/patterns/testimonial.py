@@ -37,7 +37,7 @@ def Testimonial(
     Returns:
         Card component with testimonial content
 
-    Example:
+    Examples:
         Basic testimonial:
         >>> Testimonial(
         ...     quote="This product changed my life!",
@@ -162,7 +162,7 @@ def TestimonialSection(
     Returns:
         Div with testimonials in responsive grid
 
-    Example:
+    Examples:
         Basic testimonial section:
         >>> TestimonialSection(
         ...     Testimonial(

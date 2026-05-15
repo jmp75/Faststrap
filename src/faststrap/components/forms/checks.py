@@ -54,7 +54,7 @@ def Checkbox(
     Returns:
         FastHTML Div element with form-check structure
 
-    Example:
+    Examples:
         Basic checkbox:
         >>> Checkbox("remember", label="Remember me")
 
@@ -154,7 +154,7 @@ def Radio(
     Returns:
         FastHTML Div element with form-check structure
 
-    Example:
+    Examples:
         Radio group:
         >>> Radio("color", label="Red", value="red", checked=True)
         >>> Radio("color", label="Blue", value="blue")
@@ -245,7 +245,7 @@ def Switch(
     Returns:
         FastHTML Div element with form-check form-switch structure
 
-    Example:
+    Examples:
         Basic switch:
         >>> Switch("notifications", label="Enable notifications")
 
@@ -332,7 +332,7 @@ def Range(
     Returns:
         FastHTML Div element with form-range structure
 
-    Example:
+    Examples:
         Basic range:
         >>> Range("volume", label="Volume", value=50)
 

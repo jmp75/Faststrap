@@ -93,7 +93,7 @@ class StructuredData:
     Provides static methods for common structured data types including
     Article, Product, Breadcrumb, Organization, and LocalBusiness.
 
-    Example:
+    Examples:
         Article structured data:
         >>> StructuredData.article(
         ...     headline="My Blog Post",
@@ -139,7 +139,7 @@ class StructuredData:
         Returns:
             Script element with JSON-LD structured data
 
-        Example:
+        Examples:
             >>> StructuredData.article(
             ...     headline="10 Tips for Better Python Code",
             ...     description="Learn how to write cleaner Python",
@@ -198,7 +198,7 @@ class StructuredData:
         Returns:
             Script element with JSON-LD structured data
 
-        Example:
+        Examples:
             >>> StructuredData.product(
             ...     name="Wireless Headphones",
             ...     description="Premium noise-cancelling headphones",
@@ -249,7 +249,7 @@ class StructuredData:
         Returns:
             Script element with JSON-LD structured data
 
-        Example:
+        Examples:
             >>> StructuredData.breadcrumb([
             ...     ("Home", "https://example.com/"),
             ...     ("Products", "https://example.com/products"),
@@ -297,7 +297,7 @@ class StructuredData:
         Returns:
             Script element with JSON-LD structured data
 
-        Example:
+        Examples:
             >>> StructuredData.organization(
             ...     name="Acme Corp",
             ...     url="https://acme.com",
@@ -347,7 +347,7 @@ class StructuredData:
         Returns:
             Script element with JSON-LD structured data
 
-        Example:
+        Examples:
             >>> StructuredData.local_business(
             ...     name="Joe's Coffee Shop",
             ...     address={

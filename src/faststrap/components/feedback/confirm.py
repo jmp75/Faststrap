@@ -61,7 +61,7 @@ def ConfirmDialog(
     Returns:
         Modal component
 
-    Example:
+    Examples:
         >>> ConfirmDialog(
         ...     "Are you sure you want to delete this?",
         ...     hx_confirm_url="/delete/1",

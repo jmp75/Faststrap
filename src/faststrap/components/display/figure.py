@@ -48,7 +48,7 @@ def Figure(
     Returns:
         FastHTML Figure element
 
-    Example:
+    Examples:
         >>> Figure("image.jpg", caption="A nice view")
 
         >>> Figure("avatar.png", size="50%", rounded=True, align="center")

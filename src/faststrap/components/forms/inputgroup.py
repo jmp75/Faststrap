@@ -33,7 +33,7 @@ def InputGroup(
     Returns:
         FastHTML Div element with input-group structure
 
-    Example:
+    Examples:
         With text addon:
         >>> InputGroup(
         ...     InputGroupText("@"),
@@ -92,7 +92,7 @@ def InputGroupText(
     Returns:
         FastHTML Span element with input-group-text class
 
-    Example:
+    Examples:
         >>> InputGroupText("@")
         >>> InputGroupText("$")
         >>> InputGroupText(Icon("search"))
@@ -154,7 +154,7 @@ def FloatingLabel(
     Returns:
         FastHTML Div element with form-floating structure
 
-    Example:
+    Examples:
         Basic:
         >>> FloatingLabel("email", label="Email address", input_type="email")
 

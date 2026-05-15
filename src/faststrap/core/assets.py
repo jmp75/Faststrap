@@ -813,7 +813,7 @@ def add_bootstrap(
     Returns:
         Modified app instance
 
-    Example:
+    Examples:
         # Basic setup with light mode
         add_bootstrap(app)
 
@@ -1002,7 +1002,7 @@ def mount_assets(
         Do not use the same url_path as Faststrap's static files (usually "/static").
         This will cause Bootstrap CSS/JS to fail loading. Use "/assets" or another path.
 
-    Example:
+    Examples:
         Basic usage:
         >>> from fasthtml.common import FastHTML
         >>> from faststrap import add_bootstrap, mount_assets

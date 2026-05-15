@@ -56,7 +56,7 @@ def FileInput(
     Returns:
         FastHTML Div element with file input structure
 
-    Example:
+    Examples:
         Basic:
         >>> FileInput("upload", label="Upload file")
 

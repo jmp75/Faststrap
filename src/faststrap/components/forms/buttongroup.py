@@ -29,7 +29,7 @@ def ButtonGroup(
     Returns:
         FastHTML Div element with button group
 
-    Example:
+    Examples:
         Basic group:
         >>> ButtonGroup(
         ...     Button("Left", variant="primary"),
@@ -111,7 +111,7 @@ def ButtonToolbar(
     Returns:
         FastHTML Div element with button toolbar
 
-    Example:
+    Examples:
         >>> ButtonToolbar(
         ...     ButtonGroup(
         ...         Button("1"), Button("2"), Button("3")

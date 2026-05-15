@@ -276,7 +276,7 @@ class Theme:
     A Theme contains color variables (primary, secondary, etc.) and can
     generate CSS for light mode, dark mode, or auto mode.
 
-    Example:
+    Examples:
         >>> theme = Theme({"--bs-primary": "#7BA05B"})
         >>> style = theme.to_style(mode="dark")
     """
@@ -477,7 +477,7 @@ def create_theme(
     Returns:
         Theme instance
 
-    Example:
+    Examples:
         >>> theme = create_theme(
         ...     primary="#7BA05B",
         ...     secondary="#48C774",
@@ -531,7 +531,7 @@ def theme_variant_css(
     ``data-bs-theme`` mode convention without requiring every app to hand-write
     repetitive selectors.
 
-    Example:
+    Examples:
         >>> theme_variant_css(
         ...     ".metric-card",
         ...     light={"background": "rgba(255,255,255,.85)"},
@@ -774,7 +774,7 @@ def set_component_defaults(component: str, **defaults: Any) -> None:
         component: Component name (e.g., "Button")
         **defaults: Default values to set
 
-    Example:
+    Examples:
         >>> set_component_defaults("Button", variant="outline-primary", size="sm")
         >>> # Now all Button() calls use these defaults unless overridden
     """
@@ -829,7 +829,7 @@ def resolve_defaults(component: str, **kwargs: Any) -> dict[str, Any]:
     Returns:
         Dict of resolved attributes
 
-    Example:
+    Examples:
         >>> set_component_defaults("Button", variant="secondary")
         >>> resolve_defaults("Button", variant=UNSET, size="lg")
         {"variant": "secondary", "size": "lg"}
