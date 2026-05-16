@@ -84,6 +84,7 @@ nav:
   - Guides:
     - Architecture: guides/architecture.md
     - Custom Components: guides/custom-components.md
+    - Documentation Standards: guides/documentation-standards.md
     - Performance: guides/performance.md
     - Upgrading: guides/upgrading.md
   - Deployment:

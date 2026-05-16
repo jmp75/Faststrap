@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Expanded docs for `GlassNavbar`, `SidebarNavbar`, `FormBuilder.from_pydantic()`, `Avatar`, `ModernToast`, `Chart`, `MapView`, and `Carousel`.
 - Expanded docs for advanced form controls, notification/install surfaces, `Sheet`, `Markdown`, `Mermaid`, `Svg`, and `TextClamp`.
 - Added a component index, architecture/render-model guide, performance guide, upgrade guide, and moved internal planning docs out of the public docs tree.
+- Polished README/showcase presentation and added documentation standards for future component pages.
 
 ## [0.7.0] - 2026-05-07
 

@@ -472,30 +472,24 @@ Docs are actively being expanded to match the full API surface. See the docs sit
 
 ## Showcase References
 
-Faststrap now has a dedicated `showcase/` layer for polished, product-style references. These files are meant to show what the framework looks like beyond small demos:
+Faststrap has a dedicated `showcase/` layer for polished, product-style references. These are fuller applications and landing pages, not tiny component demos.
 
-- `showcase/novaflow_ai_saas.py`
-- `showcase/atlas_command_center.py`
-- `showcase/onboardflow_workspace.py`
-- `showcase/fastcloud_generated_saas.py` (compact minimal-good example)
-- `showcase/northstar_ops_dashboard.py`
-- `showcase/agency_portfolio.py`
-- `showcase/carenest_clinic.py`
-- `showcase/ledgerleaf_finance.py`
-- `showcase/learnloop_academy.py`
-- `showcase/lexbridge_corporate.py`
-- `showcase/forgedocs_platform.py`
+| Reference | Best Use |
+| --- | --- |
+| `showcase/novaflow_ai_saas.py` | Premium SaaS landing pages |
+| `showcase/atlas_command_center.py` | v0.7 command-center dashboard with new components |
+| `showcase/onboardflow_workspace.py` | Workflow/onboarding apps with FormWizard and live validation |
+| `showcase/northstar_ops_dashboard.py` | Dense analytics and operations dashboards |
+| `showcase/hotel_booking_showcase.py` | Luxury/editorial product marketing |
+| `showcase/ledgerleaf_finance.py` | Finance and mobile-aware account surfaces |
 
-Recommended screenshot folder for docs/README assets:
+### Visual Preview
 
-- `docs/assets/showcase/`
+![NovaFlow AI SaaS light mode](docs/assets/showcase/novaflow-ai-saas-light.png)
 
-Recommended naming:
+![Northstar Ops Dashboard dark mode](docs/assets/showcase/northstar-ops-dashboard-dark.png)
 
-- `novaflow-ai-saas-light.png`
-- `novaflow-ai-saas-dark.png`
-- `northstar-ops-dashboard-light.png`
-- `northstar-ops-dashboard-dark.png`
+See the full gallery in the [Showcase docs](https://faststrap-org.github.io/Faststrap/showcase/).
 
 ---
 
@@ -531,120 +525,26 @@ Comprehensive examples organized by learning path:
 
 **See**: `examples/README.md` for complete guide
 
-| **Dropdown** | Contextual menus with split buttons |  |
-| **Input** | Text form controls with validation |  |
-| **Select** | Dropdown selections (single/multiple) |  |
-| **Breadcrumb** | Navigation trail with icons |  |
-| **Pagination** | Page navigation with customization |  |
-| **Spinner** | Loading indicators (border/grow) |  |
-| **Progress** | Progress bars with animations |  |
+---
 
-###  Phase 4A (v0.4.0) - 10 Components
+## Current Release Snapshot
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| **Table** | Responsive data tables |  |
-| **Accordion** | Collapsible panels |  |
-| **Checkbox** | Checkbox form controls |  |
-| **Radio** | Radio button controls |  |
-| **Switch** | Toggle switch variant |  |
-| **Range** | Slider input control |  |
-| **ListGroup** | Versatile lists |  |
-| **Collapse** | Show/hide content |  |
-| **InputGroup** | Prepend/append addons |  |
-| **FloatingLabel** | Animated label inputs |  |
+Faststrap's current main branch reflects the v0.7.x documentation and component wave:
 
-###  Phase 4B (v0.4.5) - 8 Components
+- **128 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
+- **145+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
+- **Optional integrations** for `faststrap[chartjs]`, `faststrap[gsap]`, and `faststrap[markdown]`.
+- **Discovery APIs** including `list_components()`, `find_components()`, `get_components_by_pattern()`, and `list_component_metadata()`.
+- **Documentation structure** with component index, architecture guide, upgrade guide, performance guide, and custom component guide.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| **FileInput** | File uploads with preview |  |
-| **Tooltip** | Contextual hints |  |
-| **Popover** | Rich overlays |  |
-| **Figure** | Image + caption |  |
-| **ConfirmDialog** | Modal confirmation preset |  |
-| **EmptyState** | Placeholder component |  |
-| **StatCard** | Metric display card |  |
-| **Hero** | Landing page hero section |  |
+Useful docs:
 
-###  Phase 5A (v0.5.0-v0.5.3) - 6 Components
+- [Component Index](https://faststrap-org.github.io/Faststrap/components/)
+- [Architecture Guide](https://faststrap-org.github.io/Faststrap/guides/architecture/)
+- [Performance Guide](https://faststrap-org.github.io/Faststrap/guides/performance/)
+- [Upgrade Guide](https://faststrap-org.github.io/Faststrap/guides/upgrading/)
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| **Image** | Responsive images with utilities |  |
-| **Carousel** | Image/content sliders |  |
-| **Placeholder** | Skeleton loading states |  |
-| **Scrollspy** | Auto-updating navigation |  |
-| **SidebarNavbar** | Premium vertical sidebar |  |
-| **GlassNavbar** | Glassmorphism navbar |  |
-
-###  Phase 5B+ (v0.5.6-v0.6.0) - stabilization and foundations
-
-**HTMX Presets Module (17 helpers):**
-
-- `ActiveSearch`, `InfiniteScroll`, `AutoRefresh`, `LazyLoad`, `LoadingButton`
-- `OptimisticAction`, `LocationAction`
-- `hx_redirect`, `hx_refresh`, `hx_trigger`, `hx_reswap`, `hx_retarget`, `toast_response`
-- `SSEStream`, `sse_event`, `sse_comment`
-- `@require_auth` decorator
-
-**SEO Module (3 helpers):**
-
-- `SEO` - Meta tags, Open Graph, Twitter Cards, Article metadata
-- `PageMeta` - Unified SEO + social + canonical + favicon composition
-- `StructuredData` - JSON-LD for Article, Product, Breadcrumb, Organization, LocalBusiness
-
-**UI Components (9):**
-
-- `ErrorPage`, `ErrorDialog`, `FormGroup`, `ThemeToggle`, `SearchableSelect`
-- `FooterModern`, `Testimonial`, `TestimonialSection`, `AuthLayout`
-
-## Release Snapshot (current main - v0.7.0 release candidate)
-
-The planned v0.7.0 component roadmap is now complete on `main`. The next release should be treated as a substantial minor release because the public API surface now includes the planned component wave, optional integrations, and framework ergonomics.
-
-### Data Foundations
-
-- DataTable with search, sort, pagination, and export helper
-- DataTable query helpers: `DataTable.query_params()` and `DataTable.page_url()`
-- Chart wrapper for Matplotlib, Plotly, Altair, and raw SVG/HTML
-- Optional Chart.js integration: `ChartJS`, `add_chartjs()`, and `faststrap[chartjs]`
-- Metric cards: `MetricCard`, `TrendCard`, `KPICard`
-- `StatCard` refinement with `delta` aliases and a theme hook
-- Dashboard layout primitives: `DashboardGrid`
-- Filter inputs: `FilterBar`, `DateRangePicker`, `MultiSelect`, `RangeSlider`, `ExportButton`
-- Realtime helpers: `SSEStream`, `SSETarget`
-- NotificationCenter dropdown hub
-- Renderers: `Markdown`, `Svg`, `Mermaid`
-- Form error summary: `FormErrorSummary`
-
-### Completed Component Waves
-
-- Wave 1: `ResultCard`, `Avatar`, `AvatarGroup`, `StatusBadge`, `BadgeGroup`, `InlineEditor`
-- Wave 2: `Timeline`, `Stepper`, `CalendarDatePicker`
-- Wave 3: `FormWizard`, `CommandPalette`, `ModernToast`, `ChartJS`, `GSAP Motion`
-- Wave 4: `Pagination` improvements, `LiveValidationField`, `ValidationMessage`, `ConfirmAction`, DataTable query helpers, registry discovery, `theme_variant_css`
-
-### Optional Integrations
-
-- `faststrap[chartjs]` for Chart.js teams
-- `faststrap[gsap]` for richer motion while keeping core `Fx` zero-JS by default
-- `ModernToast` as an opinionated polished toast alternative beside the core Bootstrap toast components
-
-### Remaining Before Major Release
-
-- Add focused examples for all newly added components and optional integrations
-- Add at least two showcase apps that exercise the new surfaces in realistic product contexts
-- Finalize release notes/changelog and version metadata
-- Run full CI locally and on GitHub Actions
-
-**Status: v0.7.0 planned component scope reached.**
-
-### Canonical Next-Component Plan
-
-For the current merged source of truth on what we plan to build next, see the `Canonical Next Build Roadmap` section in [`ROADMAP.md`](ROADMAP.md). That section consolidates the audit follow-ups, implementation-first additions, and broader component suggestions into one prioritized wave plan.
-
-See [ROADMAP.md](ROADMAP.md) for complete timeline.
+For the current source of truth on future build direction, see [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
