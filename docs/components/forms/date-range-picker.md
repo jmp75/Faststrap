@@ -73,6 +73,29 @@ For `method="post"`, ensure CSRF protection is enabled.
 
 Preset shortcuts rely on the Faststrap runtime from `add_bootstrap(app)`.
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `start_name` | `str` | `"start_date"` | Start date field name. |
+| `end_name` | `str` | `"end_date"` | End date field name. |
+| `start_label` | `str` | `"Start date"` | Start date label. |
+| `end_label` | `str` | `"End date"` | End date label. |
+| `start_value` | `str \| None` | `None` | Initial start date in `YYYY-MM-DD` format. |
+| `end_value` | `str \| None` | `None` | Initial end date in `YYYY-MM-DD` format. |
+| `min_date` | `str \| None` | `None` | Earliest selectable date. |
+| `max_date` | `str \| None` | `None` | Latest selectable date. |
+| `presets` | `list[tuple[str, str, str]] \| None` | `None` | Preset buttons as `(label, start, end)`. |
+| `endpoint` | `str \| None` | `None` | Form action and optional HTMX endpoint. |
+| `method` | `"get" \| "post"` | `"get"` | Submit method. |
+| `auto` | `bool` | `False` | Submit on change when an endpoint exists. |
+| `apply_label` | `str \| None` | `"Apply"` | Submit button label. Set `None` to hide. |
+| `hx_target` | `str \| None` | `None` | HTMX target selector. |
+| `hx_swap` | `str \| None` | `"outerHTML"` | HTMX swap style. |
+| `push_url` | `bool` | `False` | Push URL for HTMX GET flows. |
+| `form_cls` / `presets_cls` / `inputs_cls` | `str \| None` | `None` | Styling hooks. |
+| `**kwargs` | `Any` | | Extra form attributes. |
+
 ---
 
 ## API Reference

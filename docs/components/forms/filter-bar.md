@@ -101,6 +101,25 @@ FilterBar(
 
 Validate filters server-side. If you use `method="post"`, enable CSRF protection.
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `*filters` | `Any` | | Filter controls to render. |
+| `endpoint` | `str \| None` | `None` | Form action and optional HTMX endpoint. |
+| `method` | `"get" \| "post"` | `"get"` | Submit method. |
+| `mode` | `"auto" \| "apply"` | `"auto"` | Auto-submit on change or render Apply button. |
+| `apply_label` | `str` | `"Apply"` | Apply button text in apply mode. |
+| `apply_variant` | Bootstrap variant | `"primary"` | Apply button variant. |
+| `reset_label` | `str \| None` | `None` | Reset link label. |
+| `reset_href` | `str \| None` | `None` | Reset link target. |
+| `debounce` | `int` | `300` | HTMX debounce in milliseconds for auto mode. |
+| `hx_target` | `str \| None` | `None` | HTMX target selector. |
+| `hx_swap` | `str \| None` | `"outerHTML"` | HTMX swap style. |
+| `push_url` | `bool` | `False` | Push URL for HTMX GET flows. |
+| `filters_cls` / `actions_cls` / `form_cls` | `str \| None` | `None` | Styling hooks. |
+| `**kwargs` | `Any` | | Extra form attributes. |
+
 ---
 
 ## API Reference

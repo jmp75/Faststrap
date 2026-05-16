@@ -58,20 +58,23 @@ CalendarDatePicker(
 
 ## Parameters
 
-| Param | Type | Description |
-| :--- | :--- | :--- |
-| `name` | `str` | Input name. |
-| `label` | `str` | Label shown above the date input. |
-| `value` | `str | None` | Initial date in `YYYY-MM-DD` format. |
-| `min_date` | `str | None` | Earliest selectable date. |
-| `max_date` | `str | None` | Latest selectable date. |
-| `endpoint` | `str | None` | Optional form/HTMX endpoint. |
-| `method` | `get | post` | Submission method. |
-| `auto` | `bool` | Submit on date change when an endpoint is present. |
-| `apply_label` | `str | None` | Submit button label. Set to `None` to hide. |
-| `clear_label` | `str | None` | Optional reset button label. |
-| `hx_target` | `str | None` | HTMX target for responses. |
-| `push_url` | `bool` | Whether HTMX should push the URL. |
+| Param | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `str` | `"date"` | Input name. |
+| `label` | `str` | `"Date"` | Label shown above the date input. |
+| `value` | `str \| None` | `None` | Initial date in `YYYY-MM-DD` format. |
+| `min_date` | `str \| None` | `None` | Earliest selectable date. |
+| `max_date` | `str \| None` | `None` | Latest selectable date. |
+| `endpoint` | `str \| None` | `None` | Optional form/HTMX endpoint. |
+| `method` | `get \| post` | `"get"` | Submission method. |
+| `auto` | `bool` | `False` | Submit on date change when an endpoint is present. |
+| `apply_label` | `str \| None` | `"Apply"` | Submit button label. Set to `None` to hide. |
+| `clear_label` | `str \| None` | `None` | Optional reset button label. |
+| `hx_target` | `str \| None` | `None` | HTMX target for responses. |
+| `hx_swap` | `str \| None` | `"outerHTML"` | HTMX swap style. |
+| `push_url` | `bool` | `False` | Whether HTMX should push the URL. |
+| `input_cls` / `form_cls` | `str \| None` | `None` | Styling hooks. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
 
 ::: faststrap.components.forms.calendar_date_picker.CalendarDatePicker
     options:

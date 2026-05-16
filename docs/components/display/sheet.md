@@ -26,6 +26,8 @@ Sheet(
 - `Sheet` wraps `Drawer` with `placement="bottom"`.
 - Pass `height` to control panel height (for example `"50%"`, `"70vh"`).
 - Other `Drawer` kwargs such as `backdrop` and `scroll` are supported.
+- Requires Bootstrap JavaScript because it uses the offcanvas behavior from `Drawer`.
+- Trigger it with `data_bs_toggle="offcanvas"` and `data_bs_target="#yourSheetId"`.
 
 ## Parameters
 
@@ -36,6 +38,18 @@ Sheet(
 | `title` | `str \| None` | `None` | Optional header title |
 | `height` | `str` | `"auto"` | CSS height for the sheet |
 | `**kwargs` | `Any` | - | Forwarded to `Drawer` |
+
+## Example With Form Controls
+
+```python
+Sheet(
+    Input("email", label="Invite by email"),
+    Button("Send invite", variant="primary"),
+    sheet_id="inviteSheet",
+    title="Invite teammate",
+    height="60vh",
+)
+```
 
 ::: faststrap.components.display.sheet.Sheet
     options:

@@ -43,3 +43,14 @@ InstallPrompt(
 
 - [Modal](modal.md) - Modal dialogs
 - [Alert](alert.md) - Alert messages
+
+## Behavior Notes
+
+- Requires Bootstrap JavaScript because it uses Bootstrap Toast.
+- Designed for apps that already call `add_pwa()`.
+- iOS does not expose the same install prompt event as Chromium browsers, so the component shows manual iOS instructions.
+- Android/Desktop waits for the browser `beforeinstallprompt` event before showing the install button.
+
+## API Reference
+
+::: faststrap.components.feedback.install_prompt.InstallPrompt

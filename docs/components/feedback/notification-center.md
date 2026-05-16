@@ -76,6 +76,26 @@ When `endpoint` is provided, the dropdown menu is loaded on click.
 
 ---
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `*items` | `Any` | | Notification items. Tuples, strings, and custom nodes are supported. |
+| `count` | `int \| None` | `None` | Badge count. Omit to hide the badge. |
+| `title` | `str` | `"Notifications"` | Dropdown header text. |
+| `endpoint` | `str \| None` | `None` | Optional HTMX endpoint loaded when the bell is clicked. |
+| `center_id` | `str \| None` | `None` | Explicit wrapper ID. Auto-generated when omitted. |
+| `menu_cls` | `str \| None` | `None` | Extra dropdown menu classes. |
+| `button_cls` | `str \| None` | `None` | Extra toggle button classes. |
+| `badge_variant` | Bootstrap variant | `UNSET` | Badge color variant. Defaults to `danger`. |
+| `empty_text` | `str` | `"No notifications"` | Empty dropdown text. |
+| `max_items` | `int \| None` | `None` | Limit initially rendered items. |
+| `hx_swap` | `str \| None` | `"innerHTML"` | HTMX swap style for lazy-loaded menu content. |
+| `push_url` | `bool` | `False` | Push URL for HTMX loads. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
+
+---
+
 ## Security Notes
 
 If you load notifications over HTMX, ensure the endpoint is authenticated and returns only the current user's data.

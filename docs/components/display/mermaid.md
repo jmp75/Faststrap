@@ -61,6 +61,18 @@ Only render trusted diagrams when using relaxed security settings. Keep `securit
 
 ---
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `diagram` | `str` | required | Mermaid diagram text. |
+| `theme` | `str \| None` | `UNSET` | Mermaid theme metadata for runtime initialization. |
+| `security_level` | `str \| None` | `UNSET` | Mermaid security level metadata. |
+| `min_width` | `str \| int \| None` | `None` | Minimum width. Integers become pixel values. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
+
+---
+
 ## API Reference
 
 ::: faststrap.components.display.mermaid.Mermaid

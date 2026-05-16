@@ -52,6 +52,19 @@ Use `currentColor` inside your SVG to inherit text color and automatically adapt
 
 ---
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `svg` | `str` | required | SVG markup. |
+| `sanitize` | `bool` | `True` | Sanitize SVG with `bleach`. |
+| `allowed_tags` | `list[str] \| None` | `None` | Override allowed SVG tags. |
+| `allowed_attributes` | `dict[str, list[str]] \| None` | `None` | Override allowed SVG attributes. |
+| `allowed_protocols` | `list[str] \| None` | `None` | Override allowed URL protocols. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
+
+---
+
 ## Security Notes
 
 Only disable sanitization for trusted SVG markup. Treat user-provided SVG as untrusted input.
@@ -59,6 +72,8 @@ Only disable sanitization for trusted SVG markup. Treat user-provided SVG as unt
 ---
 
 ## API Reference
+
+::: faststrap.components.display.svg.render_svg
 
 ::: faststrap.components.display.svg.Svg
     options:

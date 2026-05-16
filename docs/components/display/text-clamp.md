@@ -71,17 +71,24 @@ Card(
 )
 ```
 
-## API
+## Parameters
 
-- `text`: Full text content.
-- `max_chars`: Number of characters before truncation.
-- `show_more`: Toggle expandable mode.
-- `expand_label`: Expand button text.
-- `collapse_label`: Collapse button text.
-- `button_cls`: Button classes.
-- `ellipsis`: Trailing truncation string.
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `str` | required | Full text content. |
+| `max_chars` | `int` | `180` | Number of characters before truncation. Minimum effective value is `1`. |
+| `show_more` | `bool` | `True` | Render expandable full text and toggle button. |
+| `expand_label` | `str` | `"Show more"` | Expand button text. |
+| `collapse_label` | `str` | `"Show less"` | Collapse button text. |
+| `button_cls` | `str` | Bootstrap link button classes | Toggle button classes. |
+| `ellipsis` | `str` | `"..."` | Trailing truncation string. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
 
 ## Notes
 
 - If text length is below `max_chars`, no toggle button is rendered.
 - `show_more=False` keeps preview-only output.
+
+## API Reference
+
+::: faststrap.components.display.text_clamp.TextClamp
