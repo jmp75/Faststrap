@@ -117,25 +117,17 @@ See the Showcase section in the docs for the current flagship set and screenshot
 
 ## Stats
 
-- **110+ exports** implemented.
-- **679+ tests** passing.
+- **128 registered UI components** implemented.
+- **145+ components, helpers, presets, and integrations** available.
 - **7 interaction presets** + **6 response helpers** + **1 auth decorator** + **SSEStream**.
 - **100% Python**.
 
-## Future Releases
+## Next Steps
 
-- **Layout primitives**: Stack, Cluster, Center, Switcher, Sidebar
-- **Data tooling**: DataFrameViewer (virtualized), DataProfiler, ModelReport layout
-- **Chart presets**: common analysis plots + insight helpers
-- **Form extensions**: FormWizard, Stepper, inline editing, validation workflow recipes
-- **UI extensions**: Timeline, ProfileDropdown, SearchBar, Avatar, ResultCard
-- **List/navigation helpers**: richer Pagination ergonomics for non-table views
-- **Icon packs**: optional icon registries beyond Bootstrap Icons
-- **Notebook helpers**: render-to-HTML convenience for notebooks
-- **Modern feedback and charts**: ModernToast and optional `ChartJS` integration
-- **Optional motion**: GSAP-based motion presets via `faststrap[gsap]`
-
-See `components/proposed.md` for the current planned component direction.
+- Browse the [Component Index](components/index.md).
+- Read the [Architecture Guide](guides/architecture.md) to understand the render model.
+- Use the [Upgrade Guide](guides/upgrading.md) when moving between Faststrap versions.
+- Review the repository `ROADMAP.md` for future component and integration direction.
 
 ## License
 

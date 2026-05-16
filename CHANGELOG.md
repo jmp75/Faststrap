@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added docs pages for the component registry, component defaults / `UNSET`, `theme_variant_css()`, custom component authoring, live validation, KPI/metric/trend cards, feature grids, pricing patterns, and `NavbarModern`.
 - Expanded docs for `GlassNavbar`, `SidebarNavbar`, `FormBuilder.from_pydantic()`, `Avatar`, `ModernToast`, `Chart`, `MapView`, and `Carousel`.
 - Expanded docs for advanced form controls, notification/install surfaces, `Sheet`, `Markdown`, `Mermaid`, `Svg`, and `TextClamp`.
+- Added a component index, architecture/render-model guide, performance guide, upgrade guide, and moved internal planning docs out of the public docs tree.
 
 ## [0.7.0] - 2026-05-07
 

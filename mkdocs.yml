@@ -82,7 +82,10 @@ nav:
     - PWA Guide: PWA_GUIDE.md
     - Troubleshooting: TROUBLESHOOTING.md
   - Guides:
+    - Architecture: guides/architecture.md
     - Custom Components: guides/custom-components.md
+    - Performance: guides/performance.md
+    - Upgrading: guides/upgrading.md
   - Deployment:
     - Overview: deployment/overview.md
     - Vercel: deployment/vercel.md
@@ -92,6 +95,7 @@ nav:
     - VPS: deployment/vps.md
     - Split Architecture: deployment/split-architecture.md
   - Components:
+    - Overview: components/index.md
     - Forms:
       - Button: components/forms/button.md
       - Input: components/forms/input.md
