@@ -21,12 +21,40 @@ MapView(
 
 ## Key Options
 
-- `include_assets=True`: inject Leaflet CSS/JS from CDN (default)
-- `include_assets=False`: skip injection if your app already loads Leaflet
-- `marker=True`: place a marker at the center coordinate
-- `popup_text="..."`: optional marker popup text
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `latitude` | `float` | required | Center latitude. Must be between `-90` and `90`. |
+| `longitude` | `float` | required | Center longitude. Must be between `-180` and `180`. |
+| `zoom` | `int` | `13` | Leaflet zoom level, `0` to `22`. |
+| `height` | `str` | `"320px"` | Map container height. |
+| `width` | `str` | `"100%"` | Map container width. |
+| `marker` | `bool` | `True` | Place a marker at the center coordinate. |
+| `popup_text` | `str \| None` | `None` | Optional marker popup text. |
+| `map_id` | `str \| None` | `None` | Explicit DOM ID. Auto-generated when omitted. |
+| `include_assets` | `bool` | `True` | Inject Leaflet CSS/JS from CDN. |
+| `tiles_url` | `str` | OpenStreetMap tiles | Leaflet tile URL template. |
+| `attribution` | `str` | OpenStreetMap attribution | Tile attribution HTML. |
+| `leaflet_css_url` | `str` | Leaflet CDN CSS | Override CSS URL. |
+| `leaflet_js_url` | `str` | Leaflet CDN JS | Override JS URL. |
+| `**kwargs` | `Any` | | Extra container attributes. |
+
+## Reusing Leaflet Assets
+
+If the page already loads Leaflet once, set `include_assets=False` for additional maps:
+
+```python
+MapView(
+    latitude=40.7128,
+    longitude=-74.0060,
+    include_assets=False,
+)
+```
 
 ## Size Implication
 
 Leaflet is CDN-first in this component, so Faststrap wheel size does not
 increase unless you choose to vendor assets yourself.
+
+## API Reference
+
+::: faststrap.components.display.map_view.MapView

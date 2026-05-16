@@ -41,17 +41,31 @@ AvatarGroup(
 
 ## Parameters
 
-| Param | Type | Description |
-| :--- | :--- | :--- |
-| `name` | `str | None` | Display name used for alt text and generated initials. |
-| `src` | `str | None` | Optional image URL. |
-| `alt` | `str | None` | Image alt text. Defaults to `name`. |
-| `initials` | `str | None` | Explicit initials override. |
-| `size` | `sm | md | lg | xl` | Avatar size. |
-| `shape` | `circle | rounded | square` | Avatar shape. |
-| `variant` | `str` | Bootstrap text/background variant for initials. |
-| `status` | `str | None` | Optional status label stored in `data-status`. |
-| `status_variant` | `str | None` | Bootstrap variant for the status dot. |
+### `Avatar`
+
+| Param | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `str \| None` | `None` | Display name used for title, ARIA label, and generated initials. |
+| `src` | `str \| None` | `None` | Optional image URL. |
+| `alt` | `str \| None` | `None` | Image alt text. Defaults to `name`. |
+| `initials` | `str \| None` | `None` | Explicit initials override. |
+| `size` | `xs \| sm \| md \| lg \| xl` | `md` | Avatar size. |
+| `shape` | `circle \| rounded \| square` | `circle` | Avatar shape. |
+| `variant` | `str` | `secondary` | Bootstrap text/background variant for initials. |
+| `status` | `str \| None` | `None` | Optional status label. Common values: `online`, `busy`, `away`, `offline`. |
+| `status_variant` | `str \| None` | `None` | Bootstrap variant for the status dot. |
+| `**kwargs` | `Any` | | Extra attributes. |
+
+### `AvatarGroup`
+
+| Param | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `*avatars` | `Any` | | Avatar components. |
+| `max_visible` | `int \| None` | `None` | Maximum avatars to show before adding a `+N` counter. |
+| `total` | `int \| None` | `None` | Total people count when not all avatars are passed. |
+| `size` | `xs \| sm \| md \| lg \| xl` | `md` | Size for the generated `+N` counter avatar. |
+| `overlap` | `bool` | `True` | Overlap avatars with negative margin. |
+| `**kwargs` | `Any` | | Extra group attributes. |
 
 ::: faststrap.components.display.avatar.Avatar
     options:

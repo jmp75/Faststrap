@@ -159,6 +159,8 @@ nav:
     - Navigation:
       - Navbar: components/navigation/navbar.md
       - CommandPalette: components/navigation/command-palette.md
+      - GlassNavbar: components/navigation/glass-navbar.md
+      - SidebarNavbar: components/navigation/sidebar-navbar.md
       - Tabs: components/navigation/tabs.md
       - Dropdown: components/navigation/dropdown.md
       - Breadcrumb: components/navigation/breadcrumb.md

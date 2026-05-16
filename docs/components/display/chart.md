@@ -32,6 +32,8 @@ Chart(fig, backend="plotly", include_js=True)
 
 If your figure object exposes `to_html()`, `Chart` can render it directly.
 
+For Plotly, `include_js=True` asks Plotly to include its JavaScript from a CDN. If your layout already loads Plotly globally, leave `include_js=False`.
+
 ---
 
 ## Raw SVG or HTML
@@ -58,6 +60,19 @@ If you pass a Matplotlib or Plotly/Altair object, `Chart` will infer the backend
 ```python
 Chart(fig, backend="matplotlib", width=480, height=320)
 ```
+
+## Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `figure` | `Any` | required | Matplotlib figure, Plotly/Altair chart, or trusted raw string. |
+| `backend` | `matplotlib \| plotly \| altair \| svg \| html \| None` | `None` | Explicit renderer. Required for raw strings. |
+| `include_js` | `bool` | `False` | Include Plotly JavaScript when rendering Plotly charts. |
+| `responsive` | `bool` | `True` | Adds `w-100` to the wrapper. |
+| `width` | `str \| int \| None` | `None` | Wrapper width. Integers become pixel values. |
+| `height` | `str \| int \| None` | `None` | Wrapper height. Integers become pixel values. |
+| `allow_unsafe_html` | `bool` | `False` | Required for raw SVG/HTML strings. |
+| `**kwargs` | `Any` | | Extra wrapper attributes. |
 
 ---
 

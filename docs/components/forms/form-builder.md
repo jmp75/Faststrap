@@ -2,6 +2,9 @@
 
 `FormBuilder.from_pydantic()` generates a Bootstrap-styled form from a Pydantic model.
 
+!!! warning "Pydantic v2 required"
+    `FormBuilder.from_pydantic()` reads `model_fields`, which is the Pydantic v2 model API. Pydantic v1 models are not supported by this helper.
+
 !!! info "Naming update in v0.6.1"
     Starting in Faststrap `v0.6.1`, the preferred import is `FormBuilder` to avoid confusion
     with FastHTML's native `Form` element.
@@ -41,10 +44,34 @@ form = FormBuilder.from_pydantic(Signup, action="/signup")
 
 ## Options
 
-- `include=[...]` include only selected fields
-- `exclude=[...]` remove selected fields
-- `submit_label="Submit"` customize button text
-- `submit_variant="primary"` customize button style
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `model_class` | `type[Any]` | required | Pydantic `BaseModel` class. |
+| `action` | `str \| None` | `None` | Form submit URL. |
+| `method` | `str` | `"post"` | Form method. |
+| `include` | `list[str] \| None` | `None` | Include only selected fields. |
+| `exclude` | `list[str] \| None` | `None` | Exclude selected fields. |
+| `submit_label` | `str` | `"Submit"` | Submit button text. |
+| `submit_variant` | `str` | `"primary"` | Bootstrap button variant. |
+| `form_cls` | `str` | `""` | Extra form classes. |
+| `button_cls` | `str` | `""` | Extra submit button classes. |
+| `**kwargs` | `Any` | | Extra form attributes, including HTMX attributes. |
+
+## HTMX Submit Example
+
+```python
+FormBuilder.from_pydantic(
+    Signup,
+    hx_post="/signup",
+    hx_target="#signup-result",
+    hx_swap="outerHTML",
+    submit_label="Create account",
+)
+```
+
+## Validation Flow
+
+Use `FormErrorSummary`, `FormGroupFromErrors`, `LiveValidationField`, and `ValidationMessage` when you need server-side error rendering or live field validation. `FormBuilder.from_pydantic()` focuses on generating the initial Bootstrap-styled form.
 
 ## Backward Compatibility
 
