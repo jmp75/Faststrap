@@ -1,19 +1,19 @@
-# FastStrap Roadmap  Updated March 2026
+# FastStrap Roadmap - Updated May 2026
 
-**Vision:** The most complete, Pythonic, zero-JS Bootstrap 5 component library for FastHTML  100+ production-ready components built by the community, for the community.
+**Vision:** The most complete, Pythonic, zero-JS Bootstrap 5 component library for FastHTML - a production-grade UI layer for web apps, data apps, ML tools, and AI-native interfaces.
 
 ---
 
-## Current Status (v0.6.0 - March 2026)
+## Current Status (v0.7.x - May 2026)
 
-**109+ components live**  Phase 1 through v0.6.0 complete  
-**679+ tests** - 90%+ coverage  
-**Full HTMX + Bootstrap 5.3.3 support**  
-**100% Bootstrap parity achieved**   
-**Zero custom JavaScript required**  
-**NEW: HTMX Presets Module**  17 interaction/response/auth helpers  
-**NEW: SEO Module**  Comprehensive meta tags + structured data  
-**NEW: Data foundations**  DataTable, Chart, DashboardGrid, filters, SSE helpers
+**128 registered UI components live**
+**145+ total components, helpers, presets, integrations, and utilities**
+**779+ tests collected in CI**
+**Full HTMX + Bootstrap 5.3.3 support**
+**Core remains FastHTML/Bootstrap/HTMX-first**
+**Zero custom JavaScript required**
+**Optional integrations available** for ChartJS, GSAP, Markdown, maps, and richer motion/chart use cases
+**Docs structure hardened** with component index, architecture guide, upgrade guide, performance guide, and docs standards
 
 ### Pre-v0.6 Delivered by v0.5.9
 
@@ -154,7 +154,7 @@ Faststrap commits to the following architectural contracts:
 
 ## Phase 5  Composed UI & Design System Layer (v0.5.x  Complete + pre-v0.6 extensions)
 
-**Goal:** SaaS-ready patterns, layouts, and visual effects.  
+**Goal:** SaaS-ready patterns, layouts, and visual effects.
 **Focus:** `faststrap.layouts`, `faststrap.patterns`, `faststrap.effects`.
 
 ### Components & Plans
@@ -260,12 +260,12 @@ Faststrap commits to the following architectural contracts:
 
 | Priority | Component | Description | Status |
 |----------|-----------|-------------|--------|
-| 1 | `DataTable` | Advanced table with sort/filter/pagination for DataFrames | Implemented | 
-| 2 | `Chart` | Wrapper for Matplotlib, Plotly, Altair with responsive sizing | Implemented | 
-| 3 | `Table.from_df()` | Convert pandas/polars DataFrame to Bootstrap table | Implemented | 
-| 4 | `MetricCard` | Enhanced StatCard with trends and deltas | Implemented | 
-| 5 | `TrendCard` | KPI card with sparkline visualization | Implemented | 
-| 6 | `KPICard` | Multi-metric dashboard card | Implemented | 
+| 1 | `DataTable` | Advanced table with sort/filter/pagination for DataFrames | Implemented |
+| 2 | `Chart` | Wrapper for Matplotlib, Plotly, Altair with responsive sizing | Implemented |
+| 3 | `Table.from_df()` | Convert pandas/polars DataFrame to Bootstrap table | Implemented |
+| 4 | `MetricCard` | Enhanced StatCard with trends and deltas | Implemented |
+| 5 | `TrendCard` | KPI card with sparkline visualization | Implemented |
+| 6 | `KPICard` | Multi-metric dashboard card | Implemented |
 
 **Features:**
 
@@ -282,12 +282,12 @@ Faststrap commits to the following architectural contracts:
 
 | Priority | Component | Description | Status |
 |----------|-----------|-------------|--------|
-| 1 | `DashboardGrid` | Responsive grid system for dashboards | Implemented | 
-| 2 | `FilterBar` | Composable filter components | Implemented | 
-| 3 | `DateRangePicker` | Date range selection with presets | Implemented | 
-| 4 | `MultiSelect` | Multi-select dropdown for filtering | Implemented | 
-| 5 | `RangeSlider` | Numeric range slider | Implemented | 
-| 6 | `ExportButton` | Export data to CSV/Excel/PDF | Implemented | 
+| 1 | `DashboardGrid` | Responsive grid system for dashboards | Implemented |
+| 2 | `FilterBar` | Composable filter components | Implemented |
+| 3 | `DateRangePicker` | Date range selection with presets | Implemented |
+| 4 | `MultiSelect` | Multi-select dropdown for filtering | Implemented |
+| 5 | `RangeSlider` | Numeric range slider | Implemented |
+| 6 | `ExportButton` | Export data to CSV/Excel/PDF | Implemented |
 | 7 | `DistributionPlot` | Histogram with KDE overlay | Planned |
 | 8 | `CorrelationMatrix` | Heatmap for correlation analysis | Planned |
 
@@ -480,13 +480,23 @@ currently shipped:
 - `CodeBlock`
 - `JsonViewer`
 - `KeyValueList`
+- `Stack`
+- `Cluster`
+- `Center`
+- `Sidebar`
+- `SplitPane`
 - `LogViewer`
+- `PageHeader`
+- `FormSection`
 - `FilePreview`
 - `DataCard`
 - `RecordDetail`
-- `PageHeader`
 - `SectionHeader`
 - `ResourceList`
+- `PollUntil`
+- `Debounce`
+- `ConfirmPrompt`
+- `SwapOnEvent`
 - `DataFramePreview`
 - `ModelCard`
 - `DatasetCard`
@@ -517,20 +527,41 @@ These should remain lightweight, HTML-first, and dependency-free where possible.
 
 | Candidate | Status | Rationale |
 |-----------|--------|-----------|
+| `Stack` | Planned | Vertical layout primitive for repeated `d-flex flex-column gap-*` patterns. |
+| `Cluster` | Planned | Horizontal wrapping layout primitive for toolbar/action/filter rows. |
+| `Center` | Planned | Centering primitive for empty states, auth shells, and focused panels. |
+| `Sidebar` | Planned | App-shell primitive distinct from `SidebarNavbar`; pairs a fixed/sidebar region with scrollable main content. |
+| `SplitPane` | Planned | Two-pane editor/inspector/master-detail layout; start non-resizable in core, richer behavior later if needed. |
 | `PdfEmbed` / `PdfViewer` | Planned | Basic iframe/object PDF display with download fallback; no PDF.js in core. |
 | `CodeBlock` | Planned | Developer/docs/AI app primitive for displaying code snippets. |
 | `JsonViewer` | Planned | Useful for APIs, ML outputs, agent traces, and config dashboards. |
 | `KeyValueList` | Planned | Common metadata/detail display pattern. |
 | `LogViewer` | Planned | Useful for jobs, deployment logs, agent runs, and ML training logs. |
+| `FormSection` | Planned | Groups related fields with title, description, and optional divider. |
 | `FilePreview` | Planned | Generic file preview shell with safe fallback/download behavior. |
 | `DataCard` / `RecordDetail` | Planned | Structured object/detail display without hand-rolled markup. |
 | `PageHeader` / `SectionHeader` | Planned | Reusable product/dashboard headers with actions and status. |
 | `ResourceList` | Planned | Entity list pattern with icon/avatar/status/action support. |
 
+### Core Track: Interaction Presets
+
+These should stay HTMX-first and dependency-free.
+
+| Candidate | Status | Rationale |
+|-----------|--------|-----------|
+| `Debounce` | Planned | Small helper for consistent `delay:Xms changed` HTMX triggers. |
+| `ConfirmPrompt` | Planned | Cleanly applies `hx-confirm` to actions without custom JavaScript. |
+| `SwapOnEvent` | Planned | Trigger HTMX swaps from custom client events. |
+| `PollUntil` | Planned | Poll job/status endpoints until a done/error sentinel appears; high value for queues and ML jobs. |
+
 ### Data Science and ML Track
 
 These should make Faststrap a strong option for internal analytics and ML
 operations apps without requiring React.
+
+The near-term competitive gap is interactive plotting. The existing `Chart`
+component handles core Python chart output, while `faststrap[plots]` should
+focus on richer Plotly/Altair/Vega-style interaction.
 
 | Candidate | Status | Rationale |
 |-----------|--------|-----------|
@@ -541,6 +572,17 @@ operations apps without requiring React.
 | `ArtifactList` | Planned | Files/checkpoints/reports produced by jobs or model runs. |
 | `TrainingProgress` | Planned | Epoch/progress/metric trend summary for ML jobs. |
 | `PredictionResult` | Planned | Human-readable model output with confidence and explanation slots. |
+| `ConfusionMatrix` | Planned optional/core-adjacent | Useful ML diagnostic display that can start as a table/heatmap without new dependencies. |
+
+### Optional `faststrap[plots]` Scope
+
+| Candidate | Status | Rationale |
+|-----------|--------|-----------|
+| `PlotlyChart` | Planned | Embed interactive Plotly figures without requiring Dash. |
+| `AltairChart` | Planned | Embed Altair/Vega-Lite specs for data-science workflows. |
+| `VegaChart` | Planned | Lower-level Vega/Vega-Lite bridge for teams already using specs. |
+| `DistributionPlot` | Planned | Common statistical visualization helper. |
+| `CorrelationMatrix` | Planned | Common analytics/ML exploratory view. |
 
 ### AI and Agent Track
 
@@ -561,19 +603,35 @@ so agents do not need to rely on brittle screenshot/click workflows.
 | `ReasoningTimeline` | Planned | Timeline-style display for planning/evaluation steps. |
 | `EvalResultCard` | Planned | Compact display for eval scores, pass/fail status, and notes. |
 
+Initial display primitives for this track:
+
+- `MessageThread`
+- `ToolCallCard`
+- `AgentTrace`
+- `ReasoningTimeline`
+
+Initial structured API primitives:
+
+- `agent_action`
+- `AgentManifest`
+- `/.well-known/faststrap-agent.json`
+- form/table schema export hooks
+
 ### Optional Integration Packs
 
 These are useful, but should remain explicit opt-ins:
 
-- `faststrap[pdfjs]` for rich PDF navigation, zoom, and search.
-- `faststrap[plots]` for Plotly, Altair, Vega-Lite, or ECharts bridges.
-- `faststrap[ml]` for ML/data-science cards and report patterns if the surface grows beyond core.
-- `faststrap[agents]` for structured agent manifests and action endpoints.
-- `faststrap[editor]` for rich text or markdown editing.
-- `faststrap[upload]` for advanced drag/drop uploads, queues, progress, and previews.
-- `faststrap[tables]` for heavier data-grid features such as pinning or virtualization.
-- `faststrap[maps]` for Leaflet/MapLibre/provider-backed map integrations.
-- `faststrap[docs]` for documentation-site primitives and component preview/playground patterns.
+Priority order:
+
+1. `faststrap[plots]` for Plotly, Altair, Vega-Lite, or ECharts bridges.
+2. `faststrap[agents]` for structured agent manifests and action endpoints.
+3. `faststrap[ml]` for ML/data-science cards and report patterns if the surface grows beyond core.
+4. `faststrap[editor]` for rich text, Markdown, or code editing.
+5. `faststrap[upload]` for advanced drag/drop uploads, queues, progress, and previews.
+6. `faststrap[tables]` for heavier data-grid features such as pinning or virtualization.
+7. `faststrap[maps]` for Leaflet/MapLibre/provider-backed map integrations.
+8. `faststrap[pdfjs]` for rich PDF navigation, zoom, and search.
+9. `faststrap[docs]` for documentation-site primitives and component preview/playground patterns.
 
 ### Guardrails
 
@@ -583,6 +641,55 @@ These are useful, but should remain explicit opt-ins:
 - Optional integrations must degrade gracefully when assets are not loaded.
 - Agent-facing APIs should be explicit, inspectable, and safe by default.
 - New data/ML components should compose existing `Card`, `Badge`, `Table`, `DataTable`, `Progress`, and `Chart` primitives where possible.
+
+### Adoption Track: Interactive Component Playground
+
+The docs site should eventually include a lightweight playground where users can
+adjust common component parameters and see rendered output without installing
+Faststrap locally.
+
+Preferred stance:
+
+- Static-docs friendly.
+- No production server required.
+- Start with curated components (`Button`, `Alert`, `Card`, `Badge`, `Avatar`, `MetricCard`).
+- Treat Pyodide/CodeSandbox-style execution as optional progressive enhancement.
+- Prefer a safe parameter editor over arbitrary code execution for the first version.
+
+### Recommended Next Build Sequence
+
+**Wave A: Core primitives, no new dependencies**
+
+1. `Stack`, `Cluster`, `Center`
+2. `PageHeader`, `KeyValueList`, `RecordDetail`
+3. `CodeBlock`, `JsonViewer`
+4. `FormSection`
+5. `PollUntil`
+
+**Wave B: `faststrap[plots]`**
+
+1. `PlotlyChart`
+2. `AltairChart`
+3. `VegaChart`
+4. `DistributionPlot`
+5. `CorrelationMatrix`
+
+**Wave C: `faststrap[agents]`**
+
+1. `agent_action`
+2. `AgentManifest`
+3. `MessageThread`
+4. `ToolCallCard`
+5. form/table schema export hooks
+
+**Wave D: `faststrap[ml]`**
+
+1. `ModelCard`
+2. `DatasetCard`
+3. `ExperimentRunCard`
+4. `TrainingProgress`
+5. `PredictionResult`
+6. `ConfusionMatrix`
 
 ---
 
@@ -704,7 +811,7 @@ What Faststrap intentionally *won't* do:
 
 ## v1.0.0  Production Release (Target Aug 2026)
 
-**Goal:** Full Bootstrap parity + SaaS patterns + Documentation  
+**Goal:** Full Bootstrap parity + SaaS patterns + Documentation
 **Target:** 100+ components
 
 ### Milestones
@@ -760,14 +867,14 @@ What Faststrap intentionally *won't* do:
 Tell us what you need most:
 
 * [GitHub Discussions](https://github.com/Faststrap-org/Faststrap/discussions)
-* Vote on issues with 
+* Vote on issues with
 * [FastHTML Discord](https://discord.gg/qcXvcxMhdP)  #faststrap channel
 
 Your votes directly influence what gets built next.
 
 ---
 
-**Last Updated: March 2026**  
+**Last Updated: March 2026**
 **Current Version: 0.5.9 (map/markdown/data bridges, PWA foundations, and release hardening)**
 
 **Let's build the definitive UI library for FastHTML  together.**

@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Expanded docs for advanced form controls, notification/install surfaces, `Sheet`, `Markdown`, `Mermaid`, `Svg`, and `TextClamp`.
 - Added a component index, architecture/render-model guide, performance guide, upgrade guide, and moved internal planning docs out of the public docs tree.
 - Polished README/showcase presentation and added documentation standards for future component pages.
+- Updated the roadmap with the next core primitive wave, optional integration priority order, AI/agent surface scope, and playground adoption track.
 
 ## [0.7.0] - 2026-05-07
 
