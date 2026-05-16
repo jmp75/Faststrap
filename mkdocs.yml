@@ -81,6 +81,8 @@ nav:
     - Static Files: STATIC_FILES.md
     - PWA Guide: PWA_GUIDE.md
     - Troubleshooting: TROUBLESHOOTING.md
+  - Guides:
+    - Custom Components: guides/custom-components.md
   - Deployment:
     - Overview: deployment/overview.md
     - Vercel: deployment/vercel.md
@@ -112,6 +114,7 @@ nav:
       - ThemeToggle: components/forms/theme-toggle.md
       - ToggleGroup: components/forms/toggle-group.md
       - InlineEditor: components/forms/inline-editor.md
+      - Live Validation: components/forms/live-validation.md
     - Display:
       - Card: components/display/card.md
       - Chart: components/display/chart.md
@@ -133,6 +136,9 @@ nav:
       - Sheet: components/display/sheet.md
       - Empty State: components/display/empty_state.md
       - Stat Card: components/display/stat_card.md
+      - Metric Card: components/display/metric-card.md
+      - Trend Card: components/display/trend-card.md
+      - KPI Card: components/display/kpi-card.md
       - Result Card: components/display/result-card.md
       - TextClamp: components/display/text-clamp.md
       - SSETarget: components/display/sse-target.md
@@ -163,6 +169,9 @@ nav:
       - Drawer: components/navigation/drawer.md
       - Scrollspy: components/navigation/scrollspy.md
     - Patterns:
+      - Feature Grid: components/patterns/feature-grid.md
+      - Pricing: components/patterns/pricing.md
+      - Navbar Modern: components/patterns/navbar-modern.md
       - Footer Modern: components/patterns/footer-modern.md
       - Testimonial Section: components/patterns/testimonial-section.md
     - Layout:
@@ -202,5 +211,8 @@ nav:
     - ChartJS: integrations/chartjs.md
   - API Reference:
     - Core: api/core.md
+    - Component Defaults: api/defaults.md
+    - Component Registry: api/registry.md
+    - Theme Variants: api/theme-variants.md
     - Presets: api/presets.md
     - SEO: api/seo.md

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Corrected high-impact docs inaccuracies for `Hero`, `Button` outline variants, `InfiniteScroll` thresholds, SEO `url` versus `canonical`, modal accessibility parameters, and preset API tables.
 - Removed the internal proposed components planning page from the public MkDocs navigation.
+- Added docs pages for the component registry, component defaults / `UNSET`, `theme_variant_css()`, custom component authoring, live validation, KPI/metric/trend cards, feature grids, pricing patterns, and `NavbarModern`.
 
 ## [0.7.0] - 2026-05-07
 
