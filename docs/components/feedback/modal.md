@@ -204,6 +204,8 @@ Modal(
 | `scrollable` | `bool` | `.modal-dialog-scrollable` | Makes body scrollable independently. |
 | `static_backdrop` | `bool` | `data-bs-backdrop` | `static` prevents click-to-close. |
 | `keyboard` | `bool` | `data-bs-keyboard` | If `False`, Escape key won't close it. |
+| `focus_trap` | `bool` | Focus trap helper | Keeps keyboard focus inside the modal while it is open. |
+| `autofocus_selector` | `str` | Focus trap helper | CSS selector for the element to focus when the modal opens. |
 
 ::: faststrap.components.feedback.modal.Modal
     options:

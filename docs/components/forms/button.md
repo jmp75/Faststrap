@@ -315,7 +315,7 @@ def FormActions():
 </div>
 
 ### The "Destructive Action"
-For actions that can't be undone, use `outline-danger` to warn the user but not catch the eye *too* much (to avoid accidental clicks), but switch to solid danger for the confirmation.
+For actions that can't be undone, use `variant="danger"` with `outline=True` to warn the user without making the first click feel too aggressive. Switch to solid danger for the final confirmation.
 
 <div class="component-preview">
   <div class="preview-header">Live Preview</div>
@@ -326,7 +326,8 @@ For actions that can't be undone, use `outline-danger` to warn the user but not 
 ```python
 Button(
     "Delete Account", 
-    variant="outline-danger",
+    variant="danger",
+    outline=True,
     icon="trash",
     data_bs_toggle="modal", 
     data_bs_target="#confirm-delete-modal"

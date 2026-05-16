@@ -23,7 +23,7 @@ InfiniteScroll(
 | `endpoint` | `str` | **required** | Endpoint to fetch next page |
 | `target` | `str` | **required** | CSS selector for results container |
 | `trigger` | `str` | `"revealed"` | HTMX trigger event |
-| `threshold` | `str` | `"0px"` | Prefetch margin (`"200px"`) or intersection ratio (`"0.5"`) |
+| `threshold` | `str` | `"0"` | HTMX-native intersection ratio (`"0"`, `"0.5"`) or Faststrap prefetch margin (`"200px"`) |
 | `content` | `Any` | Loading indicator | Custom loading content |
 | `**kwargs` | | | Additional HTML/HTMX attrs |
 
@@ -49,6 +49,8 @@ def feed(page: int = 1):
 ```
 
 ## With Custom Threshold
+
+With no custom threshold, Faststrap uses HTMX-native `intersect threshold:0` behavior.
 
 Trigger loading 200px before the element is visible:
 

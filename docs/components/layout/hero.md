@@ -27,9 +27,9 @@ The `Hero` component (often called a Jumbotron) is a large, prominent section ty
 Hero(
     title="Build Faster with FastStrap",
     subtitle="The definitive Bootstrap component library for FastHTML.",
-    action=Button("Get Started", size="lg", variant="primary"),
-    variant="light",
-    align="center"
+    cta=Button("Get Started", size="lg", variant="primary"),
+    bg_variant="light",
+    align="center",
 )
 ```
   </div>
@@ -44,7 +44,7 @@ Hero(
 ## Visual Examples & Use Cases
 
 ### 1. Dark Mode Hero
-Use `variant="dark"` and `bg_variant="dark"` for a premium, high-contrast look.
+Use `bg_variant="dark"` for a premium, high-contrast look. FastStrap will add `text-white` automatically for dark hero backgrounds unless you pass `text_color`.
 
 !!! note "Code & Output"
     ```python
@@ -61,24 +61,24 @@ Use `variant="dark"` and `bg_variant="dark"` for a premium, high-contrast look.
 Hero(
     title="Modern Python Development",
     subtitle="Zero JS, Infinite Possibilities.",
-    variant="dark",
     bg_variant="dark",
-    align="start"
+    align="start",
 )
 ```
   </div>
 </div>
     ```
 
-### 2. Image Backgrounds
-You can pass an image URL to `bg_image` to create a more visual experience.
+### 2. Branded Backgrounds
+Use `bg_color` for custom brand colors, or pass normal HTML attributes such as `style` through `**kwargs` when you need a richer background treatment.
 
 ```python
 Hero(
     title="Adventure Awaits",
-    bg_image="https://example.com/mountain.jpg",
-    fixed_bg=True, # Parallax effect
-    variant="dark"
+    subtitle="Design a landing-page hero without leaving Python.",
+    bg_color="#0f172a",
+    text_color="text-white",
+    cta=Button("Start Exploring", variant="light"),
 )
 ```
 
@@ -87,12 +87,12 @@ Hero(
 ## Practical Functionality
 
 ### 1. Customizing Children
-The `action` argument can accept any FastHTML element or component.
+The `cta` argument can accept any FastHTML element or component.
 
 ```python
 Hero(
     ...,
-    action=Div(
+    cta=Div(
         Button("Download", variant="primary"),
         Button("View Source", variant="link"),
         cls="d-flex gap-2 justify-content-center"
@@ -107,14 +107,15 @@ Hero(
 | FastStrap Param | Type | Description |
 | :--- | :--- | :--- |
 | `title` | `str` | Main large heading (H1). |
-| `subtitle` | `str` | Secondary text or description. |
-| `action` | `Any` | Call to action (usually a button). |
+| `subtitle` | `str \| None` | Secondary text or description. |
+| `cta` | `Any` | Call to action area, usually a button or button group. |
 | `align` | `str` | Alignment: `start`, `center`, `end`. |
-| `variant` | `str` | Text theme: `light` or `dark`. |
-| `bg_variant` | `str` | Background color utility (e.g. `primary`, `dark`). |
-| `bg_image` | `str` | URL for background image. |
+| `bg_variant` | `str \| None` | Bootstrap background utility suffix, such as `primary`, `light`, or `dark`. |
+| `bg_color` | `str \| None` | Custom background color. Hex values are applied as inline background color. |
+| `text_color` | `str \| None` | Text color class, such as `text-white` or `text-dark`. |
+| `py` | `str` | Vertical padding scale used for `py-{value}`. Default `5`. |
 | `container` | `bool` | If `True`, wraps content in a `.container`. Default `True`. |
-| `fixed_bg` | `bool` | Enables parallax background attachment. |
+| `**kwargs` | `Any` | Additional HTML attributes, including `id`, `cls`, `style`, and HTMX attributes. |
 
 ::: faststrap.components.layout.hero.Hero
     options:

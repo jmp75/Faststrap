@@ -7,7 +7,7 @@ Get your first FastStrap application running in less than a minute.
 Create a new file named `app.py`:
 
 ```python title="app.py"
-from fasthtml.common import FastHTML, serve, H1, P
+from fasthtml.common import FastHTML, serve
 from faststrap import add_bootstrap, Container, Hero, Button
 
 # 1. Initialize FastHTML
@@ -23,8 +23,8 @@ def home():
         Hero(
             title="FastStrap is Live!",
             subtitle="Building beautiful Python UIs has never been easier.",
-            action=Button("View Components", variant="primary", href="/components"),
-            align="center"
+            cta=Button("View Components", variant="primary", href="/components"),
+            align="center",
         )
     )
 
@@ -78,6 +78,6 @@ Button(
 
 ## Next Steps
 
-- Explore the [Component Gallery](components/forms/button.md)
+- Explore the [Component Gallery](../components/forms/button.md)
 - Learn about [Dark Mode and Theming](customization.md)
-- Check the [Grid System](layout/grid.md) for complex layouts
+- Check the [Grid System](../components/layout/grid.md) for complex layouts

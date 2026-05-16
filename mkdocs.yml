@@ -90,7 +90,6 @@ nav:
     - VPS: deployment/vps.md
     - Split Architecture: deployment/split-architecture.md
   - Components:
-    - Proposed Components: components/proposed.md
     - Forms:
       - Button: components/forms/button.md
       - Input: components/forms/input.md

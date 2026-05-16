@@ -256,6 +256,9 @@ return hx_trigger({
 
 Return content + out-of-band toast.
 
+!!! warning "ToastContainer is required"
+    `toast_response()` uses HTMX out-of-band swapping. Your page layout must include `ToastContainer()` for the toast to appear. If the container is missing, the response still succeeds but the toast has nowhere to render.
+
 ```python
 from faststrap.presets import toast_response
 
@@ -409,7 +412,7 @@ def get_posts_page(page: int = 1):
 | `InfiniteScroll` | `endpoint`, `target`, `threshold` | Infinite scroll loader |
 | `AutoRefresh` | `endpoint`, `target`, `interval` | Auto-polling element |
 | `LazyLoad` | `endpoint`, `placeholder`, `trigger` | Lazy-loaded content |
-| `LoadingButton` | `text`, `endpoint`, `target`, `method` | Button with loading state |
+| `LoadingButton` | `*children`, `endpoint`, `target`, `method`, `loading_text` | Button with loading state |
 | `SSEStream` | `events`, `headers` | Server-Sent Events response |
 
 ### Response Helpers

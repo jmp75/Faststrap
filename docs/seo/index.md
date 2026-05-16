@@ -79,7 +79,7 @@ The main component for generating SEO meta tags.
 - `description` (str): Page description
 - `keywords` (list[str]): List of keywords
 - `image` (str): Image URL for social sharing
-- `url` (str): Canonical URL
+- `url` (str): Open Graph URL (`og:url`) used for social sharing cards
 - `og_type` (str): Open Graph type ("website", "article", "product")
 - `article` (bool): If True, adds article-specific meta tags
 - `published_time` (str): Article published time (ISO 8601)
@@ -91,11 +91,22 @@ The main component for generating SEO meta tags.
 - `twitter_site` (str): Twitter site handle (@username)
 - `twitter_creator` (str): Twitter creator handle
 - `robots` (str): Robots meta tag value (default: "index, follow")
-- `canonical` (str): Canonical URL (if different from url)
+- `canonical` (str): Canonical link (`<link rel="canonical">`) used by search engines. If omitted, no canonical link is emitted.
 - `locale` (str): Page locale (e.g., "en_US")
 - `alternate_locales` (list[str]): List of alternate locales
 
 **Returns:** Tuple of meta tag elements to include in page head
+
+For most public pages, set both `url` and `canonical` to the same absolute URL:
+
+```python
+SEO(
+    title="My Page",
+    description="Helpful page description.",
+    url="https://example.com/page",
+    canonical="https://example.com/page",
+)
+```
 
 ### StructuredData
 
