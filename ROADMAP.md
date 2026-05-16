@@ -4,16 +4,17 @@
 
 ---
 
-## Current Status (v0.7.x - May 2026)
+## Current Status (v0.8.0 - May 2026)
 
-**143 registered UI components live**
-**160+ total components, helpers, presets, integrations, and utilities**
-**779+ tests collected in CI**
+**152 registered UI components live**
+**170+ total components, helpers, presets, integrations, and utilities**
+**790+ tests collected in CI**
 **Full HTMX + Bootstrap 5.3.3 support**
 **Core remains FastHTML/Bootstrap/HTMX-first**
 **Zero custom JavaScript required**
 **Optional integrations available** for ChartJS, GSAP, Markdown, maps, and richer motion/chart use cases
 **Docs structure hardened** with component index, architecture guide, upgrade guide, performance guide, and docs standards
+**v0.8 core primitives added**: `Stack`, `Cluster`, `Center`, `PageHeader`, `KeyValueList`, `RecordDetail`, `CodeBlock`, `JsonViewer`, `FormSection`, and `PollUntil`
 **Visual primitives absorbed into core**: `FlipCard`, `TiltCard`, `RevealCard`, `GlowCard`, CSS loaders, `ProgressRing`, `GradientButton`, `FloatingActionButton`, and `ParallaxSection`
 
 ### Pre-v0.6 Delivered by v0.5.9
@@ -528,20 +529,20 @@ These should remain lightweight, HTML-first, and dependency-free where possible.
 
 | Candidate | Status | Rationale |
 |-----------|--------|-----------|
-| `Stack` | Planned | Vertical layout primitive for repeated `d-flex flex-column gap-*` patterns. |
-| `Cluster` | Planned | Horizontal wrapping layout primitive for toolbar/action/filter rows. |
-| `Center` | Planned | Centering primitive for empty states, auth shells, and focused panels. |
+| `Stack` | Complete | Vertical layout primitive for repeated `d-flex flex-column gap-*` patterns. |
+| `Cluster` | Complete | Horizontal wrapping layout primitive for toolbar/action/filter rows. |
+| `Center` | Complete | Centering primitive for empty states, auth shells, and focused panels. |
 | `Sidebar` | Planned | App-shell primitive distinct from `SidebarNavbar`; pairs a fixed/sidebar region with scrollable main content. |
 | `SplitPane` | Planned | Two-pane editor/inspector/master-detail layout; start non-resizable in core, richer behavior later if needed. |
 | `PdfEmbed` / `PdfViewer` | Planned | Basic iframe/object PDF display with download fallback; no PDF.js in core. |
-| `CodeBlock` | Planned | Developer/docs/AI app primitive for displaying code snippets. |
-| `JsonViewer` | Planned | Useful for APIs, ML outputs, agent traces, and config dashboards. |
-| `KeyValueList` | Planned | Common metadata/detail display pattern. |
+| `CodeBlock` | Complete | Developer/docs/AI app primitive for displaying code snippets. |
+| `JsonViewer` | Complete | Useful for APIs, ML outputs, agent traces, and config dashboards. |
+| `KeyValueList` | Complete | Common metadata/detail display pattern. |
 | `LogViewer` | Planned | Useful for jobs, deployment logs, agent runs, and ML training logs. |
-| `FormSection` | Planned | Groups related fields with title, description, and optional divider. |
+| `FormSection` | Complete | Groups related fields with title, description, and optional divider. |
 | `FilePreview` | Planned | Generic file preview shell with safe fallback/download behavior. |
-| `DataCard` / `RecordDetail` | Planned | Structured object/detail display without hand-rolled markup. |
-| `PageHeader` / `SectionHeader` | Planned | Reusable product/dashboard headers with actions and status. |
+| `DataCard` / `RecordDetail` | Partial | `RecordDetail` is complete; `DataCard` remains planned. |
+| `PageHeader` / `SectionHeader` | Partial | `PageHeader` is complete; `SectionHeader` remains planned. |
 | `ResourceList` | Planned | Entity list pattern with icon/avatar/status/action support. |
 
 ### Core Track: Interaction Presets
@@ -553,7 +554,7 @@ These should stay HTMX-first and dependency-free.
 | `Debounce` | Planned | Small helper for consistent `delay:Xms changed` HTMX triggers. |
 | `ConfirmPrompt` | Planned | Cleanly applies `hx-confirm` to actions without custom JavaScript. |
 | `SwapOnEvent` | Planned | Trigger HTMX swaps from custom client events. |
-| `PollUntil` | Planned | Poll job/status endpoints until a done/error sentinel appears; high value for queues and ML jobs. |
+| `PollUntil` | Complete | Poll job/status endpoints until final replacement markup appears; high value for queues and ML jobs. |
 
 ### Data Science and ML Track
 

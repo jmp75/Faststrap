@@ -18,6 +18,7 @@ from .export_button import ExportButton
 from .file import FileInput
 from .filter_bar import FilterBar
 from .form import Form, FormBuilder
+from .form_section import FormSection
 from .form_wizard import FormWizard, WizardStep
 from .formgroup import FormGroup
 from .inline_editor import InlineEditor
@@ -44,6 +45,7 @@ __all__ = [
     "FloatingActionButton",
     "Form",
     "FormBuilder",
+    "FormSection",
     "FormWizard",
     "FormGroup",
     "FilterBar",

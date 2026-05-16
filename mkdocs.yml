@@ -108,6 +108,7 @@ nav:
       - ButtonGroup: components/forms/buttongroup.md
       - Checkbox & Switch: components/forms/checks.md
       - FileInput: components/forms/file-input.md
+      - FormSection: components/forms/form-section.md
       - FormGroup: components/forms/formgroup.md
       - FilterBar: components/forms/filter-bar.md
       - DateRangePicker: components/forms/date-range-picker.md
@@ -124,6 +125,7 @@ nav:
       - Live Validation: components/forms/live-validation.md
     - Display:
       - Card: components/display/card.md
+      - Structured Display: components/display/structured-display.md
       - Visual Cards: components/display/visual-cards.md
       - Chart: components/display/chart.md
       - Table: components/display/table.md
@@ -187,6 +189,8 @@ nav:
       - Testimonial Section: components/patterns/testimonial-section.md
     - Layout:
       - Grid: components/layout/grid.md
+      - Layout Primitives: components/layout/primitives.md
+      - PageHeader: components/layout/page-header.md
       - Hero: components/layout/hero.md
       - DashboardGrid: components/layout/dashboard-grid.md
       - ParallaxSection: components/layout/parallax-section.md
@@ -199,6 +203,7 @@ nav:
     - LoadingButton: presets/loading-button.md
     - OptimisticAction: presets/optimistic-action.md
     - LocationAction: presets/location-action.md
+    - PollUntil: presets/poll-until.md
     - SSEStream: presets/sse-stream.md
     - Response Helpers: presets/responses.md
     - Route Protection: presets/require-auth.md

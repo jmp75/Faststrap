@@ -275,6 +275,44 @@ def AutoRefresh(
     return Div(content, **attrs)
 
 
+def PollUntil(
+    endpoint: str,
+    target: str = "this",
+    interval: int = 2000,
+    *,
+    content: Any | None = None,
+    **kwargs: Any,
+) -> Div:
+    """Poll an endpoint until the server returns final replacement markup.
+
+    This is a zero-JavaScript HTMX helper. It does not inspect response bodies on
+    the client. To stop polling, have the server return markup that replaces this
+    element without the polling attributes, usually with ``hx_swap="outerHTML"``.
+    """
+    hx_attrs = {
+        "hx_get": endpoint,
+        "hx_target": target,
+        "hx_trigger": f"load, every {interval}ms",
+        "hx_swap": kwargs.pop("hx_swap", "outerHTML" if target == "this" else "innerHTML"),
+    }
+
+    for key in ["hx_indicator", "hx_push_url"]:
+        if key in kwargs:
+            hx_attrs[key] = kwargs.pop(key)
+
+    user_cls = kwargs.pop("cls", "")
+    attrs: dict[str, Any] = {
+        "cls": merge_classes("poll-until", user_cls),
+        **hx_attrs,
+    }
+    attrs.update(convert_attrs(kwargs))
+
+    if content is None:
+        content = Div("Working...", cls="text-muted")
+
+    return Div(content, **attrs)
+
+
 def LazyLoad(
     endpoint: str,
     trigger: str = "revealed",

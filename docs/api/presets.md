@@ -411,6 +411,7 @@ def get_posts_page(page: int = 1):
 | `ActiveSearch` | `endpoint`, `target`, `placeholder`, `debounce` | Live search input |
 | `InfiniteScroll` | `endpoint`, `target`, `threshold` | Infinite scroll loader |
 | `AutoRefresh` | `endpoint`, `target`, `interval` | Auto-polling element |
+| `PollUntil` | `endpoint`, `target`, `interval`, `content` | Poll until final replacement markup |
 | `LazyLoad` | `endpoint`, `placeholder`, `trigger` | Lazy-loaded content |
 | `LoadingButton` | `*children`, `endpoint`, `target`, `method`, `loading_text` | Button with loading state |
 | `SSEStream` | `events`, `headers` | Server-Sent Events response |

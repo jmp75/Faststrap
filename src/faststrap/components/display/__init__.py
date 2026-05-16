@@ -23,6 +23,7 @@ from .sse_target import SSETarget
 from .stat_card import KPICard, MetricCard, StatCard, TrendCard
 from .status_badge import BadgeGroup, StatusBadge
 from .stepper import Stepper, StepperStep
+from .structured import CodeBlock, JsonViewer, KeyValueList, RecordDetail
 from .svg import Svg, render_svg
 from .table import BsTable, BsTBody, BsTCell, BsTHead, BsTRow, Table, TBody, TCell, THead, TRow
 from .text_clamp import TextClamp
@@ -38,6 +39,7 @@ __all__ = [
     "Carousel",
     "CarouselItem",
     "Chart",
+    "CodeBlock",
     "DataTable",
     "datatable_export_params",
     "datatable_page_url",
@@ -47,11 +49,14 @@ __all__ = [
     "FlipCard",
     "GlowCard",
     "Image",
+    "JsonViewer",
+    "KeyValueList",
     "MapView",
     "Markdown",
     "render_markdown",
     "Mermaid",
     "ResultCard",
+    "RecordDetail",
     "RevealCard",
     "Sheet",
     "StatusBadge",

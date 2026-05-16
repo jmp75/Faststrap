@@ -15,8 +15,8 @@
 FastHTML is amazing for building web apps in pure Python, but it lacks pre-built UI components. FastStrap fills that gap by providing:
 
 
- **160+ components, helpers, and presets** - 143 registered UI components plus HTMX, SEO, PWA, and optional integrations
- **HTMX Presets Module** - 17 ready-to-use patterns for common interactions  
+ **170+ components, helpers, and presets** - 152 registered UI components plus HTMX, SEO, PWA, and optional integrations
+ **HTMX Presets Module** - 18 ready-to-use patterns for common interactions  
  **SEO Module** - Comprehensive meta tags, Open Graph, Twitter Cards, and structured data  
  **Zero JavaScript knowledge required** - Components just work  
  **No build steps** - Pure Python, no npm/webpack/vite  
@@ -254,11 +254,11 @@ modal = get_component("Modal")
 
 ---
 
-## Available Components And Helpers (160+ Total)
+## Available Components And Helpers (170+ Total)
 
-Faststrap currently exposes **143 registered UI components** across forms, display, feedback, navigation, layout, and patterns, plus **17 HTMX presets**, SEO/PWA helpers, accessibility helpers, core utilities, and optional integrations. Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
+Faststrap currently exposes **152 registered UI components** across forms, display, feedback, navigation, layout, and patterns, plus **18 HTMX presets**, SEO/PWA helpers, accessibility helpers, core utilities, and optional integrations. Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
 
-### Presets Module (17 Utilities)
+### Presets Module (18 Utilities)
 
 - `ActiveSearch`
 - `InfiniteScroll`
@@ -267,6 +267,7 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `LoadingButton`
 - `OptimisticAction`
 - `LocationAction`
+- `PollUntil`
 - `hx_redirect`
 - `hx_refresh`
 - `hx_trigger`
@@ -278,7 +279,7 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `sse_comment`
 - `@require_auth`
 
-### Forms (35 Public Components / Helpers)
+### Forms (36 Public Components / Helpers)
 
 - `Button`
 - `ButtonGroup`
@@ -297,6 +298,7 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `FormErrorSummary`
 - `FormGroup`
 - `FormGroupFromErrors`
+- `FormSection`
 - `FormWizard`
 - `GradientButton`
 - `Input`
@@ -316,7 +318,7 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `ValidationMessage`
 - `WizardStep`
 
-### Display (38 Components + 5 table aliases)
+### Display (42 Components + 5 table aliases)
 
 - `Avatar`
 - `AvatarGroup`
@@ -326,17 +328,21 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `Carousel`
 - `CarouselItem`
 - `Chart`
+- `CodeBlock`
 - `DataTable`
 - `EmptyState`
 - `Figure`
 - `FlipCard`
 - `GlowCard`
 - `Image`
+- `JsonViewer`
 - `KPICard`
+- `KeyValueList`
 - `MapView`
 - `Markdown`
 - `Mermaid`
 - `MetricCard`
+- `RecordDetail`
 - `ResultCard`
 - `RevealCard`
 - `Sheet`
@@ -427,13 +433,17 @@ Faststrap currently exposes **143 registered UI components** across forms, displ
 - `TabPane`
 - `Tabs`
 
-### Layout (6 Components)
+### Layout (10 Components)
 
 - `Container`
 - `Row`
 - `Col`
+- `Stack`
+- `Cluster`
+- `Center`
 - `Hero`
 - `DashboardGrid`
+- `PageHeader`
 - `ParallaxSection`
 
 ### Patterns (8 Composed Components)
@@ -544,10 +554,10 @@ Comprehensive examples organized by learning path:
 
 ## Current Release Snapshot
 
-Faststrap's current main branch reflects the v0.7.x documentation and component wave:
+Faststrap's current main branch reflects the v0.8.0 core primitive and visual component wave:
 
-- **143 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
-- **160+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
+- **152 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
+- **170+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
 - **Optional integrations** for `faststrap[chartjs]`, `faststrap[gsap]`, and `faststrap[markdown]`.
 - **Discovery APIs** including `list_components()`, `find_components()`, `get_components_by_pattern()`, and `list_component_metadata()`.
 - **Documentation structure** with component index, architecture guide, upgrade guide, performance guide, and custom component guide.
@@ -752,7 +762,7 @@ Pagination(
 ```
 faststrap/
  src/faststrap/               # Library source
-    components/              # 143 registered UI components
+    components/              # 152 registered UI components
     core/                    # Assets, theme, registry, discovery, base primitives
     integrations/            # Optional ChartJS and GSAP integrations
     presets/                 # HTMX interaction/response helpers

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added the planned v0.8.0 zero-dependency core primitive wave:
+  - `Stack`, `Cluster`, and `Center` for common layout composition.
+  - `PageHeader` for dashboard/product page headings with actions.
+  - `KeyValueList`, `RecordDetail`, `CodeBlock`, and `JsonViewer` for data/dev-app display.
+  - `FormSection` for grouped form sections.
+  - `PollUntil` for HTMX polling until final replacement markup is returned.
 - Absorbed the safe, dependency-free visual primitives from the private community scratchpad into core:
   - `FlipCard`, `TiltCard`, `RevealCard`, and `GlowCard`
   - `DotsLoader`, `RingLoader`, `WaveLoader`, `PulseLoader`, `PolygonLoader`, `TypewriterLoader`, `ShadowLoader`, and `ProgressRing`
