@@ -6,14 +6,15 @@
 
 ## Current Status (v0.7.x - May 2026)
 
-**128 registered UI components live**
-**145+ total components, helpers, presets, integrations, and utilities**
+**143 registered UI components live**
+**160+ total components, helpers, presets, integrations, and utilities**
 **779+ tests collected in CI**
 **Full HTMX + Bootstrap 5.3.3 support**
 **Core remains FastHTML/Bootstrap/HTMX-first**
 **Zero custom JavaScript required**
 **Optional integrations available** for ChartJS, GSAP, Markdown, maps, and richer motion/chart use cases
 **Docs structure hardened** with component index, architecture guide, upgrade guide, performance guide, and docs standards
+**Visual primitives absorbed into core**: `FlipCard`, `TiltCard`, `RevealCard`, `GlowCard`, CSS loaders, `ProgressRing`, `GradientButton`, `FloatingActionButton`, and `ParallaxSection`
 
 ### Pre-v0.6 Delivered by v0.5.9
 

@@ -117,8 +117,8 @@ See the Showcase section in the docs for the current flagship set and screenshot
 
 ## Stats
 
-- **128 registered UI components** implemented.
-- **145+ components, helpers, presets, and integrations** available.
+- **143 registered UI components** implemented.
+- **160+ components, helpers, presets, and integrations** available.
 - **7 interaction presets** + **6 response helpers** + **1 auth decorator** + **SSEStream**.
 - **100% Python**.
 

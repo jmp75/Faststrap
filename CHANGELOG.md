@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Absorbed the safe, dependency-free visual primitives from the private community scratchpad into core:
+  - `FlipCard`, `TiltCard`, `RevealCard`, and `GlowCard`
+  - `DotsLoader`, `RingLoader`, `WaveLoader`, `PulseLoader`, `PolygonLoader`, `TypewriterLoader`, `ShadowLoader`, and `ProgressRing`
+  - `GradientButton`, `FloatingActionButton`, and `ParallaxSection`
+- Added `faststrap-visual.css` and wired it into local/CDN assets and PWA precache defaults.
+
 ### Fixed
 
 - Fixed `ModernToast` dismiss controls so the close button renders a single icon and removes the toast reliably.

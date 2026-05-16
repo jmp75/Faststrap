@@ -1,6 +1,6 @@
 # Component Index
 
-Faststrap currently registers **128 UI components** across forms, display, feedback, navigation, layout, and patterns. Use this page as a scan-friendly map before reaching for custom HTML.
+Faststrap currently registers **143 UI components** across forms, display, feedback, navigation, layout, and patterns. Use this page as a scan-friendly map before reaching for custom HTML.
 
 !!! tip "Discovery API"
     You can also inspect components programmatically with `list_components()`, `find_components()`, and `list_component_metadata()`. See the [Component Registry](../api/registry.md).
@@ -17,6 +17,7 @@ Faststrap currently registers **128 UI components** across forms, display, feedb
 | `ExportButton` | [ExportButton](forms/export-button.md) | Export links and POST forms. |
 | `FileInput` | [FileInput](forms/file-input.md) | File upload control. |
 | `FilterBar` | [FilterBar](forms/filter-bar.md) | Dashboard/filter composition. |
+| `FloatingActionButton`, `GradientButton` | [Action Buttons](forms/action-buttons.md) | Opinionated premium action buttons. |
 | `FloatingLabel` | [FloatingLabel](forms/floatinglabel.md) | Bootstrap floating labels. |
 | `FormBuilder` | [Form Builder](forms/form-builder.md) | Pydantic v2 form generation. |
 | `FormErrorSummary`, `FormGroup`, `FormGroupFromErrors` | [FormGroup](forms/formgroup.md) | Validation and grouped field rendering. |
@@ -45,6 +46,7 @@ Faststrap currently registers **128 UI components** across forms, display, feedb
 | `DataTable` | [DataTable](display/data-table.md) | Search, sort, pagination, server-side table flows. |
 | `EmptyState` | [Empty State](display/empty_state.md) | Empty data placeholders. |
 | `Figure` | [Figure](display/figure.md) | Images with captions. |
+| `FlipCard`, `GlowCard`, `RevealCard`, `TiltCard` | [Visual Cards](display/visual-cards.md) | CSS-only premium visual cards. |
 | `Image` | [Image](display/image.md) | Responsive image utilities. |
 | `KPICard` | [KPI Card](display/kpi-card.md) | Multiple metrics in one card. |
 | `MapView` | [MapView](display/map-view.md) | Optional Leaflet map. |
@@ -79,6 +81,7 @@ Faststrap currently registers **128 UI components** across forms, display, feedb
 | `Placeholder`, `PlaceholderButton`, `PlaceholderCard` | [Tooltip & Popover](feedback/overlays.md) | Loading placeholders and overlays. |
 | `Popover`, `Tooltip` | [Tooltip & Popover](feedback/overlays.md) | Bootstrap overlays. |
 | `Progress`, `ProgressBar` | [Progress](feedback/progress.md) | Progress indicators. |
+| `DotsLoader`, `RingLoader`, `WaveLoader`, `PulseLoader`, `PolygonLoader`, `TypewriterLoader`, `ShadowLoader`, `ProgressRing` | [CSS Loaders](feedback/loaders.md) | Additional CSS-only loading indicators. |
 | `SimpleToast`, `Toast`, `ToastContainer` | [Toast](feedback/toast.md) | Bootstrap toasts. |
 | `Spinner` | [Spinner](feedback/spinner.md) | Loading spinners. |
 
@@ -108,6 +111,7 @@ Faststrap currently registers **128 UI components** across forms, display, feedb
 | `Col`, `Container`, `Row` | [Grid](layout/grid.md) | Bootstrap layout primitives. |
 | `DashboardGrid` | [DashboardGrid](layout/dashboard-grid.md) | Responsive dashboard grids. |
 | `Hero` | [Hero](layout/hero.md) | Landing hero sections. |
+| `ParallaxSection` | [ParallaxSection](layout/parallax-section.md) | CSS-only background image section. |
 | `Feature`, `FeatureGrid` | [Feature Grid](patterns/feature-grid.md) | Feature sections. |
 | `FooterModern` | [Footer Modern](patterns/footer-modern.md) | Marketing footer. |
 | `NavbarModern` | [Navbar Modern](patterns/navbar-modern.md) | Premium navbar pattern. |

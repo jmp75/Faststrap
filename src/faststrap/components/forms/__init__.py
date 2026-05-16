@@ -1,5 +1,6 @@
 """Form components."""
 
+from .action_buttons import FloatingActionButton, GradientButton
 from .button import Button, CloseButton
 from .buttongroup import ButtonGroup, ButtonToolbar
 from .calendar_date_picker import CalendarDatePicker
@@ -40,6 +41,7 @@ __all__ = [
     "Range",
     "ToggleGroup",
     "FileInput",
+    "FloatingActionButton",
     "Form",
     "FormBuilder",
     "FormWizard",
@@ -52,6 +54,7 @@ __all__ = [
     "map_formgroup_validation",
     "FormGroupFromErrors",
     "FormErrorSummary",
+    "GradientButton",
     "LiveValidationField",
     "ValidationMessage",
     "Input",

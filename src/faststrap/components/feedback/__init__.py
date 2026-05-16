@@ -5,6 +5,16 @@ from .confirm import ConfirmAction, ConfirmDialog
 from .error_dialog import ErrorDialog
 from .error_page import ErrorPage
 from .install_prompt import InstallPrompt
+from .loaders import (
+    DotsLoader,
+    PolygonLoader,
+    ProgressRing,
+    PulseLoader,
+    RingLoader,
+    ShadowLoader,
+    TypewriterLoader,
+    WaveLoader,
+)
 from .modal import Modal
 from .modern_toast import ModernToast, ModernToastStack
 from .notification_center import NotificationCenter
@@ -26,6 +36,7 @@ __all__ = [
     "Alert",
     "ConfirmAction",
     "ConfirmDialog",
+    "DotsLoader",
     "ErrorDialog",
     "ErrorPage",
     "InstallPrompt",
@@ -42,12 +53,19 @@ __all__ = [
     "Placeholder",
     "PlaceholderButton",
     "PlaceholderCard",
+    "PolygonLoader",
     "Popover",
     "Progress",
     "ProgressBar",
+    "ProgressRing",
+    "PulseLoader",
+    "RingLoader",
     "SimpleToast",
+    "ShadowLoader",
     "Spinner",
     "Toast",
     "ToastContainer",
     "Tooltip",
+    "TypewriterLoader",
+    "WaveLoader",
 ]

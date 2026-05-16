@@ -48,6 +48,7 @@ BOOTSTRAP_ICONS_INTEGRITY: str | None = None
 FASTSTRAP_CDN_CSS_FILES = [
     "css/faststrap-fx.css",
     "css/faststrap-layouts.css",
+    "css/faststrap-visual.css",
 ]
 
 # CDN assets with SRI hashes
@@ -79,6 +80,7 @@ def local_assets(static_url: str, *, include_js: bool = True) -> tuple[Any, ...]
         Link(rel="stylesheet", href=f"{base}/css/bootstrap-icons.min.css"),
         Link(rel="stylesheet", href=f"{base}/css/faststrap-fx.css"),
         Link(rel="stylesheet", href=f"{base}/css/faststrap-layouts.css"),
+        Link(rel="stylesheet", href=f"{base}/css/faststrap-visual.css"),
     ]
     if include_js:
         assets.append(Script(src=f"{base}/js/bootstrap.bundle.min.js"))

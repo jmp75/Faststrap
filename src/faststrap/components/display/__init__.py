@@ -27,6 +27,7 @@ from .svg import Svg, render_svg
 from .table import BsTable, BsTBody, BsTCell, BsTHead, BsTRow, Table, TBody, TCell, THead, TRow
 from .text_clamp import TextClamp
 from .timeline import Timeline, TimelineItem
+from .visual_cards import FlipCard, GlowCard, RevealCard, TiltCard
 
 __all__ = [
     "Badge",
@@ -43,12 +44,15 @@ __all__ = [
     "datatable_query_params",
     "EmptyState",
     "Figure",
+    "FlipCard",
+    "GlowCard",
     "Image",
     "MapView",
     "Markdown",
     "render_markdown",
     "Mermaid",
     "ResultCard",
+    "RevealCard",
     "Sheet",
     "StatusBadge",
     "SSETarget",
@@ -63,6 +67,7 @@ __all__ = [
     "TextClamp",
     "Timeline",
     "TimelineItem",
+    "TiltCard",
     "BsTable",
     "BsTHead",
     "BsTBody",

@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WRAPPER_FILES = {
     "src/faststrap/components/display/sheet.py",
     "src/faststrap/components/display/stat_card.py",
+    "src/faststrap/components/forms/action_buttons.py",
     "src/faststrap/components/feedback/confirm.py",
     "src/faststrap/components/feedback/error_dialog.py",
     "src/faststrap/components/feedback/install_prompt.py",

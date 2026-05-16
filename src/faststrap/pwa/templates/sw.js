@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
     // Local Assets (if any)
     '/static/css/faststrap-fx.css',
     '/static/css/faststrap-layouts.css',
+    '/static/css/faststrap-visual.css',
     // Fallback Offline Page
     '/offline'
 ];

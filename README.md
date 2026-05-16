@@ -15,7 +15,7 @@
 FastHTML is amazing for building web apps in pure Python, but it lacks pre-built UI components. FastStrap fills that gap by providing:
 
 
- **145+ components, helpers, and presets** - 128 registered UI components plus HTMX, SEO, PWA, and optional integrations  
+ **160+ components, helpers, and presets** - 143 registered UI components plus HTMX, SEO, PWA, and optional integrations
  **HTMX Presets Module** - 17 ready-to-use patterns for common interactions  
  **SEO Module** - Comprehensive meta tags, Open Graph, Twitter Cards, and structured data  
  **Zero JavaScript knowledge required** - Components just work  
@@ -254,9 +254,9 @@ modal = get_component("Modal")
 
 ---
 
-## Available Components And Helpers (145+ Total)
+## Available Components And Helpers (160+ Total)
 
-Faststrap currently exposes **128 registered UI components** across forms, display, feedback, navigation, layout, and patterns, plus **17 HTMX presets**, SEO/PWA helpers, accessibility helpers, core utilities, and optional integrations. Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
+Faststrap currently exposes **143 registered UI components** across forms, display, feedback, navigation, layout, and patterns, plus **17 HTMX presets**, SEO/PWA helpers, accessibility helpers, core utilities, and optional integrations. Components are typed, HTMX-friendly, and follow Bootstrap conventions. Stability markers (`@stable`, `@beta`, `@experimental`) indicate API maturity.
 
 ### Presets Module (17 Utilities)
 
@@ -278,7 +278,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `sse_comment`
 - `@require_auth`
 
-### Forms (33 Public Components / Helpers)
+### Forms (35 Public Components / Helpers)
 
 - `Button`
 - `ButtonGroup`
@@ -290,6 +290,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `ExportButton`
 - `FileInput`
 - `FilterBar`
+- `FloatingActionButton`
 - `FloatingLabel`
 - `Form`
 - `FormBuilder`
@@ -297,6 +298,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `FormGroup`
 - `FormGroupFromErrors`
 - `FormWizard`
+- `GradientButton`
 - `Input`
 - `InputGroup`
 - `InputGroupText`
@@ -314,7 +316,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `ValidationMessage`
 - `WizardStep`
 
-### Display (34 Components + 5 table aliases)
+### Display (38 Components + 5 table aliases)
 
 - `Avatar`
 - `AvatarGroup`
@@ -327,6 +329,8 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `DataTable`
 - `EmptyState`
 - `Figure`
+- `FlipCard`
+- `GlowCard`
 - `Image`
 - `KPICard`
 - `MapView`
@@ -334,6 +338,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `Mermaid`
 - `MetricCard`
 - `ResultCard`
+- `RevealCard`
 - `Sheet`
 - `SSETarget`
 - `StatCard`
@@ -350,6 +355,7 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `TextClamp`
 - `Timeline`
 - `TimelineItem`
+- `TiltCard`
 - `TrendCard`
 
 ### v0.6.1 Naming Notes
@@ -357,11 +363,12 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `FormBuilder` is now the preferred name for the Pydantic form builder API. If you are on `v0.6.0` or earlier, keep using `Form.from_pydantic()`. In `v0.6.1+`, prefer `FormBuilder.from_pydantic()`. `Form` remains as a compatibility alias.
 - `Table`, `THead`, `TBody`, `TRow`, and `TCell` remain the primary table API. `v0.6.1` adds optional aliases `BsTable`, `BsTHead`, `BsTBody`, `BsTRow`, and `BsTCell` for projects that import both FastHTML and Faststrap table primitives.
 
-### Feedback (27 Components)
+### Feedback (35 Components)
 
 - `Alert`
 - `ConfirmAction`
 - `ConfirmDialog`
+- `DotsLoader`
 - `ErrorDialog`
 - `ErrorPage`
 - `ErrorToast`
@@ -376,16 +383,23 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `Placeholder`
 - `PlaceholderButton`
 - `PlaceholderCard`
+- `PolygonLoader`
 - `Popover`
 - `Progress`
 - `ProgressBar`
+- `ProgressRing`
+- `PulseLoader`
+- `RingLoader`
+- `ShadowLoader`
 - `SimpleToast`
 - `Spinner`
 - `SuccessToast`
 - `Toast`
 - `ToastContainer`
 - `Tooltip`
+- `TypewriterLoader`
 - `WarningToast`
+- `WaveLoader`
 
 ### Navigation (23 Components)
 
@@ -413,13 +427,14 @@ Faststrap currently exposes **128 registered UI components** across forms, displ
 - `TabPane`
 - `Tabs`
 
-### Layout (5 Components)
+### Layout (6 Components)
 
 - `Container`
 - `Row`
 - `Col`
 - `Hero`
 - `DashboardGrid`
+- `ParallaxSection`
 
 ### Patterns (8 Composed Components)
 
@@ -531,8 +546,8 @@ Comprehensive examples organized by learning path:
 
 Faststrap's current main branch reflects the v0.7.x documentation and component wave:
 
-- **128 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
-- **145+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
+- **143 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
+- **160+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
 - **Optional integrations** for `faststrap[chartjs]`, `faststrap[gsap]`, and `faststrap[markdown]`.
 - **Discovery APIs** including `list_components()`, `find_components()`, `get_components_by_pattern()`, and `list_component_metadata()`.
 - **Documentation structure** with component index, architecture guide, upgrade guide, performance guide, and custom component guide.
@@ -737,7 +752,7 @@ Pagination(
 ```
 faststrap/
  src/faststrap/               # Library source
-    components/              # 128 registered UI components
+    components/              # 143 registered UI components
     core/                    # Assets, theme, registry, discovery, base primitives
     integrations/            # Optional ChartJS and GSAP integrations
     presets/                 # HTMX interaction/response helpers

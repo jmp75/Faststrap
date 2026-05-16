@@ -75,6 +75,7 @@ _DEFAULT_LOCAL_PRECACHE_URLS = (
     BOOTSTRAP_ICONS_URL,
     "/static/css/faststrap-fx.css",
     "/static/css/faststrap-layouts.css",
+    "/static/css/faststrap-visual.css",
 )
 
 
