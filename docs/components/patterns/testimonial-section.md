@@ -451,7 +451,12 @@ def testimonials_page(category: str = "all"):
 
 ---
 
-::: faststrap.components.patterns.testimonial
+::: faststrap.components.patterns.testimonial.Testimonial
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.patterns.testimonial.TestimonialSection
     options:
         show_source: true
         heading_level: 4

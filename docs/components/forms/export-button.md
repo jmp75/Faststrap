@@ -28,9 +28,9 @@ ExportButton("Export CSV", endpoint="/export", export_format="csv")
 ## With DataTable State
 
 ```python
-from faststrap import DataTable, ExportButton
+from faststrap import ExportButton, datatable_export_params
 
-params = DataTable.export_params(sort="name", direction="asc", search="alice")
+params = datatable_export_params(sort="name", direction="asc", search="alice")
 ExportButton("Export", endpoint="/export", extra_params=params)
 ```
 

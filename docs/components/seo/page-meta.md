@@ -97,3 +97,10 @@ def home():
 - `PageMeta(...)` is additive convenience, not a replacement for advanced `StructuredData` usage.
 - For JSON-LD schema, keep using `StructuredData.*(...)` alongside `PageMeta(...)`.
 - Canonical links are emitted only when `canonical` or `url` is provided.
+
+## API Reference
+
+::: faststrap.seo.page_meta.PageMeta
+    options:
+        show_source: true
+        heading_level: 4

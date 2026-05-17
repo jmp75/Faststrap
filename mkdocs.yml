@@ -159,6 +159,7 @@ nav:
       - Tooltip & Popover: components/feedback/overlays.md
       - Spinner: components/feedback/spinner.md
       - CSS Loaders: components/feedback/loaders.md
+      - Placeholder: components/feedback/placeholder.md
       - Progress: components/feedback/progress.md
       - Collapse: components/feedback/collapse.md
       - Error Page: components/feedback/error-page.md
@@ -216,6 +217,8 @@ nav:
     - PageMeta: components/seo/page-meta.md
   - Showcase:
     - Overview: showcase/index.md
+    - Admin Dashboard: showcase/admin-dashboard.md
+    - SaaS Landing: showcase/saas-landing.md
     - Atlas Command Center: showcase/atlas-command-center.md
     - OnboardFlow Workspace: showcase/onboardflow-workspace.md
     - NovaFlow AI SaaS: showcase/novaflow-ai-saas.md

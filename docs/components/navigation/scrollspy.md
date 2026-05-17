@@ -94,3 +94,10 @@ Scrollspy(
 
 - [Navbar](navbar.md) - Navigation component
 - [Tabs](tabs.md) - Tabbed navigation
+
+## Generated API Reference
+
+::: faststrap.components.navigation.scrollspy.Scrollspy
+    options:
+        show_source: true
+        heading_level: 4

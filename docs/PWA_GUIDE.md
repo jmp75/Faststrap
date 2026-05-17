@@ -149,3 +149,15 @@ Faststrap also includes mobile-oriented UI components:
 - `BottomNav`, `BottomNavItem`
 - `Sheet`
 - `InstallPrompt`
+
+## API Reference
+
+::: faststrap.pwa.core.PwaMeta
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.pwa.core.add_pwa
+    options:
+        show_source: true
+        heading_level: 3

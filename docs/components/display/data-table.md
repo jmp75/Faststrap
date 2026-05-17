@@ -155,12 +155,12 @@ DataTable(
 
 ## Export Integration
 
-Use the helpers to reuse the table query state for exports, links, and handlers:
+Use the helpers to reuse the table query state for exports, links, and handlers. They are available both as top-level helpers and as convenience attributes on `DataTable`:
 
 ```python
-from faststrap import DataTable, ExportButton
+from faststrap import datatable_export_params, ExportButton
 
-params = DataTable.export_params(
+params = datatable_export_params(
     sort="name",
     direction="asc",
     search="alice",
@@ -173,7 +173,9 @@ ExportButton("Export CSV", endpoint="/export", export_format="csv", extra_params
 Build the same query contract for non-export actions:
 
 ```python
-params = DataTable.query_params(
+from faststrap import datatable_query_params
+
+params = datatable_query_params(
     sort="name",
     direction="asc",
     search="alice",
@@ -186,7 +188,9 @@ params = DataTable.query_params(
 Build one page URL while preserving table state:
 
 ```python
-url = DataTable.page_url(
+from faststrap import datatable_page_url
+
+url = datatable_page_url(
     "/users?view=active",
     page=3,
     per_page=25,
@@ -228,6 +232,21 @@ You can also pass `table_cls` and `table_attrs` to control the inner table eleme
 ## API Reference
 
 ::: faststrap.components.display.data_table.DataTable
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.data_table.datatable_export_params
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.data_table.datatable_query_params
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.data_table.datatable_page_url
     options:
         show_source: true
         heading_level: 4

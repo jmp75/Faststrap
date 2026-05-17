@@ -21,9 +21,14 @@ faststrap doctor --path .
 ## Checks currently included
 
 - Import source shadowing (site-packages vs local source confusion).
+- Missing or outdated `python-fasthtml` dependency when a local `pyproject.toml` declares a minimum version.
+- Missing `add_bootstrap(...)` call.
 - Potential `/static` mount conflicts with `mount_assets(...)`.
 - `toast_response(...)` usage without `ToastContainer(...)`.
 - Basic preset misuse detection patterns.
+- Serverless deployment issues:
+  - no `use_cdn=True` in serverless environments
+  - `serve(...)` calls in serverless entrypoints
 
 ## Why this helps
 

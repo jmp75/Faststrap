@@ -178,3 +178,18 @@ Div(
     options:
         show_source: false
         heading_level: 4
+
+::: faststrap.components.forms.checks.Switch
+    options:
+        show_source: false
+        heading_level: 4
+
+::: faststrap.components.forms.checks.Range
+    options:
+        show_source: false
+        heading_level: 4
+
+::: faststrap.components.forms.button.CloseButton
+    options:
+        show_source: false
+        heading_level: 4

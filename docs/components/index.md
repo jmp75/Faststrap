@@ -80,7 +80,7 @@ Faststrap currently registers **152 UI components** across forms, display, feedb
 | `Modal` | [Modal](feedback/modal.md) | Bootstrap modal wrapper. |
 | `ModernToast`, `ModernToastStack` | [ModernToast](feedback/modern-toast.md) | Opinionated polished toast surface. |
 | `NotificationCenter` | [Notification Center](feedback/notification-center.md) | Dropdown notification hub. |
-| `Placeholder`, `PlaceholderButton`, `PlaceholderCard` | [Tooltip & Popover](feedback/overlays.md) | Loading placeholders and overlays. |
+| `Placeholder`, `PlaceholderButton`, `PlaceholderCard` | [Placeholder](feedback/placeholder.md) | Skeleton loading placeholders. |
 | `Popover`, `Tooltip` | [Tooltip & Popover](feedback/overlays.md) | Bootstrap overlays. |
 | `Progress`, `ProgressBar` | [Progress](feedback/progress.md) | Progress indicators. |
 | `DotsLoader`, `RingLoader`, `WaveLoader`, `PulseLoader`, `PolygonLoader`, `TypewriterLoader`, `ShadowLoader`, `ProgressRing` | [CSS Loaders](feedback/loaders.md) | Additional CSS-only loading indicators. |

@@ -694,3 +694,8 @@ Dropdown(
     options:
         show_source: true
         heading_level: 4
+
+::: faststrap.components.navigation.dropdown.DropdownDivider
+    options:
+        show_source: true
+        heading_level: 4

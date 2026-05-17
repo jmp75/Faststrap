@@ -5,10 +5,12 @@ GSAP Motion is an optional integration for richer, opinionated animation. Core F
 ## Install
 
 ```bash
-pip install "faststrap[gsap]"
+pip install faststrap
 ```
 
-The extra is intentionally lightweight. GSAP itself is loaded from CDN by `add_gsap(app)` unless you pass a custom URL.
+The `gsap` extra is intentionally dependency-free in the Python package. GSAP itself is loaded from CDN by `add_gsap(app)` unless you pass a custom URL.
+
+Faststrap exposes `GSAP_VERSION` and `GSAP_CDN_URL` when you need to inspect or reuse the default pinned asset. `GsapPreset` and `MotionPreset` are type aliases for the supported preset names.
 
 ## App Setup
 
@@ -95,3 +97,25 @@ Row(
 - Server-rendered markup remains usable without GSAP.
 - The runtime respects `prefers-reduced-motion`.
 - Use GSAP for premium motion, guided flows, and showcase-level polish, not basic layout behavior.
+
+## API Reference
+
+::: faststrap.integrations.gsap.gsap_assets
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.integrations.gsap.add_gsap
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.integrations.gsap.Gsap
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.integrations.gsap.GsapReveal
+    options:
+        show_source: true
+        heading_level: 3

@@ -414,7 +414,11 @@ def get_posts_page(page: int = 1):
 | `PollUntil` | `endpoint`, `target`, `interval`, `content` | Poll until final replacement markup |
 | `LazyLoad` | `endpoint`, `placeholder`, `trigger` | Lazy-loaded content |
 | `LoadingButton` | `*children`, `endpoint`, `target`, `method`, `loading_text` | Button with loading state |
+| `OptimisticAction` | `*children`, `endpoint`, `method`, `target`, `payload` | Optimistic mutation button with rollback/commit events |
+| `LocationAction` | `*children`, `endpoint`, `method`, `target` | Browser geolocation action helper |
 | `SSEStream` | `events`, `headers` | Server-Sent Events response |
+| `sse_event` | `data`, `event`, `event_id`, `retry` | Format one SSE event payload |
+| `sse_comment` | `text` | Format one SSE comment/keepalive payload |
 
 ### Response Helpers
 
@@ -436,6 +440,96 @@ def get_posts_page(page: int = 1):
 ---
 
 ::: faststrap.presets
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.ActiveSearch
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.InfiniteScroll
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.AutoRefresh
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.PollUntil
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.LazyLoad
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.LoadingButton
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.OptimisticAction
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.interactions.LocationAction
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.hx_redirect
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.hx_refresh
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.hx_trigger
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.hx_reswap
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.hx_retarget
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.responses.toast_response
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.streams.SSEStream
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.streams.sse_event
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.streams.sse_comment
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.presets.auth.require_auth
     options:
         show_source: true
         heading_level: 4

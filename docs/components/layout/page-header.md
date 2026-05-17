@@ -34,3 +34,10 @@ PageHeader(
 
 - On small screens, the actions stack below the title.
 - On large screens, the title and actions align horizontally with `justify-content-between`.
+
+## API Reference
+
+::: faststrap.components.layout.page_header.PageHeader
+    options:
+        show_source: true
+        heading_level: 4

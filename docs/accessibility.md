@@ -99,3 +99,25 @@ def home():
 - `SkipLink` should appear early in the DOM.
 - `LiveRegion` should be used for meaningful state changes (avoid noisy updates).
 - `FocusTrap` is best for overlays, dialogs, and modal-like content.
+
+## API Reference
+
+::: faststrap.accessibility.SkipLink
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.accessibility.VisuallyHidden
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.accessibility.LiveRegion
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.accessibility.FocusTrap
+    options:
+        show_source: true
+        heading_level: 3

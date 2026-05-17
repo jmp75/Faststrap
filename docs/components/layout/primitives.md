@@ -42,3 +42,20 @@ All three accept `**kwargs`, including `cls`, `id`, `style`, `hx_*`, `data_*`, a
 - These are intentionally zero-JS and use Bootstrap utility classes.
 - `gap` maps to Bootstrap's `gap-*` scale.
 - `align` maps to `align-items-*`; `justify` maps to `justify-content-*`.
+
+## API Reference
+
+::: faststrap.components.layout.primitives.Stack
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.layout.primitives.Cluster
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.layout.primitives.Center
+    options:
+        show_source: true
+        heading_level: 4

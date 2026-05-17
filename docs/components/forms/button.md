@@ -355,7 +355,7 @@ This table maps every FastStrap specific parameter to what it actually does in H
 | `active` | `bool` | `.active` | Forces the button to appear in a "pressed" state. |
 | `icon` | `str` | `<i class="bi bi-{icon}">` | Adds a Bootstrap Icon (e.g., "check", "house"). |
 | `icon_pos` | `str` | - | Position of icon: `start` (default) or `end`. |
-| `spinner` | `bool` | `.spinner-border` | Adds a loading spinner. |
+| `spinner` | `bool` | `.spinner-border` | Controls whether `loading=True` renders a spinner. It does not show a spinner by itself. |
 | `loading` | `bool` | - | Helper that enables `spinner` and `disabled` state together. |
 | `loading_text` | `str` | - | Text to display when `loading=True`. |
 | `css_vars` | `dict` | `style="--var: val"` | Dict of CSS variables to apply inline. |

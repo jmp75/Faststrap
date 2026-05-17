@@ -132,7 +132,6 @@ Input("username", validation_state="invalid", value="Invalid data")
 ### 2. Floating Labels
 Bootstrap's modern "Floating Label" pattern moves the label *inside* the input, floating up when the user types.
 
-```python
 <div class="component-preview">
   <div class="preview-header">Live Preview</div>
   <div class="preview-render">

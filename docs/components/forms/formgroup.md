@@ -405,3 +405,18 @@ FormGroup(
     options:
         show_source: true
         heading_level: 4
+
+::: faststrap.components.forms.errors.FormGroupFromErrors
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.forms.errors.extract_field_error
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.forms.errors.map_formgroup_validation
+    options:
+        show_source: true
+        heading_level: 4

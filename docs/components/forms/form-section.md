@@ -31,3 +31,10 @@ FormSection(
 
 - Use `divider=False` for the first section in a form.
 - `FormSection` is layout-only; validation still belongs to `FormGroup`, `LiveValidationField`, and server-side form handling.
+
+## API Reference
+
+::: faststrap.components.forms.form_section.FormSection
+    options:
+        show_source: true
+        heading_level: 4

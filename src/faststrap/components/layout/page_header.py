@@ -1,4 +1,4 @@
-﻿"""Reusable page-level header component."""
+"""Reusable page-level header component."""
 
 from __future__ import annotations
 

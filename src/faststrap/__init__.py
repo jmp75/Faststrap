@@ -215,6 +215,7 @@ from .core.registry import (
     get_components_by_pattern,
     list_component_metadata,
     list_components,
+    register,
 )
 from .core.theme import (
     UNSET,
@@ -269,6 +270,7 @@ __all__ = [
     "get_components_by_pattern",
     "list_component_metadata",
     "list_components",
+    "register",
     "theme_variant_css",
     "add_chartjs",
     "add_gsap",

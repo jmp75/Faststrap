@@ -82,3 +82,15 @@ from faststrap import Form
 
 form = Form.from_pydantic(Signup, action="/signup")
 ```
+
+## API Reference
+
+::: faststrap.components.forms.form.FormBuilder
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.forms.form.Form
+    options:
+        show_source: true
+        heading_level: 4

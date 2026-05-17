@@ -76,3 +76,10 @@ ToggleGroup(
 
 - If `values` is provided, it must match the number of buttons.
 - If `name` is set, selected value is synced to hidden input for form submission.
+
+## API Reference
+
+::: faststrap.components.forms.toggle_group.ToggleGroup
+    options:
+        show_source: true
+        heading_level: 4

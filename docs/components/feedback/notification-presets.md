@@ -70,3 +70,35 @@ Container(
     Div(id="content"),
 )
 ```
+
+## API Reference
+
+::: faststrap.components.feedback.notifications.NoticeToast
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.notifications.NoticeAlert
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.notifications.SuccessToast
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.notifications.ErrorToast
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.notifications.WarningToast
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.notifications.InfoToast
+    options:
+        show_source: true
+        heading_level: 4

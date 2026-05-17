@@ -52,8 +52,56 @@
 }
 
 /* Restore Material Button and Typography appearance */
-.md-button {
+.md-typeset .md-button {
   text-decoration: none !important;
+  border-color: var(--md-primary-fg-color) !important;
+  color: var(--md-primary-fg-color) !important;
+  background-color: transparent !important;
+}
+
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus-visible {
+  border-color: var(--md-primary-fg-color--light) !important;
+  color: #ffffff !important;
+  background-color: var(--md-primary-fg-color--light) !important;
+}
+
+.md-typeset .md-button--primary {
+  border-color: var(--md-primary-fg-color) !important;
+  color: #ffffff !important;
+  background-color: var(--md-primary-fg-color) !important;
+}
+
+.md-typeset .md-button--primary:hover,
+.md-typeset .md-button--primary:focus-visible {
+  border-color: var(--md-primary-fg-color--dark) !important;
+  color: #ffffff !important;
+  background-color: var(--md-primary-fg-color--dark) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button {
+  border-color: #8bb9ff !important;
+  color: #dbeafe !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button:hover,
+[data-md-color-scheme="slate"] .md-typeset .md-button:focus-visible {
+  border-color: #b6d2ff !important;
+  color: #0f172a !important;
+  background-color: #b6d2ff !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary {
+  border-color: #8bb9ff !important;
+  color: #0f172a !important;
+  background-color: #8bb9ff !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary:hover,
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary:focus-visible {
+  border-color: #dbeafe !important;
+  color: #0f172a !important;
+  background-color: #dbeafe !important;
 }
 
 h1,

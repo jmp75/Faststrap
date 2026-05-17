@@ -51,7 +51,22 @@ standard way to preserve HTMX support and attribute conversion consistently.
         show_root_heading: true
         show_source: true
 
+::: faststrap.core.assets.get_assets
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.assets.mount_assets
+    options:
+        show_root_heading: true
+        show_source: true
+
 ::: faststrap.utils.static_management.get_faststrap_static_url
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.utils.static_management.cleanup_static_resources
     options:
         show_root_heading: true
         show_source: true
@@ -78,7 +93,27 @@ For normal FastStrap components, prefer plain function-based components such as
 `Button(...)`, `Card(...)`, or `Row(...)`. That remains the default style across
 the framework.
 
+::: faststrap.core.base.Component
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.base.BaseComponent
+    options:
+        show_root_heading: true
+        show_source: true
+
 ::: faststrap.core.theme.create_theme
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.theme.get_builtin_theme
+    options:
+        show_root_heading: true
+        show_source: true
+
+::: faststrap.core.theme.list_builtin_themes
     options:
         show_root_heading: true
         show_source: true
@@ -143,7 +178,8 @@ Button = get_component("Button")
 Use `theme_variant_css()` when a polished component needs small light/dark CSS differences without repeating selector boilerplate.
 
 ```python
-from fasthtml.common import Style\nfrom faststrap import theme_variant_css
+from fasthtml.common import Style
+from faststrap import theme_variant_css
 
 Style(
     theme_variant_css(

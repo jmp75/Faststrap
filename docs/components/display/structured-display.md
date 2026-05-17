@@ -36,3 +36,25 @@ JsonViewer({"accuracy": 0.94, "loss": 0.12}, title="Metrics")
 - `CodeBlock` does not ship a syntax highlighter in core. It emits `language-*` classes so an optional highlighter can enhance it later.
 - `JsonViewer(title=...)` uses a native `<details>` element; omit `title` for an always-visible block.
 - These components are core-safe: no JavaScript and no extra dependencies.
+
+## API Reference
+
+::: faststrap.components.display.structured.KeyValueList
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.structured.RecordDetail
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.structured.CodeBlock
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.structured.JsonViewer
+    options:
+        show_source: true
+        heading_level: 4

@@ -1,4 +1,4 @@
-﻿"""Form layout helpers."""
+"""Form layout helpers."""
 
 from __future__ import annotations
 

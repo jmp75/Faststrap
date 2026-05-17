@@ -21,7 +21,7 @@ FastHTML is amazing for building web apps in pure Python, but it lacks pre-built
  **Zero JavaScript knowledge required** - Components just work  
  **No build steps** - Pure Python, no npm/webpack/vite  
  **Full HTMX integration** - Dynamic updates without page reloads  
- **Zero-JS animations by default** - Beautiful effects with pure CSS (`Fx`), with optional GSAP motion via `faststrap[gsap]`  
+ **Zero-JS animations by default** - Beautiful effects with pure CSS (`Fx`), with optional GSAP motion via `add_gsap(app)`  
  **Dark mode built-in** - Automatic theme switching  
  **Type-safe** - Full type hints for better IDE support  
  **Pythonic API** - Intuitive kwargs style  
@@ -141,8 +141,9 @@ Button("Full Width", full_width=True, variant="info")
 Button("Pill", pill=True, variant="warning")
 Button("Active", active=True, variant="success")
 
-# Icon and spinner control
-Button("Icon + Spinner", icon="check-circle", spinner=True, icon_pos="start")
+# Icon and loading spinner control
+Button("Save", icon="check-circle", icon_pos="start")
+Button("Saving", loading=True, spinner=True, loading_text="Saving...")
 ```
 
 ### 4. Slot Class Overrides
@@ -476,8 +477,8 @@ Faststrap currently exposes **152 registered UI components** across forms, displ
 
 ### Optional Integrations (3 Opt-In Systems)
 
-- `ChartJS` - Optional Chart.js integration via `faststrap[chartjs]`
-- `Gsap` / `Motion` / `GsapReveal` - Optional GSAP motion integration via `faststrap[gsap]`
+- `ChartJS` - Optional Chart.js integration via `add_chartjs(app)`
+- `Gsap` / `Motion` / `GsapReveal` - Optional GSAP motion integration via `add_gsap(app)`
 - `ModernToast` - Opinionated modern toast surface that remains separate from the core Bootstrap toast API
 
 ### Core Discovery And Theme Utilities
@@ -558,7 +559,7 @@ Faststrap's current main branch reflects the v0.8.0 core primitive and visual co
 
 - **152 registered UI components** across forms, display, feedback, navigation, layout, and patterns.
 - **170+ total components, helpers, presets, and integrations** including HTMX presets, SEO helpers, PWA helpers, and optional integrations.
-- **Optional integrations** for `faststrap[chartjs]`, `faststrap[gsap]`, and `faststrap[markdown]`.
+- **Optional integrations** for Chart.js, GSAP, and `faststrap[markdown]`.
 - **Discovery APIs** including `list_components()`, `find_components()`, `get_components_by_pattern()`, and `list_component_metadata()`.
 - **Documentation structure** with component index, architecture guide, upgrade guide, performance guide, and custom component guide.
 

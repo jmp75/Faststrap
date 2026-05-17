@@ -7,6 +7,7 @@ from faststrap import (
     get_components_by_pattern,
     list_component_metadata,
     list_components,
+    register,
 )
 
 
@@ -31,3 +32,7 @@ def test_list_component_metadata_includes_names_and_categories() -> None:
 def test_list_components_and_get_component_remain_available() -> None:
     assert "Button" in list_components(category="forms")
     assert get_component("Button") is Button
+
+
+def test_register_is_available_from_top_level_for_custom_component_docs() -> None:
+    assert callable(register)

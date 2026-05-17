@@ -116,3 +116,13 @@ def add_item():
     options:
         show_source: true
         heading_level: 4
+
+::: faststrap.components.feedback.toast.Toast
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.feedback.toast.ToastContainer
+    options:
+        show_source: true
+        heading_level: 4

@@ -7,10 +7,12 @@ Core Faststrap still ships `Chart`. Use `ChartJS` when you specifically want Cha
 ## Install
 
 ```bash
-pip install "faststrap[chartjs]"
+pip install faststrap
 ```
 
-The extra is intentionally lightweight. The integration loads Chart.js from a CDN unless you pass your own asset URL.
+The `chartjs` extra is intentionally dependency-free in the Python package. The integration loads Chart.js from a CDN unless you pass your own asset URL, so no additional Python dependency is required.
+
+Faststrap exposes `CHARTJS_VERSION` and `CHARTJS_CDN_URL` when you need to inspect or reuse the default pinned asset. `ChartJSType` is the type alias for supported Chart.js chart kinds.
 
 ## Import
 
@@ -69,6 +71,16 @@ ChartJS(
 | `height` | `int | None` | Canvas height. |
 | `width` | `int | None` | Canvas width. |
 | `responsive` | `bool` | Adds Chart.js responsive option. |
+
+::: faststrap.integrations.chartjs.chartjs_assets
+    options:
+        show_source: true
+        heading_level: 3
+
+::: faststrap.integrations.chartjs.add_chartjs
+    options:
+        show_source: true
+        heading_level: 3
 
 ::: faststrap.integrations.chartjs.ChartJS
     options:

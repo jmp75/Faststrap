@@ -50,12 +50,11 @@ The v0.7.x wave includes:
 Optional integrations remain outside the core dependency path:
 
 ```bash
-pip install "faststrap[chartjs]"
-pip install "faststrap[gsap]"
+pip install faststrap
 pip install "faststrap[markdown]"
 ```
 
-Core `Fx` animations remain the default lightweight motion system. GSAP is opt-in.
+Chart.js and GSAP integrations load frontend assets from CDN by default and do not require extra Python packages. `faststrap[markdown]` installs the optional Python dependencies needed by the Markdown renderer. Core `Fx` animations remain the default lightweight motion system. GSAP is opt-in.
 
 ### Pydantic Forms
 

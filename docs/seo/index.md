@@ -491,4 +491,4 @@ See the [SEO API documentation](../api/seo.md) for complete parameter details an
 
 ## Examples
 
-See the [examples directory](../../examples/05_new_components/seo_demo.py) for complete working examples.
+See [`examples/05_new_components/seo_demo.py`](https://github.com/Faststrap-org/Faststrap/blob/main/examples/05_new_components/seo_demo.py) for a complete working example.

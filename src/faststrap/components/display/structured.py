@@ -1,4 +1,4 @@
-﻿"""Structured display primitives for data, code, and records."""
+"""Structured display primitives for data, code, and records."""
 
 from __future__ import annotations
 

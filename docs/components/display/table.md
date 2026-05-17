@@ -145,3 +145,23 @@ BsTable(
     options:
         show_source: true
         heading_level: 4
+
+::: faststrap.components.display.table.THead
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.table.TBody
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.table.TRow
+    options:
+        show_source: true
+        heading_level: 4
+
+::: faststrap.components.display.table.TCell
+    options:
+        show_source: true
+        heading_level: 4

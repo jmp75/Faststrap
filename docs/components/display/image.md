@@ -8,13 +8,13 @@ Responsive image component with Bootstrap utilities.
 from faststrap import Image
 
 # Responsive image
-Image(src="/photos/landscape.jpg", alt="Beautiful landscape")
+Image(src="/photos/landscape.jpg", alt="Beautiful landscape", fluid=True)
 
 # Thumbnail
 Image(src="/profile.jpg", alt="Profile", thumbnail=True)
 
-# Rounded
-Image(src="/avatar.jpg", alt="Avatar", rounded=True)
+# Circular
+Image(src="/avatar.jpg", alt="Avatar", rounded_circle=True)
 ```
 
 ## API Reference
@@ -22,12 +22,15 @@ Image(src="/avatar.jpg", alt="Avatar", rounded=True)
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `src` | str | Required | Image source URL |
-| `alt` | str | "" | Alternative text |
-| `fluid` | bool | True | Make image responsive |
-| `thumbnail` | bool | False | Add thumbnail border |
-| `rounded` | bool | False | Round corners |
-| `circle` | bool | False | Make image circular |
-| `align` | str\|None | None | Alignment: "start", "center", "end" |
+| `alt` | `str \| None` | `None` | Alternative text. |
+| `fluid` | `bool \| None` | `False` | Add `.img-fluid` for responsive sizing. |
+| `thumbnail` | `bool \| None` | `False` | Add thumbnail border/padding. |
+| `rounded` | `bool \| None` | `False` | Round corners. |
+| `rounded_circle` | `bool \| None` | `False` | Make image circular with `.rounded-circle`. |
+| `align` | `str \| None` | `None` | Alignment: `"start"`, `"center"`, or `"end"`. |
+| `width` | `str \| int \| None` | `None` | Image width. Integers are emitted as pixel values. |
+| `height` | `str \| int \| None` | `None` | Image height. Integers are emitted as pixel values. |
+| `loading` | `"lazy" \| "eager" \| None` | `None` | Native browser image loading hint. |
 | `**kwargs` | Any | - | Additional HTML attributes |
 
 ## Examples
@@ -48,7 +51,7 @@ Image(
 Image(
     src="/users/john.jpg",
     alt="John Doe",
-    circle=True,
+    rounded_circle=True,
     style={"width": "100px", "height": "100px"}
 )
 ```
@@ -85,3 +88,10 @@ Image(
 - [Figure](figure.md) - Image with caption
 - [Carousel](carousel.md) - Image slideshow
 - [Card](card.md) - Image in card layout
+
+## API Reference
+
+::: faststrap.components.display.image.Image
+    options:
+        show_source: true
+        heading_level: 4

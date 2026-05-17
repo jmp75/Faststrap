@@ -76,6 +76,25 @@ add_bootstrap(app, theme=my_brand)
 ### How it works
 This function generates a small CSS block that overwrites Bootstrap's internal variables. It ensures that everything using `variant="primary"` (Buttons, Alerts, Badges, etc.) will now use your custom purple color.
 
+### Built-in themes
+
+Faststrap includes these built-in theme names:
+
+```python
+from faststrap import list_builtin_themes
+
+list_builtin_themes()
+# ["green-nature", "blue-ocean", "purple-magic", "red-alert", ...]
+```
+
+Use one directly with `add_bootstrap()`:
+
+```python
+add_bootstrap(app, theme="green-nature", mode="auto")
+```
+
+Use `get_builtin_theme(name)` when you need the `Theme` instance itself, for example to inspect or reuse its variables.
+
 ---
     
 ## 3. Custom Fonts (Google Fonts)

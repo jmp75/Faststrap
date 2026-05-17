@@ -116,3 +116,8 @@ Tabs(
     options:
         show_source: false
         heading_level: 4
+
+::: faststrap.components.navigation.tabs.TabPane
+    options:
+        show_source: false
+        heading_level: 4

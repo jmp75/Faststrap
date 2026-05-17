@@ -1,4 +1,4 @@
-﻿"""Small layout primitives for common flexbox compositions."""
+"""Small layout primitives for common flexbox compositions."""
 
 from __future__ import annotations
 
