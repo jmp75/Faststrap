@@ -11,6 +11,7 @@ from fasthtml.common import to_xml
 pytest.importorskip("pydantic")
 from pydantic import BaseModel, EmailStr
 
+from faststrap import Input
 from faststrap.components.forms.form import Form, FormBuilder
 
 
@@ -84,3 +85,29 @@ def test_form_alias_warns_and_delegates() -> None:
 
     html = to_xml(form)
     assert 'action="/signup"' in html
+
+
+def test_form_alias_delegates_to_fasthtml_form_element() -> None:
+    form = Form(Input("email"), method="post", action="/submit")
+    html = to_xml(form)
+
+    assert html.startswith("<form")
+    assert 'method="post"' in html
+    assert 'action="/submit"' in html
+    assert 'name="email"' in html
+
+
+def test_faststrap_star_import_does_not_break_native_form_usage() -> None:
+    namespace: dict[str, object] = {}
+
+    exec(
+        "from fasthtml.common import *\n"
+        "from faststrap import *\n"
+        "result = Form(Input('email'), method='post', action='/submit')",
+        namespace,
+    )
+
+    html = to_xml(namespace["result"])
+    assert html.startswith("<form")
+    assert 'action="/submit"' in html
+    assert 'name="email"' in html

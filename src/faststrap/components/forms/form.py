@@ -182,12 +182,16 @@ class FormBuilder:
 
 @beta
 class Form:
-    """Compatibility alias for :class:`FormBuilder`.
+    """Compatibility wrapper for FastHTML's native `Form` element.
 
-    `Form.from_pydantic()` is retained for backward compatibility with Faststrap
-    v0.6.0 and earlier. New code should prefer `FormBuilder.from_pydantic()`
-    to avoid confusion with FastHTML's native `Form` element.
+    `Form(...)` delegates to FastHTML's native `Form` so wildcard imports do
+    not accidentally break ordinary form markup. `Form.from_pydantic()` is
+    retained for backward compatibility with Faststrap v0.6.0 and earlier.
+    New code should prefer `FormBuilder.from_pydantic()` for generated forms.
     """
+
+    def __new__(cls, *children: Any, **kwargs: Any) -> FTForm:
+        return FTForm(*children, **kwargs)
 
     @staticmethod
     def from_pydantic(
