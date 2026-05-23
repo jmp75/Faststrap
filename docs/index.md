@@ -5,8 +5,8 @@
 </p>
 
 <p align="center" style="font-size: 1.2rem; margin-top: 1rem;">
-  <b>Modern Bootstrap 5 components for FastHTML.</b><br>
-  Build beautiful web UIs in pure Python with zero JavaScript knowledge.
+  <b>Python-native UI components for FastHTML apps, dashboards, and data tools.</b><br>
+  Build production web interfaces in pure Python, with Bootstrap polish and HTMX flow.
 </p>
 
 <div align="center">
@@ -18,17 +18,47 @@
 
 ## The Vision
 
-FastStrap aims to be the **standard component library for FastHTML**, providing 100+ production-ready Bootstrap 5 components. It combines the power of **Python**, the simplicity of **FastHTML**, and the maturity of **Bootstrap** into a single, cohesive experience.
+FastStrap aims to be the **standard UI layer for FastHTML**: a Python-native toolkit for product apps, admin panels, data dashboards, scientific tools, and AI-assisted interfaces. It combines the power of **Python**, the simplicity of **FastHTML**, the interactivity of **HTMX**, and the maturity of **Bootstrap** into a single, cohesive experience.
+
+The core stays lightweight and dependency-conscious, while the broader ecosystem is growing toward richer data, visualization, and agent-friendly workflows.
+
+## Built For
+
+- :material-application-braces: **Product and admin apps**
+
+    ---
+
+    Forms, navigation, layouts, modals, notifications, auth screens, and production-ready Bootstrap surfaces.
+
+- :material-chart-box: **Dashboards and analytics**
+
+    ---
+
+    DataTable, metric cards, KPI cards, charts, maps, polling, SSE helpers, and structured display primitives.
+
+- :material-flask-outline: **Scientific and modelling tools**
+
+    ---
+
+    Compose Python-first interfaces for workflows such as modelling dashboards, internal research apps, and operational data tools.
+
+- :material-robot-outline: **AI-ready interfaces**
+
+    ---
+
+    Registered components, metadata, structured outputs, and a roadmap for richer agent-facing surfaces without turning core into a heavy framework.
+
+{ .grid .cards }
 
 ## Why FastStrap
 
-FastHTML is amazing for building web apps in pure Python, but building UI from scratch can be time-consuming. FastStrap bridges the gap by providing a comprehensive set of **production-ready Bootstrap 5 components** that just work.
+FastHTML is amazing for building web apps in pure Python, but building complete interfaces from scratch can be time-consuming. FastStrap bridges the gap by providing a comprehensive set of **production-ready Bootstrap 5 components** that work for both classic web apps and data-heavy tools.
 
 - :material-language-python: **Pure Python**
 
     ---
 
-    No JavaScript, HTML, or CSS knowledge required. Define your UI with Python classes and intuitive keyword arguments.
+    Define your UI with Python functions and intuitive keyword arguments. Drop into HTML, CSS, or HTMX when you need the extra control.
 
 - :material-flash: **FastHTML Native**
 
@@ -47,6 +77,12 @@ FastHTML is amazing for building web apps in pure Python, but building UI from s
     ---
 
     Modern Python 3.10+ type hints for specific arguments. Great IDE support with auto-completion.
+
+- :material-database-eye: **Data-App Friendly**
+
+    ---
+
+    Tables, metric displays, polling, streaming helpers, charts, maps, Markdown, Mermaid, JSON, and code rendering for practical internal tools.
 
 { .grid .cards }
 

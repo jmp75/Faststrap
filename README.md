@@ -1,6 +1,8 @@
 # FastStrap
 
-**Modern Bootstrap 5 components for FastHTML - Build beautiful web UIs in pure Python with zero JavaScript knowledge.**
+**Python-native UI components for FastHTML apps, dashboards, data tools, and AI-ready interfaces.**
+
+FastStrap helps Python developers build production web apps, admin panels, analytics dashboards, modelling tools, and agent-friendly interfaces with FastHTML, Bootstrap 5, and HTMX. The core stays lightweight and dependency-conscious: write Python, get polished HTML, and add JavaScript only when an optional integration truly needs it.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -12,23 +14,27 @@
 
 ## Why FastStrap
 
-FastHTML is amazing for building web apps in pure Python, but it lacks pre-built UI components. FastStrap fills that gap by providing:
+FastHTML is amazing for building web apps in pure Python, but complete product and data interfaces still need a reliable UI layer. FastStrap fills that gap by providing:
 
 
- **170+ components, helpers, and presets** - 152 registered UI components plus HTMX, SEO, PWA, and optional integrations
- **HTMX Presets Module** - 18 ready-to-use patterns for common interactions  
- **SEO Module** - Comprehensive meta tags, Open Graph, Twitter Cards, and structured data  
- **Zero JavaScript knowledge required** - Components just work  
- **No build steps** - Pure Python, no npm/webpack/vite  
- **Full HTMX integration** - Dynamic updates without page reloads  
- **Zero-JS animations by default** - Beautiful effects with pure CSS (`Fx`), with optional GSAP motion via `add_gsap(app)`  
- **Dark mode built-in** - Automatic theme switching  
- **Type-safe** - Full type hints for better IDE support  
- **Pythonic API** - Intuitive kwargs style  
- **Enhanced customization** - Slot classes, CSS variables, themes, and more  
- **Docs and examples included** - Coverage is expanding
+- **170+ components, helpers, and presets** - 152 registered UI components plus HTMX, SEO, PWA, and optional integrations
+- **Product UI foundations** - Forms, navigation, layouts, modals, notifications, auth screens, and Bootstrap surfaces
+- **Dashboard and data-app tools** - DataTable, metric cards, KPI cards, charts, maps, polling, SSE helpers, Markdown, Mermaid, JSON, and code rendering
+- **HTMX Presets Module** - Ready-to-use patterns for search, lazy loading, polling, optimistic actions, geolocation, and server-sent events
+- **SEO Module** - Comprehensive meta tags, Open Graph, Twitter Cards, and structured data
+- **PWA Module** - Installable app setup with manifest, service worker, icons, and offline foundations
+- **Agent-friendly direction** - Component registry metadata and structured primitives designed to support future AI/agent interfaces
+- **Zero JavaScript knowledge required for core workflows** - Components just work
+- **No build steps** - Pure Python, no npm/webpack/vite
+- **Full HTMX integration** - Dynamic updates without page reloads
+- **Zero-JS animations by default** - Beautiful effects with pure CSS (`Fx`), with optional GSAP motion via `add_gsap(app)`
+- **Dark mode built-in** - Automatic theme switching
+- **Type-safe** - Full type hints for better IDE support
+- **Pythonic API** - Intuitive kwargs style
+- **Enhanced customization** - Slot classes, CSS variables, themes, and more
+- **Docs and examples included** - Coverage is expanding
 
-It also ships higher-level modules for HTMX presets, SEO metadata composition, and PWA setup so production concerns are covered alongside UI components.
+It also ships higher-level modules for HTMX presets, SEO metadata composition, and PWA setup so production concerns are covered alongside UI components. The roadmap keeps heavier capabilities, such as richer plotting, ML dashboards, and agent surfaces, as focused optional integrations rather than bloating the core.
 
 ---
 
